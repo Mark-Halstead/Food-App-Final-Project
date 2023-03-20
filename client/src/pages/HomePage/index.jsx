@@ -1,10 +1,11 @@
 import React from 'react'
-import { Landing } from '../../components'
+import { Landing, PricingCards } from '../../components'
 
 const HomePage = () => {
   return (
     <>
       <Landing />
+      <PricingCards />
     </>
   )
 }
