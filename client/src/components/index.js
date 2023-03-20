@@ -5,4 +5,5 @@ export {default as Landing} from './Landing'
 export {default as LandingLogo} from './LandingLogo'
 export {default as PricingCards} from './PricingCards'
 export {default as Hamburger} from './Hamburger'
+// export {default as Wrapper} from './Wrapper'
 

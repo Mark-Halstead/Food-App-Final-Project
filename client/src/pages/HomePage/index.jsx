@@ -3,7 +3,7 @@ import { Landing, PricingCards, Hamburger } from '../../components'
 
 const HomePage = () => {
   return (
-    <div class="hamburger-container">
+    <div className="hamburger-container">
       <Hamburger />
       <Landing />
       <PricingCards />
