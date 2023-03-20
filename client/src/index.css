@@ -54,6 +54,124 @@ p {
 /*////////////////// GLOBAL STYLES START /////////////////////*/
 
 /*////////////////// HAMBURGER-MENU STYLES START /////////////////////*/
+.hamburger-navbar-icon {
+  width: 5.5rem;
+  height: 5.5rem;
+  border-radius: 50%;
+  cursor: pointer;
+  flex-direction: column;
+}
+
+.hamburger-open-navbar-icon {
+  position: fixed;
+  top: 0.4rem;
+  left: 0.50rem;
+  z-index: 200;
+}
+
+.hamburger-navbar-icon .line {
+  height: 0.2rem;
+  width: 3.5rem;
+  background-color: rgb(203, 203, 203);
+}
+
+.hamburger-open-navbar-icon .line {
+  margin: 0.6rem 1rem;
+}
+
+.hamburger-navbar-wrapper {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.7);
+  position: fixed;
+  left: 0;
+  bottom: -100%;
+  opacity: 0;
+  z-index: 300;
+  padding: 3.5rem 5.5rem 3.5rem 3.5rem;
+  transition: bottom 0.5s, opacity 0.2s;
+}
+
+.change .hamburger-navbar-wrapper {
+  bottom: 0;
+  opacity: 1;
+  transition: bottom 0.5s, opacity 0.2s 0.25s;
+}
+
+.hamburger-navbar {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)),
+    url(images/navbar-bg.jpg) center no-repeat;
+  background-size: cover;
+  position: relative;
+  overflow-y: hidden;
+}
+
+.hamburger-close-navbar-icon {
+  position: absolute;
+  top: 2.5rem;
+  right: 3rem;
+  z-index: 300;
+}
+
+.hamburger-close-navbar-icon .line {
+  position: absolute;
+}
+
+.hamburger-ine-1 {
+  transform: rotate(40deg);
+}
+
+.hamburger-line-2 {
+  transform: rotate(-40deg);
+}
+
+.hamburger-nav-list {
+  height: 100%;
+  display: flex;
+}
+
+.hamburger-nav-link {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  width: 100%;
+  opacity: 0.8;
+  position: relative;
+  top: -100%;
+  transition: all 0.3s;
+}
+
+.change .hamburger-nav-link {
+  top: 0;
+}
+
+.hamburger-nav-link:hover {
+  opacity: 1;
+  color: #c2c2c2;
+}
+
+.change .hamburger-nav-link:nth-child(1) {
+  transition: top 1s 0.4s, opacity 0.3s, color 0.3s;
+}
+
+.change .hamburger-nav-link:nth-child(2) {
+  transition: top 1s 0.6s, opacity 0.3s, color 0.3s;
+}
+
+.change .hamburger-nav-link:nth-child(3) {
+  transition: top 1s 0.8s, opacity 0.3s, color 0.3s;
+}
+
+.change .hamburger-nav-link:nth-child(4) {
+  transition: top 1s 1s, opacity 0.3s, color 0.3s;
+}
+
+.change .hamburger-nav-link:nth-child(5) {
+  transition: top 1s 1.2s, opacity 0.3s, color 0.3s;
+}
 /*////////////////// HAMBURGER-MENU STYLES  /////////////////////*/
 
 
@@ -121,7 +239,7 @@ p {
 
 #landing-logo {
   margin-top: 0.5rem;
-  margin-left: 1.5rem;
+  margin-left: 6rem;
 }
 
 .section-title {
@@ -138,7 +256,7 @@ p {
 /*//////////////// LANDING CSS START ///////////////*/
 .landing {
   height: 100vh;
-  background: white;
+  background: #18de18;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -226,7 +344,7 @@ p {
   background: none;
 }
 
-.floating-bg {
+/* .floating-bg {
   z-index: 1;
   width: 150vw;
   height: 150vw;
@@ -236,9 +354,9 @@ p {
   left: calc(50% - 75vw);
   border-radius: 45%;
   animation: rotate 30s infinite;
-}
+} */
 
-.floating-bg::before {
+/* .floating-bg::before {
   content: "";
   width: 100%;
   height: 100%;
@@ -248,7 +366,7 @@ p {
   left: 0;
   border-radius: 40%;
   animation: rotate 30s infinite;
-}
+} */
 
 @keyframes rotate {
   0% {

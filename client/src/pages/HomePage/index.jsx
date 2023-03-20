@@ -1,13 +1,13 @@
 import React from 'react'
-import { Landing, PricingCards } from '../../components'
+import { Landing, PricingCards, Hamburger } from '../../components'
 
 const HomePage = () => {
   return (
-    <>
-      {/* <Hamburger /> */}
+    <div class="hamburger-container">
+      <Hamburger />
       <Landing />
       <PricingCards />
-    </>
+    </div>
   )
 }
 
