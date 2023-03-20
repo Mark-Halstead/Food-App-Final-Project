@@ -1,11 +1,21 @@
-import React from 'react'
+import React, { useContext } from 'react';
+import { Outlet } from 'react-router-dom'
+import NavLinks from '../NavLinks'
+import LandingLogo from '../LandingLogo';
 
-const Navbar = () => {
-  return (
-    <>
-        <h1>Hello World</h1>
-    </>
-  )
+const NavBar = () => {
+
+    return (
+        <>
+            <nav className='navbar'>
+                <LandingLogo title='plate' subTitle='pal' />
+                <div className='nav-center'>
+                    <NavLinks parentClass='nav-links' itemClass='nav-link' />
+                </div>
+            </nav>
+            <Outlet />
+        </>
+    )
 }
 
-export default Navbar
+export default NavBar
