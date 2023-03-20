@@ -1,10 +1,10 @@
 import React from 'react'
 import { Navbar } from '../../components'
 
-const Landing = () => {
+const HomePage = () => {
   return (
     <Navbar />
   )
 }
 
-export default Landing
+export default HomePage
