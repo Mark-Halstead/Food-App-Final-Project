@@ -9,7 +9,7 @@ const Landing = () => {
                     About
                 </a>
             </div>
-            <div class="floating-bg"></div>
+            <div className="floating-bg"></div>
         </section>
     )
 }
