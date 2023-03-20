@@ -1,11 +1,18 @@
 import React from 'react'
-import { Landing } from './pages'
+import { HomePage } from './pages'
+import { Routes, Route } from 'react-router-dom'
+import { NavBar } from './components'
+
 
 function App() {
 
   return (
     <>
-      <Landing />
+      <Routes>
+      <Route path="/" element={<NavBar />}>
+        <Route index element={<HomePage />} />
+      </Route>
+    </Routes>
     </>
   )
 }
