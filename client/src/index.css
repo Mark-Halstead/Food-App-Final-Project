@@ -88,7 +88,7 @@ p {
   border: none;
   outline: none;
   font-size: 1.5rem;
-  color: hsl(206, 100%, 76%);
+  color: #00FF00;
   cursor: pointer;
   transition: all 0.2s linear;
 }
@@ -108,12 +108,27 @@ p {
 }
 .nav-link:hover {
   padding: 0;
-  color: hsl(206, 100%, 76%);
+  color: #18d418;
   background: transparent;
 }
 
 .nav-links {
   height: auto;
   display: flex;
+}
+
+#landing-logo {
+  margin-top: 0.5rem;
+  margin-left: 1.5rem;
+}
+
+.section-title {
+  text-align: center;
+}
+.section-title h2 {
+  text-transform: uppercase;
+}
+.section-title span {
+  color: #18d418;
 }
 /*//////////////// NAVBAR CSS END //////////////////*/
