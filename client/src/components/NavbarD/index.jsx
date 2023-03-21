@@ -10,10 +10,14 @@ const NavbarD = () => {
     setShowDropdown(!showDropdown);
   }
 
+  const toggleSidebar = () => {
+    setSidebar(!sidebar);
+}
+
   return (
     <Wrapper>
       <div className='nav-center'>
-        <button type='button' className='toggle-btn' onClick={() => console.log("Needs to be configured")}>
+        <button type='button' className='toggle-btn' onClick={() => toggleSidebar()}>
           <FaAlignLeft />
         </button>
         <div>

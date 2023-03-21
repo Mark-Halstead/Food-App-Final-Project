@@ -3,7 +3,7 @@ import { FaWpforms } from 'react-icons/fa';
 import { ImProfile } from 'react-icons/im';
 // Remember to import icons up here for each navlink when styling!
 
-const navLinks = [
+const links = [
   {
     id: 1,
     text: 'Overview',
@@ -12,21 +12,18 @@ const navLinks = [
   {
     id: 2,
     text: 'Plan',
-    path: 'all-jobs',
-    icon: <MdQueryStats />,
+    path: '/plan',
   },
   {
     id: 3,
     text: 'Profile',
-    path: 'add-job',
-    icon: <ImProfile />,
+    path: '/profile',
   },
   {
     id: 4,
-    text: 'Other links',
-    path: 'profile',
-    icon: <FaWpforms />,
+    text: 'Chat',
+    path: '/chat',
   },
 ];
 
-export default navLinks;
+export default links;
