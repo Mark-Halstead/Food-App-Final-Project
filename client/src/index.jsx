@@ -13,7 +13,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       domain="dev-114ylhztictuc35u.eu.auth0.com"
       clientId="C1LUd5GgB7TPtsRQWc7Faf9afGk7PZtj"
       authorizationParams={{
-        redirect_uri: window.location.origin
+        redirect_uri: `${window.location.origin}/dashboard`
       }}
     >
       <Router>

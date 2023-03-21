@@ -12,7 +12,6 @@ function App() {
       <Route path="/" element={<Navbar />}>
         <Route index element={<HomePage />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="http://localhost:3000/dashboard/app" />
       </Route>
     </Routes>
     </>
