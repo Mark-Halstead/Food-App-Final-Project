@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import { BrowserRouter as Router } from 'react-router-dom'
 import App from './App'
 import { Auth0Provider } from '@auth0/auth0-react'
+import { SidebarProvider } from './contexts/SidebarContext';
 import 'normalize.css'
 import './dashboard.css'
 // import './index.css'
@@ -19,7 +20,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       }}
     >
       <Router>
-        <App />
+        <SidebarProvider>
+          <App />
+        </SidebarProvider>
       </Router>
     </Auth0Provider>
   </React.StrictMode>,
