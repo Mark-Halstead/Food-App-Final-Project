@@ -5,7 +5,7 @@ import App from './App'
 import { Auth0Provider } from '@auth0/auth0-react'
 import 'normalize.css'
 import './dashboard.css'
-import './index.css'
+// import './index.css'
 
 
 
