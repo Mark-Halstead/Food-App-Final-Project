@@ -1,45 +1,47 @@
+import React, { useState } from 'react';
 import Wrapper from "../../assets/wrappers/Navbar"
 import { FaAlignLeft, FaUserCircle, FaCaretDown } from 'react-icons/fa';
-import { useState } from 'react';
+// Import own logo (maybe from adobe?)
 
 const NavbarD = () => {
-    return (
-      <Wrapper>
-        <div className='nav-center'>
+  const [showDropdown, setShowDropdown] = useState(false);
+
+  const toggleDropdown = () => {
+    setShowDropdown(!showDropdown);
+  }
+
+  return (
+    <Wrapper>
+      <div className='nav-center'>
+        <button type='button' className='toggle-btn' onClick={() => console.log("Needs to be configured")}>
+          <FaAlignLeft />
+        </button>
+        <div>
+          <h3 className='logo-text'>dashboard</h3>
+        </div>
+        <div className='btn-container'>
           <button
             type='button'
-            className='toggle-btn'
-            onClick={() => console.log('toggle sidebar')}
+            className='btn'
+            onClick={toggleDropdown}
           >
-            <FaAlignLeft />
+            <FaUserCircle />
+            <FaCaretDown />
           </button>
-          <div>
-            <h3 className='logo-text'>dashboard</h3>
-          </div>
-          <div className='btn-container'>
+          <div className={`dropdown ${showDropdown ? 'show-dropdown' : ''}`}>
+            {/* Logout needs to be toggled */}
             <button
               type='button'
-              className='btn'
-              onClick={() => console.log('toggle logout dropdown')}
+              className='dropdown-btn'
+              onClick={toggleDropdown}
             >
-              <FaUserCircle />
-              <FaCaretDown />
+              logout
             </button>
-            <div className='dropdown show-dropdown'>
-              <button
-                type='button'
-                className='dropdown-btn'
-                onClick={() => {
-                  console.log('logout user');
-                }}
-              >
-                logout
-              </button>
-            </div>
           </div>
         </div>
-      </Wrapper>
-    );
-  };
-  
-  export default NavbarD;
+      </div>
+    </Wrapper>
+  );
+};
+export default NavbarD;
+
