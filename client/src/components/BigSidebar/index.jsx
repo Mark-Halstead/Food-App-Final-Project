@@ -4,9 +4,9 @@ import Wrapper from "../../assets/wrappers/BigSidebar"
 
 const BigSideBar = () => {
     return (
-        <Wrapper>
+        // <Wrapper>
             <h2>BigSideBar</h2>
-        </Wrapper>
+        // {/* </Wrapper> */}
     )
 }
 
