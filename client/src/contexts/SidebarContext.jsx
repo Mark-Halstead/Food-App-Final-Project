@@ -9,7 +9,7 @@ export const SidebarProvider = ({ children }) => {
   const [sidebar, setSidebar] = useState(true);
 
   const toggleSidebar = () => {
-    setSidebar(!sidebar ? sidebar : !sidebar);
+    setSidebar(!sidebar);
   };
 
   return (
