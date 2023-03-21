@@ -10,9 +10,12 @@
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.0.1",
+    "@reduxjs/toolkit": "^1.9.3",
     "normalize.css": "^8.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-icons": "^4.8.0",
+    "react-redux": "^8.0.5",
     "react-router-dom": "^6.9.0",
     "styled-components": "^5.3.9",
     "testing-library": "^0.0.2",
