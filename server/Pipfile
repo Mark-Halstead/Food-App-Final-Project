@@ -5,8 +5,12 @@ name = "pypi"
 
 [packages]
 flask = "*"
+pymongo = "*"
+python-dotenv = "*"
+pydantic = {extras = ["email"], version = "*"}
+flask-cors = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.11"
+# python_version = "3.11"
