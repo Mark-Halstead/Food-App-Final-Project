@@ -1,9 +1,11 @@
-import React from 'react'
+import Wrapper from "../../assets/wrappers/Navbar"
 
 const NavbarD = () => {
-  return (
-    <div>NavbarD</div>
-  )
+    return (
+        <Wrapper>
+            <div>NavbarD</div>
+        </Wrapper>
+    )
 }
 
 export default NavbarD
