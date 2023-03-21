@@ -1,21 +1,20 @@
-from app.db.connect import db
+from app.db import get_connection
 from bson import ObjectId
 
-users = db.users
-
 class User:
-    @staticmethod
-    def create(user_data):
-        return users.insert_one(user_data).inserted_id
+    def __init__(self, db_connection=None):
+        if db_connection is None:
+            db_connection = get_connection()
+        self.users = db_connection.users
 
-    @staticmethod
-    def get(user_id):
-        return users.find_one({"_id": ObjectId(user_id)})
+    def create(self, user_data):
+        return self.users.insert_one(user_data).inserted_id
 
-    @staticmethod
-    def update(user_id, user_data):
-        return users.update_one({"_id": ObjectId(user_id)}, {"$set": user_data}).modified_count
+    def get(self, user_id):
+        return self.users.find_one({"_id": ObjectId(user_id)})
 
-    @staticmethod
-    def delete(user_id):
-        return users.delete_one({"_id": ObjectId(user_id)}).deleted_count
+    def update(self, user_id, user_data):
+        return self.users.update_one({"_id": ObjectId(user_id)}, {"$set": user_data}).modified_count
+
+    def delete(self, user_id):
+        return self.users.delete_one({"_id": ObjectId(user_id)}).deleted_count
