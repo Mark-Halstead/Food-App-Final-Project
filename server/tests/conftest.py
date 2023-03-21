@@ -7,26 +7,78 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# This fixture will be used to create a test client for your Flask app
+# Create a test client for your Flask app
 @pytest.fixture
 def app():
     return flask_app
 
-# This fixture will create a test client for your Flask app
+# Create a test client for your Flask app
 @pytest.fixture
 def client(app):
     with app.test_client() as test_client:
         yield test_client
 
-# This fixture will be used to create a test database connection
+# Create a test database connection
 @pytest.fixture
 def test_db():
-    # You can use a test-specific database or collections here
     return get_connection("TEST_DB_URL")
 
-# This fixture will be used to clean up the test database after each test
+# Clean up the test database after each test
 @pytest.fixture(autouse=True)
 def clean_up(test_db):
     yield
     for collection in test_db.list_collection_names():
         test_db.drop_collection(collection)
+
+
+## users data 
+@pytest.fixture
+def correct_user_data():
+    return {
+        "email": "testuser@example.com",
+        "password": "testpassword",
+        "first_name": "Test",
+        "last_name": "User",
+        "paid_subscription": True,
+        "weight": 70,
+        "age": 30,
+        "height": 170,
+        "goal": "lose weight",
+        "activity_level": "moderate",
+        "dietary_restrictions": ["vegan"],
+        "food_preferences": ["Italian"],
+        "daily_calorie_target": 2000,
+        "meal_complexity": "easy",
+        "budget": "medium"
+    }
+
+@pytest.fixture
+def incorrect_user_data():
+    return {
+        "email": "testuser@example.com",
+        "password": "testpassword",
+        "first_name": "Test",
+        "last_name": "User",
+        "weight": 70,
+        "age": 30,
+        "height": 170,
+        "goal": "lose weight",
+        "activity_level": "moderate",
+        "dietary_restrictions": ["vegan"],
+        "food_preferences": ["Italian"],
+        "daily_calorie_target": 2000,
+        "meal_complexity": "easy",
+        "budget": "medium"
+    }
+
+@pytest.fixture
+def update_user_data():
+    return {
+        "weight": 70,
+        "age": 30,
+        "goal": "lose weight",
+        "activity_level": "moderate",
+        "dietary_restrictions": ["vegan"],
+        "food_preferences": ["Italian"],
+        "daily_calorie_target": 2500,
+    }

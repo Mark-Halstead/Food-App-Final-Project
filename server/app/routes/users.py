@@ -59,7 +59,7 @@ def add_user():
         return make_response(jsonify({"error": "Invalid data", "details": e.errors()}), 400)
 
 @user_routes.route("/<user_id>", methods=["GET"])
-def get_user_route(user_id):
+def get_user(user_id):
     user = g.user_model.get(user_id)
     if user:
         return Response(JSONEncoder().encode(user), content_type='application/json')
@@ -67,7 +67,7 @@ def get_user_route(user_id):
         return make_response(jsonify({"error": "User not found"}), 404)
 
 @user_routes.route("/<user_id>", methods=["PUT"])
-def update_user_route(user_id):
+def update_user(user_id):
     try:
         user_data = request.json
         validated_data = UserUpdateSchema(**user_data).dict()
@@ -80,7 +80,7 @@ def update_user_route(user_id):
         return make_response(jsonify({"error": "Invalid data", "details": e.errors()}), 400)
 
 @user_routes.route("/<user_id>", methods=["DELETE"])
-def delete_user_route(user_id):
+def delete_user(user_id):
     deleted_count = g.user_model.delete(user_id)
     if deleted_count:
         return {"deleted_count": deleted_count}
