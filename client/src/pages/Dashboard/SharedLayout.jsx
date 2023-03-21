@@ -6,7 +6,16 @@ import Wrapper from '../../assets/wrappers/SharedLayout'
 const SharedLayout = () => {
   return (
     <Wrapper>
-      <main className='dashboard'></main>
+      <main className='dashboard'>
+        <SmallSideBar />
+        <BigSideBar />
+        <div>
+          <NavbarD />
+          <div className="dashboard-page">
+            <Outlet />
+          </div>
+        </div>
+      </main>
     </Wrapper>
   )
 }
