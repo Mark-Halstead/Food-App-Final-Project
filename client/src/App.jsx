@@ -24,10 +24,10 @@ function App() {
           <Route path='chat' element={<Chat />} />
         </Route>
       </Routes>
-      {location.pathname.startsWith('/dashboard') && <link rel="stylesheet" href="/dashboard.css" />}
+      {location.pathname.startsWith('/dashboard') && <link rel="stylesheet" href="./dashboard.css" />}
     </>
   );
 
   }
-  
+
   export default App;
