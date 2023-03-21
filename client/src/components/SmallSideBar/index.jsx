@@ -1,13 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Wrapper from "../../assets/wrappers/SmallSidebar"
 import { FaTimes } from 'react-icons/fa';
 
 const SmallSideBar = () => {
+    const [sidebar, setSidebar] = useState(true)
+
+    const toggleSidebar = () => {
+        setSidebar(!sidebar);
+    }
     return (
         <Wrapper>
-            <div className="sidebar-container show-sidebar" >
+            <div className={sidebar ? "sidebar-container show-sidebar" : "sidebar-container"} >
                 <div className="content" >
-                    <button className='close-btn' onClick={() => console.log('toggle')} >
+                    <button className='close-btn' onClick={() => toggleSidebar()} >
                         <FaTimes/>
                     </button>
                     <header>
