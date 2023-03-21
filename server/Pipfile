@@ -9,6 +9,7 @@ pymongo = "*"
 python-dotenv = "*"
 pydantic = {extras = ["email"], version = "*"}
 flask-cors = "*"
+pytest = "*"
 
 [dev-packages]
 
