@@ -11,14 +11,15 @@
 <body>
 <script type="text/javascript">
     $(document).ready(function() {
-        var socket = io.connect("http://localhost:5000")
+        var socket = io.connect("http://localhost:5001")
         socket.on('connect', function() {
             socket.send("User connected!");
         });
-        socket.on('message', function(date) {
-            $('#messages').append($('<p>').text(data));
+        socket.on('message', function(message) {
+            var formattedMessage = $('<li>').text(message);
+            $('#messages').append(formattedMessage);
         })
-        $('sendBtn').on('click', function() {
+        $('#sendBtn').on('click', function() {
             socket.send($('#username').val() + ': ' + $('#message').val());
             $('#message').val('');
         });
