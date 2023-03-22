@@ -1,20 +1,40 @@
-from app.db import get_connection
-from bson import ObjectId
+from pydantic import BaseModel, EmailStr, constr
+from typing import Optional, List
 
-class User:
-    def __init__(self, db_connection=None):
-        if db_connection is None:
-            db_connection = get_connection()
-        self.users = db_connection.users
+from app.models.Base import Base
 
-    def create(self, user_data):
-        return self.users.insert_one(user_data).inserted_id
+## these classes are used for data validation purposes 
+class UserSchema(BaseModel):
+    nutritionist_id: Optional[int]
+    email: EmailStr
+    password: constr(min_length=8)
+    first_name: str
+    last_name: str
+    paid_subscription: bool
+    weight: float
+    age: int
+    height: float
+    goal: str
+    activity_level: str
+    dietary_restrictions: Optional[List[str]]
+    food_preferences: Optional[List[str]]
+    daily_calorie_target: float
+    meal_complexity: str
+    budget: str
 
-    def get(self, user_id):
-        return self.users.find_one({"_id": ObjectId(user_id)})
+class UserUpdateSchema(BaseModel):
+    subscription_type: Optional[bool]
+    weight: Optional[float]
+    age: Optional[int]
+    height: Optional[float]
+    goal: Optional[str]
+    activity_level: Optional[str]
+    dietary_restrictions: Optional[List[str]]
+    food_preferences: Optional[List[str]]
+    daily_calorie_target: Optional[float]
+    meal_complexity: Optional[str]
+    budget: Optional[str]
 
-    def update(self, user_id, user_data):
-        return self.users.update_one({"_id": ObjectId(user_id)}, {"$set": user_data}).modified_count
-
-    def delete(self, user_id):
-        return self.users.delete_one({"_id": ObjectId(user_id)}).deleted_count
+class User(Base):
+    def __init__(self, table_name, db_connection=None):
+        super().__init__(table_name, db_connection)
