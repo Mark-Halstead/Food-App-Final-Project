@@ -255,8 +255,8 @@ p {
 
 /*//////////////// LANDING CSS START ///////////////*/
 .landing {
-  height: 100vh;
-  background: #18de18;
+  height: 100vh; 
+  background: #18de18; 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -302,7 +302,7 @@ p {
   font-size: 1.25rem;
   margin-top: 3rem;
   background: #fff;
-  color: #18de18; 
+  color: #42b942; 
 }
 
 @keyframes pulse {

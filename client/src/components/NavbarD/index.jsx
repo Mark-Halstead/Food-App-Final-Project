@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import Wrapper from "../../assets/wrappers/Navbar"
+import Wrapper from "../../assets/wrappers/NavbarD"
 import { FaAlignLeft, FaUserCircle, FaCaretDown } from 'react-icons/fa';
 import { SidebarContext } from '../../contexts/SidebarContext';
 
@@ -38,6 +38,7 @@ const NavbarD = () => {
                         onClick={toggleDropdown}
                     >
                         <FaUserCircle />
+                        Example User
                         <FaCaretDown />
                     </button>
                     <div className={`dropdown ${showDropdown ? 'show-dropdown' : ''}`}>

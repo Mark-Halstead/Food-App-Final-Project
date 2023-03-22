@@ -1,8 +1,13 @@
 import React from 'react'
+import { StatsContainer, ChartContainer } from '../../components'
+
 
 const Overview = () => {
   return (
-    <h1>Overview</h1>
+    <>
+      <StatsContainer/>
+      <ChartContainer/>
+    </>
   )
 }
 
