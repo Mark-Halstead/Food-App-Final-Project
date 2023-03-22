@@ -10,6 +10,7 @@ python-dotenv = "*"
 pydantic = {extras = ["email"], version = "*"}
 flask-cors = "*"
 pytest = "*"
+faker = "*"
 
 [dev-packages]
 

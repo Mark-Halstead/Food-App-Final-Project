@@ -1,10 +1,12 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "8e97df0922c3ff109dd79c07df31249381149bdcc2cc5403fe2a4263816221aa"
+            "sha256": "6f4afb926b8d6252a80b06f146b006d08801753e5341e0af84d47220d46de03e"
         },
         "pipfile-spec": 6,
-        "requires": {},
+        "requires": {
+            "python_version": "3.7.10"
+        },
         "sources": [
             {
                 "name": "pypi",
@@ -60,6 +62,14 @@
             ],
             "markers": "python_version < '3.11'",
             "version": "==1.1.1"
+        },
+        "faker": {
+            "hashes": [
+                "sha256:2deeee8fed3d1b8ae5f87d172d4569ddc859aab8693f7cd68eddc5d20400563a",
+                "sha256:e7c058e1f360f245f265625b32d3189d7229398ad80a8b6bac459891745de052"
+            ],
+            "index": "pypi",
+            "version": "==18.3.0"
         },
         "flask": {
             "hashes": [
@@ -314,6 +324,14 @@
             ],
             "index": "pypi",
             "version": "==7.2.2"
+        },
+        "python-dateutil": {
+            "hashes": [
+                "sha256:0123cacc1627ae19ddf3c27a5de5bd67ee4586fbdd6440d9748f8abb483d3e86",
+                "sha256:961d03dc3453ebbc59dbdea9e4e11c5651520a876d0f4db161e8674aae935da9"
+            ],
+            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
+            "version": "==2.8.2"
         },
         "python-dotenv": {
             "hashes": [
