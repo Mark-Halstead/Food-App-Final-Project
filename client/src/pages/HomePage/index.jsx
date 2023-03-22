@@ -1,13 +1,16 @@
 import React from 'react'
 import { Landing, PricingCards, Hamburger } from '../../components'
+import HomeWrapper from '../../assets/wrappers/HomePage'
 
 const HomePage = () => {
   return (
-    <div className="hamburger-container">
-      <Hamburger />
-      <Landing />
-      <PricingCards />
-    </div>
+    <HomeWrapper>
+      <div className="hamburger-container">
+        <Hamburger />
+        <Landing />
+        <PricingCards />
+      </div>
+    </HomeWrapper>
   )
 }
 
