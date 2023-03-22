@@ -12,7 +12,7 @@ const BigSideBarN = () => {
             <div
                 className={
                     !sidebar
-                        ? 'sidebar-container '
+                        ? 'sidebar-container'
                         : 'sidebar-container show-sidebar'
                 }
             >

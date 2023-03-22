@@ -7,10 +7,13 @@ name = "pypi"
 flask = "*"
 pymongo = "*"
 python-dotenv = "*"
-pydantic = {extras = ["email"], version = "*"}
 flask-cors = "*"
 pytest = "*"
 gunicorn = "*"
+pydantic = {extras = ["email"], version = "*"}
+bcrypt = "*"
+"flask.ext.pymongo" = "*"
+passlib = "*"
 
 [dev-packages]
 

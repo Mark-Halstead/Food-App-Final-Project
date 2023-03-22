@@ -2,10 +2,15 @@ import React, { useState, useContext, useEffect } from 'react';
 import Wrapper from "../../assets/wrappers/NavbarD"
 import { FaAlignLeft, FaUserCircle, FaCaretDown } from 'react-icons/fa';
 import { SidebarContext } from '../../contexts/SidebarContext';
+import { AuthContext } from '../../contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const NavbarD = () => {
     const [showDropdown, setShowDropdown] = useState(false);
     const { sidebar, toggleSidebar } = useContext(SidebarContext);
+    const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
+    const { username } = useContext(AuthContext);
+    const navigate = useNavigate()
 
     useEffect(() => {
         if (!sidebar) {
@@ -21,6 +26,16 @@ const NavbarD = () => {
     const toggleDropdown = () => {
         setShowDropdown(!showDropdown);
     };
+
+    const handleLogout = () => {
+        try {
+            setIsLoggedIn(false)
+            navigate('/')
+            alert("Successfully logged out!")
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     return (
         <Wrapper>
@@ -45,7 +60,7 @@ const NavbarD = () => {
                         <button
                             type='button'
                             className='dropdown-btn'
-                            onClick={toggleDropdown}
+                            onClick={handleLogout}
                         >
                             logout
                         </button>
