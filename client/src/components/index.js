@@ -6,7 +6,7 @@ export { default as Landing } from "./Landing";
 export { default as PricingCards } from "./PricingCards";
 export { default as Hamburger } from "./Hamburger";
 export { default as NavbarD } from "./NavbarD";
-export { default as BigSideBar } from "./BigSideBar";
+// export { default as BigSideBar } from "./BigSideBar";
 export { default as SmallSideBar } from "./SmallSideBar";
 export { default as ChartContainer } from "./ChartContainer";
 export { default as StatsContainer } from "./StatsContainer";
