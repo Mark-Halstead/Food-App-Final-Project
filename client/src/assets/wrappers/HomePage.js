@@ -1,4 +1,6 @@
+import styled from 'styled-components';
 
+const HomeWrapper = styled.article`
 /*////////////////// GLOBAL STYLES START /////////////////////*/
 * {
   margin: 0;
@@ -255,8 +257,8 @@ p {
 
 /*//////////////// LANDING CSS START ///////////////*/
 .landing {
-  height: 100vh; 
-  background: #18de18; 
+  height: 100vh;
+  background: #18de18;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -302,7 +304,7 @@ p {
   font-size: 1.25rem;
   margin-top: 3rem;
   background: #fff;
-  color: #42b942; 
+  color: #18de18; 
 }
 
 @keyframes pulse {
@@ -512,6 +514,6 @@ p {
   }
 }
 /*//////////////// PRICING CARDS CSS END ///////////////*/
+`;
 
-
-
+export default HomeWrapper;

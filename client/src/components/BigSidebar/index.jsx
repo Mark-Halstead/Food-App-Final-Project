@@ -1,13 +1,28 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Wrapper from "../../assets/wrappers/BigSideBar"
+import DashNavLinks from '../DashNavLinks';
+import { SidebarContext } from '../../contexts/SidebarContext';
 
-
-const BigSideBar = () => {
+const BigSidebar = () => {
+    
+    const { sidebar } = useContext(SidebarContext);
+  
     return (
-        <Wrapper>
-            <h2>BigSideBar</h2>
-        </Wrapper>
-    )
-}
-
-export default BigSideBar
+      <Wrapper>
+        <div
+          className={
+            !sidebar
+              ? 'sidebar-container '
+              : 'sidebar-container show-sidebar'
+          }
+        >
+          <div className='content'>
+            <header>
+            </header>
+            <DashNavLinks />
+          </div>
+        </div>
+      </Wrapper>
+    );
+  };
+  export default BigSidebar;
