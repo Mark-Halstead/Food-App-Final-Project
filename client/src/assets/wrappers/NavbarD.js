@@ -6,6 +6,7 @@ const Wrapper = styled.nav`
   align-items: center;
   justify-content: center;
   box-shadow: 0 1px 0px 0px rgba(0, 0, 0, 0.1);
+  background: var(--white);
   .logo {
     display: flex;
     align-items: center;
@@ -26,7 +27,7 @@ const Wrapper = styled.nav`
     display: flex;
     align-items: center;
   }
-  background: var(--white);
+
   .btn-container {
     position: relative;
   }
@@ -57,7 +58,7 @@ const Wrapper = styled.nav`
   .dropdown-btn {
     background: transparent;
     border-color: transparent;
-    color: var(--primary-500);
+    color: #42b942;
     letter-spacing: var(--letterSpacing);
     text-transform: capitalize;
     cursor: pointer;
