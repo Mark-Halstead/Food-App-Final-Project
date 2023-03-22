@@ -5,6 +5,7 @@ import { Navbar } from './components'
 import { Profile, Overview, Plan, SharedLayout, Chat, NutritionistSharedLayout, Register, Login } from './pages/index'
 import { useLocation } from 'react-router-dom';
 import NutritionistProfile from './pages/NutritionistDashboard/NutritionistProfile'
+import { AuthProvider } from './contexts/AuthContext';
 
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
 
   return (
     <>
+      <AuthProvider>
         <Routes>
           <Route path="/" element={<Navbar />}>
             <Route index element={<HomePage />} />
@@ -30,6 +32,7 @@ function App() {
             <Route path='chat' element={<Chat />} />
           </Route>
         </Routes>
+      </AuthProvider>
     </>
   );
 
