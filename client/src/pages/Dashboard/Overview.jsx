@@ -1,8 +1,11 @@
 import React from 'react'
+import ChartContainer from '../../components/ChartContainer'
 
 const Overview = () => {
   return (
-    <h1>Overview</h1>
+    <>
+      <ChartContainer/>
+    </>
   )
 }
 
