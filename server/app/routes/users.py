@@ -1,43 +1,12 @@
 from flask import Blueprint, request, Response, g
-from pydantic import BaseModel, EmailStr, constr, ValidationError
 from flask import make_response, jsonify, request
-from typing import Optional, List
+from pydantic import ValidationError
 from bson import ObjectId
 import json
 
-from app.models.User import User
+from app.models.User import UserSchema, UserUpdateSchema
 
-## these classes are used for data validation purposes 
-class UserSchema(BaseModel):
-    nutritionist_id: Optional[int]
-    email: EmailStr
-    password: constr(min_length=8)
-    first_name: str
-    last_name: str
-    paid_subscription: bool
-    weight: float
-    age: int
-    height: float
-    goal: str
-    activity_level: str
-    dietary_restrictions: Optional[List[str]]
-    food_preferences: Optional[List[str]]
-    daily_calorie_target: float
-    meal_complexity: str
-    budget: str
 
-class UserUpdateSchema(BaseModel):
-    subscription_type: Optional[bool]
-    weight: Optional[float]
-    age: Optional[int]
-    height: Optional[float]
-    goal: Optional[str]
-    activity_level: Optional[str]
-    dietary_restrictions: Optional[List[str]]
-    food_preferences: Optional[List[str]]
-    daily_calorie_target: Optional[float]
-    meal_complexity: Optional[str]
-    budget: Optional[str]
 
 ## this is to be able to json encode the _id value (ObjectId object) that is returned from db
 class JSONEncoder(json.JSONEncoder):
@@ -46,9 +15,9 @@ class JSONEncoder(json.JSONEncoder):
             return str(o)
         return json.JSONEncoder.default(self, o)
 
-user_routes = Blueprint("user_routes", __name__)
+users_routes = Blueprint("users_routes", __name__)
 
-@user_routes.route("/", methods=["POST"])
+@users_routes.route("/", methods=["POST"])
 def add_user():
     try:
         user_data = request.json
@@ -58,7 +27,7 @@ def add_user():
     except ValidationError as e:
         return make_response(jsonify({"error": "Invalid data", "details": e.errors()}), 400)
 
-@user_routes.route("/<user_id>", methods=["GET"])
+@users_routes.route("/<user_id>", methods=["GET"])
 def get_user(user_id):
     user = g.user_model.get(user_id)
     if user:
@@ -66,7 +35,7 @@ def get_user(user_id):
     else:
         return make_response(jsonify({"error": "User not found"}), 404)
 
-@user_routes.route("/<user_id>", methods=["PUT"])
+@users_routes.route("/<user_id>", methods=["PUT"])
 def update_user(user_id):
     try:
         user_data = request.json
@@ -79,7 +48,7 @@ def update_user(user_id):
     except ValidationError as e:
         return make_response(jsonify({"error": "Invalid data", "details": e.errors()}), 400)
 
-@user_routes.route("/<user_id>", methods=["DELETE"])
+@users_routes.route("/<user_id>", methods=["DELETE"])
 def delete_user(user_id):
     deleted_count = g.user_model.delete(user_id)
     if deleted_count:
