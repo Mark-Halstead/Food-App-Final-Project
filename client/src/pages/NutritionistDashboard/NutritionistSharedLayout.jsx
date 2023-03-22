@@ -1,7 +1,7 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
 import { SmallSideBar, NavbarD } from '../../components'
-import { BigSideBarN } from '../../components'
+// import { BigSideBarN } from '../../components'
 import Wrapper from '../../assets/wrappers/SharedLayout'
 
 const NutritionistSharedLayout = () => {
@@ -9,7 +9,7 @@ const NutritionistSharedLayout = () => {
     <Wrapper>
       <main className='dashboard'>
         <SmallSideBar />
-        <BigSideBarN />
+        {/* <BigSideBarN /> */}
         <div>
           <NavbarD />
           <div className="dashboard-page">
