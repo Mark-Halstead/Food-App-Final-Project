@@ -1,17 +1,17 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Wrapper from "../../assets/wrappers/BigSideBar"
 import DashNavLinks from '../DashNavLinks';
-
+import { SidebarContext } from '../../contexts/SidebarContext';
 
 const BigSidebar = () => {
     
-    const isSidebarOpen = false
+    const { sidebar } = useContext(SidebarContext);
   
     return (
       <Wrapper>
         <div
           className={
-            isSidebarOpen
+            !sidebar
               ? 'sidebar-container '
               : 'sidebar-container show-sidebar'
           }
