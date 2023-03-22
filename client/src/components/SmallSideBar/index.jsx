@@ -1,8 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { FaTimes } from 'react-icons/fa';
-import { NavLink } from 'react-router-dom';
-import links from './links';
 import { SidebarContext } from '../../contexts/SidebarContext';
+import DashNavLinks from '../DashNavLinks';
 import Wrapper from '../../assets/wrappers/SmallSidebar';
 
 const SmallSideBar = () => {
@@ -32,24 +31,7 @@ const SmallSideBar = () => {
           <header>
             {/* Our Team logo here */}
           </header>
-          <div className='nav-links'>
-            {links.map((link) => {
-              const { text, path, id } = link;
-              return (
-                <NavLink
-                  to={path}
-                  className={({ isActive }) => {
-                    return isActive ? 'nav-link active' : 'nav-link';
-                  }}
-                  key={id}
-                  onClick={() => toggleSidebar()}
-                  end
-                >
-                  {text}
-                </NavLink>
-              );
-            })}
-          </div>
+          <DashNavLinks />
         </div>
       </div>
     </Wrapper>
