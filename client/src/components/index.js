@@ -10,5 +10,6 @@ export { default as BigSideBar } from "./BigSideBar";
 export { default as SmallSideBar } from "./SmallSideBar";
 export { default as ChartContainer } from "./ChartContainer";
 export { default as StatsContainer } from "./StatsContainer";
-
+export { default as DashNavLinksN } from "./DashNavLinksN";
+export { default as BigSideBarN } from "./BigSideBarN";
 
