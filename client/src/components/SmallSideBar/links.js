@@ -7,22 +7,22 @@ const links = [
   {
     id: 1,
     text: 'Overview',
-    path: '/',
+    path: '/dashboard',
   },
   {
     id: 2,
     text: 'Plan',
-    path: '/plan',
+    path: '/dashboard/plan',
   },
   {
     id: 3,
     text: 'Profile',
-    path: '/profile',
+    path: '/dashboard/profile',
   },
   {
     id: 4,
     text: 'Chat',
-    path: '/chat',
+    path: '/dashboard/chat',
   },
 ];
 
