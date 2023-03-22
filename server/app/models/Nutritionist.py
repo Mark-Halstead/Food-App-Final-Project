@@ -20,5 +20,5 @@ class NutritionistUpdateSchema(BaseModel):
 
 
 class Nutritionist(Base):
-    def __init__(self, db_connection=None):
-        super().__init__(db_connection)
+    def __init__(self, table_name, db_connection=None):
+        super().__init__(table_name, db_connection)

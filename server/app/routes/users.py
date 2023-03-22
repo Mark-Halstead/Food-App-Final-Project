@@ -15,9 +15,9 @@ class JSONEncoder(json.JSONEncoder):
             return str(o)
         return json.JSONEncoder.default(self, o)
 
-users_routes = Blueprint("users_routes", __name__)
+user_routes = Blueprint("user_routes", __name__)
 
-@users_routes.route("/", methods=["POST"])
+@user_routes.route("/", methods=["POST"])
 def add_user():
     try:
         user_data = request.json
@@ -27,7 +27,7 @@ def add_user():
     except ValidationError as e:
         return make_response(jsonify({"error": "Invalid data", "details": e.errors()}), 400)
 
-@users_routes.route("/<user_id>", methods=["GET"])
+@user_routes.route("/<user_id>", methods=["GET"])
 def get_user(user_id):
     user = g.user_model.get(user_id)
     if user:
@@ -35,7 +35,7 @@ def get_user(user_id):
     else:
         return make_response(jsonify({"error": "User not found"}), 404)
 
-@users_routes.route("/<user_id>", methods=["PUT"])
+@user_routes.route("/<user_id>", methods=["PUT"])
 def update_user(user_id):
     try:
         user_data = request.json
@@ -48,7 +48,7 @@ def update_user(user_id):
     except ValidationError as e:
         return make_response(jsonify({"error": "Invalid data", "details": e.errors()}), 400)
 
-@users_routes.route("/<user_id>", methods=["DELETE"])
+@user_routes.route("/<user_id>", methods=["DELETE"])
 def delete_user(user_id):
     deleted_count = g.user_model.delete(user_id)
     if deleted_count:

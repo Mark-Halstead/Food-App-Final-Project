@@ -13,9 +13,9 @@ class JSONEncoder(json.JSONEncoder):
             return str(o)
         return json.JSONEncoder.default(self, o)
 
-nutritionists_routes = Blueprint("nutritionists_routes", __name__)
+nutritionist_routes = Blueprint("nutritionist_routes", __name__)
 
-@nutritionists_routes.route("/", methods=["POST"])
+@nutritionist_routes.route("/", methods=["POST"])
 def add_nutritionist():
     try:
         nutritionist_data = request.json
@@ -25,7 +25,7 @@ def add_nutritionist():
     except ValidationError as e:
         return make_response(jsonify({"error": "Invalid data", "details": e.errors()}), 400)
 
-@nutritionists_routes.route("/<nutritionist_id>", methods=["GET"])
+@nutritionist_routes.route("/<nutritionist_id>", methods=["GET"])
 def get_nutritionist(nutritionist_id):
     nutritionist = g.nutritionist_model.get(nutritionist_id)
     if nutritionist:
@@ -33,7 +33,7 @@ def get_nutritionist(nutritionist_id):
     else:
         return make_response(jsonify({"error": "Nutritionist not found"}), 404)
 
-@nutritionists_routes.route("/<nutritionist_id>", methods=["PUT"])
+@nutritionist_routes.route("/<nutritionist_id>", methods=["PUT"])
 def update_nutritionist(nutritionist_id):
     try:
         nutritionist_data = request.json
@@ -46,7 +46,7 @@ def update_nutritionist(nutritionist_id):
     except ValidationError as e:
         return make_response(jsonify({"error": "Invalid data", "details": e.errors()}), 400)
 
-@nutritionists_routes.route("/<nutritionist_id>", methods=["DELETE"])
+@nutritionist_routes.route("/<nutritionist_id>", methods=["DELETE"])
 def delete_nutritionist(nutritionist_id):
     deleted_count = g.nutritionist_model.delete(nutritionist_id)
     if deleted_count:

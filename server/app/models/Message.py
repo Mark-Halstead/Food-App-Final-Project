@@ -3,13 +3,12 @@ from typing import Optional, List
 
 from app.models.Base import Base
 
-# reviews table schema
-class ReviewSchema(BaseModel):
+class MessageSchema(BaseModel):
     user_id: int
     nutritionist_id: int
-    rating: int
-    review: str
+    sender: str
+    message: str
 
-class Review(Base):
+class Message(Base):
     def __init__(self, table_name, db_connection=None):
         super().__init__(table_name, db_connection)
