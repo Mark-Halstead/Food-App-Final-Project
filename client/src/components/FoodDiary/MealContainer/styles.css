@@ -1,0 +1,14 @@
+.meal-container {
+    background-color: lightblue;
+    margin: 10px;
+    width: auto;
+    padding: 20px;
+}
+.title-section {
+    display: flex;
+    justify-content: space-between;
+}
+
+h2 {
+    margin-bottom: 0;
+}
