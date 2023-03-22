@@ -1,13 +1,27 @@
 import React from 'react'
 import Wrapper from "../../assets/wrappers/BigSideBar"
+import DashNavLinks from '../DashNavLinks';
 
 
-const BigSideBar = () => {
+const BigSidebar = () => {
+
+    const isSidebarOpen = false
     return (
         <Wrapper>
-            <h2>BigSideBar</h2>
+            <div
+                className={
+                    isSidebarOpen
+                        ? 'sidebar-container '
+                        : 'sidebar-container show-sidebar'
+                }
+            >
+                <div className='content'>
+                    <header>
+                    </header>
+                    <DashNavLinks />
+                </div>
+            </div>
         </Wrapper>
-    )
-}
-
-export default BigSideBar
+    );
+};
+export default BigSidebar;
