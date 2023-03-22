@@ -7,3 +7,4 @@ def get_connection(url="TEST_DB_URL"):
     client = MongoClient(DB_URL)
 
     return client.flask_db
+

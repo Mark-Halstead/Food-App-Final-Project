@@ -21,6 +21,7 @@ function App() {
           <Route path="/dashboard" element={<SharedLayout />}>
             <Route index element={<Overview />} />
             <Route path='profile' element={<Profile />} />
+            <Route path="diary" element={<FoodDiary />} />
             <Route path='plan' element={<Plan />} />
             <Route path='chat' element={<Chat />} />
           </Route>

@@ -8,7 +8,7 @@ class ProductSchema(BaseModel):
     calories: float
     fat: float
     protein: float
-    carbohydrates: float
+    carbohydrate: float
     salt: float
     barcode: str
 
