@@ -8,4 +8,5 @@ export { default as Hamburger } from "./Hamburger";
 export { default as NavbarD } from "./NavbarD";
 export { default as BigSideBar } from "./BigSideBar";
 export { default as SmallSideBar } from "./SmallSideBar";
-// export {default as Wrapper} from './Wrapper'
+
+

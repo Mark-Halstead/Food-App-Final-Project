@@ -1,5 +1,5 @@
 import React from 'react'
-import Wrapper from "../../assets/wrappers/BigSidebar"
+import Wrapper from "../../assets/wrappers/BigSideBar"
 
 
 const BigSideBar = () => {
