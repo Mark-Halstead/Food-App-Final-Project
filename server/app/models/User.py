@@ -38,3 +38,13 @@ class UserUpdateSchema(BaseModel):
 class User(Base):
     def __init__(self, table_name, db_connection=None):
         super().__init__(table_name, db_connection)
+
+# class AuthUser:
+#     def signup(self):
+
+#         user = {
+#             "__id__": "",
+#             "name": "",
+#             "email": "",
+#             "password": "",
+#         }

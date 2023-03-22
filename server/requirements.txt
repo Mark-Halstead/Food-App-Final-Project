@@ -5,3 +5,4 @@ pydantic[email]
 flask-cors
 pytest
 gunicorn
+bcrypt

@@ -1,4 +1,4 @@
-from flask import Flask, g
+from flask import Flask, g, render_template, url_for, request, session, redirect
 from flask_cors import CORS
 from pymongo import MongoClient
 from datetime import datetime
@@ -40,3 +40,12 @@ def set_models():
 def index():
     return {"welcome":"Welcome to the PlatePal API"}
 
+
+@app.route('/home')
+def home():
+    return render_template("home.html")
+
+
+@app.route('/dashboard')
+def dashboard():
+    return render_template("dashboard.html")

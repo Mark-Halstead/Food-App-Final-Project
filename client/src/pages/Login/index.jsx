@@ -20,6 +20,7 @@ function Login() {
             // console.log(response.data.token);
             setIsLoggedIn(true);
             setUsername(username);
+            console.log(username);
             alert('You have successfully logged in!');
             navigate('/dashboard');
         } catch (error) {
