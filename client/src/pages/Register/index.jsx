@@ -1,63 +1,55 @@
 import React, { useState } from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import Wrapper from '../../assets/wrappers/RegisterPage'
+import Wrapper from '../../assets/wrappers/RegisterPage';
 
 function Register() {
+  const navigate = useNavigate();
 
-    const Navigate = useNavigate()
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [role, setRole] = useState('');
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.post('http://127.0.0.1:5000/users/signup', {
+        name: name,
+        email: email,
+        password: password,
+      });
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        Navigate("/login")
-        console.log(username);
-        console.log(password);
-        console.log(role);
-        // try {
-        //   const response = await axios.post('http://localhost:3000/users/register', {
-        //     username: username,
-        //     password: password,
-        //     role: role
-        //   });
+      console.log(response.data);
+      alert('Thanks for registering!');
+      navigate('/login');
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  };
 
-        //   console.log(response.data);
-        //   alert("Thanks for registering!")
-        //   Navigate("/login")
-        //   // redirect to login page or display success message
-        // } catch (error) {
-        //   console.log(error.response.data);
-        //   // display error message
-        // }
-    };
-
-    return (
-        <Wrapper>
-            <div className='register-background'>
-                <div className="register-container">
-                    <form onSubmit={handleSubmit}>
-                        <label>
-                            Username:
-                            <input type="text" value={username} onChange={(event) => setUsername(event.target.value)} />
-                        </label>
-                        <label>
-                            Password:
-                            <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} />
-                        </label>
-                        <label>
-                            Role:
-                            <input type="text" value={role} onChange={(event) => setRole(event.target.value)} />
-                        </label>
-                        <button type="submit">Register</button>
-                    </form>
-                </div>
-            </div>
-        </Wrapper>
-    );
+  return (
+    <Wrapper>
+      <div className="register-background">
+        <div className="register-container">
+          <form onSubmit={handleSubmit}>
+            <label>
+              Name:
+              <input type="text" value={name} onChange={(event) => setName(event.target.value)} required />
+            </label>
+            <label>
+              Email:
+              <input type="email" value={email} onChange={(event) => setEmail(event.target.value)} required />
+            </label>
+            <label>
+              Password:
+              <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} required />
+            </label>
+            <button type="submit">Register</button>
+          </form>
+        </div>
+      </div>
+    </Wrapper>
+  );
 }
-
 
 export default Register;
