@@ -5,7 +5,7 @@ from flask import g
 from unittest import mock
 
 def test_add_user(client, test_db, correct_user_data):
-    user_model = User(test_db)
+    user_model = User("users", test_db)
     with client.application.app_context():
         g.user_model = user_model
 
@@ -20,7 +20,7 @@ def test_add_user(client, test_db, correct_user_data):
         assert user_id == "123"
 
 def test_add_user_incorrect_data(client, test_db, incorrect_user_data):
-    user_model = User(test_db)
+    user_model = User("users", test_db)
     with client.application.app_context():
         g.user_model = user_model
         response = client.post("/users/", json=incorrect_user_data)
@@ -28,7 +28,7 @@ def test_add_user_incorrect_data(client, test_db, incorrect_user_data):
         assert response.json["error"] == "Invalid data"
 
 def test_get_user(client, test_db, correct_user_data):
-    user_model = User(test_db)
+    user_model = User("users", test_db)
     with client.application.app_context():
         g.user_model = user_model
 
@@ -42,7 +42,7 @@ def test_get_user(client, test_db, correct_user_data):
         assert response.json == correct_user_data
 
 def test_get_user_none_found(client, test_db, correct_user_data):
-    user_model = User(test_db)
+    user_model = User("users", test_db)
     with client.application.app_context():
         g.user_model = user_model
 
