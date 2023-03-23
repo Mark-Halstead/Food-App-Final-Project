@@ -1,0 +1,519 @@
+import styled from 'styled-components';
+
+const HomeWrapper = styled.article`
+/*////////////////// GLOBAL STYLES START /////////////////////*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Comic Sans MS';
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  background: #fff;
+  color: hsl(209, 61%, 16%);
+  line-height: 1.5;
+  font-size: 0.875rem;
+}
+ul {
+  list-style-type: none;
+}
+li {
+  margin-right: 15px;
+  font-weight: 800;
+}
+a {
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  letter-spacing: 0.20rem;
+  text-transform: capitalize;
+  line-height: 1.25;
+  margin-bottom: 0.75rem;
+}
+h1 {
+  font-size: 3rem;
+}
+h2 {
+  font-size: 2rem;
+}
+h3 {
+  font-size: 1.25rem;
+}
+h4 {
+  font-size: 0.875rem;
+}
+p {
+  margin-bottom: 1.25rem;
+  color: hsl(210, 22%, 49%);
+}
+/*////////////////// GLOBAL STYLES START /////////////////////*/
+
+/*////////////////// HAMBURGER-MENU STYLES START /////////////////////*/
+.hamburger-navbar-icon {
+  width: 5.5rem;
+  height: 5.5rem;
+  border-radius: 50%;
+  cursor: pointer;
+  flex-direction: column;
+}
+
+.hamburger-open-navbar-icon {
+  position: fixed;
+  top: 0.4rem;
+  left: 0.50rem;
+  z-index: 200;
+}
+
+.hamburger-navbar-icon .line {
+  height: 0.2rem;
+  width: 3.5rem;
+  background-color: rgb(203, 203, 203);
+}
+
+.hamburger-open-navbar-icon .line {
+  margin: 0.6rem 1rem;
+}
+
+.hamburger-navbar-wrapper {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.7);
+  position: fixed;
+  left: 0;
+  bottom: -100%;
+  opacity: 0;
+  z-index: 300;
+  padding: 3.5rem 5.5rem 3.5rem 3.5rem;
+  transition: bottom 0.5s, opacity 0.2s;
+}
+
+.change .hamburger-navbar-wrapper {
+  bottom: 0;
+  opacity: 1;
+  transition: bottom 0.5s, opacity 0.2s 0.25s;
+}
+
+.hamburger-navbar {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)),
+    url(images/navbar-bg.jpg) center no-repeat;
+  background-size: cover;
+  position: relative;
+  overflow-y: hidden;
+}
+
+.hamburger-close-navbar-icon {
+  position: absolute;
+  top: 2.5rem;
+  right: 3rem;
+  z-index: 300;
+}
+
+.hamburger-close-navbar-icon .line {
+  position: absolute;
+}
+
+.hamburger-ine-1 {
+  transform: rotate(40deg);
+}
+
+.hamburger-line-2 {
+  transform: rotate(-40deg);
+}
+
+.hamburger-nav-list {
+  height: 100%;
+  display: flex;
+}
+
+.hamburger-nav-link {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  width: 100%;
+  opacity: 0.8;
+  position: relative;
+  top: -100%;
+  transition: all 0.3s;
+}
+
+.change .hamburger-nav-link {
+  top: 0;
+}
+
+.hamburger-nav-link:hover {
+  opacity: 1;
+  color: #c2c2c2;
+}
+
+.change .hamburger-nav-link:nth-child(1) {
+  transition: top 1s 0.4s, opacity 0.3s, color 0.3s;
+}
+
+.change .hamburger-nav-link:nth-child(2) {
+  transition: top 1s 0.6s, opacity 0.3s, color 0.3s;
+}
+
+.change .hamburger-nav-link:nth-child(3) {
+  transition: top 1s 0.8s, opacity 0.3s, color 0.3s;
+}
+
+.change .hamburger-nav-link:nth-child(4) {
+  transition: top 1s 1s, opacity 0.3s, color 0.3s;
+}
+
+.change .hamburger-nav-link:nth-child(5) {
+  transition: top 1s 1.2s, opacity 0.3s, color 0.3s;
+}
+/*////////////////// HAMBURGER-MENU STYLES  /////////////////////*/
+
+
+
+/*//////////////// NAVBAR CSS START /////////////*/
+.navbar {
+  position: relative; 
+  z-index: 30; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgb(238, 238, 238);
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  height: 4rem;
+  display: flex;
+  align-items: center;
+}
+.nav-center {
+  width: 90vw;
+  max-width: 1170px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
+  }
+.nav-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav-toggle {
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 1.5rem;
+  color: #00FF00;
+  cursor: pointer;
+  transition: all 0.2s linear;
+}
+.nav-toggle:hover {
+  transform: scale(1.2);
+}
+.nav-link {
+  display: block;
+  padding: 0 0;
+  text-transform: capitalize;
+  letter-spacing: 0.20rem;
+  transition: all 0.2s linear;
+  color: hsl(209, 61%, 16%);
+  cursor: pointer;
+  font-size: 1rem;
+  margin-right: 0.7rem;
+}
+.nav-link:hover {
+  padding: 0;
+  color: #18d418;
+  background: transparent;
+}
+
+.nav-links {
+  height: auto;
+  display: flex;
+}
+
+#landing-logo {
+  margin-top: 0.5rem;
+  margin-left: 6rem;
+}
+
+.section-title {
+  text-align: center;
+}
+.section-title h2 {
+  text-transform: uppercase;
+}
+.section-title span {
+  color: #18de18;
+}
+/*//////////////// NAVBAR CSS END //////////////////*/
+
+/*//////////////// LANDING CSS START ///////////////*/
+.landing {
+  height: 100vh;
+  background: #18de18;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative; 
+  z-index: 10; 
+}
+
+.landing-banner {
+  text-align: center;
+  color: #fff;
+  padding: 0 3rem;
+  margin-bottom: 8rem;
+  position: relative; 
+  z-index: 10; 
+  animation: fadein 2s ease-in-out;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+    transform: translateY(-50%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+.landing-banner h1 {
+  text-transform: uppercase;
+}
+.landing-banner p {
+  max-width: 35rem;
+  margin-left: auto;
+  margin-right: auto;
+  color: #fff;
+  letter-spacing: 0.25rem;
+  z-index: -3;
+}
+.landing-btn {
+  padding: 0.9rem 1.6rem;
+  font-size: 1.25rem;
+  margin-top: 3rem;
+  background: #fff;
+  color: #18de18; 
+}
+
+@keyframes pulse {
+0% {
+  transform: scale(1);
+}
+50% {
+  transform: scale(1.2);
+}
+100% {
+  transform: scale(1);
+}
+}
+
+.landing-btn:hover {
+  background: transparent;
+  color: #fff;
+  border-color: #fff;
+}
+
+.btn {
+  text-transform: uppercase;
+  background: #fff;
+  color: #18de18;
+  padding: 0.4rem 0.45rem 0.4rem 0.8rem;
+  letter-spacing: 0.15rem;
+  display: inline-block;
+  font-weight: 600;
+  transition: all 0.3s linear;
+  font-size: 1rem;
+  border: 2px solid transparent;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.btn:hover {
+  color: hsl(184, 91%, 17%);
+  background: none;
+}
+
+/* .floating-bg {
+  z-index: 1;
+  width: 150vw;
+  height: 150vw;
+  background-color: #a7ffa7;
+  position: absolute;
+  top: -110vw;
+  left: calc(50% - 75vw);
+  border-radius: 45%;
+  animation: rotate 30s infinite;
+} */
+
+/* .floating-bg::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-color: rgb(24, 212, 24, 0.8);
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 40%;
+  animation: rotate 30s infinite;
+} */
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .landing {
+    background: rgb(44, 174, 186, 0.7),
+      url('') center/cover no-repeat;
+  }
+  .landing-banner {
+    padding: 0;
+  }
+  .landing-banner p {
+    max-width: 45rem;
+  }
+}
+/*//////////////// LANDING CSS END ///////////////*/
+
+
+/*//////////////// PRICING CARDS CSS START ///////////////*/
+.card-container {
+  width: 100%;
+  height: 100vh;
+  background-color: rgb(24, 212, 24, 0.8);
+}
+
+.cards-wrapper {
+  width: 90%;
+  margin: auto;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.card {
+  width: 300px;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)),
+    url("https://media.istockphoto.com/id/507316787/photo/healthy-food-background.jpg?s=170667a&w=0&k=20&c=FQzOQZkIUhBwTWL_omMoSw_EDnHZi48jCE6SoLc_u1s=") center no-repeat;
+  background-size: cover;
+  color: #fff;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+  transition: all 0.4s;
+}
+
+.card:hover {
+  transform: scale(1.1);
+  box-shadow: 0 15px 60px rgba(0, 0, 0, 0.8);
+}
+
+.card-header {
+  margin-bottom: 40px;
+}
+
+.card-header h3 {
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 30px;
+  font-weight: 300;
+  color: #18de18;
+  margin: 30px;
+  border-bottom: 1px groove #fff;
+  padding: 10px;
+}
+
+.card-header h1 {
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 60px;
+  font-weight: 300;
+}
+
+.card-header sup {
+  font-size: 35px;
+}
+
+.card-header span {
+  font-size: 18px;
+}
+
+.card-body {
+  margin-bottom: 60px;
+}
+
+.card-body li {
+  list-style: none;
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  margin: 15px 0;
+}
+
+.card-body i {
+  margin-right: 25px;
+}
+
+.card-body .fa-check {
+  color: #0d683a;
+}
+
+.card-body .fa-times {
+  color: #911832;
+}
+
+.card-footer {
+  margin-bottom: 40px;
+}
+
+.card-footer button {
+  width: 120px;
+  padding: 10px;
+  background-color: #18c518;
+  color: #ddd;
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: 2px solid #18c518;
+  border-radius: 50px;
+  outline: none;
+  cursor: pointer;
+}
+
+@media (max-width: 1200px) {
+  .container {
+    height: 100%;
+  }
+
+  .cards-wrapper {
+    flex-wrap: wrap;
+  }
+
+  .card {
+    margin: 50px;
+  }
+}
+/*//////////////// PRICING CARDS CSS END ///////////////*/
+`;
+
+export default HomeWrapper;

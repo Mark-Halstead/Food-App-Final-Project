@@ -1,0 +1,13 @@
+.food-item-container {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.food-item-container h3 {
+    font-size: 20px;
+    margin-bottom: 0;
+}
+
+.confirmed {
+    background-color: green;
+}

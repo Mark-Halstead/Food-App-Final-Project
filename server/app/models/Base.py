@@ -17,7 +17,7 @@ class Base:
     def create(self, data):
         return self.table.insert_one(data).inserted_id
 
-    def get_by_u(self, id):
+    def get(self, id):
         return self.table.find_one({"_id": ObjectId(id)})
 
     def update(self, id, update_data):
