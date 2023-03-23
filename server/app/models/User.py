@@ -85,7 +85,7 @@ class User(Base):
             "email": request.form.get('email')
         })
 
-        if user:
+        if user and pbkdf2_sha256.verify(request.form.get('password'), user['password']):
             user['_id'] = str(user['_id'])
             return self.start_session(user)
 
