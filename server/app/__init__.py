@@ -1,4 +1,5 @@
 from flask import Flask, g, render_template, url_for, request, session, redirect
+from functools import wraps
 from flask_cors import CORS
 import pymongo
 from pymongo import MongoClient
@@ -44,6 +45,18 @@ def set_models():
 # client = pymongo.MongoClient('localhost', 27017)
 # db = client.user_login_system
 
+
+# Decorators
+def login_required(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        if 'logged_in' in session:
+            return f(*args, **kwargs)
+        else:
+            return redirect("/")
+    return wrap
+
+
 # Routes to be moved
 @app.route('/')
 def index():
@@ -56,5 +69,6 @@ def home():
 
 
 @app.route('/dashboard')
+@login_required
 def dashboard():
     return render_template("dashboard.html")

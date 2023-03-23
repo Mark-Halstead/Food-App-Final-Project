@@ -68,3 +68,8 @@ def signup():
 def signout():
     new_user = g.user_model.signout()
     return jsonify(new_user)
+
+@user_routes.route('/login', methods=['POST'])
+def login():
+    logged_in_user = g.user_model.login()
+    return Response(JSONEncoder().encode(logged_in_user), content_type='application/json')

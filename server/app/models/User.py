@@ -79,4 +79,17 @@ class User(Base):
             return {'message': 'User signed out successfully'}
 
 
+    def login(self):
+
+        user = self.table.find_one({
+            "email": request.form.get('email')
+        })
+
+        if user:
+            user['_id'] = str(user['_id'])
+            return self.start_session(user)
+
+        return jsonify({"error":"invalid login credentials"}), 401
+
+
     

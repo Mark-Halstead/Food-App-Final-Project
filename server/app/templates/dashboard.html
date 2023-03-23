@@ -2,9 +2,30 @@
 
 {% block content %}
 
-    <h1>Dashboard</h1>
+<div class="card-wrapper">
 
-    {{ session['logged_in'] }}
-    {{ session['user'] }}
- 
+    <div class="card">
+
+      <h1 class="center">Dashboard</h1>
+      <p class="center">You are currently logged in.</p>
+
+      <div class="center">
+        <a href="users/signout" class="btn btn--secondary">Sign Out</a>
+      </div>
+    
+    </div>
+
+    <div class="card">
+
+      <h2 class="center">Your Info</h2>
+
+      <p>
+        <strong>ID:</strong> {{ session['user']['_id'] }}<br>
+        <strong>Name:</strong> {{ session['user']['name'] }}<br>
+        <strong>Email:</strong> {{ session['user']['email'] }}
+      </p>
+    
+    </div>
+  
+  </div>
 {% endblock %}
