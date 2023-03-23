@@ -1,5 +1,9 @@
 from pydantic import BaseModel, EmailStr, constr
 from typing import Optional, List
+from flask import Flask, jsonify, request, session, redirect
+from passlib.hash import pbkdf2_sha256
+from app import db
+import uuid
 
 from app.models.Base import Base
 
@@ -39,12 +43,40 @@ class User(Base):
     def __init__(self, table_name, db_connection=None):
         super().__init__(table_name, db_connection)
 
-# class AuthUser:
-#     def signup(self):
 
-#         user = {
-#             "__id__": "",
-#             "name": "",
-#             "email": "",
-#             "password": "",
-#         }
+    def start_session(self, user):
+        del user['password']
+        session['logged_in'] = True
+        session['user'] = user
+        return user
+
+
+    def signup(self):
+        print(request.form)
+
+        # Create user object
+        user = {
+            "token_id": uuid.uuid4().hex,
+            "name": request.form.get("name"),
+            "email": request.form.get("email"),
+            "password": request.form.get("password"),
+        }
+
+        # Encrypt the password
+        user['password'] = pbkdf2_sha256.encrypt(user['password']) 
+
+        if self.table.insert_one(user):
+            user['_id'] = str(user['_id'])
+            return self.start_session(user)
+
+        return user
+
+    def signout(self):
+        session.clear()
+        if 'user' in session:
+            return {'message': 'You did not logout successfully'}
+        else:
+            return {'message': 'User signed out successfully'}
+
+
+    

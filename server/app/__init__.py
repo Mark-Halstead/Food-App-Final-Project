@@ -1,5 +1,6 @@
 from flask import Flask, g, render_template, url_for, request, session, redirect
 from flask_cors import CORS
+import pymongo
 from pymongo import MongoClient
 from datetime import datetime
 from dotenv import load_dotenv
@@ -10,6 +11,7 @@ from app.models import User, Nutritionist, Product, DailyDiaryEntry, Review, Mes
 load_dotenv()
 
 app = Flask(__name__)
+app.secret_key = '\x0c\xf1\xc7$\xd6\xfa\x1d\xe2\xcdh\x82K\xed$1\xa1'
 CORS(app)
 app.register_blueprint(user_routes, url_prefix="/users")
 app.register_blueprint(nutritionist_routes, url_prefix="/nutritionists")
@@ -36,12 +38,19 @@ def set_models():
     if not hasattr(g, 'meal_plan_entry_model'):
         g.meal_plan_entry_model = MealPlanEntry("meal_plan_entries")
 
+
+
+# # Database test
+# client = pymongo.MongoClient('localhost', 27017)
+# db = client.user_login_system
+
+# Routes to be moved
 @app.route('/')
 def index():
     return {"welcome":"Welcome to the PlatePal API"}
 
 
-@app.route('/home')
+@app.route('/test')
 def home():
     return render_template("home.html")
 

@@ -4,7 +4,7 @@ from pydantic import ValidationError
 from bson import ObjectId
 import json
 
-from app.models.User import UserSchema, UserUpdateSchema
+from app.models.User import UserSchema, UserUpdateSchema, User
 
 
 
@@ -55,3 +55,16 @@ def delete_user(user_id):
         return {"deleted_count": deleted_count}
     else:
         return make_response(jsonify({"error": "User not found"}), 404)
+
+
+
+@user_routes.route('/signup', methods=["POST"])
+def signup():
+    new_user = g.user_model.signup()
+    return Response(JSONEncoder().encode(new_user), content_type='application/json')
+
+
+@user_routes.route('/signout')
+def signout():
+    new_user = g.user_model.signout()
+    return jsonify(new_user)
