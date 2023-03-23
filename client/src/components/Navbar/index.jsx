@@ -1,7 +1,7 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom'
 import NavLinks from '../NavLinks'
-// import LandingLogo from '../LandingLogo';
+import Landinglogo from '../Landinglogo';
 import { useAuth0 } from '@auth0/auth0-react';
 
 const NavBar = () => {
@@ -12,7 +12,7 @@ const NavBar = () => {
     return (
         <>
             <nav className='navbar'>
-                {/* <LandingLogo title='plate' subTitle='pal' /> */}
+                <Landinglogo title='plate' subTitle='pal' />
                 <div className='nav-center'>
                     <NavLinks parentClass='nav-links' itemClass='nav-link' />
                         <button onClick={loginWithRedirect}>login</button>

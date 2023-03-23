@@ -1,6 +1,6 @@
 import React from 'react'
 
-const LandingLogo = ({ title, subTitle }) => {
+const Landinglogo = ({ title, subTitle }) => {
   return (
     <div className='section-title' id="landing-logo">
       <h2>
@@ -10,4 +10,4 @@ const LandingLogo = ({ title, subTitle }) => {
   )
 }
 
-export default LandingLogo
+export default Landinglogo
