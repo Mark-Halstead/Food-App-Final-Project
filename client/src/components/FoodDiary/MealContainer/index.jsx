@@ -5,7 +5,7 @@ import './styles.css'
 import Wrapper from '../../../assets/wrappers/MealContainer'
 import FoodItem from '../FoodItem'
 
-function MealContainer({ mealName, diaryEntry, totals, setDiaryEntry }) {
+function MealContainer({ mealName, diaryEntry, totals, setDiaryEntry, openSearchPopup }) {
 
     return (
             <div className='meal-container'>
@@ -27,7 +27,11 @@ function MealContainer({ mealName, diaryEntry, totals, setDiaryEntry }) {
 
                 </div>
                 <div className='add-food-item-container'>
-                    <button className='add-food-item'>Add Item</button>
+                    <button 
+                        className='add-food-item'
+                        onClick={() => openSearchPopup(mealName)}
+                        
+                    >Add Item</button>
                 </div>
             </div>
     )

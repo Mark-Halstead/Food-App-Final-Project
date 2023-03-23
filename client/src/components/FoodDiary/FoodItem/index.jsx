@@ -37,10 +37,10 @@ function FoodItem({ item, meal, diaryEntry, setDiaryEntry}) {
 	return (
 		<div className={`food-item-container${item.confirmed ? ' confirmed' : ''}`}>
 			<div>
-				<h3>{item.product.name}</h3>
+				<h3>{item.product.product_name_en}</h3>
 			</div>
 			<div>
-				<h3>{item.product.calories}</h3>
+				<h3>{item.product.nutriments["energy-kcal"]}</h3>
 			</div>
 			<div className='button-containers'>
 				<button
