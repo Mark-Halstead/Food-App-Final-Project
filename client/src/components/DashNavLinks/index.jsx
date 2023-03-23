@@ -1,6 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom';
-import links from '../SmallSideBar/links'
+import links from "../SmallSideBar/links"
 
 const DashNavLinks = () => {
     return (
