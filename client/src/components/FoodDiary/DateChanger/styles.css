@@ -1,0 +1,6 @@
+.date-back-button,
+.date-forwards-button {
+    background-color: rgba(0, 0, 0, 0);
+    cursor: pointer;
+    border: none;
+}
