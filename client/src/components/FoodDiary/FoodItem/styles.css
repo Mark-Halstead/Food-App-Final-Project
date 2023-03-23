@@ -1,6 +1,13 @@
 .food-item-container {
     display: flex;
     justify-content: space-evenly;
+    background-color: rgb(230, 230, 230);
+}
+
+.food-item-container div {
+    flex: 1;
+    display: flex;
+    justify-content: center;
 }
 
 .food-item-container h3 {

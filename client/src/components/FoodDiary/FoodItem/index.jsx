@@ -2,18 +2,53 @@ import React from 'react'
 
 import './styles.css'
 
-function FoodItem({ item, meal, onFoodItemConfirm, onFoodItemDelete }) {
+function FoodItem({ item, meal, diaryEntry, setDiaryEntry}) {
+    async function handleFoodItemConfirm(meal, productId, confirmed) {
+		try {
+            const options = {
+                method:"PUT",
+                body:JSON.stringify({confirmed})
+            }
+			const url = `http://127.0.0.1:5000/diary_entries/${diaryEntry._id}/foods/${meal}/${productId}`
+			console.log('url', url)
+            const response = await fetch(url , 
+                options
+            )
+			console.log('response', response)
+            const data = await response.json()
+            console.log('data', data)
+            setDiaryEntry(data)
+        } catch (error) {
+
+        }
+    } 
+    
+    async function handleFoodItemDelete(meal, productId) {
+        try {
+            const response = await fetch(`http://127.0.0.1:5000/diary_entries/${diaryEntry._id}/foods/${meal}/${productId}`,
+                {method:"DELETE"}
+            )
+            const data = await response.json()
+            setDiaryEntry(data)
+        } catch (error) {
+        }
+    }
+
 	return (
 		<div className={`food-item-container${item.confirmed ? ' confirmed' : ''}`}>
-			<h3>{item.name}</h3>
-			<h3>{item.calories}</h3>
+			<div>
+				<h3>{item.product.name}</h3>
+			</div>
+			<div>
+				<h3>{item.product.calories}</h3>
+			</div>
 			<div className='button-containers'>
 				<button
-					onClick={() => onFoodItemConfirm(meal, item.item_id, !item.confirmed)}
+					onClick={() => handleFoodItemConfirm(meal, item.product._id, !item.confirmed)}
 				
 				>&#10004;</button>
 				<button
-					onClick={() => onFoodItemDelete(meal, item.item_id)}
+					onClick={() => handleFoodItemDelete(meal, item.product._id)}
 				>&#x2716;</button>
 
 			</div>

@@ -9,6 +9,43 @@
     justify-content: space-between;
 }
 
-h2 {
+.title-section h2 {
     margin-bottom: 0;
+}
+
+.diary-header {
+    display: flex;
+    position: relative;
+}
+
+.diary-header div {
+    flex: 1;
+    text-align: center;
+}
+
+.diary-header-left {
+    display: flex;
+    justify-content: flex-start;
+    flex: 0;
+}
+
+.diary-header i {
+    font-size: 50px;
+}
+
+.date-container {
+    display: flex;
+    justify-content: center;
+}
+.date-container h2 {
+    margin: 0 10px;
+}
+
+.add-food-item {
+    margin: 5px;
+}
+
+.add-food-item-container {
+    display: flex;
+    justify-content: center;
 }

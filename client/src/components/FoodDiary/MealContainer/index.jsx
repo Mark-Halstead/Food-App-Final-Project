@@ -5,7 +5,7 @@ import './styles.css'
 import Wrapper from '../../../assets/wrappers/MealContainer'
 import FoodItem from '../FoodItem'
 
-function MealContainer({ mealName, diaryEntry, onFoodItemConfirm, onFoodItemDelete }) {
+function MealContainer({ mealName, diaryEntry, totals, setDiaryEntry }) {
 
     return (
             <div className='meal-container'>
@@ -13,21 +13,22 @@ function MealContainer({ mealName, diaryEntry, onFoodItemConfirm, onFoodItemDele
                     <h2 className='meal-title'>{mealName}</h2>
                     <h2>
                         {
-                            diaryEntry ?
-                                diaryEntry.totals[mealName].calories
-                                : null
+                            totals && 
+                                totals[mealName].calories
                         }
                     </h2>
                 </div>
                 <div className='food-items-container'>
                     {
                         diaryEntry ?
-                            (diaryEntry[mealName].map((item) => (<FoodItem item={item} meal={mealName} onFoodItemConfirm={onFoodItemConfirm} onFoodItemDelete={onFoodItemDelete} /> )))
+                            (diaryEntry[mealName].map((item) => (<FoodItem item={item} meal={mealName} diaryEntry={diaryEntry} setDiaryEntry={setDiaryEntry}/> )))
                             : null
                     }
 
                 </div>
-                <button className='add-food-item'>Add Item</button>
+                <div className='add-food-item-container'>
+                    <button className='add-food-item'>Add Item</button>
+                </div>
             </div>
     )
 }

@@ -2,7 +2,7 @@ import React from 'react'
 import { Clients, HomePage } from './pages'
 import { Routes, Route } from 'react-router-dom'
 import { Navbar } from './components'
-import { Profile, Overview, Plan, SharedLayout, Chat, NutritionistSharedLayout, Register, Login } from './pages/index'
+import { Profile, Overview, Plan, SharedLayout, Chat, NutritionistSharedLayout, Register, Login, FoodDiary } from './pages/index'
 import { useLocation } from 'react-router-dom';
 import NutritionistProfile from './pages/NutritionistDashboard/NutritionistProfile'
 import { AuthProvider } from './contexts/AuthContext';
