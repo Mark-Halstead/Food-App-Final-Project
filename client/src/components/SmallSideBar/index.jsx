@@ -3,7 +3,6 @@ import { FaTimes } from 'react-icons/fa';
 import { SidebarContext } from '../../contexts/SidebarContext';
 import DashNavLinks from '../DashNavLinks';
 import Wrapper from '../../assets/wrappers/SmallSidebar';
-import DashNavLinks from '../DashNavLinks';
 
 const SmallSideBar = () => {
   const { sidebar, toggleSidebar } = useContext(SidebarContext);
