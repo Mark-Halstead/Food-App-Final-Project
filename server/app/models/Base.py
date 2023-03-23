@@ -5,7 +5,7 @@ import pymongo
 class Base:
     def __init__(self, table_name, db_connection=None):
         if db_connection is None:
-            db_connection = get_connection()
+            db_connection = get_connection("DB_URL")
         self.table = db_connection[table_name]
 
     def index(self):
