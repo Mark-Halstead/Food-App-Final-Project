@@ -5,14 +5,15 @@ import { RiArrowRightSLine } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
 
 
-const GoalsForm = () => {
+const SubscriptionForm = () => {
 
     const Navigate = useNavigate()
-    const [goal, setGoal] = useState("")
+    const [budget, setBudget] = useState("")
+    const [subscriptionType, setSubscriptionType] = useState("")
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        Navigate("/diet-form")
+        Navigate("/dashboard")
       };
     
       const handleChange = (e, setGoal) => {
@@ -24,14 +25,20 @@ const GoalsForm = () => {
     return (
         <Wrapper>
             <form className='form' onSubmit={handleSubmit}>
-        <h3>What are your goals?</h3>
+        <h3>Payment Plan</h3>
         <div className='form-center'>
           <FormFormat
             type='text'
-            name='Goal'
-            value={goal}
-            handleChange={(e) => handleChange(e, setGoal)}
+            name='Budget'
+            value={budget}
+            handleChange={(e) => handleChange(e, setBudget)}
           />
+          <FormFormat
+            type='text'
+            name='Subscription Type'
+            value={subscriptionType}
+            handleChange={(e) => handleChange(e, setSubscriptionType)}
+            />
           <button type='submit' className='btn btn-block'>
             Next <RiArrowRightSLine style={{ fontSize: '10px' }} size={10} />
           </button>
@@ -41,4 +48,4 @@ const GoalsForm = () => {
     )
 }
 
-export default GoalsForm
+export default SubscriptionForm

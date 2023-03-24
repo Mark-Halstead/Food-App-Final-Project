@@ -5,14 +5,16 @@ import { RiArrowRightSLine } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
 
 
-const GoalsForm = () => {
+const DietForm = () => {
 
     const Navigate = useNavigate()
-    const [goal, setGoal] = useState("")
+    const [dietaryRestrictions, setRestrictions] = useState("")
+    const [allergies, setAllergies] = useState("")
+    const [foodPreferences, setFoodPreferences] = useState("")
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        Navigate("/diet-form")
+        Navigate("/subscription-form")
       };
     
       const handleChange = (e, setGoal) => {
@@ -24,13 +26,25 @@ const GoalsForm = () => {
     return (
         <Wrapper>
             <form className='form' onSubmit={handleSubmit}>
-        <h3>What are your goals?</h3>
+        <h3>Dietary Information</h3>
         <div className='form-center'>
           <FormFormat
             type='text'
-            name='Goal'
-            value={goal}
-            handleChange={(e) => handleChange(e, setGoal)}
+            name='Dietary Restrictions'
+            value={dietaryRestrictions}
+            handleChange={(e) => handleChange(e, setRestrictions)}
+          />
+          <FormFormat
+            type='text'
+            name='Allergies'
+            value={allergies}
+            handleChange={(e) => handleChange(e, setAllergies)}
+          />
+          <FormFormat
+            type='text'
+            name='Food Preferences'
+            value={foodPreferences}
+            handleChange={(e) => handleChange(e, setFoodPreferences)}
           />
           <button type='submit' className='btn btn-block'>
             Next <RiArrowRightSLine style={{ fontSize: '10px' }} size={10} />
@@ -41,4 +55,4 @@ const GoalsForm = () => {
     )
 }
 
-export default GoalsForm
+export default DietForm

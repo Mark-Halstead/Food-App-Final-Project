@@ -11,3 +11,5 @@ export { default as Login } from "./Login";
 export { default as Register } from "./Register";
 export { default as UserSignUpForm } from "./UserSignUpForm";
 export { default as GoalsForm } from "./GoalsForm";
+export { default as DietForm } from "./DietForm";
+export { default as SubscriptionForm } from "./SubscriptionForm";
