@@ -15,6 +15,7 @@ bcrypt = "*"
 "flask.ext.pymongo" = "*"
 passlib = "*"
 faker = "*"
+pytest-cov = "*"
 
 [dev-packages]
 

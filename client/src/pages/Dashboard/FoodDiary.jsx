@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react'
 
 import { MealContainer, MoodMenu, StatContainer, DateChanger } from '../../components/FoodDiary'
+import { SearchPopup } from '../../components';
+import { calculateTotals } from '../../helpers/calculateStats';
 
 function FoodDiary() {
     const currentDate = new Date();
     
     const [selectedDate, setSelectedDate] = useState(new Date().toISOString().slice(0, 10));
     const [mealTotals, setMealTotals] = useState({ breakfast: {}, lunch: {}, dinner: {}, snacks: {} });
+    const [showSearchPopup, setShowSearchPopup] = useState(false)
+    const [meal, setMeal] = useState("")
 
     const [allDiaryEntries, setAllDiaryEntries] = useState(null);
     const [diaryEntry, setDiaryEntry] = useState(null);
@@ -17,7 +21,7 @@ function FoodDiary() {
         setLoading(true)
         async function getDiaryEntry() {
             try {
-                const response = await fetch(`http://127.0.0.1:5000/diary_entries?user_id=641c24093d388394c215d240`)
+                const response = await fetch(`http://127.0.0.1:5000/diary_entries?user_id=641c910f2df7c4cef1c96255`)
                 const data = await response.json()
                 console.log('data', data)
                 setAllDiaryEntries(data)
@@ -59,68 +63,30 @@ function FoodDiary() {
         updateDiary({mood})
         console.log('mood', mood)
         setShowMoodMenu(false)
-    } 
+    }      
 
-    const calculateMealTotals = (meal) => {
-        let caloriesTotal = 0;
-        let fatTotal = 0;
-        let carbTotal = 0;
-        let proteinTotal = 0;
-      
-        meal.forEach((item) => {
-          if (item.confirmed) {
-            caloriesTotal += item.product.calories * item.serving_size / 100;
-            fatTotal += item.product.fat * item.serving_size / 100;
-            carbTotal += item.product.carbohydrate * item.serving_size / 100;
-            proteinTotal += item.product.protein * item.serving_size / 100;
-          }
-        });
-      
-        return {
-          calories: caloriesTotal.toFixed(),
-          fat: fatTotal.toFixed(1),
-          carb: carbTotal.toFixed(1),
-          protein: proteinTotal.toFixed(1),
-        };
-      };
-      
-      const calculateTotals = (diaryEntry) => {
-        let totalCalories = 0;
-        let totalFat = 0;
-        let totalCarb = 0;
-        let totalProtein = 0;
-      
-        const mealTotals = {};
-        for (const meal of ["breakfast", "lunch", "dinner", "snacks"]) {
-          const { calories, fat, carb, protein } = calculateMealTotals(diaryEntry[meal]);
-          mealTotals[meal] = { calories, fat, carb, protein };
-      
-          totalCalories += parseFloat(calories);
-          totalFat += parseFloat(fat);
-          totalCarb += parseFloat(carb);
-          totalProtein += parseFloat(protein);
-        }
-      
-        return {
-            totalCalories: totalCalories.toFixed(),
-            totalFat: totalFat.toFixed(1),
-            totalCarb: totalCarb.toFixed(1),
-            totalProtein: totalProtein.toFixed(1),
-            ... mealTotals
-        };
-      };
-      
+    const openSearchPopup = (meal) => {
+        setMeal(meal)
+        setShowSearchPopup(true)
+
+    }
 
     useEffect(() => {
         if (diaryEntry) {
             const totals = calculateTotals(diaryEntry);
             setMealTotals(totals);
-            console.log('totals', totals)
         }
     }, [diaryEntry]);
 
+    const handleAddFood = () => {
+    }
+
     return (
         <div>
+            <div>
+                <button onClick={openSearchPopup}>Search for food</button>
+                {showSearchPopup && <SearchPopup onClose={() => setShowSearchPopup(false)} onAddFood={handleAddFood} meal={meal} diaryEntry={diaryEntry}/>}
+            </div>
             <div className='diary-header'>
                 <div className='diary-header-left'>
                     <StatContainer title={"Target (kcal)"} value={"2500"}/>
@@ -139,10 +105,10 @@ function FoodDiary() {
                 </div>
 
             </div>
-            <MealContainer mealName={"breakfast"} diaryEntry={diaryEntry} setDiaryEntry={setDiaryEntry} totals={mealTotals}/>
-            <MealContainer mealName={"lunch"} diaryEntry={diaryEntry} setDiaryEntry={setDiaryEntry} totals={mealTotals}/>
-            <MealContainer mealName={"dinner"} diaryEntry={diaryEntry} setDiaryEntry={setDiaryEntry} totals={mealTotals}/>
-            <MealContainer mealName={"snacks"} diaryEntry={diaryEntry} setDiaryEntry={setDiaryEntry} totals={mealTotals}/>
+            <MealContainer mealName={"breakfast"} diaryEntry={diaryEntry} setDiaryEntry={setDiaryEntry} totals={mealTotals} openSearchPopup={openSearchPopup}/>
+            <MealContainer mealName={"lunch"} diaryEntry={diaryEntry} setDiaryEntry={setDiaryEntry} totals={mealTotals} openSearchPopup={openSearchPopup}/>
+            <MealContainer mealName={"dinner"} diaryEntry={diaryEntry} setDiaryEntry={setDiaryEntry} totals={mealTotals} openSearchPopup={openSearchPopup}/>
+            <MealContainer mealName={"snacks"} diaryEntry={diaryEntry} setDiaryEntry={setDiaryEntry} totals={mealTotals} openSearchPopup={openSearchPopup}/>
         </div>
     )
 }
