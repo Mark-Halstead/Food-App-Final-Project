@@ -7,7 +7,7 @@ function Register() {
 
     const Navigate = useNavigate()
 
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [role, setRole] = useState('');
 
@@ -16,7 +16,7 @@ function Register() {
 
         try {
             const response = await axios.post('http://127.0.0.1:5000/users/signup', {
-                username: username,
+                email: email,
                 password: password,
                 role: role,
             });
@@ -37,8 +37,8 @@ function Register() {
                 <div className="register-container">
                     <form onSubmit={handleSubmit}>
                         <label>
-                            Username:
-                            <input type="text" value={username} onChange={(event) => setUsername(event.target.value)} />
+                            Email:
+                            <input type="text" value={email} onChange={(event) => setEmail(event.target.value)} />
                         </label>
                         <label>
                             Password:
