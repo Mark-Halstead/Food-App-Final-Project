@@ -96,7 +96,7 @@ const Profile = () => {
             handleChange={handleChange}
           />
           <button type='submit' className='btn btn-block'>
-            Save Changes
+            Next 
           </button>
         </div>
       </form>
