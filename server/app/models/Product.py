@@ -15,3 +15,9 @@ class ProductSchema(BaseModel):
 class Product(Base):
     def __init__(self, table_name, db_connection=None):
         super().__init__(table_name, db_connection)
+
+    def get_by_id(self, id):
+        product = self.table.find_one({
+            "id": id
+        })
+        return product

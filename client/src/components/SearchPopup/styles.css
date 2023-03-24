@@ -1,0 +1,22 @@
+.popup-background {
+    background-color: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    z-index: 1;
+}
+
+.popup {
+    width: 80%;
+    height: 80%;
+    background-color: rgb(127, 244, 255);
+    border-radius: 10px;
+    padding: 40px;
+    overflow-y: auto;
+}

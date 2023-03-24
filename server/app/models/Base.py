@@ -1,5 +1,6 @@
 from bson import ObjectId
 from app.db import get_connection
+import pymongo
 
 class Base:
     def __init__(self, table_name, db_connection=None):
@@ -9,19 +10,23 @@ class Base:
 
     def index(self):
         results = self.table.find()
-        list_of_results = []
-        for r in results:
-            list_of_results.append(r)
+        list_of_results = [r for r in results]
         return list_of_results
 
     def create(self, data):
-        return self.table.insert_one(data).inserted_id
+        id = self.table.insert_one(data).inserted_id
+        return self.get(id)
 
     def get(self, id):
         return self.table.find_one({"_id": ObjectId(id)})
 
     def update(self, id, update_data):
-        return self.table.update_one({"_id": ObjectId(id)}, {"$set": update_data}).modified_count
+        updated_document = self.table.find_one_and_update(
+            {"_id": ObjectId(id)},
+            {"$set": update_data},
+            return_document=pymongo.ReturnDocument.AFTER
+        )
+        return updated_document
 
     def delete(self, id):
         return self.table.delete_one({"_id": ObjectId(id)}).deleted_count

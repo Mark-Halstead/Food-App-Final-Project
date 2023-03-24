@@ -40,31 +40,81 @@ def add_dummy_users():
         print(f"User with ID {result.inserted_id} added to the collection")
 
 def add_dummy_products():
-    products = [
-        {"name": "Banana", "calories": 89, "fat": 0.3, "protein": 1.1, "carbohydrate": 22.8, "salt": 0.01, "barcode": "1234567890"},
-        {"name": "Apple", "calories": 52, "fat": 0.2, "protein": 0.3, "carbohydrate": 14, "salt": 0.001, "barcode": "2345678901"},
-        {"name": "Chicken Breast", "calories": 165, "fat": 3.6, "protein": 31, "carbohydrate": 0, "salt": 0.06, "barcode": "3456789012"},
-        {"name": "Rice", "calories": 130, "fat": 0.3, "protein": 2.7, "carbohydrate": 28, "salt": 0.001, "barcode": "4567890123"}
-    ]
+    products = []
+    for i in range(100):
+        product = {
+            "allergens_tags": [],
+            "brands": fake.company(),
+            "id": str(random.randint(10000000, 99999999)),
+            "nutriments": {
+                "carbohydrates": round(random.uniform(0, 100), 1),
+                "carbohydrates_100g": round(random.uniform(0, 100), 1),
+                "carbohydrates_serving": round(random.uniform(0, 100), 1),
+                "carbohydrates_unit": "g",
+                "carbohydrates_value": round(random.uniform(0, 100), 1),
+                "energy": round(random.uniform(0, 500), 1),
+                "energy-kcal": round(random.uniform(0, 500), 1),
+                "energy-kcal_100g": round(random.uniform(0, 500), 1),
+                "energy-kcal_serving": round(random.uniform(0, 500), 1),
+                "energy-kcal_unit": "kcal",
+                "fat": "0.5",
+                "fat_100g": "0.5",
+                "proteins_100g": "0.5",
+                "sodium_100g": "0.004",
+            },
+            "product_name_en": fake.word(),
+            "serving_quantity": round(random.uniform(0, 500), 1),
+            "_id": str(random.randint(10000000, 99999999))
+        }
+        products.append(product)
     db.products.insert_many(products)
 
 def add_dummy_diary_entries():
+    # Generate a list of dates for the diary entries
+    date_format = "%Y-%m-%d"
+    num_entries = 10
+    start_date = datetime.now() - timedelta(days=num_entries)
+    end_date = datetime.now() + timedelta(days=num_entries)
+    dates = [(start_date + timedelta(days=i)).strftime(date_format) for i in range((end_date - start_date).days)]
+    user_ids = [user["_id"] for user in db.users.find()]
+    products = list(db.products.find())
 
-    date = datetime.now().strftime("%Y-%m-%d")
-    for i in range(10):
-        user_id = str(random.choice([user["_id"] for user in db.users.find()]))
-        breakfast = [{"item_id": i+1, "product_id": str(random.choice(list(db.products.find()))["_id"]), "serving_size": random.randint(50, 200), "confirmed": random.choice([True, False])} for i in range(random.randint(1, 5))]
-        lunch = [{"item_id": i+1, "product_id": str(random.choice(list(db.products.find()))["_id"]), "serving_size": random.randint(50, 200), "confirmed": random.choice([True, False])} for i in range(random.randint(1, 5))]
-        dinner = [{"item_id": i+1, "product_id": str(random.choice(list(db.products.find()))["_id"]), "serving_size": random.randint(50, 200), "confirmed": random.choice([True, False])} for i in range(random.randint(1, 5))]
-        snacks = [{"item_id": i+1, "product_id": str(random.choice(list(db.products.find()))["_id"]), "serving_size": random.randint(10, 100), "confirmed": random.choice([True, False])} for i in range(random.randint(0, 3))]
-        mood = random.choice(["Happy", "Sad", "Neutral"])
-        weight = random.uniform(50, 100)
-        followed_meal_plan = random.choice([True, False])
-        diary_entry = DailyDiaryEntrySchema(user_id=user_id, date=date, breakfast=breakfast, lunch=lunch, dinner=dinner, snacks=snacks, mood=mood, weight=weight, followed_meal_plan=followed_meal_plan)
-        db.diary_entries.insert_one(diary_entry.dict())
+    for date in dates:
+        for user_id in user_ids:
+            breakfast = []
+            lunch = []
+            dinner = []
+            snacks = []
+            for i in range(random.randint(1, 5)):
+                product = random.choice(products)
+                serving_multiplier = round(random.uniform(0, 3), 1)
+                confirmed = random.choice([True, False])
+                food_item = {"item_id": i+1, "product": product, "serving_multiplier": serving_multiplier, "confirmed": confirmed}
+                breakfast.append(food_item)
+            for i in range(random.randint(1, 5)):
+                product = random.choice(products)
+                serving_multiplier = round(random.uniform(0, 3), 1)
+                confirmed = random.choice([True, False])
+                food_item = {"item_id": i+1, "product": product, "serving_multiplier": serving_multiplier, "confirmed": confirmed}
+                lunch.append(food_item)
+            for i in range(random.randint(1, 5)):
+                product = random.choice(products)
+                serving_multiplier = round(random.uniform(0, 3), 1)
+                confirmed = random.choice([True, False])
+                food_item = {"item_id": i+1, "product": product, "serving_multiplier": serving_multiplier, "confirmed": confirmed}
+                dinner.append(food_item)
+            for i in range(random.randint(0, 3)):
+                product = random.choice(products)
+                serving_multiplier = round(random.uniform(0, 3), 1)
+                confirmed = random.choice([True, False])
+                food_item = {"item_id": i+1, "product": product, "serving_multiplier": serving_multiplier, "confirmed": confirmed}
+                snacks.append(food_item)
+            mood = random.choice([1, 2, 3, 4, 5])
+            weight = random.uniform(50, 100)
+            followed_meal_plan = random.choice([True, False])
+            diary_entry = DailyDiaryEntrySchema(user_id=user_id, date=date, breakfast=breakfast, lunch=lunch, dinner=dinner, snacks=snacks, mood=mood, weight=weight, followed_meal_plan=followed_meal_plan)
+            db.diary_entries.insert_one(diary_entry.dict())
 
-    # Decrement date by one day for the next entry
-    date = (datetime.strptime(date, "%Y-%m-%d") - timedelta(days=1)).strftime("%Y-%m-%d")
 
 add_dummy_users()
 add_dummy_products()

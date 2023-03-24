@@ -1,19 +1,29 @@
 from pydantic import BaseModel, Field
 from typing import Optional, List
 from bson import ObjectId
+from datetime import date
 
 from app.models.Base import Base
 
 class DailyDiaryEntrySchema(BaseModel):
-    user_id: str
+    user_id: ObjectId
     date: str
     breakfast: List[dict]
     lunch: List[dict]
     dinner: List[dict]
     snacks: List[dict]
-    mood: str
+    mood: int
     weight: float
     followed_meal_plan: bool
+
+    class Config:
+        arbitrary_types_allowed = True
+
+class DailyDiaryEntryUpdateSchema(BaseModel):
+    mood: Optional[int]
+    weight: Optional[float]
+    followed_meal_plan: Optional[bool]
+
 
 class DailyDiaryEntry(Base):
     def __init__(self, table_name, db_connection=None):
@@ -24,3 +34,9 @@ class DailyDiaryEntry(Base):
             "date": date
         })
         return diary_entries
+
+    def get_by_user_id(self, user_id):
+        diary_entries = self.table.find({
+            "user_id": user_id
+        })
+        return [d for d in diary_entries]
