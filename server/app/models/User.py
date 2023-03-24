@@ -57,7 +57,7 @@ class User(Base):
         # Create user object
         user = {
             "token_id": uuid.uuid4().hex,
-            "name": request.form.get("name"),
+            "role": request.form.get("role"),
             "email": request.form.get("email"),
             "password": request.form.get("password"),
         }

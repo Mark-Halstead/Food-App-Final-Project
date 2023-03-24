@@ -7,13 +7,16 @@ import { JSDOM } from 'jsdom';
 import matchers from '@testing-library/jest-dom/matchers';
 expect.extend(matchers);
 
-import HomePage from '../HomePage/index';
+import Landing from './index';
 
 // Set up JSDOM environment
 const { window } = new JSDOM('<!doctype html><html><body></body></html>');
 global.window = window;
 global.document = window.document;
 
-it('Hamburger renders without crashing', () => {
-    render(<HomePage />);
+
+it('Landing renders without crashing', () => {
+    render(<Landing />)
 });
+
+
