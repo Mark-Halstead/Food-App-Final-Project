@@ -14,3 +14,4 @@ export { default as DashNavLinksN } from "./DashNavLinksN";
 export { default as BigSideBarN } from "./BigSideBarN";
 export { default as SearchPopup } from "./SearchPopup";
 export { default as FormFormat } from "./FormFormat";
+export { default as Form } from "./Form";

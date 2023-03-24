@@ -23,7 +23,7 @@ function Register() {
 
             console.log(response.data);
             alert("Thanks for registering!")
-            Navigate("/login")
+            Navigate("/user-signup-form")
             // redirect to login page or display success message
         } catch (error) {
             console.log(error.response.data);

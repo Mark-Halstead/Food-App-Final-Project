@@ -7,7 +7,7 @@ from datetime import datetime
 from dotenv import load_dotenv
 import os
 from app.routes import user_routes, nutritionist_routes, product_routes, diary_routes, review_routes, message_routes, meal_plan_routes
-from app.models import User, Nutritionist, Product, DailyDiaryEntry, Review, Message, MealPlanEntry
+from app.models import User, Nutritionist, Product, DailyDiaryEntry, Review, Message, MealPlanEntry, Token
 
 load_dotenv()
 
@@ -38,6 +38,9 @@ def set_models():
         g.message_model = Message("messages")
     if not hasattr(g, 'meal_plan_entry_model'):
         g.meal_plan_entry_model = MealPlanEntry("meal_plan_entries")
+    if not hasattr(g, 'token_model'):
+        g.token_model = Token("tokens")
+    
 
 
 

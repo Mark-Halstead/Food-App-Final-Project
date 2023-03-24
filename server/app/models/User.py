@@ -51,19 +51,7 @@ class User(Base):
         return user
 
 
-    def signup(self):
-        print(request.form)
-
-        # Create user object
-        user = {
-            "token_id": uuid.uuid4().hex,
-            "role": request.form.get("role"),
-            "username": request.form.get("username"),
-            "password": request.form.get("password"),
-        }
-
-        # Encrypt the password
-        user['password'] = pbkdf2_sha256.encrypt(user['password']) 
+    def signup(self, user):
 
         if self.table.insert_one(user):
             user['_id'] = str(user['_id'])
@@ -82,7 +70,7 @@ class User(Base):
     def login(self):
 
         user = self.table.find_one({
-            "username": request.form.get('username')
+            "email": request.form.get('email')
         })
 
         if user and pbkdf2_sha256.verify(request.form.get('password'), user['password']):
