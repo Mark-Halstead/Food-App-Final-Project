@@ -9,3 +9,5 @@ export { default as NutritionistSharedLayout } from "./NutritionistDashboard/Nut
 export { default as Clients } from "./NutritionistDashboard/Clients";
 export { default as Login } from "./Login";
 export { default as Register } from "./Register";
+export { default as UserSignUpForm } from "./UserSignUpForm";
+export { default as GoalsForm } from "./GoalsForm";
