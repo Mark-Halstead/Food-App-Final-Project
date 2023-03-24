@@ -139,16 +139,16 @@ export const AuthContext = createContext(<span class="fstat-no" title="function 
 &nbsp;
 export const AuthProvider = <span class="fstat-no" title="function not covered" >({ children }) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >  const [isLoggedIn, setIsLoggedIn] = useState(false);</span>
-<span class="cstat-no" title="statement not covered" >  const [username, setUsername] = useState('');</span>
+<span class="cstat-no" title="statement not covered" >  const [email, setEmail] = useState('');</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  useEffect(() =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    const token = localStorage.getItem('token');</span>
-<span class="cstat-no" title="statement not covered" >    const storedUsername = localStorage.getItem('username');</span>
+<span class="cstat-no" title="statement not covered" >    const storedEmail = localStorage.getItem('email');</span>
 <span class="cstat-no" title="statement not covered" >    if (token) {</span>
 <span class="cstat-no" title="statement not covered" >      setIsLoggedIn(true);</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >    if (storedUsername) {</span>
-<span class="cstat-no" title="statement not covered" >      setUsername(storedUsername); </span>
+<span class="cstat-no" title="statement not covered" >    if (storedEmail) {</span>
+<span class="cstat-no" title="statement not covered" >      setEmail(storedEmail); </span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" >  }, []);</span>
 <span class="cstat-no" title="statement not covered" >  </span>
@@ -163,7 +163,7 @@ export const AuthProvider = <span class="fstat-no" title="function not covered" 
 <span class="cstat-no" title="statement not covered" >  };</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  return (</span>
-<span class="cstat-no" title="statement not covered" >    &lt;AuthContext.Provider value={{ isLoggedIn, login, logout, setIsLoggedIn, username, setUsername }}&gt;</span>
+<span class="cstat-no" title="statement not covered" >    &lt;AuthContext.Provider value={{ isLoggedIn, login, logout, setIsLoggedIn, email, setEmail }}&gt;</span>
 <span class="cstat-no" title="statement not covered" >      {children}</span>
 <span class="cstat-no" title="statement not covered" >    &lt;/AuthContext.Provider&gt;</span>
 <span class="cstat-no" title="statement not covered" >  );</span>

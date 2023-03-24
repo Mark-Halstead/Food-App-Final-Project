@@ -9,7 +9,7 @@ const NavbarD = () => {
     const [showDropdown, setShowDropdown] = useState(false);
     const { sidebar, toggleSidebar } = useContext(SidebarContext);
     // const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
-    // const { username } = useContext(AuthContext);
+    // const { email } = useContext(AuthContext);
     const navigate = useNavigate()
 
     useEffect(() => {
