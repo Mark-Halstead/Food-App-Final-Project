@@ -1,37 +1,34 @@
 import React, { useState } from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import Wrapper from '../../assets/wrappers/RegisterPage'
+import Wrapper from '../../assets/wrappers/RegisterPage';
 
 function Register() {
 
     const Navigate = useNavigate()
 
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [role, setRole] = useState('');
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        Navigate("/login")
-        console.log(username);
-        console.log(password);
-        console.log(role);
-        // try {
-        //   const response = await axios.post('http://localhost:3000/users/register', {
-        //     username: username,
-        //     password: password,
-        //     role: role
-        //   });
 
-        //   console.log(response.data);
-        //   alert("Thanks for registering!")
-        //   Navigate("/login")
-        //   // redirect to login page or display success message
-        // } catch (error) {
-        //   console.log(error.response.data);
-        //   // display error message
-        // }
+        try {
+            const response = await axios.post('http://127.0.0.1:5000/users/signup', {
+                email: email,
+                password: password,
+                role: role,
+            });
+
+            console.log(response.data);
+            alert("Thanks for registering!")
+            Navigate("/user-signup-form")
+            // redirect to login page or display success message
+        } catch (error) {
+            console.log(error.response.data);
+            // display error message
+        }
     };
 
     return (
@@ -40,8 +37,8 @@ function Register() {
                 <div className="register-container">
                     <form onSubmit={handleSubmit}>
                         <label>
-                            Username:
-                            <input type="text" value={username} onChange={(event) => setUsername(event.target.value)} />
+                            Email:
+                            <input type="text" value={email} onChange={(event) => setEmail(event.target.value)} />
                         </label>
                         <label>
                             Password:
@@ -58,6 +55,5 @@ function Register() {
         </Wrapper>
     );
 }
-
 
 export default Register;

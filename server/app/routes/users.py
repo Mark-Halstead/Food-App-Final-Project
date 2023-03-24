@@ -3,19 +3,22 @@ from flask import make_response, jsonify, request
 from pydantic import ValidationError
 from bson import ObjectId
 import json
+import uuid
+from passlib.hash import pbkdf2_sha256
 
 from app.models.User import UserSchema, UserUpdateSchema, User
 
 
-
-## this is to be able to json encode the _id value (ObjectId object) that is returned from db
+# this is to be able to json encode the _id value (ObjectId object) that is returned from db
 class JSONEncoder(json.JSONEncoder):
     def default(self, o):
         if isinstance(o, ObjectId):
             return str(o)
         return json.JSONEncoder.default(self, o)
 
+
 user_routes = Blueprint("user_routes", __name__)
+
 
 @user_routes.route("/", methods=["POST"])
 def add_user():
@@ -27,6 +30,7 @@ def add_user():
     except ValidationError as e:
         return make_response(jsonify({"error": "Invalid data", "details": e.errors()}), 400)
 
+
 @user_routes.route("/<user_id>", methods=["GET"])
 def get_user(user_id):
     user = g.user_model.get(user_id)
@@ -34,6 +38,7 @@ def get_user(user_id):
         return Response(JSONEncoder().encode(user), content_type='application/json')
     else:
         return make_response(jsonify({"error": "User not found"}), 404)
+
 
 @user_routes.route("/<user_id>", methods=["PUT"])
 def update_user(user_id):
@@ -48,6 +53,7 @@ def update_user(user_id):
     except ValidationError as e:
         return make_response(jsonify({"error": "Invalid data", "details": e.errors()}), 400)
 
+
 @user_routes.route("/<user_id>", methods=["DELETE"])
 def delete_user(user_id):
     deleted_count = g.user_model.delete(user_id)
@@ -57,10 +63,25 @@ def delete_user(user_id):
         return make_response(jsonify({"error": "User not found"}), 404)
 
 
-
 @user_routes.route('/signup', methods=["POST"])
 def signup():
-    new_user = g.user_model.signup()
+    # Create user object
+    data = json.loads(request.data)
+    user = {
+        "token_id": uuid.uuid4().hex,
+        "email": data.get("email"),
+        "password": data.get("password"),
+    }
+   
+    # Encrypt the password
+    user['password'] = pbkdf2_sha256.encrypt(user['password'])
+    new_user = g.user_model.signup(user)
+    token_data = {
+        "token": user["token_id"],
+        "role": "user",
+        "user_id": new_user["_id"]
+    }
+    token = g.token_model.create(token_data)
     return Response(JSONEncoder().encode(new_user), content_type='application/json')
 
 
@@ -68,6 +89,7 @@ def signup():
 def signout():
     new_user = g.user_model.signout()
     return jsonify(new_user)
+
 
 @user_routes.route('/login', methods=['POST'])
 def login():

@@ -8,8 +8,8 @@ import { useNavigate } from 'react-router-dom';
 const NavbarD = () => {
     const [showDropdown, setShowDropdown] = useState(false);
     const { sidebar, toggleSidebar } = useContext(SidebarContext);
-    const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
-    const { username } = useContext(AuthContext);
+    // const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
+    // const { email } = useContext(AuthContext);
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -27,15 +27,15 @@ const NavbarD = () => {
         setShowDropdown(!showDropdown);
     };
 
-    const handleLogout = () => {
-        try {
-            setIsLoggedIn(false)
-            navigate('/')
-            alert("Successfully logged out!")
-        } catch (error) {
-            console.log(error);
-        }
-    }
+    // const handleLogout = () => {
+    //     try {
+    //         setIsLoggedIn(false)
+    //         navigate('/')
+    //         alert("Successfully logged out!")
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // }
 
     return (
         <Wrapper>
@@ -60,7 +60,7 @@ const NavbarD = () => {
                         <button
                             type='button'
                             className='dropdown-btn'
-                            onClick={handleLogout}
+                            // onClick={handleLogout}
                         >
                             logout
                         </button>

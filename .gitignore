@@ -3,3 +3,5 @@ test.py
 .env
 .vscode/
 .coverage
+node_modules
+package-lock.json
