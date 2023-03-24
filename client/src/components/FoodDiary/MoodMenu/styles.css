@@ -1,5 +1,28 @@
 .popup-menu {
     position: absolute;
     top: 0;
-    width: 33.33%;
+    right: -3.33%;
+    width: 40%;
+}
+
+.mood-menu-container button,
+.popup-menu button {
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+}
+
+.fa-face-frown {
+    color: red;
+}
+.fa-face-frown-open {
+    color: orangered;
+}
+.fa-face-meh {
+    color: orange;
+}
+.fa-face-smile {
+    color: greenyellow;
+}
+.fa-face-smile-beam {
+    color: green;
 }

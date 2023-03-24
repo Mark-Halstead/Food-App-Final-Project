@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 
+import './styles.css'
+
 function MoodMenu({ mood, handleMoodClick, showMoodMenu, setShowMoodMenu }) {
     const moodFace = {
         1:"fa-regular fa-face-frown",
@@ -17,8 +19,9 @@ function MoodMenu({ mood, handleMoodClick, showMoodMenu, setShowMoodMenu }) {
             <div className='mood-menu-container'>
                 <button
                     onClick={openMoodMenu}
+                    className="hello"
                 >
-                    <i class={moodFace[mood]}></i>
+                    <i class={`${moodFace[mood]} hello`}></i>
                 </button>
             </div>
             {showMoodMenu &&

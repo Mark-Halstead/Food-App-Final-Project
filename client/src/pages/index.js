@@ -7,5 +7,6 @@ export { default as SharedLayout } from "./Dashboard/SharedLayout";
 export { default as FoodDiary } from "./Dashboard/FoodDiary";
 export { default as NutritionistSharedLayout } from "./NutritionistDashboard/NutritionistSharedLayout";
 export { default as Clients } from "./NutritionistDashboard/Clients";
+export { default as MealPlan } from "./NutritionistDashboard/MealPlan";
 export { default as Login } from "./Login";
 export { default as Register } from "./Register";

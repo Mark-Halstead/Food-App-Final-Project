@@ -11,9 +11,10 @@ function FoodDiary() {
     const [mealTotals, setMealTotals] = useState({ breakfast: {}, lunch: {}, dinner: {}, snacks: {} });
     const [showSearchPopup, setShowSearchPopup] = useState(false)
     const [meal, setMeal] = useState("")
+    const [servingMultiplier, setServingMultiplier] = useState(1)
 
     const [allDiaryEntries, setAllDiaryEntries] = useState(null);
-    const [diaryEntry, setDiaryEntry] = useState(null);
+    const [mealItems, setMealItems] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [showMoodMenu, setShowMoodMenu] = useState(false)
@@ -21,14 +22,14 @@ function FoodDiary() {
         setLoading(true)
         async function getDiaryEntry() {
             try {
-                const response = await fetch(`http://127.0.0.1:5000/diary_entries?user_id=641c910f2df7c4cef1c96255`)
+                const response = await fetch(`http://127.0.0.1:5000/diary_entries?user_id=641d4e4340372146801382bb`)
                 const data = await response.json()
                 console.log('data', data)
                 setAllDiaryEntries(data)
 
                 const todaysDiaryEntry = data.find(entry => entry.date === selectedDate);
                 console.log('todaysDiaryEntry', todaysDiaryEntry)
-                setDiaryEntry(todaysDiaryEntry)
+                setMealItems(todaysDiaryEntry)
                 setLoading(false)
             } catch (error) {
                 setError(error)
@@ -37,20 +38,27 @@ function FoodDiary() {
         } 
         getDiaryEntry()
 
+    }, [])
+
+    useEffect(() => {
+        if (allDiaryEntries) {
+            const currentEntry = allDiaryEntries.find(entry => entry.date === selectedDate);
+            setMealItems(currentEntry)
+        }
     }, [selectedDate])
 
     async function updateDiary(updateData) {
-        console.log('diaryEntry', diaryEntry)
+        console.log('mealItems', mealItems)
         try {
             const options = {
                 method:"PUT",
                 body:JSON.stringify(updateData)
             }
-            const response = await fetch(`http://127.0.0.1:5000/diary_entries/${diaryEntry._id}`, 
+            const response = await fetch(`http://127.0.0.1:5000/diary_entries/${mealItems._id}`, 
                 options
             )
             const data = await response.json()
-            setDiaryEntry(data)
+            setMealItems(data)
             setLoading(false)
         } catch (error) {
             setError(error)
@@ -61,54 +69,80 @@ function FoodDiary() {
     const handleMoodClick = async (mood) => {
         // add function to update mood on backend
         updateDiary({mood})
-        console.log('mood', mood)
         setShowMoodMenu(false)
     }      
+
+    const handleFoodItemClick = () => {
+
+    }
 
     const openSearchPopup = (meal) => {
         setMeal(meal)
         setShowSearchPopup(true)
-
     }
 
     useEffect(() => {
-        if (diaryEntry) {
-            const totals = calculateTotals(diaryEntry);
+        if (mealItems) {
+            const totals = calculateTotals(mealItems);
             setMealTotals(totals);
         }
-    }, [diaryEntry]);
+    }, [mealItems]);
 
-    const handleAddFood = () => {
+    const handleAddFood = async (selectedItem) => {
+        const data = {serving_multiplier:servingMultiplier, ...selectedItem }
+        try {
+            const response = await axios.post(`http://127.0.0.1:5000/diary_entries/${props.mealItems._id}/foods/${props.meal}`, data);
+            const updatedDiaryEntry = response.data;
+            console.log('updatedDiaryEntry', updatedDiaryEntry)
+            setMealItems(updatedDiaryEntry)
+            onClose()
+            
+          } catch (error) {
+            console.error(error);
+          }
+    }
+
+    async function handleDeleteFood(meal, productId) {
+        try {
+            const response = await fetch(`http://127.0.0.1:5000/diary_entries/${mealItems._id}/foods/${meal}/${productId}`,
+                {method:"DELETE"}
+            )
+            const data = await response.json()
+            setMealItems(data)
+        } catch (error) {
+        }
+    }
+
+    const onClose = () => {
+        setShowSearchPopup(false)
     }
 
     return (
         <div>
             <div>
-                <button onClick={openSearchPopup}>Search for food</button>
-                {showSearchPopup && <SearchPopup onClose={() => setShowSearchPopup(false)} onAddFood={handleAddFood} meal={meal} diaryEntry={diaryEntry}/>}
+                {showSearchPopup && <SearchPopup onClose={onClose} handleAddFood={handleAddFood} meal={meal} servingMultiplier={servingMultiplier} setServingMultiplier={setServingMultiplier}/>}
             </div>
             <div className='diary-header'>
                 <div className='diary-header-left'>
                     <StatContainer title={"Target (kcal)"} value={"2500"}/>
                     {
                         mealTotals &&
-                            <StatContainer title={"Current (kcal)"} value={mealTotals.totalCalories}/>
+                            <StatContainer title={"Total (kcal)"} value={mealTotals.totalCalories}/>
                     }
                 </div>
                 <DateChanger selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
                 <div>
-
                     {
-                        diaryEntry && 
-                        <MoodMenu mood={diaryEntry.mood} handleMoodClick={handleMoodClick} showMoodMenu={showMoodMenu} setShowMoodMenu={setShowMoodMenu}/>
+                        mealItems && 
+                        <MoodMenu mood={mealItems.mood} handleMoodClick={handleMoodClick} showMoodMenu={showMoodMenu} setShowMoodMenu={setShowMoodMenu}/>
                     }
                 </div>
 
             </div>
-            <MealContainer mealName={"breakfast"} diaryEntry={diaryEntry} setDiaryEntry={setDiaryEntry} totals={mealTotals} openSearchPopup={openSearchPopup}/>
-            <MealContainer mealName={"lunch"} diaryEntry={diaryEntry} setDiaryEntry={setDiaryEntry} totals={mealTotals} openSearchPopup={openSearchPopup}/>
-            <MealContainer mealName={"dinner"} diaryEntry={diaryEntry} setDiaryEntry={setDiaryEntry} totals={mealTotals} openSearchPopup={openSearchPopup}/>
-            <MealContainer mealName={"snacks"} diaryEntry={diaryEntry} setDiaryEntry={setDiaryEntry} totals={mealTotals} openSearchPopup={openSearchPopup}/>
+            <MealContainer mealName={"breakfast"} mealItems={mealItems} setMealItems={setMealItems} totals={mealTotals} openSearchPopup={openSearchPopup} handleDeleteFood={handleDeleteFood}/>
+            <MealContainer mealName={"lunch"} mealItems={mealItems} setMealItems={setMealItems} totals={mealTotals} openSearchPopup={openSearchPopup} handleDeleteFood={handleDeleteFood}/>
+            <MealContainer mealName={"dinner"} mealItems={mealItems} setMealItems={setMealItems} totals={mealTotals} openSearchPopup={openSearchPopup} handleDeleteFood={handleDeleteFood}/>
+            <MealContainer mealName={"snacks"} mealItems={mealItems} setMealItems={setMealItems} totals={mealTotals} openSearchPopup={openSearchPopup} handleDeleteFood={handleDeleteFood}/>
         </div>
     )
 }

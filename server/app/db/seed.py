@@ -2,23 +2,42 @@ from . import get_connection
 from datetime import datetime, timedelta
 import random
 from faker import Faker
+from faker_food import FoodProvider
 from app.models.DailyDiaryEntry import DailyDiaryEntrySchema
 from app.models.User  import UserSchema
+from app.models.Nutritionist import NutritionistSchema
 
 
-db = get_connection()
+db = get_connection("DB_URL")
 db.products.delete_many({})
 db.diary_entries.delete_many({})
 db.users.delete_many({})
 
 fake = Faker()
+fake.add_provider(FoodProvider)
+
+def add_dummy_nutritionists():
+    for _ in range(10):
+        nutritionist_data = {
+            "email": fake.email(),
+            "password": "password123",
+            "first_name": fake.first_name(),
+            "last_name": fake.last_name(),
+            "credentials": fake.word(),
+            "area_of_expertise": fake.word(),
+            "education_training": [fake.sentence() for _ in range(3)]
+        }
+        nutritionist = NutritionistSchema(**nutritionist_data)
+        result = db.nutritionists.insert_one(nutritionist.dict())
+        print(f"Nutritionist with ID {result.inserted_id} added to the collection")
 
 def add_dummy_users():
     goals = ["Lose weight", "Maintain weight", "Gain weight"]
     activity_levels = ["Sedentary", "Lightly active", "Moderately active", "Very active"]
+    nutritionist_ids = [nutritionist["_id"] for nutritionist in db.nutritionists.find()]
     for _ in range(10):
         user_data = {
-            "nutritionist_id": random.randint(1, 10),
+            "nutritionist_id": random.choice(nutritionist_ids),
             "email": fake.email(),
             "password": "password123",
             "first_name": fake.first_name(),
@@ -62,7 +81,7 @@ def add_dummy_products():
                 "proteins_100g": "0.5",
                 "sodium_100g": "0.004",
             },
-            "product_name_en": fake.word(),
+            "product_name_en": fake.ingredient(),
             "serving_quantity": round(random.uniform(0, 500), 1),
             "_id": str(random.randint(10000000, 99999999))
         }
@@ -89,25 +108,25 @@ def add_dummy_diary_entries():
                 product = random.choice(products)
                 serving_multiplier = round(random.uniform(0, 3), 1)
                 confirmed = random.choice([True, False])
-                food_item = {"item_id": i+1, "product": product, "serving_multiplier": serving_multiplier, "confirmed": confirmed}
+                food_item = {"product": product, "serving_multiplier": serving_multiplier, "confirmed": confirmed, "user_serving_size":serving_multiplier * product["serving_quantity"]}
                 breakfast.append(food_item)
             for i in range(random.randint(1, 5)):
                 product = random.choice(products)
                 serving_multiplier = round(random.uniform(0, 3), 1)
                 confirmed = random.choice([True, False])
-                food_item = {"item_id": i+1, "product": product, "serving_multiplier": serving_multiplier, "confirmed": confirmed}
+                food_item = {"product": product, "serving_multiplier": serving_multiplier, "confirmed": confirmed, "user_serving_size":serving_multiplier * product["serving_quantity"]}
                 lunch.append(food_item)
             for i in range(random.randint(1, 5)):
                 product = random.choice(products)
                 serving_multiplier = round(random.uniform(0, 3), 1)
                 confirmed = random.choice([True, False])
-                food_item = {"item_id": i+1, "product": product, "serving_multiplier": serving_multiplier, "confirmed": confirmed}
+                food_item = {"product": product, "serving_multiplier": serving_multiplier, "confirmed": confirmed, "user_serving_size":serving_multiplier * product["serving_quantity"]}
                 dinner.append(food_item)
             for i in range(random.randint(0, 3)):
                 product = random.choice(products)
                 serving_multiplier = round(random.uniform(0, 3), 1)
                 confirmed = random.choice([True, False])
-                food_item = {"item_id": i+1, "product": product, "serving_multiplier": serving_multiplier, "confirmed": confirmed}
+                food_item = {"product": product, "serving_multiplier": serving_multiplier, "confirmed": confirmed, "user_serving_size":serving_multiplier * product["serving_quantity"]}
                 snacks.append(food_item)
             mood = random.choice([1, 2, 3, 4, 5])
             weight = random.uniform(50, 100)
@@ -115,7 +134,7 @@ def add_dummy_diary_entries():
             diary_entry = DailyDiaryEntrySchema(user_id=user_id, date=date, breakfast=breakfast, lunch=lunch, dinner=dinner, snacks=snacks, mood=mood, weight=weight, followed_meal_plan=followed_meal_plan)
             db.diary_entries.insert_one(diary_entry.dict())
 
-
+add_dummy_nutritionists()
 add_dummy_users()
 add_dummy_products()
 add_dummy_diary_entries()
