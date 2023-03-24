@@ -60,6 +60,7 @@ def delete_user(user_id):
 
 @user_routes.route('/signup', methods=["POST"])
 def signup():
+    print(json.loads(request.data))
     new_user = g.user_model.signup()
     return Response(JSONEncoder().encode(new_user), content_type='application/json')
 

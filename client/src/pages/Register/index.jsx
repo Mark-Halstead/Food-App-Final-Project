@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import Wrapper from '../../assets/wrappers/RegisterPage'
+import Wrapper from '../../assets/wrappers/RegisterPage';
 
 function Register() {
 
@@ -13,25 +13,22 @@ function Register() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        Navigate("/login")
-        console.log(username);
-        console.log(password);
-        console.log(role);
-        // try {
-        //   const response = await axios.post('http://localhost:3000/users/register', {
-        //     username: username,
-        //     password: password,
-        //     role: role
-        //   });
 
-        //   console.log(response.data);
-        //   alert("Thanks for registering!")
-        //   Navigate("/login")
-        //   // redirect to login page or display success message
-        // } catch (error) {
-        //   console.log(error.response.data);
-        //   // display error message
-        // }
+        try {
+            const response = await axios.post('http://127.0.0.1:5000/users/signup', {
+                username: username,
+                password: password,
+                role: role,
+            });
+
+            console.log(response.data);
+            alert("Thanks for registering!")
+            Navigate("/login")
+            // redirect to login page or display success message
+        } catch (error) {
+            console.log(error.response.data);
+            // display error message
+        }
     };
 
     return (
@@ -58,6 +55,5 @@ function Register() {
         </Wrapper>
     );
 }
-
 
 export default Register;

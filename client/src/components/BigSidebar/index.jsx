@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import Wrapper from "../../assets/wrappers/BigSideBar"
+import Wrapper from "../../assets/wrappers/BigSidebar"
 import DashNavLinks from '../DashNavLinks';
 import { SidebarContext } from '../../contexts/SidebarContext';
 

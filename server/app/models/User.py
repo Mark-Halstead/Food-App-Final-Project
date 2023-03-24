@@ -57,8 +57,8 @@ class User(Base):
         # Create user object
         user = {
             "token_id": uuid.uuid4().hex,
-            "name": request.form.get("name"),
-            "email": request.form.get("email"),
+            "role": request.form.get("role"),
+            "username": request.form.get("username"),
             "password": request.form.get("password"),
         }
 
@@ -82,7 +82,7 @@ class User(Base):
     def login(self):
 
         user = self.table.find_one({
-            "email": request.form.get('email')
+            "username": request.form.get('username')
         })
 
         if user and pbkdf2_sha256.verify(request.form.get('password'), user['password']):
