@@ -3,15 +3,15 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for contexts/AuthContext.jsx</title>
+    <title>Code coverage report for components/SearchPopup/ProductItem/index.jsx</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../prettify.css" />
-    <link rel="stylesheet" href="../base.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="../favicon.png" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../../favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(../sort-arrow-sprite.png);
+            background-image: url(../../../sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">contexts</a> AuthContext.jsx</h1>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">components/SearchPopup/ProductItem</a> index.jsx</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">14.28% </span>
+                <span class="strong">20% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>5/35</span>
+                <span class='fraction'>7/35</span>
             </div>
         
             
@@ -39,14 +39,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>0/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">14.28% </span>
+                <span class="strong">20% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>5/35</span>
+                <span class='fraction'>7/35</span>
             </div>
         
             
@@ -97,8 +97,7 @@
 <a name='L32'></a><a href='#L32'>32</a>
 <a name='L33'></a><a href='#L33'>33</a>
 <a name='L34'></a><a href='#L34'>34</a>
-<a name='L35'></a><a href='#L35'>35</a>
-<a name='L36'></a><a href='#L36'>36</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L35'></a><a href='#L35'>35</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -131,44 +130,42 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { createContext, useState, useEffect } from 'react';
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react'
 &nbsp;
-export const AuthContext = createContext(<span class="fstat-no" title="function not covered" >);</span>
+import './styles.css'
+import { StatContainer } from '../../FoodDiary'
 &nbsp;
-export const AuthProvider = <span class="fstat-no" title="function not covered" >({ children }) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >  const [isLoggedIn, setIsLoggedIn] = useState(false);</span>
-<span class="cstat-no" title="statement not covered" >  const [username, setUsername] = useState('');</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  useEffect(() =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    const token = localStorage.getItem('token');</span>
-<span class="cstat-no" title="statement not covered" >    const storedUsername = localStorage.getItem('username');</span>
-<span class="cstat-no" title="statement not covered" >    if (token) {</span>
-<span class="cstat-no" title="statement not covered" >      setIsLoggedIn(true);</span>
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >function ProductItem({result}) {</span></span>
+<span class="cstat-no" title="statement not covered" >    let value;</span>
+<span class="cstat-no" title="statement not covered" >    if (result.nutriments["energy-kcal_serving"]) {</span>
+<span class="cstat-no" title="statement not covered" >      value = `${result.nutriments["energy-kcal_serving"]} kcal`;</span>
+<span class="cstat-no" title="statement not covered" >    } else if (result.nutriments["energy-kcal_100g"]) {</span>
+<span class="cstat-no" title="statement not covered" >      value = `${result.nutriments["energy-kcal_100g"]} kcal`;</span>
+<span class="cstat-no" title="statement not covered" >    } else {</span>
+<span class="cstat-no" title="statement not covered" >      value = "";</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >    if (storedUsername) {</span>
-<span class="cstat-no" title="statement not covered" >      setUsername(storedUsername); </span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >  }, []);</span>
-<span class="cstat-no" title="statement not covered" >  </span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  const login = () =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    setIsLoggedIn(true);</span>
-<span class="cstat-no" title="statement not covered" >  };</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  const logout = () =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    // localStorage.removeItem('token');</span>
-<span class="cstat-no" title="statement not covered" >    setIsLoggedIn(false);</span>
-<span class="cstat-no" title="statement not covered" >  };</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  return (</span>
-<span class="cstat-no" title="statement not covered" >    &lt;AuthContext.Provider value={{ isLoggedIn, login, logout, setIsLoggedIn, username, setUsername }}&gt;</span>
-<span class="cstat-no" title="statement not covered" >      {children}</span>
-<span class="cstat-no" title="statement not covered" >    &lt;/AuthContext.Provider&gt;</span>
-<span class="cstat-no" title="statement not covered" >  );</span>
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >};</span></span>
-&nbsp;</pre></td></tr></table></pre>
+<span class="cstat-no" title="statement not covered" >    return (</span>
+<span class="cstat-no" title="statement not covered" >        &lt;li className='product-item-container' key={result.code}&gt;</span>
+<span class="cstat-no" title="statement not covered" >            &lt;h3&gt;{result.product_name_en}&lt;/h3&gt;</span>
+<span class="cstat-no" title="statement not covered" >            &lt;div className='product-item-stats'&gt;</span>
+<span class="cstat-no" title="statement not covered" >                </span>
+<span class="cstat-no" title="statement not covered" >                    {(</span>
+<span class="cstat-no" title="statement not covered" >                        &lt;&gt;</span>
+<span class="cstat-no" title="statement not covered" >                            &lt;StatContainer title={"Calories"} value={value} /&gt;</span>
+<span class="cstat-no" title="statement not covered" >                            &lt;StatContainer</span>
+<span class="cstat-no" title="statement not covered" >                                title={"Serving Size"}</span>
+<span class="cstat-no" title="statement not covered" >                                value={value === `${result.nutriments["energy-kcal_serving"]} kcal` ? `${result.serving_quantity} g` : `100 g`}</span>
+<span class="cstat-no" title="statement not covered" >                            /&gt;</span>
+<span class="cstat-no" title="statement not covered" >                        &lt;/&gt;</span>
+<span class="cstat-no" title="statement not covered" >                    )}</span>
+<span class="cstat-no" title="statement not covered" >                </span>
+<span class="cstat-no" title="statement not covered" >            &lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" >        &lt;/li&gt;</span>
+<span class="cstat-no" title="statement not covered" >    )</span>
+<span class="cstat-no" title="statement not covered" >}</span>
+&nbsp;
+export default ProductItem</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
@@ -177,14 +174,14 @@ export const AuthProvider = <span class="fstat-no" title="function not covered" 
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
                 at 2023-03-24T10:28:59.530Z
             </div>
-        <script src="../prettify.js"></script>
+        <script src="../../../prettify.js"></script>
         <script>
             window.onload = function () {
                 prettyPrint();
             };
         </script>
-        <script src="../sorter.js"></script>
-        <script src="../block-navigation.js"></script>
+        <script src="../../../sorter.js"></script>
+        <script src="../../../block-navigation.js"></script>
     </body>
 </html>
     
