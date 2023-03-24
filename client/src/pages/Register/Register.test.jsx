@@ -2,7 +2,8 @@ import React from 'react';
 import { render, fireEvent, screen, waitFor } from '@testing-library/react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import Register from './Register';
+import Register from './index';
+import jest from 'jest';
 
 jest.mock('axios');
 jest.mock('react-router-dom', () => ({
@@ -33,7 +34,7 @@ describe('Register component', () => {
       role: 'testrole',
     });
     expect(mockedNavigate).toHaveBeenCalledWith('/login');
-    expect(screen.getByText(/thanks for registering/i)).toBeInTheDocument();
+    expect(screen.getByText(/thanks for registering/)).toBeInTheDocument();
   });
 
   it('should display an error message if registration fails', async () => {
