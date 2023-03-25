@@ -12,7 +12,7 @@ pytest = "*"
 gunicorn = "*"
 pydantic = {extras = ["email"], version = "*"}
 bcrypt = "*"
-"flask.ext.pymongo" = "*"
+# flask.ext.pymongo = "*"
 passlib = "*"
 faker = "*"
 pytest-cov = "*"
@@ -20,4 +20,7 @@ pytest-cov = "*"
 [dev-packages]
 
 [requires]
-python_version = "3.7.10"
+# python_version = "3.7.10"
+
+[scripts]
+seed = "python test.py"

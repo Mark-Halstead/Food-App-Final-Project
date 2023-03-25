@@ -6,10 +6,22 @@ export const calculateMealTotals = (meal) => {
 
     meal.forEach((item) => {
         if (item.confirmed) {
-            caloriesTotal += (item.product.calories * item.serving_size) / 100;
-            fatTotal += (item.product.fat * item.serving_size) / 100;
-            carbTotal += (item.product.carbohydrate * item.serving_size) / 100;
-            proteinTotal += (item.product.protein * item.serving_size) / 100;
+            caloriesTotal +=
+                (item.product.nutriments["energy-kcal_100g"] *
+                    item["user_serving_size"]) /
+                100;
+            fatTotal +=
+                (item.product.nutriments["energy-kcal_100g"] *
+                    item["user_serving_size"]) /
+                100;
+            carbTotal +=
+                (item.product.nutriments["energy-kcal_100g"] *
+                    item["user_serving_size"]) /
+                100;
+            proteinTotal +=
+                (item.product.nutriments["energy-kcal_100g"] *
+                    item["user_serving_size"]) /
+                100;
         }
     });
 
@@ -21,7 +33,7 @@ export const calculateMealTotals = (meal) => {
     };
 };
 
-export const calculateTotals = (diaryEntry) => {
+export const calculateTotals = (mealItems) => {
     let totalCalories = 0;
     let totalFat = 0;
     let totalCarb = 0;
@@ -30,7 +42,7 @@ export const calculateTotals = (diaryEntry) => {
     const mealTotals = {};
     for (const meal of ["breakfast", "lunch", "dinner", "snacks"]) {
         const { calories, fat, carb, protein } = calculateMealTotals(
-            diaryEntry[meal]
+            mealItems[meal]
         );
         mealTotals[meal] = { calories, fat, carb, protein };
 

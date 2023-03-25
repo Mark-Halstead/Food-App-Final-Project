@@ -5,7 +5,8 @@ import './styles.css'
 import Wrapper from '../../../assets/wrappers/MealContainer'
 import FoodItem from '../FoodItem'
 
-function MealContainer({ mealName, diaryEntry, totals, setDiaryEntry, openSearchPopup }) {
+function MealContainer({ mealName, mealItems, totals, setMealItems, openSearchPopup, handleFoodItemClick, handleDeleteFood }) {
+
 
     return (
             <div className='meal-container'>
@@ -19,9 +20,23 @@ function MealContainer({ mealName, diaryEntry, totals, setDiaryEntry, openSearch
                     </h2>
                 </div>
                 <div className='food-items-container'>
+                    <div className={`food-item-container`}>
+                        <div>
+                            <h3>Food</h3>
+                        </div>
+                        <div>
+                            <h3>Kcal</h3>
+                        </div>
+                        <div>
+                            <h3>Serving Size</h3>
+                        </div>
+                        <div>
+
+                        </div>
+                    </div>
                     {
-                        diaryEntry ?
-                            (diaryEntry[mealName].map((item) => (<FoodItem item={item} meal={mealName} diaryEntry={diaryEntry} setDiaryEntry={setDiaryEntry}/> )))
+                        mealItems ?
+                            (mealItems[mealName].map((item) => (<FoodItem  handleDeleteFood={handleDeleteFood} handleFoodItemClick={handleFoodItemClick} item={item} meal={mealName} mealItems={mealItems} setMealItems={setMealItems}/> )))
                             : null
                     }
 

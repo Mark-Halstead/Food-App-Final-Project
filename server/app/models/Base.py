@@ -18,7 +18,25 @@ class Base:
         return self.get(id)
 
     def get(self, id):
-        return self.table.find_one({"_id": ObjectId(id)})
+        document = self.table.find_one({"_id": ObjectId(id)})
+        if document is None:
+            return None
+        document["_id"] = str(document["_id"])
+        return document
+    
+    def get_by_query(self, query):
+        document = self.table.find_one(query)
+        if document is None:
+            return None
+        document["_id"] = str(document["_id"])
+        return document
+    
+    def get_all_by_query(self, query):
+        documents = self.table.find(query)
+        if not documents:
+            return None
+        documents = [{**d, "_id":str(d["_id"])} for d in documents]
+        return documents
 
     def update(self, id, update_data):
         updated_document = self.table.find_one_and_update(

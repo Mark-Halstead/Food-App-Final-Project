@@ -2,6 +2,7 @@ from pydantic import BaseModel, EmailStr, constr
 from typing import Optional, List
 from flask import Flask, jsonify, request, session, redirect
 from passlib.hash import pbkdf2_sha256
+from bson import ObjectId
 from app import db
 import uuid
 
@@ -9,7 +10,7 @@ from app.models.Base import Base
 
 ## these classes are used for data validation purposes 
 class UserSchema(BaseModel):
-    nutritionist_id: Optional[int]
+    nutritionist_id: Optional[ObjectId]
     email: EmailStr
     password: constr(min_length=8)
     first_name: str
@@ -26,6 +27,9 @@ class UserSchema(BaseModel):
     meal_complexity: str
     budget: str
 
+    class Config:
+        arbitrary_types_allowed = True
+
 class UserUpdateSchema(BaseModel):
     subscription_type: Optional[bool]
     weight: Optional[float]
@@ -38,6 +42,9 @@ class UserUpdateSchema(BaseModel):
     daily_calorie_target: Optional[float]
     meal_complexity: Optional[str]
     budget: Optional[str]
+
+    class Config:
+        arbitrary_types_allowed = True
 
 class User(Base):
     def __init__(self, table_name, db_connection=None):

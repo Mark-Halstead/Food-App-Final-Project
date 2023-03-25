@@ -15,6 +15,12 @@
     margin-bottom: 0;
 }
 
+.food-item-container h4 {
+    font-size: 18px;
+    margin-right: 10px;
+    margin-bottom: 0;
+}
+
 .confirmed {
     background-color: green;
 }

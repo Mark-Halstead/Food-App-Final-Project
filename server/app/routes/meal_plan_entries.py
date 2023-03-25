@@ -17,21 +17,29 @@ class JSONEncoder(json.JSONEncoder):
 
 meal_plan_routes = Blueprint("meal_plan_routes", __name__)
 
-@meal_plan_routes.route("/", methods=["POST"])
-def add_meal_plan_entry():
+@meal_plan_routes.route("/<client_id>", methods=["POST"])
+def add_meal_plan_entry(client_id):
     try:
-        meal_plan_data = request.json
+        meal_plan_data = json.loads(request.data)
+        meal_plan_data["user_id"] = client_id
+        meal_plan = g.meal_plan_entry_model.get_by_query({"user_id":meal_plan_data["user_id"], "date":meal_plan_data["date"]})
+        if meal_plan:
+            # if already in there delete
+            g.meal_plan_entry_model.delete(meal_plan["_id"])
+
+        # add the new meal_plan
         validated_data = MealPlanEntrySchema(**meal_plan_data).dict()
-        inserted_id = g.meal_plan_model.create(validated_data)
-        return {"inserted_id": str(inserted_id)}
+        new_meal_plan = g.meal_plan_entry_model.create(validated_data)
+
+        return new_meal_plan
     except ValidationError as e:
         return make_response(jsonify({"error": "Invalid data", "details": e.errors()}), 400)
 
-@meal_plan_routes.route("/<entry_id>", methods=["GET"])
-def get_meal_plan_entry(entry_id):
-    meal_plan_entry = g.meal_plan_model.get(entry_id)
-    if meal_plan_entry:
-        return Response(JSONEncoder().encode(meal_plan_entry), content_type='application/json')
+@meal_plan_routes.route("/<client_id>", methods=["GET"])
+def get_meal_plan_entry(client_id):
+    meal_plans = g.meal_plan_entry_model.get_all_by_query({"user_id":client_id})
+    if meal_plans:
+        return Response(JSONEncoder().encode(meal_plans), content_type='application/json')
     else:
         return make_response(jsonify({"error": "Entry not found"}), 404)
 
@@ -40,7 +48,7 @@ def update_meal_plan_entry(entry_id):
     try:
         meal_plan_data = request.json
         validated_data = MealPlanEntrySchema(**meal_plan_data).dict()
-        modified_count = g.meal_plan_model.update(entry_id, validated_data)
+        modified_count = g.meal_plan_entry_model.update(entry_id, validated_data)
         if modified_count:
             return {"modified_count": modified_count}
         else:
@@ -50,7 +58,7 @@ def update_meal_plan_entry(entry_id):
 
 @meal_plan_routes.route("/<entry_id>", methods=["DELETE"])
 def delete_meal_plan_entry(entry_id):
-    deleted_count = g.meal_plan_model.delete(entry_id)
+    deleted_count = g.meal_plan_entry_model.delete(entry_id)
     if deleted_count:
         return {"deleted_count": deleted_count}
     else:

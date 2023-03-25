@@ -4,11 +4,11 @@ import axios from 'axios';
 import './styles.css'
 import ProductItem from './ProductItem';
 
-function SearchPopup(props) {
+function SearchPopup({handleAddFood, meal, onClose, servingMultiplier, setServingMultiplier}) {
     const [searchQuery, setSearchQuery] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const [selectedItem, setSelectedItem] = useState(null);
-    const [servingMultiplier, setServingMultiplier] = useState(1)
+    const [searchLoading, setSearchLoading] = useState(false)
 
     const handleSearchQueryChange = (event) => {
         setSearchQuery(event.target.value);
@@ -17,7 +17,7 @@ function SearchPopup(props) {
     const handleSearch = async () => {
         const params = {
             categories_tags: searchQuery,
-            page_size: 10,
+            page_size: 20,
             json: true,
             sort_by: 'popularity_key',
             fields:'brands,allergens_tags,nutriments,product_name_en,serving_quantity,id',
@@ -26,42 +26,41 @@ function SearchPopup(props) {
         const config = {
             params: params
         };
-        const response = await axios.get('https://world.openfoodfacts.org/api/v2/search', config);
-        console.log('response.data', response.data)
-        setSearchResults(response.data.products);
-    }
 
-    async function addFoodItem(entryId, meal, data) {
-      try {
-        const response = await axios.post(`http://127.0.0.1:5000/diary_entries/${entryId}/foods/${meal}`, data);
-        return response.data;
-      } catch (error) {
-        console.error(error);
-      }
+        setSearchLoading(true)
+        const response = await axios.get('https://world.openfoodfacts.org/api/v2/search', config);
+        if (response.status === 200) {
+            let products = response.data.products.filter(p => p.nutriments["energy-kcal_100g"])
+            setSearchLoading(false)
+            products = products.map(p => {
+                if (!p.serving_quantity) {
+                    p.serving_quantity = 100
+                }
+                return p
+            })
+            console.log('products', products)
+            setSearchResults(products);
+        }
+
     }
 
     const handleItemClick = (result) => {
         setServingMultiplier(1)
         setSelectedItem(result);
-        console.log('result', result)
+        console.log('setSelectedItem', result)
     }
 
     const handleBackClick = () => {
         setSelectedItem(null);
     }
 
-    const handleAddFood = async () => {
-        const data = {serving_multiplier:servingMultiplier, ...selectedItem }
-        addFoodItem(props.diaryEntry._id, props.meal, data)
-    }
-
     return (
         <div className='popup-background'>
             <div className="popup">
                 <div className="search-popup-header">
-                    <h2>{props.meal}</h2>
+                    <h2>{meal}</h2>
                     <h2>Search for food</h2>
-                    <button onClick={props.onClose}>Close</button>
+                    <button onClick={onClose}>Close</button>
                 </div>
                 <div className="search-popup-body">
                     { selectedItem ? (
@@ -72,8 +71,8 @@ function SearchPopup(props) {
                                 <li>Name: {selectedItem.product_name_en}</li>
                                 <li>Brand: {selectedItem.brands}</li>
                                 <li>Allergens: {selectedItem.allergens_tags ? selectedItem.allergens_tags.join(', ') : 'N/A'}</li>
-                                <li>Calories: {(selectedItem.nutriments["energy-kcal_serving"] * servingMultiplier).toFixed(1) || (selectedItem.nutriments["energy-kcal_100g"]  * servingMultiplier).toFixed(1)} kcal</li>
-                                <li>Serving Size: {selectedItem.serving_quantity} </li>
+                                <li>Calories: {(selectedItem.nutriments["energy-kcal_100g"]  * servingMultiplier * (selectedItem.serving_quantity / 100)).toFixed(1)} kcal</li>
+                                <li>Serving Size: {selectedItem.serving_quantity}g </li>
                                 <li>
                                     <label htmlFor="serving-quantity-input">Serving Quantity: </label>
                                     <input
@@ -88,7 +87,7 @@ function SearchPopup(props) {
                                 </li>
                                 <li>
                                     <button
-                                        onClick={handleAddFood}
+                                        onClick={() => handleAddFood(selectedItem)}
                                     >Add Food</button>
                                 </li>
                             </ul>
@@ -97,13 +96,25 @@ function SearchPopup(props) {
                         <div>
                             <input type="text" value={searchQuery} onChange={handleSearchQueryChange} />
                             <button onClick={handleSearch}>Search</button>
-                            <ul>
-                            {searchResults.map((result) => (
-                                <li key={result.id} onClick={() => handleItemClick(result)}>
-                                    <ProductItem result={result} />
-                                </li>
-                            ))}
-                            </ul>
+                            {
+                                searchLoading ?
+                                (
+                                    <h4>
+                                        Loading food...
+                                    </h4>
+                                )
+                                :
+                                (
+                                    <ul>
+                                    {searchResults.map((result) => (
+                                        <li key={result.id} onClick={() => handleItemClick(result)}>
+                                            <ProductItem result={result} />
+                                        </li>
+                                    ))}
+                                    </ul>
+                                )
+                            }
+
                         </div>
                     )}
                 </div>

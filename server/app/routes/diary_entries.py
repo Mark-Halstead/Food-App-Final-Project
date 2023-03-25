@@ -81,17 +81,18 @@ def add_food_item(entry_id, meal):
 
     item_already_in_meal = False
     for item in diary_entry[meal]:
-        if item["id"] == data["id"]:
+        if item["product"]["id"] == data["id"]:
             item_already_in_meal = True
             break
-    if item_already_in_meal:
-        item["serving_multiplier"] += data["serving_multiplier"]
-    else:
-        new_item = {**product, "serving_multiplier":data["serving_multiplier"], "confirmed":False}
-        diary_entry[meal].append(new_item)
 
-   
-    diary_entry[meal].append(data)
+    if item_already_in_meal:
+        item["serving_multiplier"] = float(item["serving_multiplier"]) + float(data["serving_multiplier"])
+        item["user_serving_size"] = round(float(data["serving_multiplier"]) * float(product["serving_quantity"]), 2)
+    else:
+        user_serving_size = round(float(data["serving_multiplier"]) * float(product["serving_quantity"]), 2)
+        new_item = {"product":product, "serving_multiplier":float(data["serving_multiplier"]), "confirmed":False, "user_serving_size":user_serving_size}
+        diary_entry[meal].append(new_item)
+  
 
     updated_diary_entry = g.diary_entry_model.update(diary_entry["_id"], diary_entry)
 
