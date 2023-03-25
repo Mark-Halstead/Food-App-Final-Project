@@ -2,4 +2,4 @@ __pycache__/
 test.py
 .env
 .vscode/
-Pipfile.lock
+node_modules
