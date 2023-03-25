@@ -13,12 +13,12 @@ const BarcodeScanner = () => {
                 name: "Live",
                 type: "LiveStream",
                 constraints: {
-                    facingMode: "environment" // use the rear-facing camera on mobile devices
+                    facingMode: "environment"
                 },
                 target: document.querySelector('#scanner-container')
             },
             decoder: {
-                readers: ["ean_reader"] // specify the type of barcode to scan
+                readers: ["ean_reader"]
             }
         }, function (err) {
             if (err) {
@@ -33,7 +33,6 @@ const BarcodeScanner = () => {
             console.log(`Scanned barcode: ${code}`);
             setScannedCode(code);
 
-            // make an API call to retrieve the product data with this barcode
             fetch(`https://world.openfoodfacts.org/api/v0/product/${code}.json`)
                 .then(response => response.json())
                 .then(data => {
@@ -51,14 +50,12 @@ const BarcodeScanner = () => {
                 });
         });
 
-        // cleanup function to stop the scanner when the component unmounts
         return () => {
             Quagga.stop();
         };
     }, []);
 
     const addToFoodDiary = () => {
-        // add the scanned code to the food diary
         console.log(`Added ${scannedCode} to food diary.`);
     };
 
