@@ -1,87 +1,113 @@
 import React, { useState } from 'react';
-import Wrapper from '../../assets/wrappers/UserSignUpForm';
-import { FormFormat } from '../../components';
-import { RiArrowRightSLine } from 'react-icons/ri';
+import { PersonalInfo, FitnessInfo, DietaryInfo, SubscriptionInfo } from '../../components';
 import { useNavigate } from 'react-router-dom';
+import Wrapper from '../../assets/wrappers/SignUpForm';
 
 const UserSignUpForm = () => {
-  const Navigate = useNavigate();
-  const [age, setAge] = useState('');
-  const [weight, setWeight] = useState('');
-  const [gender, setGender] = useState('');
-  const [activityLevel, setActivityLevel] = useState('');
+    const Navigate = useNavigate()
+    const [page, setPage] = useState(1);
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [age, setAge] = useState('');
+    const [weight, setWeight] = useState('');
+    const [gender, setGender] = useState('');
+    const [activityLevel, setActivityLevel] = useState('');
+    const [goal, setGoal] = useState('');
+    const [dietaryRestrictions, setDietaryRestrictions] = useState([]);
+    const [allergies, setAllergies] = useState([]);
+    const [foodPreferences, setFoodPreferences] = useState('');
+    const [mealComplexity, setMealComplexity] = useState('');
+    const [budget, setBudget] = useState('');
+    const [subscriptionType, setSubscriptionType] = useState('');
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    Navigate('/goals-form');
-  };
+    const handlePersonalInfoSubmit = (e) => {
+        e.preventDefault();
+        nextPage();
+    };
 
-  const handleChange = (e, setState) => {
-    setState(e.target.value);
-  };
+    const handleFitnessInfoSubmit = (e) => {
+        e.preventDefault();
+        nextPage();
+    };
 
-  const activityLevels = [
-    { label: 'Low', value: 'low' },
-    { label: 'Lightly Active', value: 'lightly-active' },
-    { label: 'Moderately Active', value: 'moderately-active' },
-  ];
+    const handleDietaryInfoSubmit = (e) => {
+        e.preventDefault();
+        nextPage();
+    };
 
-  const genderOptions = [
-    { label: 'Select Gender', value: '' },
-    { label: 'Male', value: 'male' },
-    { label: 'Female', value: 'female' },
-  ];
+    const handleSubscriptionTypeSubmit = (e) => {
+        e.preventDefault();
+        Navigate("/dashboard")
+    };
 
-  return (
-    <Wrapper>
-      <form className='form' onSubmit={handleSubmit}>
-        <h3>Your details</h3>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          <FormFormat
-            type='number'
-            name='Age'
-            value={age}
-            handleChange={(e) => handleChange(e, setAge)}
-            style={{ width: '20%', margin: '0 auto' }}
-          />
-          <FormFormat
-            type='number'
-            name='Weight'
-            value={weight}
-            handleChange={(e) => handleChange(e, setWeight)}
-            style={{ width: '20%', margin: '0 auto' }}
-          />
-          <div style={{ margin: '0 auto' }}>
-            <FormFormat
-              type='select'
-              name='Gender'
-              value={gender}
-              handleChange={(e) => handleChange(e, setGender)}
-              options={genderOptions}
-            />
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-            <label htmlFor='Activity Level'>Activity Level</label>
-            {activityLevels.map((option) => (
-              <FormFormat
-                key={option.value}
-                type='radio'
-                name={option.label}
-                value={option.value}
-                label={option.label}
-                checked={activityLevel === option.value}
-                handleChange={(e) => handleChange(e, setActivityLevel)}
-                style={{ transform: 'scale(0.8)', margin: '0 auto' }}
-              />
-            ))}
-          </div>
-          <button type='submit' className='btn btn-block'>
-            Next <RiArrowRightSLine style={{ fontSize: '10px' }} size={10} />
-          </button>
-        </div>
-      </form>
-    </Wrapper>
-  );
+    const nextPage = () => {
+        setPage(page + 1);
+    };
+
+    const prevPage = () => {
+        setPage(page - 1);
+    };
+
+    return (
+        <Wrapper>
+            <form className="form" onSubmit={() => handleSubmit()}>
+                {page === 1 && (
+                    <PersonalInfo
+                        firstName={firstName}
+                        setFirstName={setFirstName}
+                        lastName={lastName}
+                        setLastName={setLastName}
+                        email={email}
+                        setEmail={setEmail}
+                        age={age}
+                        setAge={setAge}
+                        weight={weight}
+                        setWeight={setWeight}
+                        gender={gender}
+                        setGender={setGender}
+                        nextPage={handlePersonalInfoSubmit}
+                    />
+                )}
+                {page === 2 && (
+                    <FitnessInfo
+                        activityLevel={activityLevel}
+                        setActivityLevel={setActivityLevel}
+                        goal={goal}
+                        setGoal={setGoal}
+                        prevPage={prevPage}
+                        nextPage={handleFitnessInfoSubmit}
+                    />
+                )}
+                {page === 3 && (
+                    <DietaryInfo
+                        dietaryRestrictions={dietaryRestrictions}
+                        setDietaryRestrictions={setDietaryRestrictions}
+                        allergies={allergies}
+                        setAllergies={setAllergies}
+                        foodPreferences={foodPreferences}
+                        setFoodPreferences={setFoodPreferences}
+                        mealComplexity={mealComplexity}
+                        setMealComplexity={setMealComplexity}
+                        prevPage={prevPage}
+                        nextPage={handleDietaryInfoSubmit}
+                    />
+                )}
+                {page === 4 && (
+                    <SubscriptionInfo
+                        budget={budget}
+                        setBudget={setBudget}
+                        subscriptionInfo={subscriptionType}
+                        setSubscriptionType={setSubscriptionType}
+                        prevPage={prevPage}
+                        handleSubmit={handleSubscriptionTypeSubmit}
+                    />
+                )}
+            </form>
+        </Wrapper>
+    );
 };
 
-export default UserSignUpForm;
+export default UserSignUpForm
+
+

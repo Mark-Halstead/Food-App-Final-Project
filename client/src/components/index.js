@@ -16,3 +16,7 @@ export { default as SearchPopup } from "./SearchPopup";
 export { default as FormFormat } from "./FormFormat";
 export { default as Form } from "./Form";
 export { default as BarcodeScanner } from "./BarcodeScanner";
+export { default as PersonalInfo } from "./PersonalInfo";
+export { default as DietaryInfo } from "./DietaryInfo";
+export { default as FitnessInfo } from "./FitnessInfo";
+export { default as SubscriptionInfo } from "./SubscriptionInfo";
