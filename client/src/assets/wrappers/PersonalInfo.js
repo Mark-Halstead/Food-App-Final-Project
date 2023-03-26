@@ -31,27 +31,22 @@ button {
   margin-left: 1rem;
 }
 
-@media screen and (min-width: 768px) {
-  .form-center {
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .form-group {
-    grid-template-columns: auto auto;
-    margin-right: 2rem;
-  }
-
-  .form-group:last-child {
-    margin-right: 0;
-  }
-
-  .btn-container {
-    display: flex;
-    align-items: center;
-    margin-top: 0;
-    margin-left: 2rem;
-  }
+.button {
+    cursor: pointer;
+    color: var(--white);
+    background: var(--primary-500);
+    border: transparent;
+    border-radius: var(--borderRadius);
+    letter-spacing: var(--letterSpacing);
+    padding: 0.375rem 0.75rem;
+    box-shadow: var(--shadow-2);
+    transition: var(--transition);
+    text-transform: capitalize;
+    display: inline-block;
+}
+.button:hover {
+    background: var(--primary-700);
+    box-shadow: var(--shadow-3);
 }
 
 

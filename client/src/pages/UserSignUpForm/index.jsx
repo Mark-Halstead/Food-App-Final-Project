@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { PersonalInfo, FitnessInfo, DietaryInfo, SubscriptionInfo } from '../../components';
 import { useNavigate } from 'react-router-dom';
 import Wrapper from '../../assets/wrappers/SignUpForm';
+import { CSSTransition } from 'react-transition-group';
 
 const UserSignUpForm = () => {
     const Navigate = useNavigate()
@@ -51,8 +52,13 @@ const UserSignUpForm = () => {
 
     return (
         <Wrapper>
-            <form className="form" onSubmit={() => handleSubmit()}>
-                {page === 1 && (
+            <form className="form page-transition" onSubmit={() => handleSubmit()}>
+                <CSSTransition
+                    in={page === 1}
+                    classNames="fade"
+                    timeout={300}
+                    unmountOnExit
+                >
                     <PersonalInfo
                         firstName={firstName}
                         setFirstName={setFirstName}
@@ -66,10 +72,16 @@ const UserSignUpForm = () => {
                         setWeight={setWeight}
                         gender={gender}
                         setGender={setGender}
+                        page={page}
                         nextPage={handlePersonalInfoSubmit}
                     />
-                )}
-                {page === 2 && (
+                </CSSTransition>
+                <CSSTransition
+                    in={page === 2}
+                    classNames="fade"
+                    timeout={300}
+                    unmountOnExit
+                >
                     <FitnessInfo
                         activityLevel={activityLevel}
                         setActivityLevel={setActivityLevel}
@@ -78,8 +90,13 @@ const UserSignUpForm = () => {
                         prevPage={prevPage}
                         nextPage={handleFitnessInfoSubmit}
                     />
-                )}
-                {page === 3 && (
+                </CSSTransition>
+                <CSSTransition
+                    in={page === 3}
+                    classNames="fade"
+                    timeout={300}
+                    unmountOnExit
+                >
                     <DietaryInfo
                         dietaryRestrictions={dietaryRestrictions}
                         setDietaryRestrictions={setDietaryRestrictions}
@@ -92,8 +109,13 @@ const UserSignUpForm = () => {
                         prevPage={prevPage}
                         nextPage={handleDietaryInfoSubmit}
                     />
-                )}
-                {page === 4 && (
+                </CSSTransition>
+                <CSSTransition
+                    in={page === 4}
+                    classNames="fade"
+                    timeout={300}
+                    unmountOnExit
+                >
                     <SubscriptionInfo
                         budget={budget}
                         setBudget={setBudget}
@@ -102,12 +124,13 @@ const UserSignUpForm = () => {
                         prevPage={prevPage}
                         handleSubmit={handleSubscriptionTypeSubmit}
                     />
-                )}
+                </CSSTransition>
             </form>
         </Wrapper>
     );
 };
 
-export default UserSignUpForm
+export default UserSignUpForm;
+
 
 

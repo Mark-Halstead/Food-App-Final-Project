@@ -32,27 +32,6 @@ button {
   margin-left: 1rem;
 }
 
-@media screen and (min-width: 768px) {
-  .form-center {
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .form-group {
-    grid-template-columns: auto auto;
-    margin-right: 2rem;
-  }
-
-  .form-group:last-child {
-    margin-right: 0;
-  }
-
-  .btn-container {
-    margin-top: 0;
-    margin-left: 2rem;
-  }
-}
-
 
 /*////////////////// REGISTER CSS END ///////////////////////*/
 `

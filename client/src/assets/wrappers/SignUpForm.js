@@ -35,15 +35,15 @@ position: fixed;
   }
   .btn-container {
   display: flex;
-  justify-content: center; /* Change to center */
+  justify-content: center; 
   margin-top: 0.5rem;
-  margin-bottom: 1rem; /* Add margin-bottom */
+  margin-bottom: 1rem; 
 }
 
 button {
   height: 35px;
   margin-left: 1rem;
-  margin-right: 1rem; /* Add margin-right */
+  margin-right: 1rem; 
 }
 
   .clear-btn {
@@ -52,6 +52,31 @@ button {
   .clear-btn:hover {
     background: var(--black);
   }
+
+  .fade-enter {
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+.fade-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 300ms, transform 300ms;
+}
+
+.fade-exit {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.fade-exit-active {
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: opacity 300ms, transform 300ms;
+}
+
+
+
 `
 
 export default Wrapper

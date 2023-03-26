@@ -1,5 +1,7 @@
 import React from 'react';
 import Wrapper from "../../assets/wrappers/PersonalInfo";
+import { CSSTransition } from 'react-transition-group';
+
 
 const PersonalInfo = ({
   firstName,
