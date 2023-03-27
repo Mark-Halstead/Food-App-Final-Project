@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { PersonalInfo, FitnessInfo, DietaryInfo, SubscriptionInfo } from '../../components';
 import { useNavigate } from 'react-router-dom';
 import Wrapper from '../../assets/wrappers/SignUpForm';
+import { CSSTransition } from 'react-transition-group';
 
 const UserSignUpForm = () => {
     const Navigate = useNavigate()
@@ -21,6 +23,40 @@ const UserSignUpForm = () => {
     const [budget, setBudget] = useState('');
     const [subscriptionType, setSubscriptionType] = useState('');
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const userData = {
+            email: email,
+            first_name: firstName,
+            last_name: lastName,
+            age: age,
+            weight: weight,
+            gender: gender,
+            activity_level: activityLevel,
+            goal: goal,
+            dietary_restrictions: dietaryRestrictions,
+            allergies: allergies,
+            food_preferences: foodPreferences,
+            meal_complexity: mealComplexity,
+            budget: budget,
+            subscription_type: subscriptionType
+        };
+
+        try {
+            const token = localStorage.getItem('token_id')
+            const response = await axios.put(`http://127.0.0.1:5000/users/${localStorage.getItem('token_id')}`, userData);
+
+            console.log(response.data);
+            alert("Profile updated successfully!")
+            Navigate("/dashboard")
+            // redirect to dashboard or display success message
+        } catch (error) {
+            console.log(error.response.data);
+            // display error message
+        }
+    };
+
     const handlePersonalInfoSubmit = (e) => {
         e.preventDefault();
         nextPage();
@@ -36,11 +72,6 @@ const UserSignUpForm = () => {
         nextPage();
     };
 
-    const handleSubscriptionTypeSubmit = (e) => {
-        e.preventDefault();
-        Navigate("/dashboard")
-    };
-
     const nextPage = () => {
         setPage(page + 1);
     };
@@ -51,8 +82,13 @@ const UserSignUpForm = () => {
 
     return (
         <Wrapper>
-            <form className="form" onSubmit={() => handleSubmit()}>
-                {page === 1 && (
+            <form className="form page-transition" onSubmit={() => handleSubmit()}>
+                <CSSTransition
+                    in={page === 1}
+                    classNames="fade"
+                    timeout={300}
+                    unmountOnExit
+                >
                     <PersonalInfo
                         firstName={firstName}
                         setFirstName={setFirstName}
@@ -66,10 +102,16 @@ const UserSignUpForm = () => {
                         setWeight={setWeight}
                         gender={gender}
                         setGender={setGender}
+                        page={page}
                         nextPage={handlePersonalInfoSubmit}
                     />
-                )}
-                {page === 2 && (
+                </CSSTransition>
+                <CSSTransition
+                    in={page === 2}
+                    classNames="fade"
+                    timeout={300}
+                    unmountOnExit
+                >
                     <FitnessInfo
                         activityLevel={activityLevel}
                         setActivityLevel={setActivityLevel}
@@ -78,8 +120,13 @@ const UserSignUpForm = () => {
                         prevPage={prevPage}
                         nextPage={handleFitnessInfoSubmit}
                     />
-                )}
-                {page === 3 && (
+                </CSSTransition>
+                <CSSTransition
+                    in={page === 3}
+                    classNames="fade"
+                    timeout={300}
+                    unmountOnExit
+                >
                     <DietaryInfo
                         dietaryRestrictions={dietaryRestrictions}
                         setDietaryRestrictions={setDietaryRestrictions}
@@ -92,22 +139,26 @@ const UserSignUpForm = () => {
                         prevPage={prevPage}
                         nextPage={handleDietaryInfoSubmit}
                     />
-                )}
-                {page === 4 && (
+                </CSSTransition>
+                <CSSTransition
+                    in={page === 4}
+                    classNames="fade"
+                    timeout={300}
+                    unmountOnExit
+                >
                     <SubscriptionInfo
                         budget={budget}
                         setBudget={setBudget}
-                        subscriptionInfo={subscriptionType}
+                        subscriptionType={subscriptionType}
                         setSubscriptionType={setSubscriptionType}
                         prevPage={prevPage}
-                        handleSubmit={handleSubscriptionTypeSubmit}
+                        handleSubmit={handleSubmit}
                     />
-                )}
+                </CSSTransition>
             </form>
         </Wrapper>
     );
 };
 
-export default UserSignUpForm
-
+export default UserSignUpForm;
 
