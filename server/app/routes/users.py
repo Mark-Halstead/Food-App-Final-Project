@@ -5,7 +5,7 @@ from bson import ObjectId
 import json
 import uuid
 from passlib.hash import pbkdf2_sha256
-from app.routes.auth import token_required
+from app.routes.auth import user_token_required
 
 from app.models.User import UserSchema, UserUpdateSchema, User
 
@@ -85,7 +85,7 @@ def signup():
 
 
 @user_routes.route('/', methods=['PUT'])
-@token_required('user')
+@user_token_required('user')
 def update_user(user_data):
     data = json.loads(request.data)
     updated_data = {

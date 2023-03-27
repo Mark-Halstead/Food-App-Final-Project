@@ -5,7 +5,7 @@ from bson import ObjectId
 import json
 import uuid
 from passlib.hash import pbkdf2_sha256
-from app.routes.auth import token_required
+from app.routes.auth import nutritionist_token_required
 
 from app.models.Nutritionist import NutritionistSchema, NutritionistUpdateSchema
 
@@ -78,7 +78,7 @@ def delete_nutritionist(nutritionist_id):
 
 @nutritionist_routes.route('/signup', methods=["POST"])
 def signup():
-    # Create user object
+    # Create nutritionist object
     data = json.loads(request.data)
     nutritionist = {
         "token_id": uuid.uuid4().hex,
@@ -87,7 +87,7 @@ def signup():
     }
     # Encrypt the password
     nutritionist['password'] = pbkdf2_sha256.encrypt(nutritionist['password'])
-    new_nutritionist = g.user_model.create(nutritionist)
+    new_nutritionist = g.nutritionist_model.create(nutritionist)
     token_data = {
         "token": nutritionist["token_id"],
         "role": "nutritionist",
@@ -98,23 +98,16 @@ def signup():
 
 
 @nutritionist_routes.route('/', methods=['PUT'])
-@token_required('nutritionist')
+@nutritionist_token_required('nutritionist')
 def update_nutritionist(nutritionist_data):
     data = json.loads(request.data)
     updated_data = {
-        "first_name": data.get("first_name"),
-        "last_name": data.get("last_name"),
-        "paid_subscription": data.get("paid_subscription"),
-        "weight": data.get("weight"),
-        "age": data.get("age"),
-        "height": data.get("height"),
-        "goal": data.get("goal"),
-        "activity_level": data.get("activity_level"),
-        "dietary_restrictions": data.get("dietary_restrictions"),
-        "food_preferences": data.get("food_preferences"),
-        "daily_calorie_target": data.get("daily_calorie_target"),
-        "meal_complexity": data.get("meal_complexity"),
-        "budget": data.get("budget")
+        "email": data.get("email"),
+        "first_name": data.get("firstName"),
+        "last_name": data.get("lastName"),
+        "credentials": data.get("credentials"),
+        "area_of_expertise": data.get("areaOfExpertise"),
+        "education_training": data.get("educationTraining")
     }
 
     updated_nutritionist = g.nutritionist_model.update(nutritionist_data["_id"], updated_data)
@@ -130,7 +123,7 @@ def signout():
 
 @nutritionist_routes.route('/login', methods=['POST'])
 def login():
-    # Create user object
+    # Create nutritionist object
     data = json.loads(request.data)
     nutritionist = {
         "token_id": uuid.uuid4().hex,

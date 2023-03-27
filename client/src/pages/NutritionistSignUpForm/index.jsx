@@ -1,168 +1,97 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { PersonalInfo, FitnessInfo, DietaryInfo, SubscriptionInfo } from '../../components';
+import { NutritionistInfo } from '../../components';
 import { useNavigate } from 'react-router-dom';
 import Wrapper from '../../assets/wrappers/SignUpForm';
 import { CSSTransition } from 'react-transition-group';
 
 const NutritionistSignUpForm = () => {
-    const Navigate = useNavigate()
-    const [page, setPage] = useState(1);
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('');
-    const [age, setAge] = useState('');
-    const [weight, setWeight] = useState('');
-    const [gender, setGender] = useState('');
-    const [activityLevel, setActivityLevel] = useState('');
-    const [goal, setGoal] = useState('');
-    const [dietaryRestrictions, setDietaryRestrictions] = useState([]);
-    const [allergies, setAllergies] = useState([]);
-    const [foodPreferences, setFoodPreferences] = useState('');
-    const [mealComplexity, setMealComplexity] = useState('');
-    const [budget, setBudget] = useState('');
-    const [subscriptionType, setSubscriptionType] = useState('');
+  const navigate = useNavigate();
+  const [page, setPage] = useState(1);
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [credentials, setCredentials] = useState('');
+  const [areaOfExpertise, setAreaOfExpertise] = useState('');
+  const [educationTraining, setEducationTraining] = useState('');
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-    
-        const userData = {
-            email: email,
-            first_name: firstName,
-            last_name: lastName,
-            age: age,
-            weight: weight,
-            gender: gender,
-            activity_level: activityLevel,
-            goal: goal,
-            dietary_restrictions: dietaryRestrictions,
-            allergies: allergies,
-            food_preferences: foodPreferences,
-            meal_complexity: mealComplexity,
-            budget: budget,
-            subscription_type: subscriptionType
-        };
-    
-        try {
-            const token = localStorage.getItem('token')
-            const response = await axios.put(`http://127.0.0.1:5000/users/`, userData, {
-                headers: {
-                    Authorization: `${token}`
-                },
-            });
-    
-            console.log(response.data);
-            alert("Profile updated successfully!")
-            Navigate("/dashboard")
-            // redirect to dashboard or display success message
-        } catch (error) {
-            console.log(error.response.data);
-            // display error message
-        }
-    };
-    
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    const handlePersonalInfoSubmit = (e) => {
-        e.preventDefault();
-        nextPage();
+    const userData = {
+      email: email,
+      first_name: firstName,
+      last_name: lastName,
+      credentials: credentials,
+      area_of_expertise: areaOfExpertise,
+      education_training: educationTraining
     };
 
-    const handleFitnessInfoSubmit = (e) => {
-        e.preventDefault();
-        nextPage();
-    };
+    try {
+      const token = localStorage.getItem('token')
+      const response = await axios.put(`http://127.0.0.1:5000/nutritionists/`, userData, {
+        headers: {
+          Authorization: `${token}`
+        },
+      });
 
-    const handleDietaryInfoSubmit = (e) => {
-        e.preventDefault();
-        nextPage();
-    };
+      console.log(response.data);
+      alert("Profile updated successfully!")
+      navigate("/nutritionist-dashboard")
+      // redirect to dashboard or display success message
+    } catch (error) {
+      console.log(error.response.data);
+      // display error message
+    }
+  };
 
-    const nextPage = () => {
-        setPage(page + 1);
-    };
 
-    const prevPage = () => {
-        setPage(page - 1);
-    };
+  const handleExpertiseInfoSubmit = (e) => {
+    e.preventDefault();
+    nextPage();
+  };
 
-    return (
-        <Wrapper>
-            <form className="form page-transition" onSubmit={() => handleSubmit()}>
-                <CSSTransition
-                    in={page === 1}
-                    classNames="fade"
-                    timeout={300}
-                    unmountOnExit
-                >
-                    <PersonalInfo
-                        firstName={firstName}
-                        setFirstName={setFirstName}
-                        lastName={lastName}
-                        setLastName={setLastName}
-                        email={email}
-                        setEmail={setEmail}
-                        age={age}
-                        setAge={setAge}
-                        weight={weight}
-                        setWeight={setWeight}
-                        gender={gender}
-                        setGender={setGender}
-                        page={page}
-                        nextPage={handlePersonalInfoSubmit}
-                    />
-                </CSSTransition>
-                <CSSTransition
-                    in={page === 2}
-                    classNames="fade"
-                    timeout={300}
-                    unmountOnExit
-                >
-                    <FitnessInfo
-                        activityLevel={activityLevel}
-                        setActivityLevel={setActivityLevel}
-                        goal={goal}
-                        setGoal={setGoal}
-                        prevPage={prevPage}
-                        nextPage={handleFitnessInfoSubmit}
-                    />
-                </CSSTransition>
-                <CSSTransition
-                    in={page === 3}
-                    classNames="fade"
-                    timeout={300}
-                    unmountOnExit
-                >
-                    <DietaryInfo
-                        dietaryRestrictions={dietaryRestrictions}
-                        setDietaryRestrictions={setDietaryRestrictions}
-                        allergies={allergies}
-                        setAllergies={setAllergies}
-                        foodPreferences={foodPreferences}
-                        setFoodPreferences={setFoodPreferences}
-                        mealComplexity={mealComplexity}
-                        setMealComplexity={setMealComplexity}
-                        prevPage={prevPage}
-                        nextPage={handleDietaryInfoSubmit}
-                    />
-                </CSSTransition>
-                <CSSTransition
-                    in={page === 4}
-                    classNames="fade"
-                    timeout={300}
-                    unmountOnExit
-                >
-                    <SubscriptionInfo
-                        budget={budget}
-                        setBudget={setBudget}
-                        subscriptionType={subscriptionType}
-                        setSubscriptionType={setSubscriptionType}
-                        prevPage={prevPage}
-                        handleSubmit={handleSubmit}
-                    />
-                </CSSTransition>
-            </form>
-        </Wrapper>
-    );
+  const nextPage = () => {
+    setPage(page + 1);
+  };
+
+  const prevPage = () => {
+    setPage(page - 1);
+  };
+
+  return (
+    <Wrapper>
+      <form className="form page-transition" onSubmit={handleSubmit}>
+        <CSSTransition
+          in={page === 1}
+          classNames="fade"
+          timeout={300}
+          unmountOnExit
+        >
+          <NutritionistInfo
+            firstName={firstName}
+            setFirstName={setFirstName}
+            lastName={lastName}
+            setLastName={setLastName}
+            email={email}
+            setEmail={setEmail}
+            credentials={credentials}
+            setCredentials={setCredentials}
+            areaOfExpertise={areaOfExpertise}
+            setAreaOfExpertise={setAreaOfExpertise}
+            educationTraining={educationTraining}
+            setEducationTraining={setEducationTraining}
+            page={page}
+            nextPage={handleExpertiseInfoSubmit}
+          />
+        </CSSTransition>
+        <div className="btn-container">
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+    </Wrapper>
+  );
 };
 
 export default NutritionistSignUpForm;
+
