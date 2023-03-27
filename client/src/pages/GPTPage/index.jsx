@@ -7,8 +7,8 @@ function GPTPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await axios.post('http://127.0.0.1:5000/meal_plan_entries/gpt', { "prompt": prompt });
-    setResponse(response.data.response);
+    const res = await axios.post('http://127.0.0.1:5000/meal_plan_entries/gpt', { "prompt": prompt });
+    setResponse(res.data.response.choices[0].text);
     setPrompt('');
   };
 
