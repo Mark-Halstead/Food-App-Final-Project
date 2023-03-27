@@ -2,15 +2,13 @@ import React, { useState, useContext, useEffect } from 'react';
 import Wrapper from "../../assets/wrappers/NavbarD"
 import { FaAlignLeft, FaUserCircle, FaCaretDown } from 'react-icons/fa';
 import { SidebarContext } from '../../contexts/SidebarContext';
-import { AuthContext } from '../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import ButtonLogout from '../ButtonLogout/index';
 
 const NavbarD = () => {
     const [showDropdown, setShowDropdown] = useState(false);
     const { sidebar, toggleSidebar } = useContext(SidebarContext);
-    // const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
-    // const { email } = useContext(AuthContext);
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (!sidebar) {
@@ -21,21 +19,22 @@ const NavbarD = () => {
     const handleToggleSidebar = () => {
         toggleSidebar(!sidebar);
     };
-    console.log(sidebar)
+
+    const handleLogout = () => {
+        try {
+            localStorage.removeItem('token_id')
+            localStorage.removeItem('token_id')
+            alert('You have successfully logged out!')
+            navigate('/');
+            window.location.reload();
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     const toggleDropdown = () => {
         setShowDropdown(!showDropdown);
     };
-
-    // const handleLogout = () => {
-    //     try {
-    //         setIsLoggedIn(false)
-    //         navigate('/')
-    //         alert("Successfully logged out!")
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }
 
     return (
         <Wrapper>
@@ -57,13 +56,7 @@ const NavbarD = () => {
                         <FaCaretDown />
                     </button>
                     <div className={`dropdown ${showDropdown ? 'show-dropdown' : ''}`}>
-                        <button
-                            type='button'
-                            className='dropdown-btn'
-                            // onClick={handleLogout}
-                        >
-                            logout
-                        </button>
+                        <ButtonLogout handleLogout={handleLogout} />
                     </div>
                 </div>
             </div>

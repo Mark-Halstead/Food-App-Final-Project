@@ -18,6 +18,7 @@ function Login() {
             setIsLoggedIn(true);
             alert('You have successfully logged in!');
             navigate('/user-signup-form');
+            console.log(localStorage.getItem('token_id'));
         } catch (error) {
             console.error(error);
         }
@@ -45,4 +46,5 @@ function Login() {
 }
 
 export default Login;
+
 

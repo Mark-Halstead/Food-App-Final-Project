@@ -74,7 +74,7 @@ def signup():
     }
     # Encrypt the password
     user['password'] = pbkdf2_sha256.encrypt(user['password'])
-    new_user = g.user_model.signup(user)
+    new_user = g.user_model.create(user)
     token_data = {
         "token": user["token_id"],
         "role": "user",
