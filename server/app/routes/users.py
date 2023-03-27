@@ -74,14 +74,14 @@ def signup():
     }
     # Encrypt the password
     user['password'] = pbkdf2_sha256.encrypt(user['password'])
-    new_user = g.user_model.signup(user)
+    new_user = g.user_model.create(user)
     token_data = {
         "token": user["token_id"],
         "role": "user",
         "user_id": new_user["_id"]
     }
     token = g.token_model.create(token_data)
-    return Response(JSONEncoder().encode(new_user), content_type='application/json')
+    return Response(JSONEncoder().encode(token), content_type='application/json')
 
 
 @user_routes.route('/', methods=['PUT'])
@@ -117,5 +117,23 @@ def signout():
 
 @user_routes.route('/login', methods=['POST'])
 def login():
-    logged_in_user = g.user_model.login()
-    return Response(JSONEncoder().encode(logged_in_user), content_type='application/json')
+    # Create user object
+    data = json.loads(request.data)
+    user = {
+        "token_id": uuid.uuid4().hex,
+        "email": data.get("email"),
+        "password": data.get("password"),
+    }
+    # Encrypt the password
+    user_data = g.user_model.get_by_query({"email": user["email"]})
+    if not user_data:
+        return make_response(jsonify({"error": "User not found"}), 404)
+    if not pbkdf2_sha256.verify(data.get("password"), user_data["password"]):
+        return make_response(jsonify({"error": "Password incorrect"}), 403)
+    token_data = {
+        "token": user["token_id"],
+        "role": "user",
+        "user_id": user_data["_id"]
+    }
+    token = g.token_model.create(token_data)
+    return Response(JSONEncoder().encode(token), content_type='application/json')
