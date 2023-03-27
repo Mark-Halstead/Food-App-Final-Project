@@ -16,3 +16,4 @@ export { default as DietForm } from "./DietForm";
 export { default as SubscriptionForm } from "./SubscriptionForm";
 // export { default as FormPage } from "./FormPage";
 export { default as BarcodePage } from "./Dashboard/BarcodePage";
+export { default as GPTPage } from './GPTPage';

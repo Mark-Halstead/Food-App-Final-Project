@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-
+import axios from 'axios';
 import { MealContainer, MoodMenu, StatContainer, DateChanger } from '../../components/FoodDiary'
 import { SearchPopup } from '../../components';
 import { calculateTotals } from '../../helpers/calculateStats';
