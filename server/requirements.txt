@@ -7,3 +7,4 @@ pytest
 gunicorn
 bcrypt
 passlib
+openai
