@@ -1,5 +1,5 @@
 import React from 'react'
-import { MyClients, DietForm, HomePage } from './pages'
+import { MyClients, DietForm, HomePage, GPTPage } from './pages'
 import { Routes, Route } from 'react-router-dom'
 import { Navbar } from './components'
 import { Profile, Overview, Plan, SharedLayout, Chat, NutritionistSharedLayout, Register, Login, FoodDiary, UserSignUpForm, GoalsForm, SubscriptionForm, MealPlan , BarcodePage, NutritionistList } from './pages/index'
@@ -26,6 +26,7 @@ function App() {
             <Route path='plan' element={<Plan />} />
             <Route path='chat' element={<Chat />} />
             <Route path='barcode' element={<BarcodePage />} />
+            <Route path='gpt' element={<GPTPage />} />
           </Route>
           <Route path='register' element={<Register />} />
           <Route path='login' element={<Login />} />
