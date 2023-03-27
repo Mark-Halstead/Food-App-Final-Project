@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-// import { ButtonLogout } from '../../components';
 import Wrapper from '../../assets/wrappers/LoginPage';
 import { AuthContext } from '../../contexts/AuthContext';
 
@@ -9,24 +8,20 @@ function Login() {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
+    const { setIsLoggedIn } = useContext(AuthContext);
 
     async function handleLogin(event) {
         event.preventDefault();
         try {
             const response = await axios.post('http://127.0.0.1:5000/users/login', { email, password });
-            localStorage.setItem('token', response.data.token);
-            localStorage.setItem('email', email);
-            console.log(response.data.token);
+            localStorage.setItem('token_id', response.data.token_id);
             setIsLoggedIn(true);
-            setEmail(email);
             alert('You have successfully logged in!');
-            navigate('/quizzes');
+            navigate('/user-signup-form');
         } catch (error) {
             console.error(error);
         }
     }
-
 
     return (
         <Wrapper>
@@ -42,7 +37,6 @@ function Login() {
                             <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} />
                         </label>
                         <button type="submit">Login</button>
-                        {/* <ButtonLogout /> */}
                     </form>
                 </div>
             </div>
@@ -51,3 +45,4 @@ function Login() {
 }
 
 export default Login;
+
