@@ -2,7 +2,7 @@ import React from 'react'
 import { MyClients, DietForm, HomePage } from './pages'
 import { Routes, Route } from 'react-router-dom'
 import { Navbar } from './components'
-import { Profile, Overview, Plan, SharedLayout, Chat, NutritionistSharedLayout, Register, Login, FoodDiary, UserSignUpForm, GoalsForm, SubscriptionForm, MealPlan , BarcodePage, NutritionistList, RegisterNutritionist, NutritionistSignUpForm } from './pages/index'
+import { Profile, Overview, Plan, SharedLayout, Chat, NutritionistSharedLayout, Register, Login, FoodDiary, UserSignUpForm, GoalsForm, SubscriptionForm, MealPlan , BarcodePage, NutritionistList, RegisterNutritionist, NutritionistSignUpForm, LoginNutritionist } from './pages/index'
 import { useLocation } from 'react-router-dom';
 import NutritionistProfile from './pages/NutritionistDashboard/NutritionistProfile'
 import { AuthProvider } from './contexts/AuthContext';
@@ -29,6 +29,7 @@ function App() {
           </Route>
           <Route path='register' element={<Register />} />
           <Route path='register-nutritionist' element={<RegisterNutritionist />} />
+          <Route path='login-nutritionist' element={<LoginNutritionist />} />
           <Route path='login' element={<Login />} />
           <Route path='user-signup-form' element={<UserSignUpForm />} />
           <Route path='nutritionist-signup-form' element={<NutritionistSignUpForm />} />
