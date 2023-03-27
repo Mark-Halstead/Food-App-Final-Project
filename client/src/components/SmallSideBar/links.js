@@ -29,6 +29,11 @@ const links = [
         text: "Chat",
         path: "/dashboard/chat",
     },
+    {
+        id: 5,
+        text: "BarcodeScanner",
+        path: "/dashboard/barcode",
+    },
 ];
 
 export default links;

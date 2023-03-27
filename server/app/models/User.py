@@ -65,6 +65,7 @@ class User(Base):
 
         return user
 
+
     def signout(self):
         session.clear()
         if 'user' in session:

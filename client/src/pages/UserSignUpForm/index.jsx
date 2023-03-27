@@ -1,87 +1,164 @@
 import React, { useState } from 'react';
-import Wrapper from '../../assets/wrappers/UserSignUpForm';
-import { FormFormat } from '../../components';
-import { RiArrowRightSLine } from 'react-icons/ri';
+import axios from 'axios';
+import { PersonalInfo, FitnessInfo, DietaryInfo, SubscriptionInfo } from '../../components';
 import { useNavigate } from 'react-router-dom';
+import Wrapper from '../../assets/wrappers/SignUpForm';
+import { CSSTransition } from 'react-transition-group';
 
 const UserSignUpForm = () => {
-  const Navigate = useNavigate();
-  const [age, setAge] = useState('');
-  const [weight, setWeight] = useState('');
-  const [gender, setGender] = useState('');
-  const [activityLevel, setActivityLevel] = useState('');
+    const Navigate = useNavigate()
+    const [page, setPage] = useState(1);
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [age, setAge] = useState('');
+    const [weight, setWeight] = useState('');
+    const [gender, setGender] = useState('');
+    const [activityLevel, setActivityLevel] = useState('');
+    const [goal, setGoal] = useState('');
+    const [dietaryRestrictions, setDietaryRestrictions] = useState([]);
+    const [allergies, setAllergies] = useState([]);
+    const [foodPreferences, setFoodPreferences] = useState('');
+    const [mealComplexity, setMealComplexity] = useState('');
+    const [budget, setBudget] = useState('');
+    const [subscriptionType, setSubscriptionType] = useState('');
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    Navigate('/goals-form');
-  };
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
-  const handleChange = (e, setState) => {
-    setState(e.target.value);
-  };
+        const userData = {
+            email: email,
+            first_name: firstName,
+            last_name: lastName,
+            age: age,
+            weight: weight,
+            gender: gender,
+            activity_level: activityLevel,
+            goal: goal,
+            dietary_restrictions: dietaryRestrictions,
+            allergies: allergies,
+            food_preferences: foodPreferences,
+            meal_complexity: mealComplexity,
+            budget: budget,
+            subscription_type: subscriptionType
+        };
 
-  const activityLevels = [
-    { label: 'Low', value: 'low' },
-    { label: 'Lightly Active', value: 'lightly-active' },
-    { label: 'Moderately Active', value: 'moderately-active' },
-  ];
+        try {
+            const token = localStorage.getItem('token_id')
+            const response = await axios.put(`http://127.0.0.1:5000/users/${localStorage.getItem('token_id')}`, userData);
 
-  const genderOptions = [
-    { label: 'Select Gender', value: '' },
-    { label: 'Male', value: 'male' },
-    { label: 'Female', value: 'female' },
-  ];
+            console.log(response.data);
+            alert("Profile updated successfully!")
+            Navigate("/dashboard")
+            // redirect to dashboard or display success message
+        } catch (error) {
+            console.log(error.response.data);
+            // display error message
+        }
+    };
 
-  return (
-    <Wrapper>
-      <form className='form' onSubmit={handleSubmit}>
-        <h3>Your details</h3>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          <FormFormat
-            type='number'
-            name='Age'
-            value={age}
-            handleChange={(e) => handleChange(e, setAge)}
-            style={{ width: '20%', margin: '0 auto' }}
-          />
-          <FormFormat
-            type='number'
-            name='Weight'
-            value={weight}
-            handleChange={(e) => handleChange(e, setWeight)}
-            style={{ width: '20%', margin: '0 auto' }}
-          />
-          <div style={{ margin: '0 auto' }}>
-            <FormFormat
-              type='select'
-              name='Gender'
-              value={gender}
-              handleChange={(e) => handleChange(e, setGender)}
-              options={genderOptions}
-            />
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-            <label htmlFor='Activity Level'>Activity Level</label>
-            {activityLevels.map((option) => (
-              <FormFormat
-                key={option.value}
-                type='radio'
-                name={option.label}
-                value={option.value}
-                label={option.label}
-                checked={activityLevel === option.value}
-                handleChange={(e) => handleChange(e, setActivityLevel)}
-                style={{ transform: 'scale(0.8)', margin: '0 auto' }}
-              />
-            ))}
-          </div>
-          <button type='submit' className='btn btn-block'>
-            Next <RiArrowRightSLine style={{ fontSize: '10px' }} size={10} />
-          </button>
-        </div>
-      </form>
-    </Wrapper>
-  );
+    const handlePersonalInfoSubmit = (e) => {
+        e.preventDefault();
+        nextPage();
+    };
+
+    const handleFitnessInfoSubmit = (e) => {
+        e.preventDefault();
+        nextPage();
+    };
+
+    const handleDietaryInfoSubmit = (e) => {
+        e.preventDefault();
+        nextPage();
+    };
+
+    const nextPage = () => {
+        setPage(page + 1);
+    };
+
+    const prevPage = () => {
+        setPage(page - 1);
+    };
+
+    return (
+        <Wrapper>
+            <form className="form page-transition" onSubmit={() => handleSubmit()}>
+                <CSSTransition
+                    in={page === 1}
+                    classNames="fade"
+                    timeout={300}
+                    unmountOnExit
+                >
+                    <PersonalInfo
+                        firstName={firstName}
+                        setFirstName={setFirstName}
+                        lastName={lastName}
+                        setLastName={setLastName}
+                        email={email}
+                        setEmail={setEmail}
+                        age={age}
+                        setAge={setAge}
+                        weight={weight}
+                        setWeight={setWeight}
+                        gender={gender}
+                        setGender={setGender}
+                        page={page}
+                        nextPage={handlePersonalInfoSubmit}
+                    />
+                </CSSTransition>
+                <CSSTransition
+                    in={page === 2}
+                    classNames="fade"
+                    timeout={300}
+                    unmountOnExit
+                >
+                    <FitnessInfo
+                        activityLevel={activityLevel}
+                        setActivityLevel={setActivityLevel}
+                        goal={goal}
+                        setGoal={setGoal}
+                        prevPage={prevPage}
+                        nextPage={handleFitnessInfoSubmit}
+                    />
+                </CSSTransition>
+                <CSSTransition
+                    in={page === 3}
+                    classNames="fade"
+                    timeout={300}
+                    unmountOnExit
+                >
+                    <DietaryInfo
+                        dietaryRestrictions={dietaryRestrictions}
+                        setDietaryRestrictions={setDietaryRestrictions}
+                        allergies={allergies}
+                        setAllergies={setAllergies}
+                        foodPreferences={foodPreferences}
+                        setFoodPreferences={setFoodPreferences}
+                        mealComplexity={mealComplexity}
+                        setMealComplexity={setMealComplexity}
+                        prevPage={prevPage}
+                        nextPage={handleDietaryInfoSubmit}
+                    />
+                </CSSTransition>
+                <CSSTransition
+                    in={page === 4}
+                    classNames="fade"
+                    timeout={300}
+                    unmountOnExit
+                >
+                    <SubscriptionInfo
+                        budget={budget}
+                        setBudget={setBudget}
+                        subscriptionType={subscriptionType}
+                        setSubscriptionType={setSubscriptionType}
+                        prevPage={prevPage}
+                        handleSubmit={handleSubmit}
+                    />
+                </CSSTransition>
+            </form>
+        </Wrapper>
+    );
 };
 
 export default UserSignUpForm;
+

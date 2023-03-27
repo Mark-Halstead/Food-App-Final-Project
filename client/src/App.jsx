@@ -2,7 +2,7 @@ import React from 'react'
 import { MyClients, DietForm, HomePage } from './pages'
 import { Routes, Route } from 'react-router-dom'
 import { Navbar } from './components'
-import { Profile, Overview, Plan, SharedLayout, Chat, NutritionistSharedLayout, Register, Login, FoodDiary, UserSignUpForm, GoalsForm, SubscriptionForm, FormPage, MealPlan, NutritionistList } from './pages/index'
+import { Profile, Overview, Plan, SharedLayout, Chat, NutritionistSharedLayout, Register, Login, FoodDiary, UserSignUpForm, GoalsForm, SubscriptionForm, FormPage, MealPlan , BarcodePage } from './pages/index'
 import { useLocation } from 'react-router-dom';
 import NutritionistProfile from './pages/NutritionistDashboard/NutritionistProfile'
 import { AuthProvider } from './contexts/AuthContext';
@@ -25,6 +25,7 @@ function App() {
             <Route path="nutritionists" element={<NutritionistList />} />
             <Route path='plan' element={<Plan />} />
             <Route path='chat' element={<Chat />} />
+            <Route path='barcode' element={<BarcodePage />} />
           </Route>
           <Route path='register' element={<Register />} />
           <Route path='login' element={<Login />} />
@@ -32,7 +33,7 @@ function App() {
           <Route path='goals-form' element={<GoalsForm />} />
           <Route path='diet-form' element={<DietForm />} />
           <Route path='subscription-form' element={<SubscriptionForm />} />
-          <Route path='form' element={<FormPage />} />
+          {/* <Route path='form' element={<FormPage />} /> */}
           <Route path="/nutritionist-dashboard" element={<NutritionistSharedLayout />}>
             <Route index element={<NutritionistProfile />} />
             <Route path='meal-plan/:clientId' element={<MealPlan />} />

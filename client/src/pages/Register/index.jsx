@@ -22,12 +22,13 @@ function Register() {
             });
 
             console.log(response.data);
+            const { token_id } = response.data;
+            localStorage.setItem('token_id', token_id);
+            console.log(localStorage.getItem('token_id'));
             alert("Thanks for registering!")
             Navigate("/user-signup-form")
-            // redirect to login page or display success message
         } catch (error) {
             console.log(error.response.data);
-            // display error message
         }
     };
 
