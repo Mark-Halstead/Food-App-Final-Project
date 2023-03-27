@@ -9,8 +9,8 @@ const ButtonLogout = () => {
         try {
             alert("You have successfully logged out!")
             Navigate("/")
-            console.log(localStorage.getItem('token_id'));
-            localStorage.removeItem('token_id');
+            console.log(localStorage.getItem('token'));
+            localStorage.removeItem('token');
             console.log("Successfully removed token!");
         } catch (error) {
             console.log(error);

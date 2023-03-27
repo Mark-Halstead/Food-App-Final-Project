@@ -25,7 +25,7 @@ const UserSignUpForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+    
         const userData = {
             email: email,
             first_name: firstName,
@@ -42,11 +42,15 @@ const UserSignUpForm = () => {
             budget: budget,
             subscription_type: subscriptionType
         };
-
+    
         try {
-            const token = localStorage.getItem('token_id')
-            const response = await axios.put(`http://127.0.0.1:5000/users/${localStorage.getItem('token_id')}`, userData);
-
+            const token = localStorage.getItem('token')
+            const response = await axios.put(`http://127.0.0.1:5000/users/`, userData, {
+                headers: {
+                    Authorization: `${token}`
+                },
+            });
+    
             console.log(response.data);
             alert("Profile updated successfully!")
             Navigate("/dashboard")
@@ -56,6 +60,7 @@ const UserSignUpForm = () => {
             // display error message
         }
     };
+    
 
     const handlePersonalInfoSubmit = (e) => {
         e.preventDefault();

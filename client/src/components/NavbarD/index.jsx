@@ -22,11 +22,9 @@ const NavbarD = () => {
 
     const handleLogout = () => {
         try {
-            localStorage.removeItem('token_id')
-            localStorage.removeItem('token_id')
+            localStorage.removeItem('token')
             alert('You have successfully logged out!')
             navigate('/');
-            window.location.reload();
         } catch (error) {
             console.log(error);
         }

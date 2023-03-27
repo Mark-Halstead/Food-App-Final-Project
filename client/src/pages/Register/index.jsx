@@ -22,9 +22,9 @@ function Register() {
             });
 
             console.log(response.data);
-            const { token_id } = response.data;
-            localStorage.setItem('token_id', token_id);
-            console.log(localStorage.getItem('token_id'));
+            const { token } = response.data;
+            localStorage.setItem('token', token);
+            console.log(localStorage.getItem('token'));
             alert("Thanks for registering!")
             Navigate("/user-signup-form")
         } catch (error) {
