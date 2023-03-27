@@ -25,12 +25,12 @@ const links = [
         path: "/dashboard/diary",
     },
     {
-        id: 4,
+        id: 5,
         text: "Chat",
         path: "/dashboard/chat",
     },
     {
-        id: 5,
+        id: 6,
         text: "BarcodeScanner",
         path: "/dashboard/barcode",
     },
