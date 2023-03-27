@@ -4,8 +4,8 @@ from typing import Optional, List
 from app.models.Base import Base
 
 class MessageSchema(BaseModel):
-    user_id: int
-    nutritionist_id: int
+    user_id: str
+    nutritionist_id: str
     sender: str
     message: str
 

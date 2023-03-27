@@ -5,10 +5,10 @@ from app.models.Base import Base
 
 # reviews table schema
 class ReviewSchema(BaseModel):
-    user_id: int
-    nutritionist_id: int
+    user_id: str
+    nutritionist_id: str
     rating: int
-    review: str
+    review_message: str
 
 class Review(Base):
     def __init__(self, table_name, db_connection=None):

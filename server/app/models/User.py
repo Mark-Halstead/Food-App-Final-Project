@@ -10,7 +10,7 @@ from app.models.Base import Base
 
 ## these classes are used for data validation purposes 
 class UserSchema(BaseModel):
-    nutritionist_id: Optional[ObjectId]
+    nutritionist_id: Optional[str]
     email: EmailStr
     password: constr(min_length=8)
     first_name: str
@@ -56,7 +56,6 @@ class User(Base):
         session['logged_in'] = True
         session['user'] = user
         return user
-
 
     def signup(self, user):
 
