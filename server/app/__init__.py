@@ -1,9 +1,7 @@
 from flask import Flask, g, render_template, url_for, request, session, redirect
+from flask_jwt_extended import JWTManager
 from functools import wraps
 from flask_cors import CORS
-import pymongo
-from pymongo import MongoClient
-from datetime import datetime
 from dotenv import load_dotenv
 import os
 from app.routes import user_routes, nutritionist_routes, product_routes, diary_routes, review_routes, message_routes, meal_plan_routes
@@ -14,6 +12,8 @@ load_dotenv()
 app = Flask(__name__)
 app.secret_key = '\x0c\xf1\xc7$\xd6\xfa\x1d\xe2\xcdh\x82K\xed$1\xa1'
 CORS(app)
+jwt = JWTManager(app)
+
 app.register_blueprint(user_routes, url_prefix="/users")
 app.register_blueprint(nutritionist_routes, url_prefix="/nutritionists")
 app.register_blueprint(product_routes, url_prefix="/products")

@@ -15,6 +15,24 @@ class JSONEncoder(json.JSONEncoder):
 
 nutritionist_routes = Blueprint("nutritionist_routes", __name__)
 
+@nutritionist_routes.route("/", methods=["GET"])
+def get_all_nutritionists():
+    nutritionists = g.nutritionist_model.index()
+    reviews = g.review_model.index()
+    for n in nutritionists:
+        nutritionist_reviews = [r for r in reviews if r["nutritionist_id"] == str(n["_id"])]
+        n["reviews"] = nutritionist_reviews
+        n["average_rating"] = sum([r["rating"] for r in nutritionist_reviews]) / len(nutritionist_reviews)
+
+    ## add some logic for picking top picks (need to add client_id to request)
+    for i in range(3):
+        nutritionists[i]["top_pick"] = True
+
+    if nutritionists:
+        return Response(JSONEncoder().encode(nutritionists), content_type='application/json')
+    else:
+        return make_response(jsonify({"error": "Nutritionist not found"}), 404)
+
 @nutritionist_routes.route("/", methods=["POST"])
 def add_nutritionist():
     try:
