@@ -17,6 +17,7 @@ passlib = "*"
 faker = "*"
 pytest-cov = "*"
 openai = "*"
+flask-jwt-extended = "*"
 
 [dev-packages]
 
