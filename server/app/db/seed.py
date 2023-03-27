@@ -6,36 +6,44 @@ from faker_food import FoodProvider
 from app.models.DailyDiaryEntry import DailyDiaryEntrySchema
 from app.models.User  import UserSchema
 from app.models.Nutritionist import NutritionistSchema
+from app.models.Review import ReviewSchema
 
 
 db = get_connection("DB_URL")
 db.products.delete_many({})
 db.diary_entries.delete_many({})
 db.users.delete_many({})
+db.nutritionists.delete_many({})
+db.reviews.delete_many({})
+db.tokens.delete_many({})
 
 fake = Faker()
 fake.add_provider(FoodProvider)
 
 def add_dummy_nutritionists():
+    nutritionists = []
     for _ in range(10):
         nutritionist_data = {
             "email": fake.email(),
             "password": "password123",
             "first_name": fake.first_name(),
             "last_name": fake.last_name(),
-            "credentials": fake.word(),
-            "area_of_expertise": fake.word(),
-            "education_training": [fake.sentence() for _ in range(3)]
+            "credentials": random.choice(["RD", "MS", "PhD", "MD"]),
+            "area_of_expertise": random.choice(["Weight management", "Sports nutrition", "Eating disorders", "Gut health"]),
+            "education_training": [f"{random.choice(['BS', 'MS', 'PhD'])} {fake.word()} {fake.city()} {random.choice(['University', 'College'])}" for _ in range(3)]
         }
         nutritionist = NutritionistSchema(**nutritionist_data)
-        result = db.nutritionists.insert_one(nutritionist.dict())
-        print(f"Nutritionist with ID {result.inserted_id} added to the collection")
+        nutritionists.append(nutritionist)
+    result = db.nutritionists.insert_many([nutritionist.dict() for nutritionist in nutritionists])
 
 def add_dummy_users():
     goals = ["Lose weight", "Maintain weight", "Gain weight"]
     activity_levels = ["Sedentary", "Lightly active", "Moderately active", "Very active"]
-    nutritionist_ids = [nutritionist["_id"] for nutritionist in db.nutritionists.find()]
-    for _ in range(10):
+    dietary_restrictions = ["Gluten-free", "Dairy-free", "Vegan", "Vegetarian", "Kosher", "Halal"]
+    food_preferences = ["Italian", "Mexican", "Asian", "Mediterranean", "Indian"]
+    nutritionist_ids = [str(nutritionist["_id"]) for nutritionist in db.nutritionists.find()]
+    users = []
+    for _ in range(100):
         user_data = {
             "nutritionist_id": random.choice(nutritionist_ids),
             "email": fake.email(),
@@ -48,15 +56,43 @@ def add_dummy_users():
             "height": random.uniform(150, 200),
             "goal": random.choice(goals),
             "activity_level": random.choice(activity_levels),
-            "dietary_restrictions": [fake.word() for _ in range(random.randint(0, 3))],
-            "food_preferences": [fake.word() for _ in range(random.randint(0, 3))],
+            "dietary_restrictions": [random.choice(dietary_restrictions) for _ in range(random.randint(0, 3))],
+            "food_preferences": [random.choice(food_preferences) for _ in range(random.randint(0, 3))],
             "daily_calorie_target": random.uniform(1000, 3000),
-            "meal_complexity": fake.word(),
-            "budget": fake.word()
+            "meal_complexity": random.randint(0, 5),
+            "budget": random.randint(0, 5)
         }
         user = UserSchema(**user_data)
-        result = db.users.insert_one(user.dict())
-        print(f"User with ID {result.inserted_id} added to the collection")
+        users.append(user)
+    
+    result = db.users.insert_many([user.dict() for user in users])
+    user_ids = result.inserted_ids
+
+    reviews = []
+    for nutritionist_id in nutritionist_ids:
+        for _ in range(random.randint(1, 5)):
+            review_data = {
+                "user_id": str(random.choice(user_ids)),
+                "nutritionist_id": nutritionist_id,
+                "rating": random.randint(1, 5),
+                "review_message": fake.text()
+            }
+            review = ReviewSchema(**review_data)
+            reviews.append(review)
+    
+    db.reviews.insert_many([review.dict() for review in reviews])
+
+def add_tokens():
+    user_ids = [user["_id"] for user in db.users.find()]
+    tokens = []
+    for user_id in user_ids:
+        token = {
+            "user_id": user_id,
+            "token": fake.uuid4(),
+            "role":"user"
+        }
+        tokens.append(token)
+    db.tokens.insert_many(tokens)
 
 def add_dummy_products():
     products = []
@@ -98,6 +134,8 @@ def add_dummy_diary_entries():
     user_ids = [user["_id"] for user in db.users.find()]
     products = list(db.products.find())
 
+    diary_entries = []
+
     for date in dates:
         for user_id in user_ids:
             breakfast = []
@@ -132,9 +170,12 @@ def add_dummy_diary_entries():
             weight = random.uniform(50, 100)
             followed_meal_plan = random.choice([True, False])
             diary_entry = DailyDiaryEntrySchema(user_id=user_id, date=date, breakfast=breakfast, lunch=lunch, dinner=dinner, snacks=snacks, mood=mood, weight=weight, followed_meal_plan=followed_meal_plan)
-            db.diary_entries.insert_one(diary_entry.dict())
+            diary_entries.append(diary_entry)
+    
+    db.diary_entries.insert_many([diary_entry.dict() for diary_entry in diary_entries])
 
 add_dummy_nutritionists()
 add_dummy_users()
+add_tokens()
 add_dummy_products()
 add_dummy_diary_entries()

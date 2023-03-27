@@ -5,9 +5,9 @@ from bson import ObjectId
 import json
 import uuid
 from passlib.hash import pbkdf2_sha256
+from app.routes.auth import token_required
 
 from app.models.User import UserSchema, UserUpdateSchema, User
-
 
 # this is to be able to json encode the _id value (ObjectId object) that is returned from db
 class JSONEncoder(json.JSONEncoder):
@@ -84,10 +84,11 @@ def signup():
     return Response(JSONEncoder().encode(new_user), content_type='application/json')
 
 
-@user_routes.route('/<token_id>', methods=['PUT'])
-def update_user(token_id):
+@user_routes.route('/', methods=['PUT'])
+@token_required('user')
+def update_user(user_data):
     data = json.loads(request.data)
-    user = {
+    updated_data = {
         "first_name": data.get("first_name"),
         "last_name": data.get("last_name"),
         "paid_subscription": data.get("paid_subscription"),
@@ -102,9 +103,8 @@ def update_user(token_id):
         "meal_complexity": data.get("meal_complexity"),
         "budget": data.get("budget")
     }
-    token_data = g.token_model.find_by_token(token_id)
-    user_id = token_data["user_id"]
-    updated_user = g.user_model.update(user_id, user)
+
+    updated_user = g.user_model.update(user_data["_id"], updated_data)
     return Response(JSONEncoder().encode(updated_user), content_type='application/json')
 
 
