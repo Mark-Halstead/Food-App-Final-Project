@@ -22,7 +22,7 @@ function FoodDiary() {
         setLoading(true)
         async function getDiaryEntry() {
             try {
-                const response = await fetch(`http://127.0.0.1:5000/diary_entries?user_id=641d4e4340372146801382bb`)
+                const response = await fetch(`http://127.0.0.1:5000/diary_entries`)
                 const data = await response.json()
                 console.log('data', data)
                 setAllDiaryEntries(data)
