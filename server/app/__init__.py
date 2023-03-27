@@ -1,5 +1,4 @@
-from flask import Flask, g, render_template, url_for, request, session, redirect
-from flask_jwt_extended import JWTManager
+from flask import Flask, g, render_template, url_for, request, session, redirect, jsonify
 from functools import wraps
 from flask_cors import CORS
 from dotenv import load_dotenv
@@ -12,7 +11,10 @@ load_dotenv()
 app = Flask(__name__)
 app.secret_key = '\x0c\xf1\xc7$\xd6\xfa\x1d\xe2\xcdh\x82K\xed$1\xa1'
 CORS(app)
-jwt = JWTManager(app)
+
+@app.errorhandler(401)
+def unauthorized(error):
+    return jsonify({'error': 'Unauthorized access'}), 401
 
 app.register_blueprint(user_routes, url_prefix="/users")
 app.register_blueprint(nutritionist_routes, url_prefix="/nutritionists")

@@ -1,25 +1,25 @@
-from app import jwt
-from flask import request, g
-from flask_jwt_extended import get_jwt_identity, JWTManager
+from functools import wraps
+from flask import request, abort, g
 
-@jwt.user_claims_loader
-def add_claims_to_access_token(user):
-    return {'role': user['role']}
+def token_required(role):
+    def decorator(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            token = request.headers.get('Authorization')
+            if not token:
+                abort(401, 'Token is missing')
 
-@jwt.user_identity_loader
-def user_identity_lookup(user):
-    return user["_id"]
+            token_data = g.token_model.find_by_token(token)
+            if not token_data or token_data.get('role') != role:
+                abort(401, 'Invalid token')
 
-@jwt.token_in_request_loader
-def extract_token_from_request():
-    token = request.headers.get('Authorization')
-    if token:
-        token = token.split(' ')[1]
-    return token
+            user_id = token_data.get('user_id')
+            user_data = g.user_model.get(user_id)
+            if not user_data:
+                abort(401, 'User not found')
 
-@jwt.user_loader_callback_loader
-def user_loader_callback(identity):
-    user = g.user_model.get(identity)
-    if user:
-        return user
-    return None
+            kwargs['user_data'] = user_data
+            return func(*args, **kwargs)
+
+        return wrapper
+    return decorator

@@ -15,6 +15,7 @@ db.diary_entries.delete_many({})
 db.users.delete_many({})
 db.nutritionists.delete_many({})
 db.reviews.delete_many({})
+db.tokens.delete_many({})
 
 fake = Faker()
 fake.add_provider(FoodProvider)
@@ -80,6 +81,18 @@ def add_dummy_users():
             reviews.append(review)
     
     db.reviews.insert_many([review.dict() for review in reviews])
+
+def add_tokens():
+    user_ids = [user["_id"] for user in db.users.find()]
+    tokens = []
+    for user_id in user_ids:
+        token = {
+            "user_id": user_id,
+            "token": fake.uuid4(),
+            "role":"user"
+        }
+        tokens.append(token)
+    db.tokens.insert_many(tokens)
 
 def add_dummy_products():
     products = []
@@ -163,5 +176,6 @@ def add_dummy_diary_entries():
 
 add_dummy_nutritionists()
 add_dummy_users()
+add_tokens()
 add_dummy_products()
 add_dummy_diary_entries()
