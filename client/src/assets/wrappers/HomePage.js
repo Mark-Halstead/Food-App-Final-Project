@@ -16,7 +16,7 @@ const Wrapper = styled.article`
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
 }
 html {
   scroll-behavior: smooth;
@@ -186,89 +186,10 @@ p {
 }
 /*////////////////// HAMBURGER-MENU STYLES  /////////////////////*/
 
-
-
-/*//////////////// NAVBAR CSS START /////////////*/
-.navbar {
-  position: relative; 
-  z-index: 30; 
-  top: 0;
-  left: 0;
-  width: 100%;
-  background: rgb(238, 238, 238);
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
-  height: 4rem;
-  display: flex;
-  align-items: center;
-}
-.nav-center {
-  width: 90vw;
-  max-width: 1170px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  flex-wrap: wrap;
-  }
-.nav-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.nav-toggle {
-  background: transparent;
-  border: none;
-  outline: none;
-  font-size: 1.5rem;
-  color: #00FF00;
-  cursor: pointer;
-  transition: all 0.2s linear;
-}
-.nav-toggle:hover {
-  transform: scale(1.2);
-}
-.nav-link {
-  display: block;
-  padding: 0 0;
-  text-transform: capitalize;
-  letter-spacing: 0.20rem;
-  transition: all 0.2s linear;
-  color: hsl(209, 61%, 16%);
-  cursor: pointer;
-  font-size: 1rem;
-  margin-right: 0.7rem;
-}
-.nav-link:hover {
-  padding: 0;
-  color: #18d418;
-  background: transparent;
-}
-
-.nav-links {
-  height: auto;
-  display: flex;
-}
-
-#landing-logo {
-  margin-top: 0.5rem;
-  margin-left: 6rem;
-}
-
-.section-title {
-  text-align: center;
-}
-.section-title h2 {
-  text-transform: uppercase;
-}
-.section-title span {
-  color: #18de18;
-}
-/*//////////////// NAVBAR CSS END //////////////////*/
-
 /*//////////////// LANDING CSS START ///////////////*/
 .landing {
   height: 100vh;
-  background: #18de18;
+  margin-top: -1.1rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -279,10 +200,11 @@ p {
 .landing-banner {
   text-align: center;
   color: #fff;
-  padding: 0 3rem;
+  padding: 0 5rem;
   margin-bottom: 8rem;
-  position: relative; 
-  z-index: 10; 
+  margin-right: 55rem;
+  position: relative;
+  z-index: 10;
   animation: fadein 2s ease-in-out;
 }
 
@@ -300,7 +222,12 @@ p {
 
 .landing-banner h1 {
   text-transform: uppercase;
+  font-weight: 500;
+  font-size: 4.5rem;
+  color: rgb(24, 212, 24);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
+  /* text-shadow: 0 0 0.5rem #000, 0 0 0.5rem #000, 0 0 0.5rem #000, 0 0 0.5rem #000; */
 .landing-banner p {
   max-width: 35rem;
   margin-left: auto;
@@ -356,19 +283,19 @@ p {
   background: none;
 }
 
-/* .floating-bg {
+.floating-bg {
   z-index: 1;
-  width: 150vw;
-  height: 150vw;
+  width: 100vw;
+  height: 100vw;
   background-color: #a7ffa7;
   position: absolute;
-  top: -110vw;
-  left: calc(50% - 75vw);
+  top: -65vw;
+  right: -40vw;
   border-radius: 45%;
   animation: rotate 30s infinite;
-} */
+} 
 
-/* .floating-bg::before {
+.floating-bg::before {
   content: "";
   width: 100%;
   height: 100%;
@@ -378,7 +305,8 @@ p {
   left: 0;
   border-radius: 40%;
   animation: rotate 30s infinite;
-} */
+}
+
 
 @keyframes rotate {
   0% {
@@ -401,8 +329,228 @@ p {
   .landing-banner p {
     max-width: 45rem;
   }
-}
+} */
 /*//////////////// LANDING CSS END ///////////////*/
+
+/*//////////////// BANNER CSS START ///////////////*/
+
+
+.banner {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  width: 100%;
+  padding: 0 5rem;
+}
+
+.banner-heading {
+  height: 20rem;
+  margin-bottom: 4rem;
+  perspective: 60rem;
+  overflow: hidden;
+}
+
+.banner-heading span {
+  font-family: "Oswald", sans-serif;
+  font-size: 4rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: rgb(24, 212, 24);
+  margin-top: 10rem;
+  margin-left: 0.5rem;
+  text-shadow: 0.3rem 0.3rem 0.6rem rgba(0, 0, 0, 0.1);
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  transform: translateZ(8rem);
+  opacity: 0;
+  letter-spacing: 3rem;
+}
+
+.banner-heading-1 {
+  animation: animateHeading 12s 3s infinite;
+}
+
+.banner-heading-2 {
+  animation: animateHeading 12s 6s infinite;
+}
+
+.banner-heading-3 {
+  animation: animateHeading 12s 9s infinite;
+}
+
+.banner-heading-4 {
+  animation: animateHeading 12s 12s infinite;
+}
+
+@keyframes animateHeading {
+  0% {
+    transform: translateZ(8rem);
+    opacity: 0;
+    letter-spacing: 3rem;
+  }
+
+  3% {
+    transform: translateZ(0);
+    opacity: 1;
+    letter-spacing: 1.5rem;
+  }
+
+  25% {
+    transform: translateZ(0);
+    opacity: 1;
+    letter-spacing: 1.5rem;
+  }
+
+  28% {
+    transform: translateZ(8rem);
+    opacity: 0;
+    letter-spacing: 3rem;
+  }
+
+  100% {
+    transform: translateZ(8rem);
+    opacity: 0;
+    letter-spacing: 3rem;
+  }
+}
+
+.banner-paragraph {
+  font-size: 4rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.6);
+  width: 30%;
+  margin: 0 auto 6rem auto;
+  padding: 1rem 0;
+  box-shadow: 1rem 1rem 5rem rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  animation: fadeAnimation 1s 1.5s forwards;
+}
+
+@keyframes fadeAnimation {
+  0% {
+    opacity: 0;
+    visibility: hidden;
+  }
+  100% {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.banner-btn {
+width: 20rem;
+height: 4rem;
+/* background: linear-gradient(to right, #9b0e0e, #7a1010); */
+background-color: rgb(24, 212, 24);
+color: #fff;
+font-size: 1.5rem;
+margin: -3rem 10rem;
+text-transform: uppercase;
+border-radius: 3rem;
+border: 0.1rem solid rgb(24, 212, 24);
+box-shadow: 1rem 2rem 3rem rgba(0, 0, 0, 0.5);
+cursor: pointer;
+opacity: 0;
+visibility: hidden;
+position: relative;
+overflow: hidden;
+animation: fadeAnimation 1s 2s forwards;
+}
+.banner-btn::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, transparent, #fff, transparent);
+  position: absolute;
+  top: 0;
+  left: -100%;
+  transform: skewX(-30deg);
+  transition: left 0.5s;
+}
+
+.banner-btn:hover::before {
+  left: 100%;
+}
+/*//////////////// BANNER CSS END /////////////////*/
+
+/*//////////////// ABOUT CSS START /////////////////*/
+.about-img,
+.about-info {
+  margin-bottom: 2rem;
+}
+img:not(.nav-logo) {
+    width: 90%;
+    display: block;
+}
+.about-section {
+    padding: 0 0 0 0;
+    height: 95vh;
+  }
+  .section-title {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+  .section-title h2 {
+    text-transform: uppercase;
+  }
+  .section-title span {
+    color: rgb(24, 212, 24);
+  }
+  .section-center {
+    width: 90vw;
+    margin: 0 auto;
+    max-width: 1170px;
+  }
+
+  .btn-activities {
+    animation-name: pulse;
+    animation-duration: 2s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+  }
+    .section-center {
+      width: 95vw;
+    }
+
+  .about-center {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2rem;
+  }
+  .about-img,
+  .about-info {
+    margin-bottom: 0;
+  }
+
+  .about-img::before {
+    content: '';
+    position: absolute;
+    width: 90%;
+    height: 100%;
+    border: 0.5rem solid rgb(24, 212, 24);
+    box-sizing: border-box;
+    top: -1.5rem;
+    left: -1rem;
+  }
+
+  .about-img {
+    position: relative;
+  }
+  .about-photo {
+    position: relative;
+  }
+  .about-section-center {
+     margin-left: 5rem;
+     margin-top: 3rem;
+  }
+/*//////////////// ABOUT CSS END ///////////////////*/
 
 
 /*//////////////// PRICING CARDS CSS START ///////////////*/

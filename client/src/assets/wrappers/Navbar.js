@@ -7,8 +7,7 @@ const Wrapper = styled.main`
   top: 0;
   left: 0;
   width: 100%;
-  background: rgb(238, 238, 238);
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  background: rgb(238, 238, 238, 0);
   height: 4rem;
   display: flex;
   align-items: center;
@@ -35,7 +34,7 @@ const Wrapper = styled.main`
   background: transparent;
   border: none;
   outline: none;
-  font-size: 1.5rem;
+  font-size: 2rem;
   color: hsl(206, 100%, 76%);
   cursor: pointer;
   display: none;
@@ -54,7 +53,8 @@ const Wrapper = styled.main`
   transition: all 0.2s linear;
   color: hsl(209, 61%, 16%);
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 1.25rem;
+  font-weight: 1000;
 }
 
 .nav-link:hover {
@@ -71,7 +71,17 @@ const Wrapper = styled.main`
   transition: all 0.2s linear;
 }
 
+#landing-logo {
+    margin: 1.2rem 0 0 3rem
+}
 
+.section-title h2 {
+    text-transform: uppercase;
+    letter-spacing: 0.55rem;
+  }
+  .section-title span {
+    color: #18de18;
+  }
 
 `;
 export default Wrapper;

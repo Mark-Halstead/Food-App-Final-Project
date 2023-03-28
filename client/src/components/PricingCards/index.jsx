@@ -11,7 +11,7 @@ function PricingCards() {
     };
 
     return (
-        <section className="popular-tours">
+        <section className="popular-tours" id="pricing">
             <div className="cards-wrapper">
                 <div className="card">
                     <div className="front-side">
