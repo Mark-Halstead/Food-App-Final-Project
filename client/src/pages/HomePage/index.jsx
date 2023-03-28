@@ -1,16 +1,15 @@
 import React from 'react'
-import { Landing, PricingCards, Hamburger } from '../../components'
-import HomeWrapper from '../../assets/wrappers/HomePage'
+import { Landing, PricingCards, Hamburger, SocialMediaNavbar } from '../../components'
+import Wrapper from '../../assets/wrappers/HomePage'
 
 const HomePage = () => {
   return (
-    <HomeWrapper>
-      <div className="hamburger-container">
-        <Hamburger />
+    <Wrapper>
+        {/* <Hamburger /> */}
         <Landing />
         <PricingCards />
-      </div>
-    </HomeWrapper>
+        <SocialMediaNavbar />
+    </Wrapper>
   )
 }
 

@@ -21,3 +21,4 @@ export { default as FitnessInfo } from "./FitnessInfo";
 export { default as SubscriptionInfo } from "./SubscriptionInfo";
 export { default as ButtonLogout } from "./ButtonLogout";
 export { default as NutritionistInfo } from "./NutritionistInfo";
+export { default as SocialMediaNavbar } from "./SocialMediaNavbar";
