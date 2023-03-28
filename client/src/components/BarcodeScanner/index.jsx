@@ -33,7 +33,7 @@ const BarcodeScanner = () => {
             console.log(`Scanned barcode: ${code}`);
             setScannedCode(code);
 
-            fetch(`https://world.openfoodfacts.org/api/v0/product/${code}.json`)
+            fetch(`https://uk.openfoodfacts.org/api/v0/product/${code}.json`)
                 .then(response => response.json())
                 .then(data => {
                     console.log(`Retrieved product data: ${JSON.stringify(data)}`);

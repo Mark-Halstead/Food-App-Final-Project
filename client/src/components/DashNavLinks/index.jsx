@@ -6,18 +6,19 @@ const DashNavLinks = () => {
     return (
         <div className='nav-links'>
             {links.map((link) => {
-                const { text, path, id } = link;
+                const { text, path, id, icon: Icon } = link;
                 return (
                     <NavLink
                         to={path}
-                        className={({ isActive }) => {
-                            return isActive ? 'nav-link active' : 'nav-link';
-                        }}
+                        className="nav-link"
+                        activeClassName="active"
                         key={id}
-                        onClick={() => toggleSidebar()}
                         end
                     >
-                        {text}
+                        <div className="icon-container">
+                            <Icon className="icon" /> 
+                        </div>
+                        <span className="link-text">{text}</span> 
                     </NavLink>
                 );
             })}
@@ -26,3 +27,4 @@ const DashNavLinks = () => {
 }
 
 export default DashNavLinks
+
