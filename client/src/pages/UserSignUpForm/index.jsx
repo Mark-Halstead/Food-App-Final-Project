@@ -52,10 +52,8 @@ const UserSignUpForm = () => {
             console.log(response.data);
             alert("Profile updated successfully!")
             Navigate("/dashboard")
-            // redirect to dashboard or display success message
         } catch (error) {
             console.log(error.response.data);
-            // display error message
         }
     };
     
