@@ -1,3 +1,5 @@
+import { avgCalories } from "../BarChart/barData";
+
 const defaultStats = [
     {
       title: 'height',
@@ -12,8 +14,8 @@ const defaultStats = [
       bcg: '#e0e8f9',
     },
     {
-      title: 'VO2 Max',
-      count: "60",
+      title: 'Average calorie intake',
+      count: avgCalories,
       color: '#d66a6a',
       bcg: '#ffeeee',
     },

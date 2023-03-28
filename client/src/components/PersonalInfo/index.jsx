@@ -7,8 +7,6 @@ const PersonalInfo = ({
   setFirstName,
   lastName,
   setLastName,
-  email,
-  setEmail,
   age,
   setAge,
   weight,
@@ -61,15 +59,6 @@ const PersonalInfo = ({
           id="last-name"
           value={lastName}
           onChange={handleLastNameChange}
-        />
-      </div>
-      <div className="form-group">
-        <label htmlFor="email">Email:</label>
-        <input
-          type="email"
-          id="email"
-          value={email}
-          onChange={handleEmailChange}
         />
       </div>
       <div className="form-group">
