@@ -519,7 +519,7 @@ p {
   
   .wrapper {
     width: 100%;
-    height: 50vh;
+    height: 30vh;
     background-color: #262626;
     display: flex;
     justify-content: center;
@@ -528,7 +528,7 @@ p {
   
   .follow,
   .menu-link {
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: 300;
     color: #fff;
     text-transform: uppercase;
