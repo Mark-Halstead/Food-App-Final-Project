@@ -2,6 +2,7 @@ import React from 'react'
 import LandingHeader from '../LandingHeader'
 
 const Landing = () => {
+
     return (
         <section className='landing' id='landing'>
             <div className='landing-banner'>

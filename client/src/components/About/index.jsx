@@ -2,6 +2,16 @@ import React from 'react'
 import AboutTitle from '../AboutTitle'
 
 const About = () => {
+    const scrollToComponent = (id) => {
+        const element = document.getElementById(id);
+        if (element) {
+          const position = element.offsetTop - 80;
+          window.scrollTo({
+            top: position,
+            behavior: 'smooth',
+          });
+        }
+      };
     return (
         <section className='about-section' id='about'>
             <AboutTitle title='about' subTitle='platepal' />
@@ -18,7 +28,7 @@ const About = () => {
                     <p>
                         The revision planner feature enables users to schedule and plan their study time effectively.
                     </p>
-                    <a href='#activities' className='btn btn-activities'>
+                    <a href='#activities' className='btn btn-activities' onClick={() => scrollToComponent('pricing')}>
                         Pricing
                     </a>
                 </article>
