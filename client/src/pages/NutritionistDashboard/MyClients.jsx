@@ -9,7 +9,11 @@ function MyClients() {
 
   useEffect(() => {
     async function loadClients() {
-      const response = await axios.get("http://127.0.0.1:5000/clients/");
+      const response = await axios.get("http://127.0.0.1:5000/nutritionists/clients", {
+        headers:{
+          Authorization:localStorage.get("token")
+        }
+      });
       setClients(response.data.clients);
       setPendingClients(response.data.pending_clients);
     }

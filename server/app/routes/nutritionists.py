@@ -5,7 +5,7 @@ from bson import ObjectId
 import json
 import uuid
 from passlib.hash import pbkdf2_sha256
-from app.routes.auth import nutritionist_token_required
+from app.routes.auth import token_required
 
 from app.models.Nutritionist import NutritionistSchema, NutritionistUpdateSchema
 
@@ -46,13 +46,14 @@ def add_nutritionist():
     except ValidationError as e:
         return make_response(jsonify({"error": "Invalid data", "details": e.errors()}), 400)
 
-@nutritionist_routes.route("/<nutritionist_id>", methods=["GET"])
-def get_nutritionist(nutritionist_id):
-    nutritionist = g.nutritionist_model.get(nutritionist_id)
-    if nutritionist:
-        return Response(JSONEncoder().encode(nutritionist), content_type='application/json')
+@nutritionist_routes.route("/clients", methods=["GET"])
+@token_required("nutritionist")
+def get_nutritionist(user_data):
+    clients = g.user_model.get_by_query({"nutritionist_id":user_data["_id"]})
+    if clients:
+        return Response(JSONEncoder().encode(clients), content_type='application/json')
     else:
-        return make_response(jsonify({"error": "Nutritionist not found"}), 404)
+        return make_response(jsonify({"error": "Clients not found"}), 404)
 
 @nutritionist_routes.route("/<nutritionist_id>", methods=["PUT"])
 def update_nutritionist_by_id(nutritionist_id):
@@ -98,7 +99,7 @@ def signup():
 
 
 @nutritionist_routes.route('/', methods=['PUT'])
-@nutritionist_token_required('nutritionist')
+@token_required('nutritionist')
 def update_nutritionist(nutritionist_data):
     data = json.loads(request.data)
     updated_data = {

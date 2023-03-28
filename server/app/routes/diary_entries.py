@@ -4,6 +4,7 @@ from bson import ObjectId
 from typing import List
 import json
 from datetime import datetime
+from app.routes.auth import token_required
 
 from app.models.DailyDiaryEntry import DailyDiaryEntrySchema, DailyDiaryEntryUpdateSchema
 
@@ -27,14 +28,11 @@ diary_routes = Blueprint("diary_routes", __name__)
 #     except ValidationError as e:
 #         return make_response(jsonify({"error": "Invalid data", "details": e.errors()}), 400)
 
-@diary_routes.route("", methods=["GET"])
-def get_diary_entry():
+@diary_routes.route("/", methods=["GET"])
+@token_required("user")
+def get_diary_entry(user_data):
     try:
-        user_id = request.args.get("user_id")
-        if not user_id:
-            raise TypeError("User ID parameter not included in api call.")
-        user_id = ObjectId(user_id)
-        diary_entries = g.diary_entry_model.get_by_user_id(user_id)
+        diary_entries = g.diary_entry_model.get_by_user_id(user_data["_id"])
     except ValueError:
         return make_response(jsonify({"error": "Invalid date format, should be yyyy-mm-dd"}), 400)
     except TypeError as e:
@@ -65,14 +63,29 @@ def confirm_food_item(entry_id, meal, food_item_id):
 
     return Response(JSONEncoder().encode(updated_data), content_type='application/json')
 
-@diary_routes.route("/<entry_id>/foods/<meal>", methods=["POST"])
-def add_food_item(entry_id, meal):
+@diary_routes.route("/<entry_date>/foods/<meal>", methods=["POST"])
+@token_required("user")
+def add_food_item(user_data, entry_date, meal):
+    user_id = user_data["_id"]
     data = json.loads(request.data)
 
-    diary_entry = g.diary_entry_model.get(entry_id)
+    diary_entry = g.diary_entry_model.get_by_query({
+        "date":entry_date,
+        "user_id":user_id
+    })
 
     if not diary_entry:
-        return make_response(jsonify({"error": "Diary entry not found"}), 404)
+        diary_entry = g.diary_entry_model.create({
+            "date":entry_date,
+            "breakfast": [],
+            "lunch": [],
+            "dinner": [],
+            "snacks": [],
+            "mood": 3,
+            "user_id": user_id,
+            "weight": 0,
+            "followed_meal_plan": False
+        })
     
     # here we need to append the food item to the correct meal and update
     product = g.product_model.get_by_id(data["id"])
@@ -118,14 +131,28 @@ def delete_food_item(entry_id, meal, food_item_id):
     return Response(JSONEncoder().encode(updated_data), content_type='application/json')
 
 
-@diary_routes.route("/<entry_id>", methods=["PUT"])
-def update_entry(entry_id):
+@diary_routes.route("/<entry_date>", methods=["PUT"])
+@token_required("user")
+def update_entry(user_data, entry_date):
     update_data = json.loads(request.data)
 
-    diary_entry = g.diary_entry_model.get(entry_id)
+    diary_entry = g.diary_entry_model.get_by_query({
+        "date":entry_date,
+        "user_id":user_data["_id"]
+    })
 
     if not diary_entry:
-        return make_response(jsonify({"error": "Diary entry not found"}), 404)
+        diary_entry = g.diary_entry_model.create({
+            "date":entry_date,
+            "breakfast": [],
+            "lunch": [],
+            "dinner": [],
+            "snacks": [],
+            "mood": 3,
+            "user_id": user_data["_id"],
+            "weight": 0,
+            "followed_meal_plan": False
+        })
 
 
     updated_data = g.diary_entry_model.update(diary_entry["_id"], update_data)

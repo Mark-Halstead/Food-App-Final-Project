@@ -43,7 +43,7 @@ function NutritionistProfile({selectedNutritionist, handleClosePopup, handleSend
                         }
                         <div className="popup-message">
                             <h5>Send a message</h5>
-                            <input type="text" placeholder="Enter your message" value={message} onChange={(e) => setMessage(e.target.value)} />
+                            <textarea name="" id="" cols="50" rows="10" placeholder="Enter your message" value={message} onChange={(e) => setMessage(e.target.value)}></textarea>
                             <button onClick={handleSendRequest}>Send</button>
                         </div>
                     </div>

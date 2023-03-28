@@ -21,7 +21,7 @@ function MoodMenu({ mood, handleMoodClick, showMoodMenu, setShowMoodMenu }) {
                     onClick={openMoodMenu}
                     className="hello"
                 >
-                    <i class={`${moodFace[mood]} hello`}></i>
+                    <i className={`${moodFace[mood]} hello`}></i>
                 </button>
             </div>
             {showMoodMenu &&

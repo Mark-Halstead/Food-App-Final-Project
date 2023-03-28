@@ -12,15 +12,17 @@ function NutritionistList() {
     const [areaFilter, setAreaFilter] = useState("");
     const [selectedNutritionist, setSelectedNutritionist] = useState({});
     const [showProfilePopup, setShowProfilePopup] = useState(false);
+    const [loading, setLoading] = useState(false)
 
 
     useEffect(() => {
         async function loadNutritionists() {
+            setLoading(true)
             const response = await axios.get("http://127.0.0.1:5000/nutritionists/")
             setNutritionists(response.data);
             setFilteredNutritionists(response.data.filter((nutritionist) => !nutritionist.top_pick));
+            setLoading(false)
         }
-
         loadNutritionists()
     }, []);
 
@@ -62,26 +64,35 @@ function NutritionistList() {
                 showProfilePopup && 
                     (<NutritionistProfile selectedNutritionist={selectedNutritionist} handleClosePopup={handleClosePopup} handleSendRequest={handleSendRequest}/>)
             }
-            <h2>Nutritionists</h2>
-            <h3>Top Picks</h3>
-            <ul className="nutritionist-list">
-                {nutritionists
-                .filter((nutritionist) => nutritionist.top_pick)
-                .map((nutritionist) => (
-                    <li key={nutritionist._id}>
-                        <NutritionistCard nutritionist={nutritionist} handleClick={handleClick}/>
-                    </li>
-                ))}
-            </ul>
-            <h3>All Nutritionists</h3>
-            <NutritionistFilter credentialsFilter={credentialsFilter} setCredentialsFilter={setCredentialsFilter} areaFilter={areaFilter} setAreaFilter={setAreaFilter}/>
-            <ul className="nutritionist-list">
-                {filteredNutritionists.map((nutritionist) => (
-                <li key={nutritionist._id}>
-                    <NutritionistCard nutritionist={nutritionist} handleClick={handleClick} />
-                </li>
-                ))}
-            </ul>
+            {
+                loading ? (
+                    <h3>Loading nutritionists...</h3>
+                ) : (
+                    <>
+                        <h2>Nutritionists</h2>
+                        <h3>Top Picks</h3>
+                        <ul className="nutritionist-list">
+                            {nutritionists
+                            .filter((nutritionist) => nutritionist.top_pick)
+                            .map((nutritionist) => (
+                                <li key={nutritionist._id}>
+                                    <NutritionistCard nutritionist={nutritionist} handleClick={handleClick}/>
+                                </li>
+                            ))}
+                        </ul>
+                        <h3>All Nutritionists</h3>
+                        <NutritionistFilter credentialsFilter={credentialsFilter} setCredentialsFilter={setCredentialsFilter} areaFilter={areaFilter} setAreaFilter={setAreaFilter}/>
+                        <ul className="nutritionist-list">
+                            {filteredNutritionists.map((nutritionist) => (
+                            <li key={nutritionist._id}>
+                                <NutritionistCard nutritionist={nutritionist} handleClick={handleClick} />
+                            </li>
+                            ))}
+                        </ul>
+                    </>
+                )
+            }
+            
         </div>
     );
 }

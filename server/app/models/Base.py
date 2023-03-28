@@ -39,6 +39,8 @@ class Base:
         return documents
 
     def update(self, id, update_data):
+        # remove _id key if present
+        "_id" in update_data and update_data.pop("_id")
         updated_document = self.table.find_one_and_update(
             {"_id": ObjectId(id)},
             {"$set": update_data},

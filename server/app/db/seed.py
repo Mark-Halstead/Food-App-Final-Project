@@ -83,13 +83,19 @@ def add_dummy_users():
     db.reviews.insert_many([review.dict() for review in reviews])
 
 def add_tokens():
-    user_ids = [user["_id"] for user in db.users.find()]
     tokens = []
-    for user_id in user_ids:
+    for user_id in [str(user["_id"]) for user in db.users.find()]:
         token = {
-            "user_id": user_id,
+            "user_id": str(user_id),
             "token": fake.uuid4(),
             "role":"user"
+        }
+        tokens.append(token)
+    for nutritionist_id in [str(nutritionist["_id"]) for nutritionist in db.nutritionists.find()]:
+        token = {
+            "user_id": str(nutritionist_id),
+            "token": fake.uuid4(),
+            "role":"nutritionist"
         }
         tokens.append(token)
     db.tokens.insert_many(tokens)
@@ -131,7 +137,7 @@ def add_dummy_diary_entries():
     start_date = datetime.now() - timedelta(days=num_entries)
     end_date = datetime.now() + timedelta(days=num_entries)
     dates = [(start_date + timedelta(days=i)).strftime(date_format) for i in range((end_date - start_date).days)]
-    user_ids = [user["_id"] for user in db.users.find()]
+    user_ids = [str(user["_id"]) for user in db.users.find()]
     products = list(db.products.find())
 
     diary_entries = []
