@@ -20,3 +20,4 @@ export { default as BarcodePage } from "./Dashboard/BarcodePage";
 export { default as RegisterNutritionist } from "./RegisterNutritionist";
 export { default as NutritionistSignUpForm } from "./NutritionistSignUpForm";
 export { default as LoginNutritionist } from "./LoginNutritionist";
+export { default as GPTPage } from './GPTPage';
