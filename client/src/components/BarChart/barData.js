@@ -1,11 +1,14 @@
 const data = [
-    { date: 'Monday', Meals: 20 },
-    { date: 'Tuesday', Meals: 25 },
-    { date: 'Wednesday', Meals: 15 },
-    { date: 'Thursday', Meals: 30 },
-    { date: 'Friday', Meals: 28 },
-    { date: 'Saturday', Meals: 35 },
-    { date: 'Sunday', Meals: 45 },
-  ]
-  
+  { date: 'Monday', Calories: 2000 },
+  { date: 'Tuesday', Calories: 2500 },
+  { date: 'Wednesday', Calories: 1987 },
+  { date: 'Thursday', Calories: 2654 },
+  { date: 'Friday', Calories: 2321 },
+  { date: 'Saturday', Calories: 3500 },
+  { date: 'Sunday', Calories: 3278 },
+]
+
+export const avgCalories = Math.round(data.reduce((acc, item) => acc + item.Calories, 0) / data.length);
+console.log(avgCalories);
+
 export default data

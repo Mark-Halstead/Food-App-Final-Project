@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">78.26% </span>
+                <span class="strong">82.97% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>36/46</span>
+                <span class='fraction'>39/47</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">40% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/4</span>
+                <span class='fraction'>2/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">78.26% </span>
+                <span class="strong">82.97% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>36/46</span>
+                <span class='fraction'>39/47</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -108,10 +108,13 @@
 <a name='L43'></a><a href='#L43'>43</a>
 <a name='L44'></a><a href='#L44'>44</a>
 <a name='L45'></a><a href='#L45'>45</a>
-<a name='L46'></a><a href='#L46'>46</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
@@ -128,12 +131,11 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
@@ -154,6 +156,8 @@
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react'
+import addDays from 'date-fns/addDays';
+import { utcToZonedTime, format } from 'date-fns-tz';
 &nbsp;
 import "./styles.css"
 &nbsp;
@@ -165,36 +169,35 @@ function DateChanger({ selectedDate, setSelectedDate }) {
         const month = (date.getMonth() + 1).toString().padStart(2, '0');
         const year = date.getFullYear();
         return `${day}/${month}/${year}`;
-      }
+    }
 &nbsp;
-    const handleDateForwards = <span class="fstat-no" title="function not covered" >() =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >        console.log('forwards')</span>
+    const handleDateChange = <span class="fstat-no" title="function not covered" >(change) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >        const date = new Date(selectedDate);</span>
-<span class="cstat-no" title="statement not covered" >        date.setDate(date.getDate() + 1);</span>
-<span class="cstat-no" title="statement not covered" >        setSelectedDate(date.toISOString().slice(0, 10))</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-    const handleDateBack = <span class="fstat-no" title="function not covered" >() =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >        console.log('back')</span>
-<span class="cstat-no" title="statement not covered" >        const date = new Date(selectedDate);</span>
-<span class="cstat-no" title="statement not covered" >        date.setDate(date.getDate() - 1);</span>
-<span class="cstat-no" title="statement not covered" >        setSelectedDate(date.toISOString().slice(0, 10))</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" >        const timezone = 'GMT';</span>
+<span class="cstat-no" title="statement not covered" >        console.log('date', date)</span>
+<span class="cstat-no" title="statement not covered" >        const zonedDate = utcToZonedTime(date, timezone);</span>
+<span class="cstat-no" title="statement not covered" >        const updatedZonedDate = addDays(zonedDate, change);</span>
+<span class="cstat-no" title="statement not covered" >        const updatedDate = format(updatedZonedDate, 'yyyy-MM-dd', { timeZone: timezone });</span>
+<span class="cstat-no" title="statement not covered" >        setSelectedDate(updatedDate);</span>
+<span class="cstat-no" title="statement not covered" >      };</span>
+&nbsp;
+&nbsp;
     return (
         &lt;div className='date-container'&gt;
-        &lt;button 
-            className='date-back-button'
-            onClick={handleDateBack}
-        &gt;
-            &lt;i className="fa-solid fa-caret-left"&gt;&lt;/i&gt;
-        &lt;/button&gt;
-            &lt;h2&gt;{formatDate(selectedDate)}&lt;/h2&gt;
-        &lt;button
-            className='date-forwards-button'
-            onClick={handleDateForwards}
-        &gt;
-            &lt;i className="fa-solid fa-caret-right"&gt;&lt;/i&gt;
-        &lt;/button&gt;
-    &lt;/div&gt;
+            &lt;button 
+                className='date-back-button'
+                onClick={<span class="fstat-no" title="function not covered" >() =&gt; handleDateChange(-1)}</span>
+            &gt;
+                &lt;i className="fa-solid fa-caret-left"&gt;&lt;/i&gt;
+            &lt;/button&gt;
+                &lt;h2&gt;{formatDate(selectedDate)}&lt;/h2&gt;
+            &lt;button
+                className='date-forwards-button'
+                onClick={<span class="fstat-no" title="function not covered" >() =&gt; handleDateChange(1)}</span>
+            &gt;
+                &lt;i className="fa-solid fa-caret-right"&gt;&lt;/i&gt;
+            &lt;/button&gt;
+        &lt;/div&gt;
     )
 }
 &nbsp;
@@ -205,7 +208,7 @@ export default DateChanger</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-03-24T11:30:19.548Z
+                at 2023-03-28T10:39:44.517Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

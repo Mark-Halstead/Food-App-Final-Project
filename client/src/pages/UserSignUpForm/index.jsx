@@ -10,7 +10,6 @@ const UserSignUpForm = () => {
     const [page, setPage] = useState(1);
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('');
     const [age, setAge] = useState('');
     const [weight, setWeight] = useState('');
     const [gender, setGender] = useState('');
@@ -27,7 +26,6 @@ const UserSignUpForm = () => {
         e.preventDefault();
     
         const userData = {
-            email: email,
             first_name: firstName,
             last_name: lastName,
             age: age,
@@ -54,10 +52,8 @@ const UserSignUpForm = () => {
             console.log(response.data);
             alert("Profile updated successfully!")
             Navigate("/dashboard")
-            // redirect to dashboard or display success message
         } catch (error) {
             console.log(error.response.data);
-            // display error message
         }
     };
     
@@ -99,8 +95,6 @@ const UserSignUpForm = () => {
                         setFirstName={setFirstName}
                         lastName={lastName}
                         setLastName={setLastName}
-                        email={email}
-                        setEmail={setEmail}
                         age={age}
                         setAge={setAge}
                         weight={weight}
