@@ -582,13 +582,13 @@ img:not(.nav-logo) {
 }
 
 .card {
-  width: 18.75rem;
+  width: 22rem;
   position: relative;
-  perspective: 82.5rem;
+  perspective: 100rem;
 }
 
 .card-image {
-  width: 100%;
+  min-width: 100%;
   border-radius: 0.375rem 0.375rem 0 0;
 }
 
@@ -610,7 +610,7 @@ img:not(.nav-logo) {
 }
 
 .tour-name {
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: 500;
   text-transform: uppercase;
   position: absolute;

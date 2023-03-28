@@ -5,7 +5,7 @@ const About = () => {
     const scrollToComponent = (id) => {
         const element = document.getElementById(id);
         if (element) {
-          const position = element.offsetTop - 80;
+          const position = element.offsetTop;
           window.scrollTo({
             top: position,
             behavior: 'smooth',
