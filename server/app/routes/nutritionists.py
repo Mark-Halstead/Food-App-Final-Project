@@ -5,7 +5,7 @@ from bson import ObjectId
 import json
 import uuid
 from passlib.hash import pbkdf2_sha256
-from app.routes.auth import nutritionist_token_required
+from app.routes.auth import token_required
 
 from app.models.Nutritionist import NutritionistSchema, NutritionistUpdateSchema
 
@@ -99,7 +99,7 @@ def signup():
 
 
 @nutritionist_routes.route('/', methods=['PUT'])
-@nutritionist_token_required('nutritionist')
+@token_required('nutritionist')
 def update_nutritionist(nutritionist_data):
     data = json.loads(request.data)
     updated_data = {
