@@ -1,20 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
+import DatePicker from 'react-date-picker'
 
 import { MealContainer, StatContainer, DateChanger } from '../../components/FoodDiary'
 import { SearchPopup } from '../../components';
+
 import { calculateTotals } from '../../helpers/calculateStats';
 import { createEmptyMealPlanObject } from '../../helpers/createEmptyObjects';
-import { useParams } from 'react-router-dom';
+import { ClientContext } from '../../contexts/ClientContext';
 
 function MealPlan() {
-    const { clientId } = useParams()
-
-
-    const user = {
-        id:"641dd823de351e63199336ac"
-    }
+    const { selectedClient } = useContext(ClientContext);
     
     const [selectedDate, setSelectedDate] = useState(new Date().toISOString().slice(0, 10));
+    const [calendarMode, setCalendarMode] = useState(true)
     const [mealTotals, setMealTotals] = useState({ breakfast: {}, lunch: {}, dinner: {}, snacks: {} });
     const [showSearchPopup, setShowSearchPopup] = useState(false)
     const [meal, setMeal] = useState("")
@@ -25,6 +23,13 @@ function MealPlan() {
     const [mealPlanEntry, setMealPlanEntry] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [date, setDate] = useState(new Date());
+
+    const handleDateChange = (newDate) => {
+      setDate(newDate);
+    }
+
+
 
     useEffect(() => {
         setLoading(true);
@@ -32,7 +37,7 @@ function MealPlan() {
         async function getMealPlans() {
             try {
                 // Add auth here to make sure nutritionist is allowed to edit client data
-                const response = await fetch(`http://127.0.0.1:5000/meal_plan_entries/${clientId}`);
+                const response = await fetch(`http://127.0.0.1:5000/meal_plan_entries/${selectedClient._id}`);
                 if (response.status === 200) {
                     const data = await response.json();
             
@@ -173,13 +178,20 @@ function MealPlan() {
         setShowSearchPopup(false)
     }
 
+    // if (calendarMode) {
+    //     return <DatePicker
+    //         onChange={handleDateChange}
+    //         value={date}
+    //     />
+    // }
+
 
     return (
         <div>
             <div>
                 {showSearchPopup && <SearchPopup onClose={onClose} handleAddFood={handleAddFood} meal={meal} servingMultiplier={servingMultiplier} setServingMultiplier={setServingMultiplier}/>}
             </div>
-            <h2>Client: Richard Swainson</h2>
+            <h2>Client: {selectedClient.first_name} {selectedClient.last_name}</h2>
             <div className='diary-header'>
                 <div className='diary-header-left'>
                     <StatContainer title={"Target (kcal)"} value={"2500"}/>

@@ -7,11 +7,13 @@ from app.models.DailyDiaryEntry import DailyDiaryEntrySchema
 from app.models.User  import UserSchema
 from app.models.Nutritionist import NutritionistSchema
 from app.models.Review import ReviewSchema
+from app.models.MealPlanEntry import MealPlanEntrySchema
 
 
 db = get_connection("DB_URL")
 db.products.delete_many({})
 db.diary_entries.delete_many({})
+db.meal_plan_entries.delete_many({})
 db.users.delete_many({})
 db.nutritionists.delete_many({})
 db.reviews.delete_many({})
@@ -46,6 +48,8 @@ def add_dummy_users():
     for _ in range(100):
         user_data = {
             "nutritionist_id": random.choice(nutritionist_ids),
+            "nutritionist_pending":random.choice([False, True]),
+            "nutritionist_message":fake.text(),
             "email": fake.email(),
             "password": "password123",
             "first_name": fake.first_name(),
@@ -130,8 +134,8 @@ def add_dummy_products():
         products.append(product)
     db.products.insert_many(products)
 
-def add_dummy_diary_entries():
-    # Generate a list of dates for the diary entries
+def add_dummy_meal_plan():
+    # Generate a list of dates for the meal_plan entries
     date_format = "%Y-%m-%d"
     num_entries = 10
     start_date = datetime.now() - timedelta(days=num_entries)
@@ -140,7 +144,7 @@ def add_dummy_diary_entries():
     user_ids = [str(user["_id"]) for user in db.users.find()]
     products = list(db.products.find())
 
-    diary_entries = []
+    meal_plan_entries = []
 
     for date in dates:
         for user_id in user_ids:
@@ -172,6 +176,53 @@ def add_dummy_diary_entries():
                 confirmed = random.choice([True, False])
                 food_item = {"product": product, "serving_multiplier": serving_multiplier, "confirmed": confirmed, "user_serving_size":serving_multiplier * product["serving_quantity"]}
                 snacks.append(food_item)
+            meal_plan_entry = MealPlanEntrySchema(user_id=user_id, date=date, breakfast=breakfast, lunch=lunch, dinner=dinner, snacks=snacks)
+            meal_plan_entries.append(meal_plan_entry)
+    
+    db.meal_plan_entries.insert_many([meal_plan_entry.dict() for meal_plan_entry in meal_plan_entries])
+
+def add_dummy_diary_entries():
+    # Generate a list of dates for the diary entries
+    date_format = "%Y-%m-%d"
+    num_entries = 10
+    start_date = datetime.now() - timedelta(days=num_entries)
+    end_date = datetime.now() + timedelta(days=num_entries)
+    dates = [(start_date + timedelta(days=i)).strftime(date_format) for i in range((end_date - start_date).days)]
+    user_ids = [str(user["_id"]) for user in db.users.find()]
+    products = list(db.products.find())
+
+    diary_entries = []
+
+    for date in dates:
+        for user_id in user_ids:
+            breakfast = []
+            lunch = []
+            dinner = []
+            snacks = []
+            for i in range(random.randint(1, 2)):
+                product = random.choice(products)
+                serving_multiplier = round(random.uniform(0, 3), 1)
+                confirmed = random.choice([True, False])
+                food_item = {"product": product, "serving_multiplier": serving_multiplier, "confirmed": confirmed, "user_serving_size":serving_multiplier * product["serving_quantity"]}
+                breakfast.append(food_item)
+            for i in range(random.randint(1, 2)):
+                product = random.choice(products)
+                serving_multiplier = round(random.uniform(0, 3), 1)
+                confirmed = random.choice([True, False])
+                food_item = {"product": product, "serving_multiplier": serving_multiplier, "confirmed": confirmed, "user_serving_size":serving_multiplier * product["serving_quantity"]}
+                lunch.append(food_item)
+            for i in range(random.randint(1, 2)):
+                product = random.choice(products)
+                serving_multiplier = round(random.uniform(0, 3), 1)
+                confirmed = random.choice([True, False])
+                food_item = {"product": product, "serving_multiplier": serving_multiplier, "confirmed": confirmed, "user_serving_size":serving_multiplier * product["serving_quantity"]}
+                dinner.append(food_item)
+            for i in range(random.randint(0, 1)):
+                product = random.choice(products)
+                serving_multiplier = round(random.uniform(0, 3), 1)
+                confirmed = random.choice([True, False])
+                food_item = {"product": product, "serving_multiplier": serving_multiplier, "confirmed": confirmed, "user_serving_size":serving_multiplier * product["serving_quantity"]}
+                snacks.append(food_item)
             mood = random.choice([1, 2, 3, 4, 5])
             weight = random.uniform(50, 100)
             followed_meal_plan = random.choice([True, False])
@@ -180,8 +231,10 @@ def add_dummy_diary_entries():
     
     db.diary_entries.insert_many([diary_entry.dict() for diary_entry in diary_entries])
 
-add_dummy_nutritionists()
-add_dummy_users()
-add_tokens()
-add_dummy_products()
-add_dummy_diary_entries()
+def populate_db():
+    add_dummy_nutritionists()
+    add_dummy_users()
+    add_tokens()
+    add_dummy_products()
+    add_dummy_meal_plan()
+    add_dummy_diary_entries()

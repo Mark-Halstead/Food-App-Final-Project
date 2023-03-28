@@ -5,7 +5,7 @@ from bson import ObjectId
 import json
 import uuid
 from passlib.hash import pbkdf2_sha256
-from app.routes.auth import user_token_required
+from app.routes.auth import token_required
 
 from app.models.User import UserSchema, UserUpdateSchema, User
 
@@ -89,7 +89,7 @@ def signup():
 
 
 @user_routes.route('/', methods=['PUT'])
-@user_token_required('user')
+@token_required('user')
 def update_user(user_data):
     data = json.loads(request.data)
     updated_data = {
@@ -106,6 +106,27 @@ def update_user(user_data):
         "daily_calorie_target": data.get("daily_calorie_target"),
         "meal_complexity": data.get("meal_complexity"),
         "budget": data.get("budget")
+    }
+
+    updated_user = g.user_model.update(user_data["_id"], updated_data)
+    return Response(JSONEncoder().encode(updated_user), content_type='application/json')
+
+
+@user_routes.route('/select_nutritionist', methods=['PUT'])
+@token_required('user')
+def select_nutritionist(user_data):
+    data = json.loads(request.data)
+    nutritionist_id = data.get("nutritionist_id")
+    nutritionist_pending = data.get("nutritionist_pending")
+    nutritionist_message = data.get("nutritionist_message")
+
+    if not nutritionist_id or not nutritionist_message:
+        return make_response(jsonify({"error": "Nutritionist ID not given in request."}), 400)
+    
+    updated_data = {
+        "nutritionist_id":nutritionist_id,
+        "nutritionist_pending":nutritionist_pending,
+        "nutritionist_message":nutritionist_message
     }
 
     updated_user = g.user_model.update(user_data["_id"], updated_data)

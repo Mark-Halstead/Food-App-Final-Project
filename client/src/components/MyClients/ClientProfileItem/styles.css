@@ -1,0 +1,18 @@
+.client-profile-item {
+    display: flex;
+    margin-bottom: 0.5rem;
+    background-color: white;
+    padding: 5px;
+}
+
+.client-profile-label {
+    display: flex;
+    align-items: center;
+    margin-right: 1rem;
+    font-weight: bold;
+}
+
+.fa-solid {
+    font-family: "Font Awesome 6 Solid";
+    margin-right: 0.5rem;
+}

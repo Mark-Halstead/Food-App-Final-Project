@@ -4,6 +4,7 @@ export { default as NavLinks } from "./NavLinks";
 export { default as Landing } from "./Landing";
 export { default as Landinglogo } from "./Landinglogo";
 export { default as PricingCards } from "./PricingCards";
+export { default as Calendar } from "./Calendar";
 export { default as Hamburger } from "./Hamburger";
 export { default as NavbarD } from "./NavbarD";
 export { default as BigSidebar } from "./BigSidebar";

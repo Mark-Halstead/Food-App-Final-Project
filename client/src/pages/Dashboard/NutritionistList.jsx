@@ -44,8 +44,20 @@ function NutritionistList() {
 
     }, [credentialsFilter, areaFilter])
 
-    const handleSendRequest = () => {
-        
+    const handleSendRequest = async (nutritionist, message) => {
+        const token = localStorage.token
+        const options = {
+            method:"PUT",
+            headers:{
+                Authorization:token
+            },
+            body:JSON.stringify({
+                nutritionist_id:nutritionist["_id"],
+                nutritionist_pending:false,
+                nutritionist_message:message
+            })
+        }
+        const response = await fetch("http://127.0.0.1:5000/users/select_nutritionist", options)
     }
 
     const handleClick = (nutritionist) => {
