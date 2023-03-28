@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Wrapper from '../../assets/wrappers/RegisterPage';
 
-function Register() {
+function RegisterNutritionist() {
 
     const Navigate = useNavigate()
 
@@ -15,7 +15,7 @@ function Register() {
         event.preventDefault();
 
         try {
-            const response = await axios.post('http://127.0.0.1:5000/users/signup', {
+            const response = await axios.post('http://127.0.0.1:5000/nutritionists/signup', {
                 email: email,
                 password: password,
                 role: role,
@@ -26,7 +26,7 @@ function Register() {
             localStorage.setItem('token', token);
             console.log(localStorage.getItem('token'));
             alert("Thanks for registering!")
-            Navigate("/user-signup-form")
+            Navigate("/nutritionist-signup-form")
         } catch (error) {
             console.log(error.response.data);
         }
@@ -50,7 +50,6 @@ function Register() {
                             <input type="text" value={role} onChange={(event) => setRole(event.target.value)} />
                         </label>
                         <button type="submit">Register</button>
-                        <button onClick={() => Navigate("/register-nutritionist")}>Register as a Nutritionist</button>
                     </form>
                 </div>
             </div>
@@ -58,4 +57,4 @@ function Register() {
     );
 }
 
-export default Register;
+export default RegisterNutritionist;

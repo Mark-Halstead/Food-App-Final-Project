@@ -4,11 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import Wrapper from '../../assets/wrappers/LoginPage';
 // import { AuthContext } from '../../contexts/AuthContext';
 
-function Login() {
+function LoginNutritionist() {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    // const { setIsLoggedIn } = useContext(AuthContext);
+// const { setIsLoggedIn } = useContext(AuthContext);
 
     async function handleLogin(event) {
         event.preventDefault();
@@ -17,7 +17,7 @@ function Login() {
             localStorage.setItem('token', response.data.token);
             // setIsLoggedIn(true);
             alert('You have successfully logged in!');
-            navigate('/dashboard');
+            navigate('/nutritionist-dashboard');
             console.log(localStorage.getItem('token'));
         } catch (error) {
             console.error(error);
@@ -38,7 +38,6 @@ function Login() {
                             <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} />
                         </label>
                         <button type="submit">Login</button>
-                        <button onClick={() => navigate("/login-nutritionist")}>Login as a Nutritionist</button>
                     </form>
                 </div>
             </div>
@@ -46,6 +45,4 @@ function Login() {
     );
 }
 
-export default Login;
-
-
+export default LoginNutritionist;
