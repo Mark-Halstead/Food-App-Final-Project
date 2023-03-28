@@ -13,14 +13,14 @@ function LoginNutritionist() {
     async function handleLogin(event) {
         event.preventDefault();
         try {
-            const response = await axios.post('http://127.0.0.1:5000/users/login', { email, password });
-            localStorage.setItem('token', response.data.token);
-            // setIsLoggedIn(true);
+            const response = await axios.post('http://127.0.0.1:5000/nutritionists/login', { email, password });
+            const { token } = response.data;
+            localStorage.setItem('token', token);
+            console.log(localStorage.getItem('token'));
             alert('You have successfully logged in!');
             navigate('/nutritionist-dashboard');
-            console.log(localStorage.getItem('token'));
         } catch (error) {
-            console.error(error);
+            console.error(error.response.data);
         }
     }
 

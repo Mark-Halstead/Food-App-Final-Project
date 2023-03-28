@@ -39,9 +39,9 @@ function App() {
           <Route path='subscription-form' element={<SubscriptionForm />} />
           {/* <Route path='form' element={<FormPage />} /> */}
           <Route path="/nutritionist-dashboard" element={<NutritionistSharedLayout />}>
-            <Route index element={<NutritionistProfile />} />
+            <Route index element={<MyClients />} />
             <Route path='meal-plan/:clientId' element={<MealPlan />} />
-            <Route path='clients' element={<MyClients />} />
+            <Route path='profile' element={<NutritionistProfile />} />
             <Route path='chat' element={<Chat />} />
           </Route>
         </Routes>
