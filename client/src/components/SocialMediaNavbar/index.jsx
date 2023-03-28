@@ -1,5 +1,4 @@
 import React from "react";
-import Wrapper from "../../assets/wrappers/SocialMediaNavbar";
 
 function SocialMediaNavbar() {
     return (

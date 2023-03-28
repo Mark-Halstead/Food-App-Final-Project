@@ -2,11 +2,21 @@ import styled from 'styled-components';
 
 const Wrapper = styled.article`
 /*////////////////// GLOBAL STYLES START /////////////////////*/
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Comic Sans MS';
+  font-family: 'Open Sans';
 }
 html {
   scroll-behavior: smooth;
@@ -396,122 +406,146 @@ p {
 
 
 /*//////////////// PRICING CARDS CSS START ///////////////*/
-.card-container {
-  width: 100%;
+.popular-tours {
+  padding: 3.75rem 0 7.5rem 0;
   height: 100vh;
-  background-color: rgb(24, 212, 24, 0.8);
+  background-color: #e0ffd9;
+  max-width: 100%;
+  opacity: 0.95;
+}
+
+.popular-tours-heading {
+  font-size: 2rem;
+  font-family: "Open Sans";
+  list-style-type: none;
+  text-decoration: none;
+  box-sizing: border-box;
+  outline: none;
+  text-align: center;
+  margin-top: -1rem;
+  margin-bottom: 2rem;
+  color: #3fe42b;
+  text-shadow: 0 0.125rem 0.25rem #3fe42b;
 }
 
 .cards-wrapper {
-  width: 90%;
-  margin: auto;
-  height: 100%;
   display: flex;
-  justify-content: space-around;
-  align-items: center;
+  justify-content: space-evenly;
 }
 
 .card {
-  width: 300px;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)),
-    url("https://media.istockphoto.com/id/507316787/photo/healthy-food-background.jpg?s=170667a&w=0&k=20&c=FQzOQZkIUhBwTWL_omMoSw_EDnHZi48jCE6SoLc_u1s=") center no-repeat;
-  background-size: cover;
-  color: #fff;
+  width: 18.75rem;
+  position: relative;
+  perspective: 82.5rem;
+}
+
+.card-image {
+  width: 100%;
+  border-radius: 0.375rem 0.375rem 0 0;
+}
+
+.front-side {
   text-align: center;
-  border-radius: 10px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
-  transition: all 0.4s;
+  background-color: #fdfdfd;
+  border-radius: 0.25rem;
+  position: relative;
+  z-index: 10;
+  opacity: 0.9;
+  transition: opacity 0.4s, transform 0.4s, box-shadow 0.4s;
 }
 
-.card:hover {
-  transform: scale(1.1);
-  box-shadow: 0 15px 60px rgba(0, 0, 0, 0.8);
+.change > .front-side {
+  transform: translateZ(-3.75rem) translateX(2.5rem);
+  box-shadow: 0 1.25rem 3.75rem #777;
+  opacity: 0.5;
+  z-index: 0;
 }
 
-.card-header {
-  margin-bottom: 40px;
-}
-
-.card-header h3 {
-  font-family: "Josefin Sans", sans-serif;
-  font-size: 30px;
-  font-weight: 300;
-  color: #18de18;
-  margin: 30px;
-  border-bottom: 1px groove #fff;
-  padding: 10px;
-}
-
-.card-header h1 {
-  font-family: "Josefin Sans", sans-serif;
-  font-size: 60px;
-  font-weight: 300;
-}
-
-.card-header sup {
-  font-size: 35px;
-}
-
-.card-header span {
-  font-size: 18px;
-}
-
-.card-body {
-  margin-bottom: 60px;
-}
-
-.card-body li {
-  list-style: none;
-  font-family: "Josefin Sans", sans-serif;
-  font-size: 16px;
-  font-weight: 300;
-  margin: 15px 0;
-}
-
-.card-body i {
-  margin-right: 25px;
-}
-
-.card-body .fa-check {
-  color: #0d683a;
-}
-
-.card-body .fa-times {
-  color: #911832;
-}
-
-.card-footer {
-  margin-bottom: 40px;
-}
-
-.card-footer button {
-  width: 120px;
-  padding: 10px;
-  background-color: #18c518;
-  color: #ddd;
-  font-family: "Montserrat", sans-serif;
-  font-size: 12px;
-  font-weight: 600;
+.tour-name {
+  font-size: 1.5rem;
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  border: 2px solid #18c518;
-  border-radius: 50px;
-  outline: none;
+  position: absolute;
+  top: 20%;
+  right: 1.25rem;
+  color: #fff;
+  text-shadow: 0 0 1rem #000, 0 0 1rem #000, 0 0 1rem #000, 0 0 1rem #000;
+}
+
+#free-plan {
+  top: 23%;
+}
+
+
+.card-list {
+  width: 60%;
+  margin: auto;
+  padding: 1.875rem 0 2.5rem 0;
+}
+
+.card-list-item {
+  font-size: 0.9375rem;
+  font-weight: 300;
+  color: #777;
+  margin: 1.25rem 0;
+  border-bottom: 0.25rem solid #3fe42b;
+  padding-bottom: 1.25rem;
+}
+
+.back-side {
+  position: absolute;
+  top: 0;
+  background-color: #3fe42b;
+  width: 100%;
+  height: 100%;
+  border-radius: 0.3125rem;
+  box-shadow: 0 1.5625rem 4.0625rem #777;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transform: translateZ(-3.75rem) translateX(2.5rem);
+  opacity: 0.5;
+  transition: opacity 0.4s, transform 0.4s, box-shadow 0.4s;
+}
+
+.change > .back-side {
+  transform: translateZ(0) translateX(0);
+  box-shadow: 0 0.9375rem 3.125rem #aaa;
+  opacity: 0.8;
+}
+
+.tour-price {
+  font-size: 2rem;
+  font-weight: 300;
+  color: #fff;
+}
+
+.card-button {
+  color: #3fe42b;
+  background-color: #fff;
+  border: none;
+  font-size: 1.5rem;
+  padding: 0.75rem 1rem;
+  letter-spacing: 0.2rem;
+  border-radius: 4rem;
   cursor: pointer;
 }
 
-@media (max-width: 1200px) {
-  .container {
-    height: 100%;
-  }
-
-  .cards-wrapper {
-    flex-wrap: wrap;
-  }
-
-  .card {
-    margin: 50px;
-  }
+.navigation-button {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  padding: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #777;
+  border-radius: 0.3rem;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
+  cursor: pointer;
 }
 /*//////////////// PRICING CARDS CSS END ///////////////*/
 
