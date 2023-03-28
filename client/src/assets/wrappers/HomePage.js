@@ -697,6 +697,29 @@ img:not(.nav-logo) {
 }
 /*//////////////// PRICING CARDS CSS END ///////////////*/
 
+/*//////////////// FOOD IMAGE CSS START /////////////////*/
+#food {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  width: 35%;
+  height: 70%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  animation: spin 36s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/*//////////////// FOOD IMAGE CSS END ///////////////////*/
+
 /*//////////////// FOOTER CSS START ///////////////*/
   
   .wrapper {

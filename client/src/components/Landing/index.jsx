@@ -1,5 +1,7 @@
 import React from 'react'
 import LandingHeader from '../LandingHeader'
+import LandingFood from '../LandingFood'
+
 
 const Landing = () => {
 
@@ -8,6 +10,7 @@ const Landing = () => {
             <div className='landing-banner'>
                 <LandingHeader />
             </div>
+            <LandingFood />
             <div className="floating-bg"></div>
         </section>
     )

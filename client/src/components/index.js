@@ -23,3 +23,4 @@ export { default as ButtonLogout } from "./ButtonLogout";
 export { default as NutritionistInfo } from "./NutritionistInfo";
 export { default as SocialMediaNavbar } from "./SocialMediaNavbar";
 export { default as About } from "./About";
+export { default as LandingFood } from "./LandingFood";
