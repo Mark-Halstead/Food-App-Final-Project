@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const Wrapper = styled.main`
     .container {
-        backgroundcolor: white;
+        background-color: white;
     }
 `;
 export default Wrapper;
