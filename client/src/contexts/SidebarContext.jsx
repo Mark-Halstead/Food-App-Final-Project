@@ -6,7 +6,7 @@ export const SidebarContext = createContext({
 });
 
 export const SidebarProvider = ({ children }) => {
-    const [sidebar, setSidebar] = useState(true);
+    const [sidebar, setSidebar] = useState(false);
 
     const toggleSidebar = () => {
         setSidebar(!sidebar);
