@@ -102,7 +102,6 @@ def signup():
 def update_nutritionist(nutritionist_data):
     data = json.loads(request.data)
     updated_data = {
-        "email": data.get("email"),
         "first_name": data.get("firstName"),
         "last_name": data.get("lastName"),
         "credentials": data.get("credentials"),

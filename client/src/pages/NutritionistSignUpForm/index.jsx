@@ -10,7 +10,6 @@ const NutritionistSignUpForm = () => {
   const [page, setPage] = useState(1);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
   const [credentials, setCredentials] = useState('');
   const [areaOfExpertise, setAreaOfExpertise] = useState('');
   const [educationTraining, setEducationTraining] = useState('');
@@ -19,7 +18,6 @@ const NutritionistSignUpForm = () => {
     e.preventDefault();
 
     const userData = {
-      email: email,
       first_name: firstName,
       last_name: lastName,
       credentials: credentials,
@@ -73,8 +71,6 @@ const NutritionistSignUpForm = () => {
             setFirstName={setFirstName}
             lastName={lastName}
             setLastName={setLastName}
-            email={email}
-            setEmail={setEmail}
             credentials={credentials}
             setCredentials={setCredentials}
             areaOfExpertise={areaOfExpertise}

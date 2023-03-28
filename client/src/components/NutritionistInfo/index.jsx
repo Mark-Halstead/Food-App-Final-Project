@@ -6,8 +6,6 @@ const NutritionistInfo = ({
     setFirstName,
     lastName,
     setLastName,
-    email,
-    setEmail,
     credentials,
     setCredentials,
     areaOfExpertise,
@@ -22,10 +20,6 @@ const NutritionistInfo = ({
 
     const handleLastNameChange = (e) => {
         setLastName(e.target.value);
-    };
-
-    const handleEmailChange = (e) => {
-        setEmail(e.target.value);
     };
 
     const handleCredentialsChange = (e) => {
@@ -60,15 +54,6 @@ const NutritionistInfo = ({
                         id="last-name"
                         value={lastName}
                         onChange={handleLastNameChange}
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="email">Email:</label>
-                    <input
-                        type="email"
-                        id="email"
-                        value={email}
-                        onChange={handleEmailChange}
                     />
                 </div>
                 <div className="form-group">
