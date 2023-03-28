@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
+import axios from 'axios';
 
 import { MealContainer, MoodMenu, StatContainer, DateChanger } from '../../components/FoodDiary'
 import { SearchPopup } from '../../components';
 import { calculateTotals } from '../../helpers/calculateStats';
+import { createEmptyDiaryEntryObject } from '../../helpers/createEmptyObjects';
 
 function FoodDiary() {
     const currentDate = new Date();
@@ -12,6 +14,7 @@ function FoodDiary() {
     const [showSearchPopup, setShowSearchPopup] = useState(false)
     const [meal, setMeal] = useState("")
     const [servingMultiplier, setServingMultiplier] = useState(1)
+    const [loadingAddingFood, setLoadingAddingFood] = useState(false)
 
     const [allDiaryEntries, setAllDiaryEntries] = useState(null);
     const [mealItems, setMealItems] = useState(null);
@@ -22,14 +25,24 @@ function FoodDiary() {
         setLoading(true)
         async function getDiaryEntry() {
             try {
-                const response = await fetch(`http://127.0.0.1:5000/diary_entries`)
-                const data = await response.json()
-                console.log('data', data)
-                setAllDiaryEntries(data)
+                const token = localStorage.getItem('token')
+                const options = {
+                    headers: {
+                        Authorization:token
+                    }
+                }
+                const response = await fetch(`http://127.0.0.1:5000/diary_entries/`, options)
+                if (response.status === 200) {
+                    const data = await response.json()
+                    setAllDiaryEntries(data)
+                    const todaysDiaryEntry = data.find(entry => entry.date === selectedDate);
+                    setMealItems(todaysDiaryEntry)
+                } else if (response.status === 404) {
+                    const emptyDiaryEntry = createEmptyDiaryEntryObject(selectedDate, "")
+                    setMealItems(emptyDiaryEntry)
+                    setAllDiaryEntries([emptyDiaryEntry])
 
-                const todaysDiaryEntry = data.find(entry => entry.date === selectedDate);
-                console.log('todaysDiaryEntry', todaysDiaryEntry)
-                setMealItems(todaysDiaryEntry)
+                }
                 setLoading(false)
             } catch (error) {
                 setError(error)
@@ -43,23 +56,43 @@ function FoodDiary() {
     useEffect(() => {
         if (allDiaryEntries) {
             const currentEntry = allDiaryEntries.find(entry => entry.date === selectedDate);
-            setMealItems(currentEntry)
-        }
+
+            const entry = currentEntry ? currentEntry : createEmptyDiaryEntryObject(selectedDate, "")
+            setMealItems(entry)
+
+        } 
     }, [selectedDate])
 
     async function updateDiary(updateData) {
         console.log('mealItems', mealItems)
         try {
+            const token = localStorage.getItem('token')
             const options = {
                 method:"PUT",
-                body:JSON.stringify(updateData)
+                body:JSON.stringify(updateData),
+                headers: {
+                    Authorization:token
+                }
+
             }
-            const response = await fetch(`http://127.0.0.1:5000/diary_entries/${mealItems._id}`, 
+            const response = await fetch(`http://127.0.0.1:5000/diary_entries/${selectedDate}`, 
                 options
             )
-            const data = await response.json()
-            setMealItems(data)
+            const updatedDiaryEntry = await response.json()
+            
+            let updatedAllDiaryEntries
+            if (allDiaryEntries.some(entry => entry.date === selectedDate)){
+                updatedAllDiaryEntries = allDiaryEntries.map(entry => {
+                    if (entry.date === selectedDate) return updatedDiaryEntry
+                    else return entry
+                } )
+            } else {
+                updatedAllDiaryEntries = [...allDiaryEntries, updatedDiaryEntry]
+            }
+            setMealItems(updatedDiaryEntry)
+            setAllDiaryEntries(updatedAllDiaryEntries)
             setLoading(false)
+            onClose()
         } catch (error) {
             setError(error)
             setLoading(false)
@@ -88,14 +121,26 @@ function FoodDiary() {
         }
     }, [mealItems]);
 
-    const handleAddFood = async (selectedItem) => {
+    const handleAddFood = async (meal, selectedItem) => {
         const data = {serving_multiplier:servingMultiplier, ...selectedItem }
         try {
-            const response = await axios.post(`http://127.0.0.1:5000/diary_entries/${props.mealItems._id}/foods/${props.meal}`, data);
+            setLoadingAddingFood(true)
+            const token = localStorage.getItem("token")
+            const response = await axios.post(`http://127.0.0.1:5000/diary_entries/${selectedDate}/foods/${meal}`, data, {
+                headers:{
+                    Authorization:token
+                }
+            });
             const updatedDiaryEntry = response.data;
-            console.log('updatedDiaryEntry', updatedDiaryEntry)
+            
+            const updatedAllDiaryEntries = allDiaryEntries.map(entry => {
+                if (entry.date === selectedDate) return updatedDiaryEntry
+                else return entry
+            } )
             setMealItems(updatedDiaryEntry)
+            setAllDiaryEntries(updatedAllDiaryEntries)
             onClose()
+            setLoadingAddingFood(false)
             
           } catch (error) {
             console.error(error);
@@ -120,7 +165,7 @@ function FoodDiary() {
     return (
         <div>
             <div>
-                {showSearchPopup && <SearchPopup onClose={onClose} handleAddFood={handleAddFood} meal={meal} servingMultiplier={servingMultiplier} setServingMultiplier={setServingMultiplier}/>}
+                {showSearchPopup && <SearchPopup onClose={onClose} handleAddFood={handleAddFood} meal={meal} servingMultiplier={servingMultiplier} setServingMultiplier={setServingMultiplier} loadingAddingFood={loadingAddingFood}/>}
             </div>
             <div className='diary-header'>
                 <div className='diary-header-left'>

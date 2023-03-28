@@ -4,7 +4,7 @@ import axios from 'axios';
 import './styles.css'
 import ProductItem from './ProductItem';
 
-function SearchPopup({handleAddFood, meal, onClose, servingMultiplier, setServingMultiplier}) {
+function SearchPopup({handleAddFood, meal, onClose, servingMultiplier, setServingMultiplier, loadingAddingFood}) {
     const [searchQuery, setSearchQuery] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const [selectedItem, setSelectedItem] = useState(null);
@@ -67,7 +67,10 @@ function SearchPopup({handleAddFood, meal, onClose, servingMultiplier, setServin
                         <div>
                             <h3>{selectedItem.product_name}</h3>
                             <button onClick={handleBackClick}>Back to results</button>
-                            <ul>
+                            { loadingAddingFood ? (
+                                <h4>Adding food...</h4>
+                            ) : (
+                                <ul>
                                 <li>Name: {selectedItem.product_name_en}</li>
                                 <li>Brand: {selectedItem.brands}</li>
                                 <li>Allergens: {selectedItem.allergens_tags ? selectedItem.allergens_tags.join(', ') : 'N/A'}</li>
@@ -87,10 +90,14 @@ function SearchPopup({handleAddFood, meal, onClose, servingMultiplier, setServin
                                 </li>
                                 <li>
                                     <button
-                                        onClick={() => handleAddFood(selectedItem)}
+                                        onClick={() => handleAddFood(meal, selectedItem)}
                                     >Add Food</button>
                                 </li>
                             </ul>
+                            )
+                        
+                            }
+                            
                         </div>
                     ) : (
                         <div>

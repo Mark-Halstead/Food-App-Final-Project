@@ -3,6 +3,7 @@ from pydantic import ValidationError
 from flask import make_response, jsonify, request
 from bson import ObjectId
 import json
+from app.routes.auth import token_required
 
 from app.models.Nutritionist import NutritionistSchema, NutritionistUpdateSchema
 
@@ -43,13 +44,14 @@ def add_nutritionist():
     except ValidationError as e:
         return make_response(jsonify({"error": "Invalid data", "details": e.errors()}), 400)
 
-@nutritionist_routes.route("/<nutritionist_id>", methods=["GET"])
-def get_nutritionist(nutritionist_id):
-    nutritionist = g.nutritionist_model.get(nutritionist_id)
-    if nutritionist:
-        return Response(JSONEncoder().encode(nutritionist), content_type='application/json')
+@nutritionist_routes.route("/clients", methods=["GET"])
+@token_required("nutritionist")
+def get_nutritionist(user_data):
+    clients = g.user_model.get_by_query({"nutritionist_id":user_data["_id"]})
+    if clients:
+        return Response(JSONEncoder().encode(clients), content_type='application/json')
     else:
-        return make_response(jsonify({"error": "Nutritionist not found"}), 404)
+        return make_response(jsonify({"error": "Clients not found"}), 404)
 
 @nutritionist_routes.route("/<nutritionist_id>", methods=["PUT"])
 def update_nutritionist(nutritionist_id):

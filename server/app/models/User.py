@@ -50,6 +50,13 @@ class User(Base):
     def __init__(self, table_name, db_connection=None):
         super().__init__(table_name, db_connection)
 
+    def email_taken(self, email):
+        user = self.table.find_one({
+            "email": email
+        })
+        if user:
+            return True
+        return False
 
     def start_session(self, user):
         del user['password']

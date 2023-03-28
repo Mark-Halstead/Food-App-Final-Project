@@ -13,7 +13,7 @@ class RoleEnum(str, Enum):
 class TokenSchema(BaseModel):
     token: str
     role: RoleEnum
-    user_id: ObjectId
+    user_id: str
 
     class Config:
         arbitrary_types_allowed = True

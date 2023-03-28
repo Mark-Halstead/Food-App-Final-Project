@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { MealContainer, StatContainer, DateChanger } from '../../components/FoodDiary'
 import { SearchPopup } from '../../components';
 import { calculateTotals } from '../../helpers/calculateStats';
-import { createEmptyMealPlanObject } from '../../helpers/createEmptyMealPlan';
+import { createEmptyMealPlanObject } from '../../helpers/createEmptyObjects';
 import { useParams } from 'react-router-dom';
 
 function MealPlan() {

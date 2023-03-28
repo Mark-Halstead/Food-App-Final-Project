@@ -31,7 +31,7 @@ def add_user():
         return make_response(jsonify({"error": "Invalid data", "details": e.errors()}), 400)
 
 
-@user_routes.route("/<user_id>", methods=["GET"])
+@user_routes.route("/", methods=["GET"])
 def get_user(user_id):
     user = g.user_model.get(user_id)
     if user:
@@ -67,6 +67,10 @@ def delete_user(user_id):
 def signup():
     # Create user object
     data = json.loads(request.data)
+    
+    if g.user_model.email_taken(data.get("email")):
+        return make_response(jsonify({"error": "Email already in use."}), 409)
+    
     user = {
         "token_id": uuid.uuid4().hex,
         "email": data.get("email"),
@@ -78,7 +82,7 @@ def signup():
     token_data = {
         "token": user["token_id"],
         "role": "user",
-        "user_id": new_user["_id"]
+        "user_id": str(new_user["_id"])
     }
     token = g.token_model.create(token_data)
     return Response(JSONEncoder().encode(token), content_type='application/json')
@@ -133,7 +137,7 @@ def login():
     token_data = {
         "token": user["token_id"],
         "role": "user",
-        "user_id": user_data["_id"]
+        "user_id": str(user_data["_id"])
     }
     token = g.token_model.create(token_data)
     return Response(JSONEncoder().encode(token), content_type='application/json')

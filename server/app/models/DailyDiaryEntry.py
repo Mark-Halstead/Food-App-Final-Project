@@ -6,7 +6,7 @@ from datetime import date
 from app.models.Base import Base
 
 class DailyDiaryEntrySchema(BaseModel):
-    user_id: ObjectId
+    user_id: str
     date: str
     breakfast: List[dict]
     lunch: List[dict]
