@@ -32,7 +32,7 @@ const Wrapper = styled.section`
   transition: all 0.3s ease-in-out;
   text-align: center;
   position: absolute;
-  left: 37%;
+  left: 35%;
   top: 10%;
 }
 
