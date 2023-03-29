@@ -17,7 +17,7 @@ function LandingHeader() {
           <span className="banner-heading-1">Health</span>
           <span className="banner-heading-2">Wellness</span>
           <span className="banner-heading-3">Nutrition</span>
-          <span className="banner-heading-4">Fitness</span>
+          <span className="banner-heading-4">Lifestyle</span>
         </h1>
         <button className="banner-btn" onClick={() => scrollToComponent('about')}>Discover Now</button>
       </div>
