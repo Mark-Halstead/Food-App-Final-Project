@@ -134,7 +134,7 @@ def signup():
     token_data = {
         "token": nutritionist["token_id"],
         "role": "nutritionist",
-        "nutritionist_id": new_nutritionist["_id"]
+        "user_id": new_nutritionist["_id"]
     }
     token = g.token_model.create(token_data)
     return Response(JSONEncoder().encode(token), content_type='application/json')
@@ -142,7 +142,7 @@ def signup():
 
 @nutritionist_routes.route('/', methods=['PUT'])
 @token_required('nutritionist')
-def update_nutritionist(nutritionist_data):
+def update_nutritionist(user_data):
     data = json.loads(request.data)
     updated_data = {
         "first_name": data.get("firstName"),
@@ -152,7 +152,7 @@ def update_nutritionist(nutritionist_data):
         "education_training": data.get("educationTraining")
     }
 
-    updated_nutritionist = g.nutritionist_model.update(nutritionist_data["_id"], updated_data)
+    updated_nutritionist = g.nutritionist_model.update(user_data["_id"], updated_data)
     return Response(JSONEncoder().encode(updated_nutritionist), content_type='application/json')
 
 

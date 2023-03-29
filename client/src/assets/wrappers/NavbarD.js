@@ -22,7 +22,7 @@ const Wrapper = styled.nav`
     background: transparent;
     border-color: transparent;
     font-size: 1.75rem;
-    color: var(--primary-500);
+    color: rgb(24, 212, 24, 0.8);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -38,6 +38,7 @@ const Wrapper = styled.nav`
     gap: 0 0.5rem;
     position: relative;
     box-shadow: var(--shadow-2);
+    background-color: rgb(24, 212, 24, 1);
   }
 
   .dropdown {
@@ -45,7 +46,8 @@ const Wrapper = styled.nav`
     top: 40px;
     left: 0;
     width: 100%;
-    background: var(--primary-100);
+    background: rgb(24, 212, 24, 0.5);
+    cursor: pointer;
     box-shadow: var(--shadow-2);
     padding: 0.5rem;
     text-align: center;
@@ -58,7 +60,7 @@ const Wrapper = styled.nav`
   .dropdown-btn {
     background: transparent;
     border-color: transparent;
-    color: #42b942;
+    color: rgb(35, 220, 35, 1);
     letter-spacing: var(--letterSpacing);
     text-transform: capitalize;
     cursor: pointer;
