@@ -47,6 +47,12 @@ class Base:
             return_document=pymongo.ReturnDocument.AFTER
         )
         return updated_document
+    
+    def get_by_user_id(self, user_id):
+        diary_entries = self.table.find({
+            "user_id": user_id
+        })
+        return [d for d in diary_entries]
 
     def delete(self, id):
         return self.table.delete_one({"_id": ObjectId(id)}).deleted_count
