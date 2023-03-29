@@ -699,14 +699,15 @@ img:not(.nav-logo) {
 /*//////////////// FOOD IMAGE CSS START /////////////////*/
 #food {
   position: absolute;
-  top: 15%;
-  left: 50%;
-  width: 36%;
-  height: 70%;
+  top: 15vh;
+  left: 50vw;
+  width: 36vw;
+  height: 70vh;
   transform: translate(-50%, -50%);
   z-index: 100;
   animation: spin 36s linear infinite;
 }
+
 
 @keyframes spin {
   from {
