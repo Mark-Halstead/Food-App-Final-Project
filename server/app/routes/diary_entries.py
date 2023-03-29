@@ -32,16 +32,15 @@ diary_routes = Blueprint("diary_routes", __name__)
 @token_required("user")
 def get_diary_entry(user_data):
     try:
+        meal_plan = g.meal_plan_entry_model.get_by_user_id(user_data["_id"])
         diary_entries = g.diary_entry_model.get_by_user_id(user_data["_id"])
-    except ValueError:
-        return make_response(jsonify({"error": "Invalid date format, should be yyyy-mm-dd"}), 400)
+
     except TypeError as e:
         return make_response(jsonify({"error": e}), 400)
 
-    if diary_entries:
-        return Response(JSONEncoder().encode(diary_entries), content_type='application/json')
-    else:
-        return make_response(jsonify({"error": "Entry not found"}), 404)
+    response_data = {"meal_plan": meal_plan, "diary_entries": diary_entries}
+    return Response(JSONEncoder().encode(response_data), content_type='application/json')
+
 
 @diary_routes.route("/<entry_id>/foods/<meal>/<food_item_id>", methods=["PUT"])
 def confirm_food_item(entry_id, meal, food_item_id):

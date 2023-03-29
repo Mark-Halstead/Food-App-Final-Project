@@ -6,6 +6,7 @@ import { Profile, Overview, Plan, SharedLayout, Chat, NutritionistSharedLayout, 
 import { useLocation } from 'react-router-dom';
 import NutritionistProfile from './pages/NutritionistDashboard/NutritionistProfile'
 import { AuthProvider } from './contexts/AuthContext';
+import { ClientProvider } from './contexts/ClientContext';
 
 
 function App() {
@@ -38,9 +39,9 @@ function App() {
           <Route path='diet-form' element={<DietForm />} />
           <Route path='subscription-form' element={<SubscriptionForm />} />
           {/* <Route path='form' element={<FormPage />} /> */}
-          <Route path="/nutritionist-dashboard" element={<NutritionistSharedLayout />}>
+          <Route path="/nutritionist-dashboard" element={<ClientProvider><NutritionistSharedLayout /></ClientProvider>}>
             <Route index element={<MyClients />} />
-            <Route path='meal-plan/:clientId' element={<MealPlan />} />
+            <Route path='meal-plan' element={<MealPlan />} />
             <Route path='profile' element={<NutritionistProfile />} />
             <Route path='chat' element={<Chat />} />
           </Route>

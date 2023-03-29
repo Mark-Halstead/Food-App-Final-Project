@@ -1,0 +1,9 @@
+.client-card {
+    background-color: bisque;
+    height: 100%;
+    padding: 15px;
+}
+
+.client-card h4 {
+    font-size: 20px;
+}

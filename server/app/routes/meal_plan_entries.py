@@ -1,10 +1,10 @@
 from flask import Blueprint, request, Response, g, jsonify, make_response
 from pydantic import ValidationError
-import openai
+# import openai
 from bson import ObjectId
 from typing import List
 import json
-openai.api_key = "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"
+# openai.api_key = "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"
 
 from app.models.MealPlanEntry import MealPlanEntrySchema
 
@@ -66,23 +66,23 @@ def delete_meal_plan_entry(entry_id):
     else:
         return make_response(jsonify({"error": "Entry not found"}), 404)
 
-@meal_plan_routes.route("/gpt", methods=["POST"])
-def get_gpt():
-    try:
-        data = request.json
-        print(data)
-        response = openai.Completion.create(
-            engine="text-davinci-003",
-            prompt=data["prompt"],
-            top_p=1,
-            max_tokens=1024,
-            frequency_penalty=0.0,
-            presence_penalty=0.0,
-            best_of=1,
-            stop=None
-        )
+# @meal_plan_routes.route("/gpt", methods=["POST"])
+# def get_gpt():
+#     try:
+#         data = request.json
+#         print(data)
+#         response = openai.Completion.create(
+#             engine="text-davinci-003",
+#             prompt=data["prompt"],
+#             top_p=1,
+#             max_tokens=1024,
+#             frequency_penalty=0.0,
+#             presence_penalty=0.0,
+#             best_of=1,
+#             stop=None
+#         )
 
-        chat_response = response.choices[0].text
-        return jsonify({"response": response})
-    except ValidationError as e:
-        return make_response(jsonify({"error": "Invalid data", "details": e.errors()}), 400)
+#         chat_response = response.choices[0].text
+#         return jsonify({"response": response})
+#     except ValidationError as e:
+#         return make_response(jsonify({"error": "Invalid data", "details": e.errors()}), 400)

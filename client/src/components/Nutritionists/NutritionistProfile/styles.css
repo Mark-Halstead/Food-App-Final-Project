@@ -1,0 +1,8 @@
+.request-nutritionist {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.request-nutritionist textarea {
+    padding: 15px;
+}

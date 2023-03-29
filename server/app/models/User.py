@@ -11,6 +11,8 @@ from app.models.Base import Base
 ## these classes are used for data validation purposes 
 class UserSchema(BaseModel):
     nutritionist_id: Optional[str]
+    nutritionist_pending: bool
+    nutritionist_message: str
     email: EmailStr
     password: constr(min_length=8)
     first_name: str
@@ -57,6 +59,17 @@ class User(Base):
         if user:
             return True
         return False
+
+    def get_all_client_profiles(self, nutritionist_id):
+        documents = self.table.find({"nutritionist_id":nutritionist_id})
+        if not documents:
+            return None
+        documents = [{**d, "_id":str(d["_id"])} for d in documents]
+        keys_to_remove = ["email", "password", "paid_subscription"]
+        for d in documents:
+            for key in keys_to_remove:
+                d.pop(key)
+        return documents
 
     def start_session(self, user):
         del user['password']

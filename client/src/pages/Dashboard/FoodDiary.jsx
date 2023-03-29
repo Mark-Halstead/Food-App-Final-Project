@@ -14,12 +14,14 @@ function FoodDiary() {
     const [meal, setMeal] = useState("")
     const [servingMultiplier, setServingMultiplier] = useState(1)
     const [loadingAddingFood, setLoadingAddingFood] = useState(false)
+    const [mealPlan, setMealPlan] = useState(null);
 
     const [allDiaryEntries, setAllDiaryEntries] = useState(null);
-    const [mealItems, setMealItems] = useState(null);
+    const [currentDiaryEntry, setCurrentDiaryEntry] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [showMoodMenu, setShowMoodMenu] = useState(false)
+
     useEffect(() => {
         setLoading(true)
         async function getDiaryEntry() {
@@ -32,13 +34,14 @@ function FoodDiary() {
                 }
                 const response = await fetch(`http://127.0.0.1:5000/diary_entries/`, options)
                 if (response.status === 200) {
-                    const data = await response.json()
-                    setAllDiaryEntries(data)
+                    const { diary_entries, meal_plan } = await response.json()
+                    setAllDiaryEntries(diary_entries)
+                    setMealPlan(meal_plan)
                     const todaysDiaryEntry = data.find(entry => entry.date === selectedDate);
-                    setMealItems(todaysDiaryEntry)
+                    setCurrentDiaryEntry(todaysDiaryEntry)
                 } else if (response.status === 404) {
                     const emptyDiaryEntry = createEmptyDiaryEntryObject(selectedDate, "")
-                    setMealItems(emptyDiaryEntry)
+                    setCurrentDiaryEntry(emptyDiaryEntry)
                     setAllDiaryEntries([emptyDiaryEntry])
 
                 }
@@ -57,13 +60,14 @@ function FoodDiary() {
             const currentEntry = allDiaryEntries.find(entry => entry.date === selectedDate);
 
             const entry = currentEntry ? currentEntry : createEmptyDiaryEntryObject(selectedDate, "")
-            setMealItems(entry)
+            setCurrentDiaryEntry(entry)
+            setShowMoodMenu(false)
 
         } 
     }, [selectedDate])
 
     async function updateDiary(updateData) {
-        console.log('mealItems', mealItems)
+        console.log('currentDiaryEntry', currentDiaryEntry)
         try {
             const token = localStorage.getItem('token')
             const options = {
@@ -88,7 +92,7 @@ function FoodDiary() {
             } else {
                 updatedAllDiaryEntries = [...allDiaryEntries, updatedDiaryEntry]
             }
-            setMealItems(updatedDiaryEntry)
+            setCurrentDiaryEntry(updatedDiaryEntry)
             setAllDiaryEntries(updatedAllDiaryEntries)
             setLoading(false)
             onClose()
@@ -114,11 +118,11 @@ function FoodDiary() {
     }
 
     useEffect(() => {
-        if (mealItems) {
-            const totals = calculateTotals(mealItems);
+        if (currentDiaryEntry) {
+            const totals = calculateTotals(currentDiaryEntry);
             setMealTotals(totals);
         }
-    }, [mealItems]);
+    }, [currentDiaryEntry]);
 
     const handleAddFood = async (meal, selectedItem) => {
         const data = {serving_multiplier:servingMultiplier, ...selectedItem }
@@ -136,7 +140,7 @@ function FoodDiary() {
                 if (entry.date === selectedDate) return updatedDiaryEntry
                 else return entry
             } )
-            setMealItems(updatedDiaryEntry)
+            setCurrentDiaryEntry(updatedDiaryEntry)
             setAllDiaryEntries(updatedAllDiaryEntries)
             onClose()
             setLoadingAddingFood(false)
@@ -148,11 +152,11 @@ function FoodDiary() {
 
     async function handleDeleteFood(meal, productId) {
         try {
-            const response = await fetch(`http://127.0.0.1:5000/diary_entries/${mealItems._id}/foods/${meal}/${productId}`,
+            const response = await fetch(`http://127.0.0.1:5000/diary_entries/${currentDiaryEntry._id}/foods/${meal}/${productId}`,
                 {method:"DELETE"}
             )
             const data = await response.json()
-            setMealItems(data)
+            setCurrentDiaryEntry(data)
         } catch (error) {
         }
     }
@@ -177,16 +181,24 @@ function FoodDiary() {
                 <DateChanger selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
                 <div>
                     {
-                        mealItems && 
-                        <MoodMenu mood={mealItems.mood} handleMoodClick={handleMoodClick} showMoodMenu={showMoodMenu} setShowMoodMenu={setShowMoodMenu}/>
+                        currentDiaryEntry && 
+                        <MoodMenu mood={currentDiaryEntry.mood} handleMoodClick={handleMoodClick} showMoodMenu={showMoodMenu} setShowMoodMenu={setShowMoodMenu}/>
                     }
                 </div>
 
             </div>
-            <MealContainer mealName={"breakfast"} mealItems={mealItems} setMealItems={setMealItems} totals={mealTotals} openSearchPopup={openSearchPopup} handleDeleteFood={handleDeleteFood}/>
-            <MealContainer mealName={"lunch"} mealItems={mealItems} setMealItems={setMealItems} totals={mealTotals} openSearchPopup={openSearchPopup} handleDeleteFood={handleDeleteFood}/>
-            <MealContainer mealName={"dinner"} mealItems={mealItems} setMealItems={setMealItems} totals={mealTotals} openSearchPopup={openSearchPopup} handleDeleteFood={handleDeleteFood}/>
-            <MealContainer mealName={"snacks"} mealItems={mealItems} setMealItems={setMealItems} totals={mealTotals} openSearchPopup={openSearchPopup} handleDeleteFood={handleDeleteFood}/>
+            {
+                loading ? 
+                    <h3 className='food-diary-loading'>Loading Food Diary...</h3>
+                    :
+                    <>
+                        <MealContainer mealName={"breakfast"} mealItems={currentDiaryEntry} setCurrentDiaryEntry={setCurrentDiaryEntry} totals={mealTotals} openSearchPopup={openSearchPopup} handleDeleteFood={handleDeleteFood}/>
+                        <MealContainer mealName={"lunch"} mealItems={currentDiaryEntry} setCurrentDiaryEntry={setCurrentDiaryEntry} totals={mealTotals} openSearchPopup={openSearchPopup} handleDeleteFood={handleDeleteFood}/>
+                        <MealContainer mealName={"dinner"} mealItems={currentDiaryEntry} setCurrentDiaryEntry={setCurrentDiaryEntry} totals={mealTotals} openSearchPopup={openSearchPopup} handleDeleteFood={handleDeleteFood}/>
+                        <MealContainer mealName={"snacks"} mealItems={currentDiaryEntry} setCurrentDiaryEntry={setCurrentDiaryEntry} totals={mealTotals} openSearchPopup={openSearchPopup} handleDeleteFood={handleDeleteFood}/>
+                    </>
+
+            }
         </div>
     )
 }
