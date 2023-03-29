@@ -4,9 +4,8 @@ import openai
 from bson import ObjectId
 from typing import List
 import json
-openai.api_key = "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"
-
 from app.models.MealPlanEntry import MealPlanEntrySchema
+import os
 
 
 ## this is to be able to json encode the _id value (ObjectId object) that is returned from db
@@ -68,6 +67,9 @@ def delete_meal_plan_entry(entry_id):
 
 @meal_plan_routes.route("/gpt", methods=["POST"])
 def get_gpt():
+    openai.api_key = os.getenv("OPENAI_API_KEY")
+    print(openai.api_key)
+    print(os.getenv("OPENAI_API_KEY"))
     try:
         data = request.json
         print(data)

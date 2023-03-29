@@ -5,7 +5,7 @@ from bson import ObjectId
 import json
 import uuid
 from passlib.hash import pbkdf2_sha256
-from app.routes.auth import user_token_required
+from app.routes.auth import token_required
 
 from app.models.User import UserSchema, UserUpdateSchema, User
 
@@ -32,10 +32,12 @@ def add_user():
 
 
 @user_routes.route("/", methods=["GET"])
-def get_user(user_id):
-    user = g.user_model.get(user_id)
-    if user:
-        return Response(JSONEncoder().encode(user), content_type='application/json')
+@token_required('user')
+def get_user(user_data):
+    print(user_data)
+    # user = g.user_model.get(user_id)
+    if user_data:
+        return Response(JSONEncoder().encode(user_data), content_type='application/json')
     else:
         return make_response(jsonify({"error": "User not found"}), 404)
 
@@ -89,7 +91,7 @@ def signup():
 
 
 @user_routes.route('/', methods=['PUT'])
-@user_token_required('user')
+@token_required('user')
 def update_user(user_data):
     data = json.loads(request.data)
     updated_data = {
