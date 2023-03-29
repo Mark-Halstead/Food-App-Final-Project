@@ -19,8 +19,16 @@ const Wrapper = styled.section`
 label {
     font-size: 1rem;
     font-weight: bold;
-    margin-bottom: 0.5rem;
     margin-right: 0.5rem;
+}
+
+select {
+    padding: 0.5rem;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s;
 }
 
 .input-outline {
@@ -35,6 +43,20 @@ textarea {
     font-size: 1rem;
     outline: none;
     transition: all 0.3s;
+}
+
+input[type="number"] {
+    padding: 0.5rem;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s;
+}
+
+input[type="number"]:focus {
+    border-color: rgb(24, 212, 24, 0.8);
+    box-shadow: 0px 0px 5px rgb(24, 212, 24, 0.8);
 }
 
 input[type="text"]:focus,
