@@ -333,41 +333,40 @@ p {
 /*//////////////// LANDING CSS END ///////////////*/
 
 /*//////////////// BANNER CSS START ///////////////*/
-
-
 .banner {
   position: absolute;
-  top: 20%;
-  left: 50%;
+  top: 20vh;
+  left: 50vw;
   transform: translateX(-50%);
   text-align: center;
-  width: 100%;
-  padding: 0 5rem;
+  width: 100vw;
+  padding: 0 5vw;
 }
 
 .banner-heading {
-  height: 20rem;
-  margin-bottom: 4rem;
-  perspective: 60rem;
+  height: 20vh;
+  margin-bottom: 8vh;
+  margin-left: -57vh;
+  perspective: 60vh;
   overflow: hidden;
 }
 
 .banner-heading span {
   font-family: "Oswald", sans-serif;
-  font-size: 4rem;
+  font-size: 4vw;
   font-weight: 800;
   text-transform: uppercase;
   color: rgb(24, 212, 24);
-  margin-top: 10rem;
-  margin-left: 0.5rem;
-  text-shadow: 0.3rem 0.3rem 0.6rem rgba(0, 0, 0, 0.1);
+  margin-top: 10vh;
+  margin-left: 0.5vw;
+  text-shadow: 0.3vw 0.3vw 0.6vw rgba(0, 0, 0, 0.1);
   position: absolute;
-  width: 100%;
+  width: 100vw;
   display: flex;
   justify-content: center;
-  transform: translateZ(8rem);
+  transform: translateZ(8vw);
   opacity: 0;
-  letter-spacing: 3rem;
+  letter-spacing: 3vw;
 }
 
 .banner-heading-1 {
@@ -388,46 +387,46 @@ p {
 
 @keyframes animateHeading {
   0% {
-    transform: translateZ(8rem);
+    transform: translateZ(8vw);
     opacity: 0;
-    letter-spacing: 3rem;
+    letter-spacing: 3vw;
   }
 
   3% {
     transform: translateZ(0);
     opacity: 1;
-    letter-spacing: 1.5rem;
+    letter-spacing: 1.5vw;
   }
 
   25% {
     transform: translateZ(0);
     opacity: 1;
-    letter-spacing: 1.5rem;
+    letter-spacing: 1.5vw;
   }
 
   28% {
-    transform: translateZ(8rem);
+    transform: translateZ(8vw);
     opacity: 0;
-    letter-spacing: 3rem;
+    letter-spacing: 3vw;
   }
 
   100% {
-    transform: translateZ(8rem);
+    transform: translateZ(8vw);
     opacity: 0;
-    letter-spacing: 3rem;
+    letter-spacing: 3vw;
   }
 }
 
 .banner-paragraph {
-  font-size: 4rem;
+  font-size: 4vw;
   font-weight: 400;
   text-transform: uppercase;
   color: #fff;
   background-color: rgba(0, 0, 0, 0.6);
-  width: 30%;
-  margin: 0 auto 6rem auto;
-  padding: 1rem 0;
-  box-shadow: 1rem 1rem 5rem rgba(0, 0, 0, 0.5);
+  width: 30vw;
+  margin: 0 auto 6vh auto;
+  padding: 1vh 0;
+  box-shadow: 1vw 1vw 5vw rgba(0, 0, 0, 0.5);
   opacity: 0;
   visibility: hidden;
   animation: fadeAnimation 1s 1.5s forwards;
@@ -445,39 +444,41 @@ p {
 }
 
 .banner-btn {
-width: 20rem;
-height: 4rem;
-/* background: linear-gradient(to right, #9b0e0e, #7a1010); */
-background-color: rgb(24, 212, 24);
-color: #fff;
-font-size: 1.5rem;
-margin: -3rem 10rem;
-text-transform: uppercase;
-border-radius: 3rem;
-border: 0.1rem solid rgb(24, 212, 24);
-box-shadow: 1rem 2rem 3rem rgba(0, 0, 0, 0.5);
-cursor: pointer;
-opacity: 0;
-visibility: hidden;
-position: relative;
-overflow: hidden;
-animation: fadeAnimation 1s 2s forwards;
+  width: 20vw;
+  height: 8vh;
+  /* background: linear-gradient(to right, #9b0e0e, #7a1010); */
+  background-color: rgb(24, 212, 24);
+  color: #fff;
+  font-size: 1.5vw;
+  margin: -3vh 10vw;
+  text-transform: uppercase;
+  border-radius: 3vw;
+  border: 0.1vw solid rgb(24, 212, 24);
+  box-shadow: 1vw 2vw 3vw rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  position: relative;
+  overflow: hidden;
+  animation: fadeAnimation 1s 2s forwards;
 }
+
 .banner-btn::before {
-  content: "";
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to right, transparent, #fff, transparent);
-  position: absolute;
-  top: 0;
-  left: -100%;
-  transform: skewX(-30deg);
-  transition: left 0.5s;
+content: "";
+width: 100%;
+height: 100%;
+background: linear-gradient(to right, transparent, #fff, transparent);
+position: absolute;
+top: 0;
+left: -100%;
+transform: skewX(-30deg);
+transition: left 0.5s;
 }
 
 .banner-btn:hover::before {
-  left: 100%;
+left: 100%;
 }
+
 /*//////////////// BANNER CSS END /////////////////*/
 
 /*//////////////// ABOUT CSS START /////////////////*/
