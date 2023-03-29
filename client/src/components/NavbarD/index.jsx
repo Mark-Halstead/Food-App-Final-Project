@@ -50,7 +50,7 @@ const NavbarD = () => {
                         onClick={toggleDropdown}
                     >
                         <FaUserCircle />
-                        Example User
+                        Welcome Wallace
                         <FaCaretDown />
                     </button>
                     <div className={`dropdown ${showDropdown ? 'show-dropdown' : ''}`}>
