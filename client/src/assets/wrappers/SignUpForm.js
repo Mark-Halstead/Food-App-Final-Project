@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 const Wrapper = styled.section`
 position: fixed;
-  top: 45%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: var(--borderRadius);
@@ -21,6 +21,11 @@ position: fixed;
     max-width: 100%;
     width: 100%;
   }
+
+  .input-outline {
+    outline: none;
+  }
+
   .form-row {
     margin-bottom: 0;
   }
@@ -75,8 +80,21 @@ button {
     transition: opacity 300ms, transform 300ms;
 }
 
+.submit-button {
+    padding: 0 1rem 0 1rem;
+    background-color: rgba(10, 212, 10, 0.8);
+    color: #fff;
+    border: none;
+    border-radius: 0.25rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s;
+}
 
-
+.submit-button:hover {
+    background-color: rgba(35, 150, 35, 0.8);
+}
 `
 
 export default Wrapper

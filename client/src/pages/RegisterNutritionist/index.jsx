@@ -20,7 +20,6 @@ function RegisterNutritionist() {
                 password: password,
                 role: role,
             });
-
             console.log(response.data);
             const { token } = response.data;
             localStorage.setItem('token', token);

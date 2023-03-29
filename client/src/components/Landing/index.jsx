@@ -1,6 +1,7 @@
 import React from 'react'
 import LandingHeader from '../LandingHeader'
 import LandingFood from '../LandingFood'
+import PeopleReviews from '../PeopleReviews'
 
 
 const Landing = () => {

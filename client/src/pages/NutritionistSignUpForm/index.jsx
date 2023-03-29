@@ -82,7 +82,7 @@ const NutritionistSignUpForm = () => {
           />
         </CSSTransition>
         <div className="btn-container">
-          <button type="submit">Submit</button>
+          <button type="submit" className="submit-button">Submit</button>
         </div>
       </form>
     </Wrapper>

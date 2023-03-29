@@ -45,6 +45,7 @@ const NutritionistInfo = ({
                         id="first-name"
                         value={firstName}
                         onChange={handleFirstNameChange}
+                        className="input-outline"
                     />
                 </div>
                 <div className="form-group">
@@ -54,11 +55,18 @@ const NutritionistInfo = ({
                         id="last-name"
                         value={lastName}
                         onChange={handleLastNameChange}
+                        className="input-outline"
                     />
                 </div>
                 <div className="form-group">
                     <label htmlFor="credentials">Credentials:</label>
-                    <input type="text" id="credentials" value={credentials} onChange={handleCredentialsChange} />
+                    <input
+                        type="text"
+                        id="credentials"
+                        value={credentials}
+                        onChange={handleCredentialsChange}
+                        className="input-outline"
+                    />
                 </div>
                 <div className="form-group">
                     <label htmlFor="area-of-expertise">Area of Expertise:</label>
@@ -67,11 +75,17 @@ const NutritionistInfo = ({
                         id="area-of-expertise"
                         value={areaOfExpertise}
                         onChange={handleAreaOfExpertiseChange}
+                        className="input-outline"
                     />
                 </div>
                 <div className="form-group">
                     <label htmlFor="education-training">Education and Training:</label>
-                    <textarea id="education-training" value={educationTraining} onChange={handleEducationTrainingChange}></textarea>
+                    <textarea
+                        id="education-training"
+                        value={educationTraining}
+                        onChange={handleEducationTrainingChange}
+                        className="input-outline"
+                    ></textarea>
                 </div>
                 <div className="btn-container">
                     <button onClick={nextPage}>Next</button>
