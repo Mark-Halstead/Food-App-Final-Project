@@ -189,20 +189,20 @@ p {
 /*//////////////// LANDING CSS START ///////////////*/
 .landing {
   height: 100vh;
-  margin-top: -1.1rem;
+  margin-top: -1.1vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative; 
-  z-index: 10; 
+  position: relative;
+  z-index: 10;
 }
 
 .landing-banner {
   text-align: center;
   color: #fff;
-  padding: 0 5rem;
-  margin-bottom: 8rem;
-  margin-right: 55rem;
+  padding: 0 5vw;
+  margin-bottom: 8vh;
+  margin-right: 27.5vw;
   position: relative;
   z-index: 10;
   animation: fadein 2s ease-in-out;
@@ -219,41 +219,41 @@ p {
   }
 }
 
-
 .landing-banner h1 {
   text-transform: uppercase;
   font-weight: 500;
-  font-size: 4.5rem;
+  font-size: 4.5vw;
   color: rgb(24, 212, 24);
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
-  /* text-shadow: 0 0 0.5rem #000, 0 0 0.5rem #000, 0 0 0.5rem #000, 0 0 0.5rem #000; */
+
 .landing-banner p {
-  max-width: 35rem;
+  max-width: 35vw;
   margin-left: auto;
   margin-right: auto;
   color: #fff;
-  letter-spacing: 0.25rem;
+  letter-spacing: 0.25vw;
   z-index: -3;
 }
+
 .landing-btn {
-  padding: 0.9rem 1.6rem;
-  font-size: 1.25rem;
-  margin-top: 3rem;
+  padding: 0.9vh 1.6vw;
+  font-size: 1.25vw;
+  margin-top: 3vh;
   background: #fff;
-  color: #18de18; 
+  color: #18de18;
 }
 
 @keyframes pulse {
-0% {
-  transform: scale(1);
-}
-50% {
-  transform: scale(1.2);
-}
-100% {
-  transform: scale(1);
-}
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .landing-btn:hover {
@@ -266,15 +266,15 @@ p {
   text-transform: uppercase;
   background: #fff;
   color: #18de18;
-  padding: 0.4rem 0.45rem 0.4rem 0.8rem;
-  letter-spacing: 0.15rem;
+  padding: 0.4vh 0.45vw 0.4vh 0.8vw;
+  letter-spacing: 0.15vw;
   display: inline-block;
   font-weight: 600;
   transition: all 0.3s linear;
-  font-size: 1rem;
-  border: 2px solid transparent;
+  font-size: 1vw;
+  border: 0.2vw solid transparent;
   cursor: pointer;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0.3vw 0.9vw rgba(0, 0, 0, 0.2);
   animation: pulse 2s ease-in-out infinite;
 }
 
@@ -293,7 +293,7 @@ p {
   right: -40vw;
   border-radius: 45%;
   animation: rotate 30s infinite;
-} 
+}
 
 .floating-bg::before {
   content: "";
@@ -307,29 +307,28 @@ p {
   animation: rotate 30s infinite;
 }
 
-
 @keyframes rotate {
   0% {
     transform: rotate(0);
   }
-
   100% {
     transform: rotate(360deg);
-  }
+ }
 }
 
 @media screen and (min-width: 768px) {
   .landing {
     background: rgb(44, 174, 186, 0.7),
-      url('') center/cover no-repeat;
+    url('') center/cover no-repeat;
   }
   .landing-banner {
     padding: 0;
   }
   .landing-banner p {
-    max-width: 45rem;
+    max-width: 45vw;
   }
-} */
+}
+
 /*//////////////// LANDING CSS END ///////////////*/
 
 /*//////////////// BANNER CSS START ///////////////*/
@@ -345,8 +344,8 @@ p {
 
 .banner-heading {
   height: 20vh;
-  margin-bottom: 8vh;
-  margin-left: -57vh;
+  margin-left: -135vh;
+  margin-top: -40vh;
   perspective: 60vh;
   overflow: hidden;
 }
@@ -450,7 +449,7 @@ p {
   background-color: rgb(24, 212, 24);
   color: #fff;
   font-size: 1.5vw;
-  margin: -3vh 10vw;
+  margin: 10vh 32vw 0 -100vw;
   text-transform: uppercase;
   border-radius: 3vw;
   border: 0.1vw solid rgb(24, 212, 24);
