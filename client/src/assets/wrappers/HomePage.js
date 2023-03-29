@@ -189,20 +189,20 @@ p {
 /*//////////////// LANDING CSS START ///////////////*/
 .landing {
   height: 100vh;
-  margin-top: -1.1rem;
+  margin-top: -1.1vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative; 
-  z-index: 10; 
+  position: relative;
+  z-index: 10;
 }
 
 .landing-banner {
   text-align: center;
   color: #fff;
-  padding: 0 5rem;
-  margin-bottom: 8rem;
-  margin-right: 55rem;
+  padding: 0 5vw;
+  margin-bottom: 8vh;
+  margin-right: 27.5vw;
   position: relative;
   z-index: 10;
   animation: fadein 2s ease-in-out;
@@ -219,41 +219,41 @@ p {
   }
 }
 
-
 .landing-banner h1 {
   text-transform: uppercase;
   font-weight: 500;
-  font-size: 4.5rem;
+  font-size: 4.5vw;
   color: rgb(24, 212, 24);
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
-  /* text-shadow: 0 0 0.5rem #000, 0 0 0.5rem #000, 0 0 0.5rem #000, 0 0 0.5rem #000; */
+
 .landing-banner p {
-  max-width: 35rem;
+  max-width: 35vw;
   margin-left: auto;
   margin-right: auto;
   color: #fff;
-  letter-spacing: 0.25rem;
+  letter-spacing: 0.25vw;
   z-index: -3;
 }
+
 .landing-btn {
-  padding: 0.9rem 1.6rem;
-  font-size: 1.25rem;
-  margin-top: 3rem;
+  padding: 0.9vh 1.6vw;
+  font-size: 1.25vw;
+  margin-top: 3vh;
   background: #fff;
-  color: #18de18; 
+  color: #18de18;
 }
 
 @keyframes pulse {
-0% {
-  transform: scale(1);
-}
-50% {
-  transform: scale(1.2);
-}
-100% {
-  transform: scale(1);
-}
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .landing-btn:hover {
@@ -266,15 +266,15 @@ p {
   text-transform: uppercase;
   background: #fff;
   color: #18de18;
-  padding: 0.4rem 0.45rem 0.4rem 0.8rem;
-  letter-spacing: 0.15rem;
+  padding: 0.4vh 0.45vw 0.4vh 0.8vw;
+  letter-spacing: 0.15vw;
   display: inline-block;
   font-weight: 600;
   transition: all 0.3s linear;
-  font-size: 1rem;
-  border: 2px solid transparent;
+  font-size: 1vw;
+  border: 0.2vw solid transparent;
   cursor: pointer;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0.3vw 0.9vw rgba(0, 0, 0, 0.2);
   animation: pulse 2s ease-in-out infinite;
 }
 
@@ -293,7 +293,7 @@ p {
   right: -40vw;
   border-radius: 45%;
   animation: rotate 30s infinite;
-} 
+}
 
 .floating-bg::before {
   content: "";
@@ -307,67 +307,65 @@ p {
   animation: rotate 30s infinite;
 }
 
-
 @keyframes rotate {
   0% {
     transform: rotate(0);
   }
-
   100% {
     transform: rotate(360deg);
-  }
+ }
 }
 
 @media screen and (min-width: 768px) {
   .landing {
     background: rgb(44, 174, 186, 0.7),
-      url('') center/cover no-repeat;
+    url('') center/cover no-repeat;
   }
   .landing-banner {
     padding: 0;
   }
   .landing-banner p {
-    max-width: 45rem;
+    max-width: 45vw;
   }
-} */
+}
+
 /*//////////////// LANDING CSS END ///////////////*/
 
 /*//////////////// BANNER CSS START ///////////////*/
-
-
 .banner {
   position: absolute;
-  top: 20%;
-  left: 50%;
+  top: 20vh;
+  left: 50vw;
   transform: translateX(-50%);
   text-align: center;
-  width: 100%;
-  padding: 0 5rem;
+  width: 100vw;
+  padding: 0 5vw;
 }
 
 .banner-heading {
-  height: 20rem;
-  margin-bottom: 4rem;
-  perspective: 60rem;
+  height: 20vh;
+  margin-left: -137vh;
+  margin-top: -40vh;
+  perspective: 60vh;
   overflow: hidden;
 }
 
 .banner-heading span {
   font-family: "Oswald", sans-serif;
-  font-size: 4rem;
+  font-size: 4vw;
   font-weight: 800;
   text-transform: uppercase;
   color: rgb(24, 212, 24);
-  margin-top: 10rem;
-  margin-left: 0.5rem;
-  text-shadow: 0.3rem 0.3rem 0.6rem rgba(0, 0, 0, 0.1);
+  margin-top: 10vh;
+  margin-left: 0.5vw;
+  text-shadow: 0.3vw 0.3vw 0.6vw rgba(0, 0, 0, 0.1);
   position: absolute;
-  width: 100%;
+  width: 100vw;
   display: flex;
   justify-content: center;
-  transform: translateZ(8rem);
+  transform: translateZ(8vw);
   opacity: 0;
-  letter-spacing: 3rem;
+  letter-spacing: 3vw;
 }
 
 .banner-heading-1 {
@@ -388,46 +386,46 @@ p {
 
 @keyframes animateHeading {
   0% {
-    transform: translateZ(8rem);
+    transform: translateZ(8vw);
     opacity: 0;
-    letter-spacing: 3rem;
+    letter-spacing: 3vw;
   }
 
   3% {
     transform: translateZ(0);
     opacity: 1;
-    letter-spacing: 1.5rem;
+    letter-spacing: 1.5vw;
   }
 
   25% {
     transform: translateZ(0);
     opacity: 1;
-    letter-spacing: 1.5rem;
+    letter-spacing: 1.5vw;
   }
 
   28% {
-    transform: translateZ(8rem);
+    transform: translateZ(8vw);
     opacity: 0;
-    letter-spacing: 3rem;
+    letter-spacing: 3vw;
   }
 
   100% {
-    transform: translateZ(8rem);
+    transform: translateZ(8vw);
     opacity: 0;
-    letter-spacing: 3rem;
+    letter-spacing: 3vw;
   }
 }
 
 .banner-paragraph {
-  font-size: 4rem;
+  font-size: 4vw;
   font-weight: 400;
   text-transform: uppercase;
   color: #fff;
   background-color: rgba(0, 0, 0, 0.6);
-  width: 30%;
-  margin: 0 auto 6rem auto;
-  padding: 1rem 0;
-  box-shadow: 1rem 1rem 5rem rgba(0, 0, 0, 0.5);
+  width: 30vw;
+  margin: 0 auto 6vh auto;
+  padding: 1vh 0;
+  box-shadow: 1vw 1vw 5vw rgba(0, 0, 0, 0.5);
   opacity: 0;
   visibility: hidden;
   animation: fadeAnimation 1s 1.5s forwards;
@@ -445,39 +443,41 @@ p {
 }
 
 .banner-btn {
-width: 20rem;
-height: 4rem;
-/* background: linear-gradient(to right, #9b0e0e, #7a1010); */
-background-color: rgb(24, 212, 24);
-color: #fff;
-font-size: 1.5rem;
-margin: -3rem 10rem;
-text-transform: uppercase;
-border-radius: 3rem;
-border: 0.1rem solid rgb(24, 212, 24);
-box-shadow: 1rem 2rem 3rem rgba(0, 0, 0, 0.5);
-cursor: pointer;
-opacity: 0;
-visibility: hidden;
-position: relative;
-overflow: hidden;
-animation: fadeAnimation 1s 2s forwards;
+  width: 20vw;
+  height: 8vh;
+  /* background: linear-gradient(to right, #9b0e0e, #7a1010); */
+  background-color: rgb(24, 212, 24);
+  color: #fff;
+  font-size: 1.5vw;
+  margin: 10vh 32vw 0 -100vw;
+  text-transform: uppercase;
+  border-radius: 3vw;
+  border: 0.1vw solid rgb(24, 212, 24);
+  box-shadow: 1vw 2vw 3vw rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  position: relative;
+  overflow: hidden;
+  animation: fadeAnimation 1s 2s forwards;
 }
+
 .banner-btn::before {
-  content: "";
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to right, transparent, #fff, transparent);
-  position: absolute;
-  top: 0;
-  left: -100%;
-  transform: skewX(-30deg);
-  transition: left 0.5s;
+content: "";
+width: 100%;
+height: 100%;
+background: linear-gradient(to right, transparent, #fff, transparent);
+position: absolute;
+top: 0;
+left: -100%;
+transform: skewX(-30deg);
+transition: left 0.5s;
 }
 
 .banner-btn:hover::before {
-  left: 100%;
+left: 100%;
 }
+
 /*//////////////// BANNER CSS END /////////////////*/
 
 /*//////////////// ABOUT CSS START /////////////////*/
@@ -699,14 +699,15 @@ img:not(.nav-logo) {
 /*//////////////// FOOD IMAGE CSS START /////////////////*/
 #food {
   position: absolute;
-  top: 15%;
-  left: 50%;
-  width: 36%;
-  height: 70%;
+  top: 15vh;
+  left: 50vw;
+  width: 36vw;
+  height: 70vh;
   transform: translate(-50%, -50%);
   z-index: 100;
   animation: spin 36s linear infinite;
 }
+
 
 @keyframes spin {
   from {
