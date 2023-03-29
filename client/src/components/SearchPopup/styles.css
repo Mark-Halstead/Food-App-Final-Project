@@ -15,8 +15,49 @@
 .popup {
     width: 80%;
     height: 80%;
-    background-color: rgb(127, 244, 255);
+    background-color: rgb(255, 255, 255);
     border-radius: 10px;
     padding: 40px;
     overflow-y: auto;
+    position: relative;
+}
+
+.popup-menu {
+    position: absolute;
+    top: 0;
+    right: -3.33%;
+    width: 40%;
+}
+
+.mood-menu-container button,
+.popup-menu button {
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+}
+
+.popup-close-button {
+    font-size: 60px;
+    line-height: 25px;
+    color: var(--textColor);
+    padding: 5px;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    margin: 10px 0 0 10px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0);
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.popup-close-button:hover {
+    color: var(--textColor);
+    opacity: 0.5;
+}
+
+.popup-close-button-container {
+    position: absolute;
+    top: 0;
+    left: 0;
 }

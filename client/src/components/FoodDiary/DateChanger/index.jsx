@@ -1,10 +1,11 @@
 import React from 'react'
 import addDays from 'date-fns/addDays';
+import isBefore from 'date-fns/isBefore';
 import { utcToZonedTime, format } from 'date-fns-tz';
 
 import "./styles.css"
 
-function DateChanger({ selectedDate, setSelectedDate }) {
+function DateChanger({ selectedDate, setSelectedDate, mealPlan }) {
 
     function formatDate(dateStr) {
         const date = new Date(dateStr);
@@ -15,14 +16,23 @@ function DateChanger({ selectedDate, setSelectedDate }) {
     }
 
     const handleDateChange = (change) => {
+        const today = new Date();
         const date = new Date(selectedDate);
         const timezone = 'GMT';
-        console.log('date', date)
+      
+        // Check if the new date is today or earlier
+        const newDate = addDays(date, change);
+
+        if (mealPlan && isBefore(newDate, today, 'day')) {
+          return; // Do nothing if the new date is today or earlier
+        }
+      
         const zonedDate = utcToZonedTime(date, timezone);
         const updatedZonedDate = addDays(zonedDate, change);
         const updatedDate = format(updatedZonedDate, 'yyyy-MM-dd', { timeZone: timezone });
         setSelectedDate(updatedDate);
       };
+      
 
 
     return (
@@ -31,14 +41,14 @@ function DateChanger({ selectedDate, setSelectedDate }) {
                 className='date-back-button'
                 onClick={() => handleDateChange(-1)}
             >
-                <i className="fa-solid fa-caret-left"></i>
+                <i className="fa-solid fa-caret-left icon-btn"></i>
             </button>
                 <h2>{formatDate(selectedDate)}</h2>
             <button
                 className='date-forwards-button'
                 onClick={() => handleDateChange(1)}
             >
-                <i className="fa-solid fa-caret-right"></i>
+                <i className="fa-solid fa-caret-right icon-btn"></i>
             </button>
         </div>
     )

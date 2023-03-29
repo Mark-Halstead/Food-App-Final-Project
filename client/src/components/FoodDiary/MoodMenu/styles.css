@@ -1,14 +1,5 @@
 .popup-menu {
-    position: absolute;
-    top: 0;
-    right: -3.33%;
-    width: 40%;
-}
-
-.mood-menu-container button,
-.popup-menu button {
-    background-color: rgba(0, 0, 0, 0);
-    border: none;
+    background-color: var(--backgroundColor);
 }
 
 .fa-face-frown {

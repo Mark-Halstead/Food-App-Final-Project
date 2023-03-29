@@ -33,7 +33,7 @@ export const calculateMealTotals = (meal) => {
     };
 };
 
-export const calculateTotals = (mealItems) => {
+export const calculateTotals = (mealItems, mealPlanItems) => {
     let totalCalories = 0;
     let totalFat = 0;
     let totalCarb = 0;
@@ -59,4 +59,52 @@ export const calculateTotals = (mealItems) => {
         totalProtein: totalProtein.toFixed(1),
         ...mealTotals,
     };
+};
+
+export const calculateCombinedTotals = (
+    currentDiaryEntry,
+    currentMealPlanEntry
+) => {
+    const totalsMealPlan = calculateTotals(currentMealPlanEntry);
+    const totals = calculateTotals(currentDiaryEntry);
+
+    const combinedTotals = {
+        totalCalories: (
+            parseFloat(totals.totalCalories) +
+            parseFloat(totalsMealPlan.totalCalories)
+        ).toFixed(),
+        totalFat: (
+            parseFloat(totals.totalFat) + parseFloat(totalsMealPlan.totalFat)
+        ).toFixed(1),
+        totalCarb: (
+            parseFloat(totals.totalCarb) + parseFloat(totalsMealPlan.totalCarb)
+        ).toFixed(1),
+        totalProtein: (
+            parseFloat(totals.totalProtein) +
+            parseFloat(totalsMealPlan.totalProtein)
+        ).toFixed(1),
+        breakfast: {},
+        lunch: {},
+        dinner: {},
+        snacks: {},
+    };
+
+    for (const meal of ["breakfast", "lunch", "dinner", "snacks"]) {
+        combinedTotals[meal].calories = (
+            parseFloat(totals[meal].calories) +
+            parseFloat(totalsMealPlan[meal].calories)
+        ).toFixed();
+        combinedTotals[meal].fat = (
+            parseFloat(totals[meal].fat) + parseFloat(totalsMealPlan[meal].fat)
+        ).toFixed(1);
+        combinedTotals[meal].carb = (
+            parseFloat(totals[meal].carb) +
+            parseFloat(totalsMealPlan[meal].carb)
+        ).toFixed(1);
+        combinedTotals[meal].protein = (
+            parseFloat(totals[meal].protein) +
+            parseFloat(totalsMealPlan[meal].protein)
+        ).toFixed(1);
+    }
+    return combinedTotals;
 };

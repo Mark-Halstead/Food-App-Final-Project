@@ -54,15 +54,34 @@ function ClientProfile({ selectedClient, handleClosePopup, handleCreateMealPlan,
             setClientDeclined(true);
         }
     };
+
+    const sendMealPlan = async (client) => {
+        const token = localStorage.token;
+        const options = {
+            method: "PUT",
+            headers: {
+                Authorization: token,
+            },
+        };
+        const response = await fetch(
+            `http://127.0.0.1:5000/nutritionists/send_meal_plan/${client._id}`,
+            options
+        );
+        if (response.status === 200) {
+            
+        }
+    }
       
     
 
     return (
         <div className="popup-background">
             <div className="popup">
+                <div>
+                    <button className='popup-close-button' onClick={handleClosePopup}>&#215;</button>
+                </div>
                 <div className="popup-header">
                     <h4><i className="fa-solid fa-user"></i> {selectedClient.first_name} {selectedClient.last_name}</h4>
-                        <button className="close-button" onClick={handleClosePopup}>X</button>
                     </div>
                     <div className="popup-content">
                     <div className={`popup-left`}>
@@ -101,7 +120,10 @@ function ClientProfile({ selectedClient, handleClosePopup, handleCreateMealPlan,
 
                                     )
                             ) :
-                                <button onClick={() => handleCreateMealPlan(selectedClient)}>View Meal Plan</button>
+                                <>
+                                    <button onClick={() => handleCreateMealPlan(selectedClient)}>View/Edit Meal Plan</button>
+                                    <button onClick={() => sendMealPlan(selectedClient)}>Send Meal Plan</button>
+                                </>
                         }
                     </div>
                 </div>

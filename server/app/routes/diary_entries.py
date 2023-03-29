@@ -32,7 +32,7 @@ diary_routes = Blueprint("diary_routes", __name__)
 @token_required("user")
 def get_diary_entry(user_data):
     try:
-        meal_plan = g.meal_plan_entry_model.get_by_user_id(user_data["_id"])
+        meal_plan = g.meal_plan_entry_model.get_by_user_id(user_data["_id"]) if user_data["meal_plan_confirmed"] else []
         diary_entries = g.diary_entry_model.get_by_user_id(user_data["_id"])
 
     except TypeError as e:
@@ -42,11 +42,12 @@ def get_diary_entry(user_data):
     return Response(JSONEncoder().encode(response_data), content_type='application/json')
 
 
-@diary_routes.route("/<entry_id>/foods/<meal>/<food_item_id>", methods=["PUT"])
-def confirm_food_item(entry_id, meal, food_item_id):
+@diary_routes.route("/<entry_date>/foods/<meal>/<food_item_id>", methods=["PUT"])
+@token_required("user")
+def confirm_food_item(user_data, entry_date, meal, food_item_id):
     data = json.loads(request.data)
     confirmed = data.get("confirmed")
-    diary_entry = g.diary_entry_model.get(entry_id)
+    diary_entry = g.diary_entry_model.get_user_by_date(entry_date, user_data["_id"])
 
     if not diary_entry:
         return make_response(jsonify({"error": "Diary entry not found"}), 404)
@@ -54,7 +55,7 @@ def confirm_food_item(entry_id, meal, food_item_id):
     meal_items = diary_entry[meal]
 
     for item in meal_items:
-        if str(item["product"]["_id"]) == food_item_id:
+        if str(item["product"]["id"]) == food_item_id:
             item["confirmed"] = confirmed
             break
 
