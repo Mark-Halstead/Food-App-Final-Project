@@ -57,10 +57,12 @@ function SearchPopup({handleAddFood, meal, onClose, servingMultiplier, setServin
     return (
         <div className='popup-background'>
             <div className="popup">
+                <div className='popup-close-button-container'>
+                    <button className='popup-close-button' onClick={onClose}>&#215;</button>
+                </div>
                 <div className="search-popup-header">
                     <h2>{meal}</h2>
                     <h2>Search for food</h2>
-                    <button onClick={onClose}>Close</button>
                 </div>
                 <div className="search-popup-body">
                     { selectedItem ? (
@@ -90,6 +92,7 @@ function SearchPopup({handleAddFood, meal, onClose, servingMultiplier, setServin
                                 </li>
                                 <li>
                                     <button
+                                        className='btn'
                                         onClick={() => handleAddFood(meal, selectedItem)}
                                     >Add Food</button>
                                 </li>
@@ -102,7 +105,10 @@ function SearchPopup({handleAddFood, meal, onClose, servingMultiplier, setServin
                     ) : (
                         <div>
                             <input type="text" value={searchQuery} onChange={handleSearchQueryChange} />
-                            <button onClick={handleSearch}>Search</button>
+                            <button
+                                onClick={handleSearch}
+                                className='btn'
+                            >Search</button>
                             {
                                 searchLoading ?
                                 (

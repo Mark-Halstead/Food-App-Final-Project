@@ -29,10 +29,15 @@ function MyClients() {
                 Authorization:localStorage.token
                 }
             });
-            const currentClients = response.data.filter(client => !client.nutritionist_pending)
-            const allPendingClients = response.data.filter(client => client.nutritionist_pending)
-            setClients(currentClients);
-            setPendingClients(allPendingClients);
+            if (response.status == 200) {
+                const currentClients = response.data.filter(client => !client.nutritionist_pending)
+                const allPendingClients = response.data.filter(client => client.nutritionist_pending)
+                setClients(currentClients);
+                setPendingClients(allPendingClients);
+            } else {
+                setClients([]);
+                setPendingClients([]);
+            }
             setLoading(false)
             setClientsLoaded(true)
         }

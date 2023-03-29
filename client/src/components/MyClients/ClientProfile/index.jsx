@@ -77,9 +77,11 @@ function ClientProfile({ selectedClient, handleClosePopup, handleCreateMealPlan,
     return (
         <div className="popup-background">
             <div className="popup">
+                <div>
+                    <button className='popup-close-button' onClick={handleClosePopup}>&#215;</button>
+                </div>
                 <div className="popup-header">
                     <h4><i className="fa-solid fa-user"></i> {selectedClient.first_name} {selectedClient.last_name}</h4>
-                        <button className="close-button" onClick={handleClosePopup}>X</button>
                     </div>
                     <div className="popup-content">
                     <div className={`popup-left`}>

@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import axios from 'axios';
 import { MealContainer, MoodMenu, StatContainer, DateChanger } from '../../components/FoodDiary'
 import { SearchPopup } from '../../components';
 import { calculateCombinedTotals } from '../../helpers/calculateStats';
 import { createEmptyDiaryEntryObject } from '../../helpers/createEmptyObjects';
+
 
 function FoodDiary() {
     const currentDate = new Date();
@@ -70,7 +71,6 @@ function FoodDiary() {
     }, [selectedDate])
 
     async function updateDiary(updateData) {
-        console.log('currentDiaryEntry', currentDiaryEntry)
         try {
             const token = localStorage.getItem('token')
             const options = {

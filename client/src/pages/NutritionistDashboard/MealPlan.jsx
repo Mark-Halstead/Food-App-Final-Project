@@ -222,11 +222,15 @@ function MealPlan() {
                 </div>
                 <DateChanger selectedDate={selectedDate} setSelectedDate={setSelectedDate} mealPlan={true}/>
                 <div>
-                    <h3>Save Meal Plan</h3>
-                    <i 
-                        className="fa-solid fa-download"
+                    <h3
                         onClick={saveMealPlan}
-                    ></i>
+                        role="button"
+                        className='icon-btn'
+                    >Save <i 
+                        className="fa-solid fa-download"
+                        
+                    ></i></h3>
+                    
                 </div>
 
             </div>

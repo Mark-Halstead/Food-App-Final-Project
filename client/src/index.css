@@ -1,4 +1,10 @@
 /*////////////////// GLOBAL STYLES START /////////////////////*/
+
+:root {
+    --themeColor: rgb(24, 212, 24);
+    --themeFont: hsl(209, 61%, 16%);
+}
+
 * {
     margin: 0;
     padding: 0;

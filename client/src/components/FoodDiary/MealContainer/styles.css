@@ -1,8 +1,9 @@
 .meal-container {
-    background-color: lightblue;
+    background-color: rgba(24, 212, 24, 0.3);
     margin: 10px;
     width: auto;
     padding: 20px;
+    border-radius: 10px;
 }
 .title-section {
     display: flex;
@@ -48,4 +49,5 @@
 .add-food-item-container {
     display: flex;
     justify-content: center;
+    margin-top: 10px;
 }

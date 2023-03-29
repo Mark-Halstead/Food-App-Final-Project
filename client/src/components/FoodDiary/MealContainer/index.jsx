@@ -16,7 +16,7 @@ function MealContainer({ mealName, mealItems, totals, setMealItems, mealPlanItem
                         {
                             totals && 
                                 totals[mealName].calories
-                        }
+                        } kcal
                     </h2>
                 </div>
                 <div className='food-items-container'>
@@ -48,7 +48,7 @@ function MealContainer({ mealName, mealItems, totals, setMealItems, mealPlanItem
                 </div>
                 <div className='add-food-item-container'>
                     <button 
-                        className='add-food-item'
+                        className='btn'
                         onClick={() => openSearchPopup(mealName)}
                         
                     >Add Item</button>

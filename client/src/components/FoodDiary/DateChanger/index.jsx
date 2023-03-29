@@ -41,14 +41,14 @@ function DateChanger({ selectedDate, setSelectedDate, mealPlan }) {
                 className='date-back-button'
                 onClick={() => handleDateChange(-1)}
             >
-                <i className="fa-solid fa-caret-left"></i>
+                <i className="fa-solid fa-caret-left icon-btn"></i>
             </button>
                 <h2>{formatDate(selectedDate)}</h2>
             <button
                 className='date-forwards-button'
                 onClick={() => handleDateChange(1)}
             >
-                <i className="fa-solid fa-caret-right"></i>
+                <i className="fa-solid fa-caret-right icon-btn"></i>
             </button>
         </div>
     )

@@ -49,7 +49,7 @@ function FoodItem({ item, meal, mealItems, setMealItems, handleFoodItemClick,  h
 			<div className='button-containers'>
 				<div>
 					<i 
-						className={icon}
+						className={`${icon} icon-btn`}
 						onClick={() => handleFoodItemConfirm(meal, item.product.id, !item.confirmed)}
 					></i>
 				</div>
@@ -57,7 +57,7 @@ function FoodItem({ item, meal, mealItems, setMealItems, handleFoodItemClick,  h
 					{
 						!mealPlanItem ?
 							<i 
-								className="fa-solid fa-delete-left"
+								className="fa-solid fa-trash icon-btn"
 								onClick={() => handleDeleteFood(meal, item.product.id)}
 							></i>
 							: null

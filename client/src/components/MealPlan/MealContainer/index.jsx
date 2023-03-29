@@ -40,7 +40,7 @@ function MealContainer({ mealName, mealItems, totals, setMealItems, openSearchPo
                 </div>
                 <div className='add-food-item-container'>
                     <button 
-                        className='add-food-item'
+                        className='add-food-item btn'
                         onClick={() => openSearchPopup(mealName)}
                         
                     >Add Item</button>
