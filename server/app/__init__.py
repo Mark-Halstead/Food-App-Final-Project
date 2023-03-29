@@ -70,7 +70,7 @@ def index():
 
 @app.route('/test')
 def home():
-    return render_template("home.html")
+    return render_template("chat_home.html")
 
 
 @app.route('/dashboard')
