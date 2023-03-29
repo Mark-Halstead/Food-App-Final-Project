@@ -557,7 +557,6 @@ img:not(.nav-logo) {
 .popular-tours {
   padding: 3.75rem 0 7.5rem 0;
   height: 100vh;
-  background-color: #e0ffd9;
   max-width: 100%;
   opacity: 0.95;
 }
@@ -702,7 +701,7 @@ img:not(.nav-logo) {
   position: absolute;
   top: 15%;
   left: 50%;
-  width: 35%;
+  width: 36%;
   height: 70%;
   transform: translate(-50%, -50%);
   z-index: 100;
