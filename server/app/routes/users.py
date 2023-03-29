@@ -32,10 +32,12 @@ def add_user():
 
 
 @user_routes.route("/", methods=["GET"])
-def get_user(user_id):
-    user = g.user_model.get(user_id)
-    if user:
-        return Response(JSONEncoder().encode(user), content_type='application/json')
+@token_required('user')
+def get_user(user_data):
+    print(user_data)
+    # user = g.user_model.get(user_id)
+    if user_data:
+        return Response(JSONEncoder().encode(user_data), content_type='application/json')
     else:
         return make_response(jsonify({"error": "User not found"}), 404)
 
