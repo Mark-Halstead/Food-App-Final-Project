@@ -719,6 +719,71 @@ img:not(.nav-logo) {
 
 /*//////////////// FOOD IMAGE CSS END ///////////////////*/
 
+
+/*//////////////// PEOPLE REVIEWS CSS START ///////////////////*/
+.stories {
+  padding: 5rem 0;
+  position: relative;
+}
+
+.stories-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  margin-top: 1rem;
+}
+
+.reviews {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.story-bg {
+  background-color: rgba(238, 238, 238, 0.85);
+  padding: 2rem 5rem 0 2.5rem;
+  margin: 2rem 0 0 0;
+  width: 75%;
+  box-shadow: 0 1rem 2.5rem rgba(51, 51, 51, 0.4);
+  transform: skewX(20deg);
+}
+
+.story {
+  transform: skewX(-20deg);
+  display: flex;
+}
+
+.story-image {
+  width: 10rem;
+  height: 10rem;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 2.5rem;
+}
+
+.story-text {
+  letter-spacing: 0.05rem;
+}
+
+.story-heading {
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  color: var(--grey-color);
+  margin-bottom: 0.5rem;
+}
+
+.story-paragraph {
+  font-size: 0.9rem;
+  color: var(--light-grey-color);
+}
+
+.story-paragraph::first-letter {
+  margin-left: 0.5rem;
+}
+
+/*//////////////// PEOPLE REVIEWS CSS END /////////////////////*/
+
 /*//////////////// FOOTER CSS START ///////////////*/
   
   .wrapper {

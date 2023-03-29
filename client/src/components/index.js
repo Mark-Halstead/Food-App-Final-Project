@@ -25,3 +25,4 @@ export { default as NutritionistInfo } from "./NutritionistInfo";
 export { default as SocialMediaNavbar } from "./SocialMediaNavbar";
 export { default as About } from "./About";
 export { default as LandingFood } from "./LandingFood";
+export { default as PeopleReviews } from "./PeopleReviews";
