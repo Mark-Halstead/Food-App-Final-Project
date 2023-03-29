@@ -1,17 +1,23 @@
 import React, { useEffect, useState, useContext } from 'react'
-import DatePicker from 'react-date-picker'
+import Calendar from 'react-calendar'
 
-import { MealContainer, StatContainer, DateChanger } from '../../components/FoodDiary'
+import { StatContainer, DateChanger } from '../../components/FoodDiary'
+import { MealContainer } from '../../components/MealPlan'
 import { SearchPopup } from '../../components';
 
 import { calculateTotals } from '../../helpers/calculateStats';
 import { createEmptyMealPlanObject } from '../../helpers/createEmptyObjects';
 import { ClientContext } from '../../contexts/ClientContext';
+import { useNavigate } from 'react-router-dom';
 
 function MealPlan() {
     const { selectedClient } = useContext(ClientContext);
+
+    const navigate = useNavigate()
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
     
-    const [selectedDate, setSelectedDate] = useState(new Date().toISOString().slice(0, 10));
+    const [selectedDate, setSelectedDate] = useState(tomorrow.toISOString().slice(0, 10));
     const [calendarMode, setCalendarMode] = useState(true)
     const [mealTotals, setMealTotals] = useState({ breakfast: {}, lunch: {}, dinner: {}, snacks: {} });
     const [showSearchPopup, setShowSearchPopup] = useState(false)
@@ -30,14 +36,19 @@ function MealPlan() {
     }
 
 
-
     useEffect(() => {
         setLoading(true);
       
         async function getMealPlans() {
+            setLoading(true)
             try {
                 // Add auth here to make sure nutritionist is allowed to edit client data
-                const response = await fetch(`http://127.0.0.1:5000/meal_plan_entries/${selectedClient._id}`);
+                const options = {
+                    headers:{
+                        Authorization:localStorage.token
+                    }
+                }
+                const response = await fetch(`http://127.0.0.1:5000/meal_plan_entries/${selectedClient._id}`, options);
                 if (response.status === 200) {
                     const data = await response.json();
             
@@ -58,6 +69,7 @@ function MealPlan() {
                     setAllMealPlans([emptyMealPlan]);
                     setMealPlanEntry(emptyMealPlan);
                 }
+                setLoading(false)
             } catch (error) {
                 setError(error);
             } finally {
@@ -92,18 +104,25 @@ function MealPlan() {
         }
     }, [mealPlanEntry]);
 
-    async function completeDay() {
+    async function saveMealPlan() {
         try {
             // Add auth here to make sure nutritionist is allowed to edit client data (add Authorisation header)
             const options = {
-                method:"POST",
-                body:JSON.stringify(mealPlanEntry)
+                method:"PUT",
+                body:JSON.stringify(allMealPlans),
+                headers:{
+                    Authorization:localStorage.token
+                }
             }
-            const response = await fetch(`http://127.0.0.1:5000/meal_plan_entries/${clientId}`, 
+            const response = await fetch(`http://127.0.0.1:5000/meal_plan_entries/${selectedClient._id}`, 
                 options
             )
-            const data = await response.json()
-            setMealPlanEntry(data)
+            if (response.status === 200) {
+                const data = await response.json()
+                setAllMealPlans(data);
+                const todaysDiaryEntry = data.find((entry) => entry.date === selectedDate);
+                setMealPlanEntry(todaysDiaryEntry);
+            }
             setLoading(false)
         } catch (error) {
             setError(error)
@@ -144,7 +163,7 @@ function MealPlan() {
     }
 
 
-    const handleAddFood = async (selectedItem) => {
+    const handleAddFood = async (meal, selectedItem) => {
         if (!mealPlanEntry) { return }
       
         const data = {
@@ -179,10 +198,7 @@ function MealPlan() {
     }
 
     // if (calendarMode) {
-    //     return <DatePicker
-    //         onChange={handleDateChange}
-    //         value={date}
-    //     />
+    //     return 
     // }
 
 
@@ -191,6 +207,10 @@ function MealPlan() {
             <div>
                 {showSearchPopup && <SearchPopup onClose={onClose} handleAddFood={handleAddFood} meal={meal} servingMultiplier={servingMultiplier} setServingMultiplier={setServingMultiplier}/>}
             </div>
+            <button
+                onClick={() => navigate(-1)}
+            
+            >Back</button>
             <h2>Client: {selectedClient.first_name} {selectedClient.last_name}</h2>
             <div className='diary-header'>
                 <div className='diary-header-left'>
@@ -200,19 +220,27 @@ function MealPlan() {
                             <StatContainer title={"Total (kcal)"} value={mealTotals.totalCalories}/>
                     }
                 </div>
-                <DateChanger selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
+                <DateChanger selectedDate={selectedDate} setSelectedDate={setSelectedDate} mealPlan={true}/>
                 <div>
-                    <h3>Day Complete</h3>
-                    <button
-                        onClick={completeDay}
-                    >&#10004;</button>
+                    <h3>Save Meal Plan</h3>
+                    <i 
+                        className="fa-solid fa-download"
+                        onClick={saveMealPlan}
+                    ></i>
                 </div>
 
             </div>
-            <MealContainer mealName={"breakfast"} mealItems={mealPlanEntry} setMealItems={setMealPlanEntry} totals={mealTotals} openSearchPopup={openSearchPopup} handleDeleteFood={handleDeleteFood}/>
-            <MealContainer mealName={"lunch"} mealItems={mealPlanEntry} setMealItems={setMealPlanEntry} totals={mealTotals} openSearchPopup={openSearchPopup} handleDeleteFood={handleDeleteFood}/>
-            <MealContainer mealName={"dinner"} mealItems={mealPlanEntry} setMealItems={setMealPlanEntry} totals={mealTotals} openSearchPopup={openSearchPopup} handleDeleteFood={handleDeleteFood}/>
-            <MealContainer mealName={"snacks"} mealItems={mealPlanEntry} setMealItems={setMealPlanEntry} totals={mealTotals} openSearchPopup={openSearchPopup} handleDeleteFood={handleDeleteFood}/>
+            {
+                loading ? 
+                    <h4>Loading meal plan...</h4>
+                :
+                <>
+                    <MealContainer mealName={"breakfast"} mealItems={mealPlanEntry} setMealItems={setMealPlanEntry} totals={mealTotals} openSearchPopup={openSearchPopup} handleDeleteFood={handleDeleteFood}/>
+                    <MealContainer mealName={"lunch"} mealItems={mealPlanEntry} setMealItems={setMealPlanEntry} totals={mealTotals} openSearchPopup={openSearchPopup} handleDeleteFood={handleDeleteFood}/>
+                    <MealContainer mealName={"dinner"} mealItems={mealPlanEntry} setMealItems={setMealPlanEntry} totals={mealTotals} openSearchPopup={openSearchPopup} handleDeleteFood={handleDeleteFood}/>
+                    <MealContainer mealName={"snacks"} mealItems={mealPlanEntry} setMealItems={setMealPlanEntry} totals={mealTotals} openSearchPopup={openSearchPopup} handleDeleteFood={handleDeleteFood}/>
+                </>
+            }
         </div>
     )
 }

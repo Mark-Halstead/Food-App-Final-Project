@@ -84,6 +84,18 @@ def decline_client(user_data, client_id):
     updated_client = g.user_model.update(client_id, update_data)
     return Response(JSONEncoder().encode(updated_client), content_type='application/json')
 
+@nutritionist_routes.route("/send_meal_plan/<client_id>", methods=["PUT"])
+@token_required("nutritionist")
+def send_meal_plan(user_data, client_id):
+    client = g.user_model.get(client_id)
+
+    if not client or client["nutritionist_id"] != str(user_data["_id"]):
+        return make_response(jsonify({"error": "Client not found"}), 404)
+    
+    update_data = {"meal_plan_confirmed": True}
+    updated_client = g.user_model.update(client_id, update_data)
+    return Response(JSONEncoder().encode(updated_client), content_type='application/json')
+
 
 @nutritionist_routes.route("/<nutritionist_id>", methods=["PUT"])
 def update_nutritionist_by_id(nutritionist_id):

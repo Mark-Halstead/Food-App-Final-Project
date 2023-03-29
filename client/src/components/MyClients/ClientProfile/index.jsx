@@ -54,6 +54,23 @@ function ClientProfile({ selectedClient, handleClosePopup, handleCreateMealPlan,
             setClientDeclined(true);
         }
     };
+
+    const sendMealPlan = async (client) => {
+        const token = localStorage.token;
+        const options = {
+            method: "PUT",
+            headers: {
+                Authorization: token,
+            },
+        };
+        const response = await fetch(
+            `http://127.0.0.1:5000/nutritionists/send_meal_plan/${client._id}`,
+            options
+        );
+        if (response.status === 200) {
+            
+        }
+    }
       
     
 
@@ -101,7 +118,10 @@ function ClientProfile({ selectedClient, handleClosePopup, handleCreateMealPlan,
 
                                     )
                             ) :
-                                <button onClick={() => handleCreateMealPlan(selectedClient)}>View Meal Plan</button>
+                                <>
+                                    <button onClick={() => handleCreateMealPlan(selectedClient)}>View/Edit Meal Plan</button>
+                                    <button onClick={() => sendMealPlan(selectedClient)}>Send Meal Plan</button>
+                                </>
                         }
                     </div>
                 </div>

@@ -8,8 +8,8 @@ import { ClientCard, ClientProfile, ClientFilters } from "../../components/MyCli
 import { ClientContext } from '../../contexts/ClientContext';
 
 function MyClients() {
-    const { clients, setClients, pendingClients, setPendingClients, selectedClient, setSelectedClient } = useContext(ClientContext);
-    const [loading, setLoading] = useState(true);
+    const { clients, setClients, pendingClients, setPendingClients, selectedClient, setSelectedClient, clientsLoaded, setClientsLoaded } = useContext(ClientContext);
+    const [loading, setLoading] = useState(false);
     const [showMyClients, setShowMyClients] = useState(true);
     const [showPendingClients, setShowPendingClients] = useState(true);
     const [showProfilePopup, setShowProfilePopup] = useState(false);
@@ -34,9 +34,12 @@ function MyClients() {
             setClients(currentClients);
             setPendingClients(allPendingClients);
             setLoading(false)
+            setClientsLoaded(true)
         }
 
-        loadClients();
+        if (!clientsLoaded) {
+            loadClients();
+        }
     }, []);
 
     const toggleMyClients = () => {

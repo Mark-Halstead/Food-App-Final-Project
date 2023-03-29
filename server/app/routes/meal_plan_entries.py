@@ -4,6 +4,7 @@ from pydantic import ValidationError
 from bson import ObjectId
 from typing import List
 import json
+from app.routes.auth import token_required
 # openai.api_key = "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"
 
 from app.models.MealPlanEntry import MealPlanEntrySchema
@@ -38,21 +39,48 @@ def add_meal_plan_entry(client_id):
         return make_response(jsonify({"error": "Invalid data", "details": e.errors()}), 400)
 
 @meal_plan_routes.route("/<client_id>", methods=["GET"])
-def get_meal_plan_entry(client_id):
+@token_required('nutritionist')
+def get_meal_plan_entry(user_data, client_id):
     meal_plans = g.meal_plan_entry_model.get_all_by_query({"user_id":client_id})
     if meal_plans:
         return Response(JSONEncoder().encode(meal_plans), content_type='application/json')
     else:
         return make_response(jsonify({"error": "Entry not found"}), 404)
+    
+@meal_plan_routes.route("/<entry_date>/foods/<meal>/<food_item_id>", methods=["PUT"])
+@token_required('user')
+def confirm_food_item(user_data, entry_date, meal, food_item_id):
+    data = json.loads(request.data)
+    confirmed = data.get("confirmed")
+    meal_plan_entry = g.meal_plan_entry_model.get_user_by_date(entry_date, user_data["_id"])
 
-@meal_plan_routes.route("/<entry_id>", methods=["PUT"])
-def update_meal_plan_entry(entry_id):
+    if not meal_plan_entry:
+        return make_response(jsonify({"error": "Diary entry not found"}), 404)
+
+    meal_items = meal_plan_entry[meal]
+
+    for item in meal_items:
+        if str(item["product"]["id"]) == food_item_id:
+            item["confirmed"] = confirmed
+            break
+
+    updated_data = g.meal_plan_entry_model.update(meal_plan_entry["_id"], meal_plan_entry)
+
+    return Response(JSONEncoder().encode(updated_data), content_type='application/json')
+
+@meal_plan_routes.route("/<client_id>", methods=["PUT"])
+@token_required('nutritionist')
+def update_meal_plan_entry(user_data, client_id):
     try:
-        meal_plan_data = request.json
-        validated_data = MealPlanEntrySchema(**meal_plan_data).dict()
-        modified_count = g.meal_plan_entry_model.update(entry_id, validated_data)
-        if modified_count:
-            return {"modified_count": modified_count}
+        client = g.user_model.get(client_id)
+
+        if not client or client["nutritionist_id"] != str(user_data["_id"]):
+            return make_response(jsonify({"error": "Client not found"}), 404)
+        data = json.loads(request.data)
+
+        updated_meal_plan = g.meal_plan_entry_model.save_meal_plan(client_id, data)
+        if updated_meal_plan:
+            return Response(JSONEncoder().encode(data), status=200, content_type='application/json')
         else:
             return make_response(jsonify({"error": "Entry not found"}), 404)
     except ValidationError as e:

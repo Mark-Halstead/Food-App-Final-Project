@@ -5,7 +5,7 @@ import './styles.css'
 import Wrapper from '../../../assets/wrappers/MealContainer'
 import FoodItem from '../FoodItem'
 
-function MealContainer({ mealName, mealItems, totals, setMealItems, openSearchPopup, handleFoodItemClick, handleDeleteFood }) {
+function MealContainer({ mealName, mealItems, totals, setMealItems, mealPlanItems, setMealPlanItems, openSearchPopup, handleFoodItemClick, handleDeleteFood }) {
 
 
     return (
@@ -34,6 +34,11 @@ function MealContainer({ mealName, mealItems, totals, setMealItems, openSearchPo
 
                         </div>
                     </div>
+                    {
+                        mealPlanItems ?
+                        (mealPlanItems[mealName].map((item) => (<FoodItem mealPlanItem={true} handleDeleteFood={handleDeleteFood} handleFoodItemClick={handleFoodItemClick} item={item} meal={mealName} mealItems={mealItems} setMealItems={setMealPlanItems}/> )))
+                        : null
+                    }  
                     {
                         mealItems ?
                             (mealItems[mealName].map((item) => (<FoodItem  handleDeleteFood={handleDeleteFood} handleFoodItemClick={handleFoodItemClick} item={item} meal={mealName} mealItems={mealItems} setMealItems={setMealItems}/> )))
