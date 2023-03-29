@@ -1,12 +1,22 @@
 import styled from 'styled-components';
 
-const HomeWrapper = styled.article`
+const Wrapper = styled.article`
 /*////////////////// GLOBAL STYLES START /////////////////////*/
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Comic Sans MS';
+  font-family: "Open Sans";
 }
 html {
   scroll-behavior: smooth;
@@ -176,89 +186,10 @@ p {
 }
 /*////////////////// HAMBURGER-MENU STYLES  /////////////////////*/
 
-
-
-/*//////////////// NAVBAR CSS START /////////////*/
-.navbar {
-  position: relative; 
-  z-index: 30; 
-  top: 0;
-  left: 0;
-  width: 100%;
-  background: rgb(238, 238, 238);
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
-  height: 4rem;
-  display: flex;
-  align-items: center;
-}
-.nav-center {
-  width: 90vw;
-  max-width: 1170px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  flex-wrap: wrap;
-  }
-.nav-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.nav-toggle {
-  background: transparent;
-  border: none;
-  outline: none;
-  font-size: 1.5rem;
-  color: #00FF00;
-  cursor: pointer;
-  transition: all 0.2s linear;
-}
-.nav-toggle:hover {
-  transform: scale(1.2);
-}
-.nav-link {
-  display: block;
-  padding: 0 0;
-  text-transform: capitalize;
-  letter-spacing: 0.20rem;
-  transition: all 0.2s linear;
-  color: hsl(209, 61%, 16%);
-  cursor: pointer;
-  font-size: 1rem;
-  margin-right: 0.7rem;
-}
-.nav-link:hover {
-  padding: 0;
-  color: #18d418;
-  background: transparent;
-}
-
-.nav-links {
-  height: auto;
-  display: flex;
-}
-
-#landing-logo {
-  margin-top: 0.5rem;
-  margin-left: 6rem;
-}
-
-.section-title {
-  text-align: center;
-}
-.section-title h2 {
-  text-transform: uppercase;
-}
-.section-title span {
-  color: #18de18;
-}
-/*//////////////// NAVBAR CSS END //////////////////*/
-
 /*//////////////// LANDING CSS START ///////////////*/
 .landing {
   height: 100vh;
-  background: #18de18;
+  margin-top: -1.1rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -269,10 +200,11 @@ p {
 .landing-banner {
   text-align: center;
   color: #fff;
-  padding: 0 3rem;
+  padding: 0 5rem;
   margin-bottom: 8rem;
-  position: relative; 
-  z-index: 10; 
+  margin-right: 55rem;
+  position: relative;
+  z-index: 10;
   animation: fadein 2s ease-in-out;
 }
 
@@ -290,7 +222,12 @@ p {
 
 .landing-banner h1 {
   text-transform: uppercase;
+  font-weight: 500;
+  font-size: 4.5rem;
+  color: rgb(24, 212, 24);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
+  /* text-shadow: 0 0 0.5rem #000, 0 0 0.5rem #000, 0 0 0.5rem #000, 0 0 0.5rem #000; */
 .landing-banner p {
   max-width: 35rem;
   margin-left: auto;
@@ -346,19 +283,19 @@ p {
   background: none;
 }
 
-/* .floating-bg {
+.floating-bg {
   z-index: 1;
-  width: 150vw;
-  height: 150vw;
+  width: 100vw;
+  height: 100vw;
   background-color: #a7ffa7;
   position: absolute;
-  top: -110vw;
-  left: calc(50% - 75vw);
+  top: -65vw;
+  right: -40vw;
   border-radius: 45%;
   animation: rotate 30s infinite;
-} */
+} 
 
-/* .floating-bg::before {
+.floating-bg::before {
   content: "";
   width: 100%;
   height: 100%;
@@ -368,7 +305,8 @@ p {
   left: 0;
   border-radius: 40%;
   animation: rotate 30s infinite;
-} */
+}
+
 
 @keyframes rotate {
   0% {
@@ -391,129 +329,511 @@ p {
   .landing-banner p {
     max-width: 45rem;
   }
-}
+} */
 /*//////////////// LANDING CSS END ///////////////*/
+
+/*//////////////// BANNER CSS START ///////////////*/
+
+
+.banner {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  width: 100%;
+  padding: 0 5rem;
+}
+
+.banner-heading {
+  height: 20rem;
+  margin-bottom: 4rem;
+  perspective: 60rem;
+  overflow: hidden;
+}
+
+.banner-heading span {
+  font-family: "Oswald", sans-serif;
+  font-size: 4rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: rgb(24, 212, 24);
+  margin-top: 10rem;
+  margin-left: 0.5rem;
+  text-shadow: 0.3rem 0.3rem 0.6rem rgba(0, 0, 0, 0.1);
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  transform: translateZ(8rem);
+  opacity: 0;
+  letter-spacing: 3rem;
+}
+
+.banner-heading-1 {
+  animation: animateHeading 12s 3s infinite;
+}
+
+.banner-heading-2 {
+  animation: animateHeading 12s 6s infinite;
+}
+
+.banner-heading-3 {
+  animation: animateHeading 12s 9s infinite;
+}
+
+.banner-heading-4 {
+  animation: animateHeading 12s 12s infinite;
+}
+
+@keyframes animateHeading {
+  0% {
+    transform: translateZ(8rem);
+    opacity: 0;
+    letter-spacing: 3rem;
+  }
+
+  3% {
+    transform: translateZ(0);
+    opacity: 1;
+    letter-spacing: 1.5rem;
+  }
+
+  25% {
+    transform: translateZ(0);
+    opacity: 1;
+    letter-spacing: 1.5rem;
+  }
+
+  28% {
+    transform: translateZ(8rem);
+    opacity: 0;
+    letter-spacing: 3rem;
+  }
+
+  100% {
+    transform: translateZ(8rem);
+    opacity: 0;
+    letter-spacing: 3rem;
+  }
+}
+
+.banner-paragraph {
+  font-size: 4rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.6);
+  width: 30%;
+  margin: 0 auto 6rem auto;
+  padding: 1rem 0;
+  box-shadow: 1rem 1rem 5rem rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  animation: fadeAnimation 1s 1.5s forwards;
+}
+
+@keyframes fadeAnimation {
+  0% {
+    opacity: 0;
+    visibility: hidden;
+  }
+  100% {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.banner-btn {
+width: 20rem;
+height: 4rem;
+/* background: linear-gradient(to right, #9b0e0e, #7a1010); */
+background-color: rgb(24, 212, 24);
+color: #fff;
+font-size: 1.5rem;
+margin: -3rem 10rem;
+text-transform: uppercase;
+border-radius: 3rem;
+border: 0.1rem solid rgb(24, 212, 24);
+box-shadow: 1rem 2rem 3rem rgba(0, 0, 0, 0.5);
+cursor: pointer;
+opacity: 0;
+visibility: hidden;
+position: relative;
+overflow: hidden;
+animation: fadeAnimation 1s 2s forwards;
+}
+.banner-btn::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, transparent, #fff, transparent);
+  position: absolute;
+  top: 0;
+  left: -100%;
+  transform: skewX(-30deg);
+  transition: left 0.5s;
+}
+
+.banner-btn:hover::before {
+  left: 100%;
+}
+/*//////////////// BANNER CSS END /////////////////*/
+
+/*//////////////// ABOUT CSS START /////////////////*/
+.about-img,
+.about-info {
+  margin-bottom: 2rem;
+}
+img:not(.nav-logo) {
+    width: 90%;
+    display: block;
+}
+.about-section {
+    padding: 0 0 0 0;
+    height: 95vh;
+  }
+  .section-title {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+  .section-title h2 {
+    text-transform: uppercase;
+  }
+  .section-title span {
+    color: rgb(24, 212, 24);
+  }
+  .section-center {
+    width: 90vw;
+    margin: 0 auto;
+    max-width: 1170px;
+  }
+
+  .btn-activities {
+    animation-name: pulse;
+    animation-duration: 2s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+  }
+    .section-center {
+      width: 95vw;
+    }
+
+  .about-center {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2rem;
+  }
+  .about-img,
+  .about-info {
+    margin-bottom: 0;
+  }
+
+  .about-img::before {
+    content: '';
+    position: absolute;
+    width: 90%;
+    height: 100%;
+    border: 0.5rem solid rgb(24, 212, 24);
+    box-sizing: border-box;
+    top: -1.5rem;
+    left: -1rem;
+  }
+
+  .about-img {
+    position: relative;
+  }
+  .about-photo {
+    position: relative;
+  }
+  .about-section-center {
+     margin-left: 5rem;
+     margin-top: 3rem;
+  }
+/*//////////////// ABOUT CSS END ///////////////////*/
 
 
 /*//////////////// PRICING CARDS CSS START ///////////////*/
-.card-container {
-  width: 100%;
+.popular-tours {
+  padding: 3.75rem 0 7.5rem 0;
   height: 100vh;
-  background-color: rgb(24, 212, 24, 0.8);
+  background-color: #e0ffd9;
+  max-width: 100%;
+  opacity: 0.95;
+}
+
+.popular-tours-heading {
+  font-size: 2rem;
+  font-family: "Open Sans";
+  list-style-type: none;
+  text-decoration: none;
+  box-sizing: border-box;
+  outline: none;
+  text-align: center;
+  margin-top: -1rem;
+  margin-bottom: 2rem;
+  color: #3fe42b;
+  text-shadow: 0 0.125rem 0.25rem #3fe42b;
 }
 
 .cards-wrapper {
-  width: 90%;
-  margin: auto;
-  height: 100%;
   display: flex;
-  justify-content: space-around;
-  align-items: center;
+  justify-content: space-evenly;
 }
 
 .card {
-  width: 300px;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)),
-    url("https://media.istockphoto.com/id/507316787/photo/healthy-food-background.jpg?s=170667a&w=0&k=20&c=FQzOQZkIUhBwTWL_omMoSw_EDnHZi48jCE6SoLc_u1s=") center no-repeat;
-  background-size: cover;
-  color: #fff;
+  width: 22rem;
+  position: relative;
+  perspective: 100rem;
+}
+
+.card-image {
+  min-width: 100%;
+  border-radius: 0.375rem 0.375rem 0 0;
+}
+
+.front-side {
   text-align: center;
-  border-radius: 10px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
-  transition: all 0.4s;
+  background-color: #fdfdfd;
+  border-radius: 0.25rem;
+  position: relative;
+  z-index: 10;
+  opacity: 0.9;
+  transition: opacity 0.4s, transform 0.4s, box-shadow 0.4s;
 }
 
-.card:hover {
-  transform: scale(1.1);
-  box-shadow: 0 15px 60px rgba(0, 0, 0, 0.8);
+.change > .front-side {
+  transform: translateZ(-3.75rem) translateX(2.5rem);
+  box-shadow: 0 1.25rem 3.75rem #777;
+  opacity: 0.5;
+  z-index: 0;
 }
 
-.card-header {
-  margin-bottom: 40px;
-}
-
-.card-header h3 {
-  font-family: "Josefin Sans", sans-serif;
-  font-size: 30px;
-  font-weight: 300;
-  color: #18de18;
-  margin: 30px;
-  border-bottom: 1px groove #fff;
-  padding: 10px;
-}
-
-.card-header h1 {
-  font-family: "Josefin Sans", sans-serif;
-  font-size: 60px;
-  font-weight: 300;
-}
-
-.card-header sup {
-  font-size: 35px;
-}
-
-.card-header span {
-  font-size: 18px;
-}
-
-.card-body {
-  margin-bottom: 60px;
-}
-
-.card-body li {
-  list-style: none;
-  font-family: "Josefin Sans", sans-serif;
-  font-size: 16px;
-  font-weight: 300;
-  margin: 15px 0;
-}
-
-.card-body i {
-  margin-right: 25px;
-}
-
-.card-body .fa-check {
-  color: #0d683a;
-}
-
-.card-body .fa-times {
-  color: #911832;
-}
-
-.card-footer {
-  margin-bottom: 40px;
-}
-
-.card-footer button {
-  width: 120px;
-  padding: 10px;
-  background-color: #18c518;
-  color: #ddd;
-  font-family: "Montserrat", sans-serif;
-  font-size: 12px;
-  font-weight: 600;
+.tour-name {
+  font-size: 2rem;
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  border: 2px solid #18c518;
-  border-radius: 50px;
-  outline: none;
+  position: absolute;
+  top: 20%;
+  right: 1.25rem;
+  color: #fff;
+  text-shadow: 0 0 1rem #000, 0 0 1rem #000, 0 0 1rem #000, 0 0 1rem #000;
+}
+
+#free-plan {
+  top: 23%;
+}
+
+
+.card-list {
+  width: 60%;
+  margin: auto;
+  padding: 1.875rem 0 2.5rem 0;
+}
+
+.card-list-item {
+  font-size: 0.9375rem;
+  font-weight: 300;
+  color: #777;
+  margin: 1.25rem 0;
+  border-bottom: 0.25rem solid #3fe42b;
+  padding-bottom: 1.25rem;
+}
+
+.back-side {
+  position: absolute;
+  top: 0;
+  background-color: #3fe42b;
+  width: 100%;
+  height: 100%;
+  border-radius: 0.3125rem;
+  box-shadow: 0 1.5625rem 4.0625rem #777;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transform: translateZ(-3.75rem) translateX(2.5rem);
+  opacity: 0.5;
+  transition: opacity 0.4s, transform 0.4s, box-shadow 0.4s;
+}
+
+.change > .back-side {
+  transform: translateZ(0) translateX(0);
+  box-shadow: 0 0.9375rem 3.125rem #aaa;
+  opacity: 0.8;
+}
+
+.tour-price {
+  font-size: 2rem;
+  font-weight: 300;
+  color: #fff;
+}
+
+.card-button {
+  color: #3fe42b;
+  background-color: #fff;
+  border: none;
+  font-size: 1.5rem;
+  padding: 0.75rem 1rem;
+  letter-spacing: 0.2rem;
+  border-radius: 4rem;
   cursor: pointer;
 }
 
-@media (max-width: 1200px) {
-  .container {
-    height: 100%;
-  }
-
-  .cards-wrapper {
-    flex-wrap: wrap;
-  }
-
-  .card {
-    margin: 50px;
-  }
+.navigation-button {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  padding: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #777;
+  border-radius: 0.3rem;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
+  cursor: pointer;
 }
 /*//////////////// PRICING CARDS CSS END ///////////////*/
+
+/*//////////////// FOOD IMAGE CSS START /////////////////*/
+#food {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  width: 35%;
+  height: 70%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  animation: spin 36s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/*//////////////// FOOD IMAGE CSS END ///////////////////*/
+
+/*//////////////// FOOTER CSS START ///////////////*/
+  
+  .wrapper {
+    width: 100%;
+    height: 30vh;
+    background-color: #262626;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .follow,
+  .menu-link {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    margin-right: 4rem;
+  }
+  
+  .follow {
+    pointer-events: auto;
+  }
+  
+  .menu {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    pointer-events: none;
+  }
+  
+  .menu:hover {
+    pointer-events: auto;
+  }
+  
+  .line {
+    width: 10rem;
+    height: 0.1rem;
+    margin-right: 5rem;
+    position: relative;
+  }
+  
+  .line::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 100%;
+    background-color: #fff;
+    transition: width 0.5s;
+  }
+  
+  .menu:hover .line::after {
+    width: 100%;
+  }
+  
+  .nav-menu {
+    display: flex;
+  }
+  
+  .menu-link {
+    text-decoration: none;
+    position: relative;
+    top: 5rem;
+    opacity: 0;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+  }
+  
+  .menu:hover .menu-link {
+    top: 0;
+    opacity: 1;
+  }
+  
+  .menu-link:nth-child(1) {
+    transition: top 0.5s 0.1s, opacity 0.5s 0.1s, background-color 0.3s;
+  }
+  
+  .menu-link:nth-child(2) {
+    transition: top 0.5s 0.2s, opacity 0.5s 0.2s, background-color 0.3s;
+  }
+  
+  .menu-link:nth-child(3) {
+    transition: top 0.5s 0.3s, opacity 0.5s 0.3s, background-color 0.3s;
+  }
+  
+  .menu-link:nth-child(4) {
+    transition: top 0.5s 0.4s, opacity 0.5s 0.4s, background-color 0.3s;
+  }
+  
+  .menu-link:nth-child(5) {
+    transition: top 0.5s 0.5s, opacity 0.5s 0.5s, background-color 0.3s;
+  }
+  
+  .menu-link:nth-child(1):hover {
+    background-color: #3b5998;
+  }
+  
+  .menu-link:nth-child(2):hover {
+    background-color: #3f729b;
+  }
+  
+  .menu-link:nth-child(3):hover {
+    background-color: #55acee;
+  }
+  
+  .menu-link:nth-child(4):hover {
+    background-color: #0077b5;
+  }
+  
+  .menu-link:nth-child(5):hover {
+    background-color: #cd201f;
+  }
+/*//////////////// FOOTER CSS END /////////////////*/
 `;
 
-export default HomeWrapper;
+export default Wrapper;

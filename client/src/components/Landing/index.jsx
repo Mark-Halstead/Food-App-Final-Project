@@ -1,14 +1,16 @@
 import React from 'react'
+import LandingHeader from '../LandingHeader'
+import LandingFood from '../LandingFood'
+
 
 const Landing = () => {
+
     return (
-        <section className='landing' id='home'>
+        <section className='landing' id='landing'>
             <div className='landing-banner'>
-                <h1>PlatePal</h1>
-                <a href='#about' className='btn landing-btn'>
-                    About
-                </a>
+                <LandingHeader />
             </div>
+            <LandingFood />
             <div className="floating-bg"></div>
         </section>
     )
