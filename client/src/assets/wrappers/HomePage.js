@@ -731,7 +731,7 @@ img:not(.nav-logo) {
   flex-direction: column;
   align-items: center;
   height: 100vh;
-  margin-top: 1rem;
+  margin-top: -2rem;
 }
 
 .reviews {
@@ -743,7 +743,7 @@ img:not(.nav-logo) {
 .story-bg {
   background-color: rgba(238, 238, 238, 0.85);
   padding: 2rem 5rem 0 2.5rem;
-  margin: 2rem 0 0 0;
+  margin: 2.5rem 0 0 0;
   width: 75%;
   box-shadow: 0 1rem 2.5rem rgba(51, 51, 51, 0.4);
   transform: skewX(20deg);

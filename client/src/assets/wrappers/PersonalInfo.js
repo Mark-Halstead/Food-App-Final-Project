@@ -17,36 +17,52 @@ const Wrapper = styled.section`
 }
 
 label {
-  margin-right: 0.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+.input-outline {
+    outline: none;
+  }
+
+  input[type="text"],
+textarea {
+    padding: 0.5rem;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+    border-color: rgb(24, 212, 24, 0.8);
+    box-shadow: 0px 0px 5px rgb(24, 212, 24, 0.8);
 }
 
 .btn-container {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 0.5rem;
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
 }
 
 button {
-  height: 35px;
-  margin-left: 1rem;
+    padding: 0 1rem 0 1rem;
+    background-color: rgba(25, 212, 25, 0.8);
+    color: #fff;
+    border: none;
+    border-radius: 0.25rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s;
 }
 
-.button {
-    cursor: pointer;
-    color: var(--white);
-    background: var(--primary-500);
-    border: transparent;
-    border-radius: var(--borderRadius);
-    letter-spacing: var(--letterSpacing);
-    padding: 0.375rem 0.75rem;
-    box-shadow: var(--shadow-2);
-    transition: var(--transition);
-    text-transform: capitalize;
-    display: inline-block;
-}
-.button:hover {
-    background: var(--primary-700);
-    box-shadow: var(--shadow-3);
+button:hover {
+    background-color: rgba(35, 150, 35, 0.8);
 }
 
 
