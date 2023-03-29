@@ -49,11 +49,41 @@ def add_nutritionist():
 @nutritionist_routes.route("/clients", methods=["GET"])
 @token_required("nutritionist")
 def get_nutritionist(user_data):
-    clients = g.user_model.get_by_query({"nutritionist_id":user_data["_id"]})
+    clients = g.user_model.get_all_client_profiles(user_data["_id"])
     if clients:
         return Response(JSONEncoder().encode(clients), content_type='application/json')
     else:
         return make_response(jsonify({"error": "Clients not found"}), 404)
+
+@nutritionist_routes.route("/accept_client/<client_id>", methods=["PUT"])
+@token_required("nutritionist")
+def accept_client(user_data, client_id):
+    update_data = {
+        "nutritionist_pending": False
+    }
+    client = g.user_model.get(client_id)
+
+    if not client or client["nutritionist_id"] != str(user_data["_id"]):
+        return make_response(jsonify({"error": "Client not found"}), 404)
+    
+    updated_client = g.user_model.update(client_id, update_data)
+    return Response(JSONEncoder().encode(updated_client), content_type='application/json')
+
+@nutritionist_routes.route("/decline_client/<client_id>", methods=["PUT"])
+@token_required("nutritionist")
+def decline_client(user_data, client_id):
+    update_data = {
+        "nutritionist_id": "",
+        "nutritionist_message":""
+    }
+    client = g.user_model.get(client_id)
+
+    if not client or client["nutritionist_id"] != str(user_data["_id"]):
+        return make_response(jsonify({"error": "Client not found"}), 404)
+    
+    updated_client = g.user_model.update(client_id, update_data)
+    return Response(JSONEncoder().encode(updated_client), content_type='application/json')
+
 
 @nutritionist_routes.route("/<nutritionist_id>", methods=["PUT"])
 def update_nutritionist_by_id(nutritionist_id):
@@ -92,7 +122,7 @@ def signup():
     token_data = {
         "token": nutritionist["token_id"],
         "role": "nutritionist",
-        "nutritionist_id": new_nutritionist["_id"]
+        "user_id": new_nutritionist["_id"]
     }
     token = g.token_model.create(token_data)
     return Response(JSONEncoder().encode(token), content_type='application/json')
@@ -100,7 +130,7 @@ def signup():
 
 @nutritionist_routes.route('/', methods=['PUT'])
 @token_required('nutritionist')
-def update_nutritionist(nutritionist_data):
+def update_nutritionist(user_data):
     data = json.loads(request.data)
     updated_data = {
         "first_name": data.get("firstName"),
@@ -110,9 +140,8 @@ def update_nutritionist(nutritionist_data):
         "education_training": data.get("educationTraining")
     }
 
-    updated_nutritionist = g.nutritionist_model.update(nutritionist_data["_id"], updated_data)
+    updated_nutritionist = g.nutritionist_model.update(user_data["_id"], updated_data)
     return Response(JSONEncoder().encode(updated_nutritionist), content_type='application/json')
-
 
 
 @nutritionist_routes.route('/signout')

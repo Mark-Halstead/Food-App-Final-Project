@@ -90,7 +90,7 @@ h5 {
     margin: 0;
     margin-bottom: 1.38rem;
     font-family: var(--headingFont);
-    font-weight: 400;
+    font-weight: 800;
     line-height: 1.3;
     text-transform: capitalize;
     letter-spacing: var(--letterSpacing);
@@ -148,7 +148,7 @@ ul {
 .btn {
     cursor: pointer;
     color: var(--white);
-    background: var(--primary-500);
+    background: rgb(24, 212, 24, 1);
     border: transparent;
     border-radius: var(--borderRadius);
     letter-spacing: var(--letterSpacing);
@@ -159,7 +159,7 @@ ul {
     display: inline-block;
 }
 .btn:hover {
-    background: var(--primary-700);
+    background: rgb(24, 212, 24, 0.8);
     box-shadow: var(--shadow-3);
 }
 .btn-hipster {

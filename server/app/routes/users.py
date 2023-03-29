@@ -114,6 +114,27 @@ def update_user(user_data):
     return Response(JSONEncoder().encode(updated_user), content_type='application/json')
 
 
+@user_routes.route('/select_nutritionist', methods=['PUT'])
+@token_required('user')
+def select_nutritionist(user_data):
+    data = json.loads(request.data)
+    nutritionist_id = data.get("nutritionist_id")
+    nutritionist_pending = data.get("nutritionist_pending")
+    nutritionist_message = data.get("nutritionist_message")
+
+    if not nutritionist_id or not nutritionist_message:
+        return make_response(jsonify({"error": "Nutritionist ID not given in request."}), 400)
+    
+    updated_data = {
+        "nutritionist_id":nutritionist_id,
+        "nutritionist_pending":nutritionist_pending,
+        "nutritionist_message":nutritionist_message
+    }
+
+    updated_user = g.user_model.update(user_data["_id"], updated_data)
+    return Response(JSONEncoder().encode(updated_user), content_type='application/json')
+
+
 
 @user_routes.route('/signout')
 def signout():

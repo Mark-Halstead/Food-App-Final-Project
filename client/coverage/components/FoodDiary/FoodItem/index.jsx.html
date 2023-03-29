@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">10.16% </span>
+                <span class="strong">10.9% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>6/59</span>
+                <span class='fraction'>6/55</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">10.16% </span>
+                <span class="strong">10.9% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>6/59</span>
+                <span class='fraction'>6/55</span>
             </div>
         
             
@@ -117,18 +117,10 @@
 <a name='L52'></a><a href='#L52'>52</a>
 <a name='L53'></a><a href='#L53'>53</a>
 <a name='L54'></a><a href='#L54'>54</a>
-<a name='L55'></a><a href='#L55'>55</a>
-<a name='L56'></a><a href='#L56'>56</a>
-<a name='L57'></a><a href='#L57'>57</a>
-<a name='L58'></a><a href='#L58'>58</a>
-<a name='L59'></a><a href='#L59'>59</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L55'></a><a href='#L55'>55</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -183,14 +175,15 @@
 &nbsp;
 import './styles.css'
 &nbsp;
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >function FoodItem({ item, meal, diaryEntry, setDiaryEntry}) {</span></span>
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >function FoodItem({ item, meal, mealItems, setMealItems, handleFoodItemClick,  handleDeleteFood }) {</span></span>
+<span class="cstat-no" title="statement not covered" >    console.log('item', item)</span>
 <span class="cstat-no" title="statement not covered" >    async function handleFoodItemConfirm(meal, productId, confirmed) {</span>
 <span class="cstat-no" title="statement not covered" >		try {</span>
 <span class="cstat-no" title="statement not covered" >            const options = {</span>
 <span class="cstat-no" title="statement not covered" >                method:"PUT",</span>
 <span class="cstat-no" title="statement not covered" >                body:JSON.stringify({confirmed})</span>
 <span class="cstat-no" title="statement not covered" >            }</span>
-<span class="cstat-no" title="statement not covered" >			const url = `http://127.0.0.1:5000/diary_entries/${diaryEntry._id}/foods/${meal}/${productId}`</span>
+<span class="cstat-no" title="statement not covered" >			const url = `http://127.0.0.1:5000/diary_entries/${mealItems._id}/foods/${meal}/${productId}`</span>
 <span class="cstat-no" title="statement not covered" >			console.log('url', url)</span>
 <span class="cstat-no" title="statement not covered" >            const response = await fetch(url , </span>
 <span class="cstat-no" title="statement not covered" >                options</span>
@@ -198,38 +191,33 @@ import './styles.css'
 <span class="cstat-no" title="statement not covered" >			console.log('response', response)</span>
 <span class="cstat-no" title="statement not covered" >            const data = await response.json()</span>
 <span class="cstat-no" title="statement not covered" >            console.log('data', data)</span>
-<span class="cstat-no" title="statement not covered" >            setDiaryEntry(data)</span>
+<span class="cstat-no" title="statement not covered" >            setMealItems(data)</span>
 <span class="cstat-no" title="statement not covered" >        } catch (error) {</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >        }</span>
 <span class="cstat-no" title="statement not covered" >    } </span>
 <span class="cstat-no" title="statement not covered" >    </span>
-<span class="cstat-no" title="statement not covered" >    async function handleFoodItemDelete(meal, productId) {</span>
-<span class="cstat-no" title="statement not covered" >        try {</span>
-<span class="cstat-no" title="statement not covered" >            const response = await fetch(`http://127.0.0.1:5000/diary_entries/${diaryEntry._id}/foods/${meal}/${productId}`,</span>
-<span class="cstat-no" title="statement not covered" >                {method:"DELETE"}</span>
-<span class="cstat-no" title="statement not covered" >            )</span>
-<span class="cstat-no" title="statement not covered" >            const data = await response.json()</span>
-<span class="cstat-no" title="statement not covered" >            setDiaryEntry(data)</span>
-<span class="cstat-no" title="statement not covered" >        } catch (error) {</span>
-<span class="cstat-no" title="statement not covered" >        }</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >	return (</span>
-<span class="cstat-no" title="statement not covered" >		&lt;div className={`food-item-container${item.confirmed ? ' confirmed' : ''}`}&gt;</span>
+<span class="cstat-no" title="statement not covered" >		&lt;div </span>
+<span class="cstat-no" title="statement not covered" >            className={`food-item-container${item.confirmed ? ' confirmed' : ''}`}</span>
+<span class="cstat-no" title="statement not covered" >            onClick={handleFoodItemClick}</span>
+<span class="cstat-no" title="statement not covered" >        &gt;</span>
 <span class="cstat-no" title="statement not covered" >			&lt;div&gt;</span>
 <span class="cstat-no" title="statement not covered" >				&lt;h3&gt;{item.product.product_name_en}&lt;/h3&gt;</span>
 <span class="cstat-no" title="statement not covered" >			&lt;/div&gt;</span>
 <span class="cstat-no" title="statement not covered" >			&lt;div&gt;</span>
-<span class="cstat-no" title="statement not covered" >				&lt;h3&gt;{item.product.nutriments["energy-kcal"]}&lt;/h3&gt;</span>
+<span class="cstat-no" title="statement not covered" >				&lt;h4&gt;{(item.product.nutriments["energy-kcal_100g"] * item["user_serving_size"] / 100).toFixed() }&lt;/h4&gt;</span>
 <span class="cstat-no" title="statement not covered" >			&lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" >            &lt;div&gt;</span>
+<span class="cstat-no" title="statement not covered" >				&lt;h4&gt;{(item.serving_multiplier * item.user_serving_size).toFixed(1)}&lt;/h4&gt;g</span>
+<span class="cstat-no" title="statement not covered" >            &lt;/div&gt;</span>
 <span class="cstat-no" title="statement not covered" >			&lt;div className='button-containers'&gt;</span>
 <span class="cstat-no" title="statement not covered" >				&lt;button</span>
-<span class="cstat-no" title="statement not covered" >					onClick={() =&gt; handleFoodItemConfirm(meal, item.product._id, !item.confirmed)}</span>
+<span class="cstat-no" title="statement not covered" >					onClick={() =&gt; handleFoodItemConfirm(meal, item.product.id, !item.confirmed)}</span>
 <span class="cstat-no" title="statement not covered" >				</span>
 <span class="cstat-no" title="statement not covered" >				&gt;&amp;#10004;&lt;/button&gt;</span>
 <span class="cstat-no" title="statement not covered" >				&lt;button</span>
-<span class="cstat-no" title="statement not covered" >					onClick={() =&gt; handleFoodItemDelete(meal, item.product._id)}</span>
+<span class="cstat-no" title="statement not covered" >					onClick={() =&gt; handleDeleteFood(meal, item.product.id)}</span>
 <span class="cstat-no" title="statement not covered" >				&gt;&amp;#x2716;&lt;/button&gt;</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >			&lt;/div&gt;</span>
@@ -244,7 +232,7 @@ export default FoodItem</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-03-24T11:30:19.548Z
+                at 2023-03-28T10:39:44.517Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

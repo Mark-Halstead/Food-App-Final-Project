@@ -1,6 +1,6 @@
 from flask import Blueprint, request, Response, g, jsonify, make_response
 from pydantic import ValidationError
-import openai
+# import openai
 from bson import ObjectId
 from typing import List
 import json
@@ -84,7 +84,7 @@ def get_gpt():
             stop=None
         )
 
-        chat_response = response.choices[0].text
-        return jsonify({"response": response})
-    except ValidationError as e:
-        return make_response(jsonify({"error": "Invalid data", "details": e.errors()}), 400)
+#         chat_response = response.choices[0].text
+#         return jsonify({"response": response})
+#     except ValidationError as e:
+#         return make_response(jsonify({"error": "Invalid data", "details": e.errors()}), 400)

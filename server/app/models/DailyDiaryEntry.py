@@ -34,9 +34,3 @@ class DailyDiaryEntry(Base):
             "date": date
         })
         return diary_entries
-
-    def get_by_user_id(self, user_id):
-        diary_entries = self.table.find({
-            "user_id": user_id
-        })
-        return [d for d in diary_entries]

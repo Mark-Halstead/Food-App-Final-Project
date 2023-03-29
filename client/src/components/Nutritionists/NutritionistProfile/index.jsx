@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import NutritionistStars from '../NutritionistStars'
 
+import './styles.css'
+
 function NutritionistProfile({selectedNutritionist, handleClosePopup, handleSendRequest}) {
     const [ selectedReviewIndex, setSelectedReviewIndex ] = useState(0)
     const [ message, setMessage ] = useState("")
@@ -41,10 +43,10 @@ function NutritionistProfile({selectedNutritionist, handleClosePopup, handleSend
                                 </div>
                             </div>
                         }
-                        <div className="popup-message">
-                            <h5>Send a message</h5>
+                        <div className="request-nutritionist">
+                            <h5>Request Nutritionist</h5>
                             <textarea name="" id="" cols="50" rows="10" placeholder="Enter your message" value={message} onChange={(e) => setMessage(e.target.value)}></textarea>
-                            <button onClick={handleSendRequest}>Send</button>
+                            <button onClick={() => handleSendRequest(selectedNutritionist, message)}>Request</button>
                         </div>
                     </div>
                 </div>
