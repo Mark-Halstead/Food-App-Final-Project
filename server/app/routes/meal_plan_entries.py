@@ -83,7 +83,6 @@ def get_gpt():
             best_of=1,
             stop=None
         )
-        response = response.choices[0].text
         return jsonify({"response": response})
     except ValidationError as e:
         return make_response(jsonify({"error": "Invalid data", "details": e.errors()}), 400)
