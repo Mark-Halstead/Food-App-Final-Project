@@ -1,6 +1,6 @@
 from flask import Blueprint, request, Response, g, jsonify, make_response
 from pydantic import ValidationError
-# import openai
+import openai
 from bson import ObjectId
 from typing import List
 import json
@@ -8,6 +8,7 @@ from app.routes.auth import token_required
 # openai.api_key = "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"
 
 from app.models.MealPlanEntry import MealPlanEntrySchema
+import os
 
 
 ## this is to be able to json encode the _id value (ObjectId object) that is returned from db
@@ -94,23 +95,24 @@ def delete_meal_plan_entry(entry_id):
     else:
         return make_response(jsonify({"error": "Entry not found"}), 404)
 
-# @meal_plan_routes.route("/gpt", methods=["POST"])
-# def get_gpt():
-#     try:
-#         data = request.json
-#         print(data)
-#         response = openai.Completion.create(
-#             engine="text-davinci-003",
-#             prompt=data["prompt"],
-#             top_p=1,
-#             max_tokens=1024,
-#             frequency_penalty=0.0,
-#             presence_penalty=0.0,
-#             best_of=1,
-#             stop=None
-#         )
-
-#         chat_response = response.choices[0].text
-#         return jsonify({"response": response})
-#     except ValidationError as e:
-#         return make_response(jsonify({"error": "Invalid data", "details": e.errors()}), 400)
+@meal_plan_routes.route("/gpt", methods=["POST"])
+def get_gpt():
+    openai.api_key = os.getenv("OPENAI_API_KEY")
+    print(openai.api_key)
+    print(os.getenv("OPENAI_API_KEY"))
+    try:
+        data = request.json
+        print(data)
+        response = openai.Completion.create(
+            engine="text-davinci-003",
+            prompt=data["prompt"],
+            top_p=1,
+            max_tokens=1024,
+            frequency_penalty=0.0,
+            presence_penalty=0.0,
+            best_of=1,
+            stop=None
+        )
+        return jsonify({"response": response})
+    except ValidationError as e:
+        return make_response(jsonify({"error": "Invalid data", "details": e.errors()}), 400)
