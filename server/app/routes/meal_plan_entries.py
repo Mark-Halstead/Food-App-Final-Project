@@ -5,8 +5,6 @@ from bson import ObjectId
 from typing import List
 import json
 from app.routes.auth import token_required
-# openai.api_key = "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"
-
 from app.models.MealPlanEntry import MealPlanEntrySchema
 import os
 
