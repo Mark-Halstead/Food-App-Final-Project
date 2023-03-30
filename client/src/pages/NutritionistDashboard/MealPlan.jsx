@@ -24,6 +24,8 @@ function MealPlan() {
     const [meal, setMeal] = useState("")
     const [client, setClient] = useState({})
     const [servingMultiplier, setServingMultiplier] = useState(1)
+    const [saving, setSaving] = useState(false)
+    const [saved, setSaved] = useState(false)
 
     const [allMealPlans, setAllMealPlans] = useState([]);
     const [mealPlanEntry, setMealPlanEntry] = useState(null);
@@ -107,6 +109,7 @@ function MealPlan() {
     async function saveMealPlan() {
         try {
             // Add auth here to make sure nutritionist is allowed to edit client data (add Authorisation header)
+            setSaving(true)
             const options = {
                 method:"PUT",
                 body:JSON.stringify(allMealPlans),
@@ -123,6 +126,8 @@ function MealPlan() {
                 const todaysDiaryEntry = data.find((entry) => entry.date === selectedDate);
                 setMealPlanEntry(todaysDiaryEntry);
             }
+            setSaved(true)
+            setSaving(false)
             setLoading(false)
         } catch (error) {
             setError(error)
@@ -208,6 +213,7 @@ function MealPlan() {
                 {showSearchPopup && <SearchPopup onClose={onClose} handleAddFood={handleAddFood} meal={meal} servingMultiplier={servingMultiplier} setServingMultiplier={setServingMultiplier}/>}
             </div>
             <button
+                className='btn'
                 onClick={() => navigate(-1)}
             
             >Back</button>
@@ -222,14 +228,22 @@ function MealPlan() {
                 </div>
                 <DateChanger selectedDate={selectedDate} setSelectedDate={setSelectedDate} mealPlan={true}/>
                 <div>
-                    <h3
-                        onClick={saveMealPlan}
-                        role="button"
-                        className='icon-btn'
-                    >Save <i 
-                        className="fa-solid fa-download"
-                        
-                    ></i></h3>
+                    {
+                        saved ? 
+                            <h3>Saved.</h3>
+                        :
+                        saving ? 
+                            <h3>Saving...</h3>
+                        :
+                        <h3
+                            onClick={saveMealPlan}
+                            role="button"
+                            className='icon-btn'
+                        >Save <i 
+                            className="fa-solid fa-download"
+                            
+                        ></i></h3>
+                    }
                     
                 </div>
 

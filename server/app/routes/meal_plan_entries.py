@@ -67,7 +67,7 @@ def confirm_food_item(user_data, entry_date, meal, food_item_id):
 
     updated_data = g.meal_plan_entry_model.update(meal_plan_entry["_id"], meal_plan_entry)
 
-    return Response(JSONEncoder().encode(updated_data), content_type='application/json')
+    return Response(JSONEncoder().encode(meal_plan_entry), content_type='application/json')
 
 @meal_plan_routes.route("/<client_id>", methods=["PUT"])
 @token_required('nutritionist')

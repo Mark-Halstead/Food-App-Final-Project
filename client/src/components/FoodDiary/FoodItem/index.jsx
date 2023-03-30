@@ -21,7 +21,7 @@ function FoodItem({ item, meal, mealItems, setMealItems, handleFoodItemClick,  h
                 options
             )
             const data = await response.json()
-            
+
             setMealItems(data)
         } catch (error) {
 			console.log('error', error)
