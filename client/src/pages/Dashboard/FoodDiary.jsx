@@ -37,6 +37,8 @@ function FoodDiary() {
                 const response = await fetch(`http://127.0.0.1:5000/diary_entries/`, options)
                 if (response.status === 200) {
                     const { diary_entries, meal_plan } = await response.json()
+                    console.log('diary_entries', diary_entries)
+                    console.log('meal_plan', meal_plan)
                     setAllDiaryEntries(diary_entries)
                     setMealPlan(meal_plan)
                     const currentDiaryEntry = diary_entries.find(entry => entry.date === selectedDate);
@@ -62,9 +64,11 @@ function FoodDiary() {
     useEffect(() => {
         if (allDiaryEntries) {
             const currentEntry = allDiaryEntries.find(entry => entry.date === selectedDate);
+            const currentMealPlan = mealPlan.find(entry => entry.date === selectedDate);
 
             const entry = currentEntry ? currentEntry : createEmptyDiaryEntryObject(selectedDate, "")
             setCurrentDiaryEntry(entry)
+            setCurrentMealPlanEntry(currentMealPlan)
             setShowMoodMenu(false)
 
         } 
@@ -192,7 +196,16 @@ function FoodDiary() {
             </div>
             {
                 loading ? 
-                    <h3 className='food-diary-loading'>Loading Food Diary...</h3>
+                    <>
+                        <div className='loader-2'>
+                            <div className="line"></div>
+                            <div className="line"></div>
+                            <div className="line"></div>
+                            <div className="line"></div>
+                            <div className="line"></div>
+                        </div>
+                    </>
+                    // <h3 className='food-diary-loading'>Loading Food Diary...</h3>
                     :
                     <>
                         <MealContainer mealName={"breakfast"} mealItems={currentDiaryEntry} setMealItems={setCurrentDiaryEntry} mealPlanItems={currentMealPlanEntry} setMealPlanItems={setCurrentMealPlanEntry} totals={mealTotals} openSearchPopup={openSearchPopup} handleDeleteFood={handleDeleteFood}/>

@@ -2,6 +2,7 @@ from . import get_connection
 from datetime import datetime, timedelta
 import random
 from faker import Faker
+from passlib.hash import pbkdf2_sha256
 from faker_food import FoodProvider
 from app.models.DailyDiaryEntry import DailyDiaryEntrySchema
 from app.models.User  import UserSchema
@@ -62,7 +63,7 @@ def add_dummy_nutritionists():
     for _ in range(10):
         nutritionist_data = {
             "email": fake.email(),
-            "password": "password123",
+            "password": pbkdf2_sha256.encrypt("password"),
             "first_name": fake.first_name(),
             "last_name": fake.last_name(),
             "credentials": random.choice(["RD", "MS", "PhD", "MD"]),
@@ -86,7 +87,7 @@ def add_dummy_users():
             "nutritionist_pending":random.choice([False, True]),
             "nutritionist_message":fake.text(),
             "email": fake.email(),
-            "password": "password123",
+            "password": pbkdf2_sha256.encrypt("password"),
             "first_name": fake.first_name(),
             "last_name": fake.last_name(),
             "paid_subscription": fake.boolean(),
@@ -99,7 +100,8 @@ def add_dummy_users():
             "food_preferences": [random.choice(food_preferences) for _ in range(random.randint(0, 3))],
             "daily_calorie_target": random.uniform(1000, 3000),
             "meal_complexity": random.randint(0, 5),
-            "budget": random.randint(0, 5)
+            "budget": random.randint(0, 5),
+            "meal_plan_confirmed": False
         }
         user = UserSchema(**user_data)
         users.append(user)

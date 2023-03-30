@@ -179,7 +179,7 @@ def login():
     token_data = {
         "token": nutritionist["token_id"],
         "role": "nutritionist",
-        "nutritionist_id": nutritionist_data["_id"]
+        "user_id": nutritionist_data["_id"]
     }
     token = g.token_model.create(token_data)
     return Response(JSONEncoder().encode(token), content_type='application/json')
