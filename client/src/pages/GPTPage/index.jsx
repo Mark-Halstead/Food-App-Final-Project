@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import "./gptstyles.css";
 
 function GPTPage() {
   const [prompt, setPrompt] = useState('');
@@ -40,50 +41,49 @@ function GPTPage() {
   };
 
   return (
-    <div>
-      <h1>Chatbot</h1>
-      <form onSubmit={handleSubmit}>
-        <button type="submit">Request meal plan for today</button>
+    <div id="gpt-container">
+      <h1 id="gpt-heading">AI Nutritionist</h1>
+      <form onSubmit={handleSubmit} id="gpt-form">
+        <button type="submit" id="gpt-button">Request meal plan for today</button>
       </form>
       {loading ?
         <p>Loading...</p>
         :
-        <ul>
-          <section>
-            <h2>Breakfast:</h2>
+        <ul id="gpt-response">
+          <section class="gpt-meal">
+            <h2>Breakfast</h2>
             <ul>
               {response.breakfast?.map((item) => (
-                <li key={item}>{item}</li>
+                <li key={item} class="gpt-item">{item}</li>
               ))}
             </ul>
           </section>
-          <section>
-            <h2>Lunch:</h2>
+          <section class="gpt-meal">
+            <h2>Lunch</h2>
             <ul>
               {response.lunch?.map((item) => (
-                <li key={item}>{item}</li>
+                <li key={item} class="gpt-item">{item}</li>
               ))}
             </ul>
           </section>
-          <section>
-            <h2>Dinner:</h2>
+          <section class="gpt-meal">
+            <h2>Dinner</h2>
             <ul>
               {response.dinner?.map((item) => (
-                <li key={item}>{item}</li>
+                <li key={item} class="gpt-item">{item}</li>
               ))}
             </ul>
           </section>
-          <section>
-            <h2>Snacks:</h2>
+          <section class="gpt-meal">
+            <h2>Snacks</h2>
             <ul>
               {response.snacks?.map((item) => (
-                <li key={item}>{item}</li>
+                <li key={item} class="gpt-item">{item}</li>
               ))}
             </ul>
           </section>
         </ul>
       }
-      {/* <p>{response}</p> */}
     </div>
   );
 }

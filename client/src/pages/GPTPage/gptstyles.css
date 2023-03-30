@@ -1,0 +1,50 @@
+#gpt-container {
+    background-color: rgba(24, 212, 24, 0.3);
+    border-radius: 10px;
+    text-align: center;
+    padding: 20px;
+}
+
+#gpt-heading {
+    color: black;
+}
+
+#gpt-form {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+#gpt-button {
+    background-color: rgb(24, 212, 24, 1);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#gpt-button:hover {
+    background-color: rgb(24, 212, 24, 0.8);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+#gpt-response {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.gpt-meal {
+    margin-bottom: 20px;
+}
+
+.gpt-item {
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    margin-bottom: 5px;
+}
