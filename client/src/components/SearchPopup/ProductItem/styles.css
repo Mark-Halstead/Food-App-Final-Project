@@ -1,7 +1,13 @@
 .product-item-container {
-    background-color: aliceblue;
-    margin: 3px 0;
+    background-color: var(--themeColorPale);
+    margin: 10px 0;
     cursor: pointer;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.product-item-container:hover {
+    background-color: var(--themeColorPaler);
 }
 
 .product-item-container h3 {

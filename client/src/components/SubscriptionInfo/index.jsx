@@ -1,5 +1,6 @@
 import React from 'react';
 import Wrapper from '../../assets/wrappers/SubscriptionInfo';
+import Loader from '../Loader';
 
 const SubscriptionInfo = ({
   budget,
@@ -8,6 +9,7 @@ const SubscriptionInfo = ({
   setSubscriptionType,
   prevPage,
   handleSubmit,
+  submitting
 }) => {
   const handleBudgetChange = (e) => {
     setBudget(e.target.value);
@@ -16,6 +18,10 @@ const SubscriptionInfo = ({
   const handleSubscriptionTypeChange = (e) => {
     setSubscriptionType(e.target.value);
   };
+
+  if (submitting) {
+    return <Loader />
+  }
 
   return (
     <Wrapper>

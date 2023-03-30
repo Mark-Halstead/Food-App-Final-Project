@@ -37,9 +37,11 @@ const NavbarD = () => {
     return (
         <Wrapper>
             <div className='nav-center'>
-                <button type='button' className='toggle-btn' onClick={handleToggleSidebar}>
-                    <FaAlignLeft />
-                </button>
+                <div>
+                    <button type='button' className='toggle-btn' onClick={handleToggleSidebar}>
+                        <FaAlignLeft />
+                    </button>
+                </div>
                 <div>
                     <h3 className='logo-text'>dashboard</h3>
                 </div>

@@ -75,6 +75,9 @@ html {
     /* rest of the vars */
     --backgroundColor: var(--grey-50);
     --textColor: var(--grey-900);
+    --themeColor: rgb(24, 212, 24, 1);
+    --themeColorPale: rgb(24, 212, 24, 0.5);
+    --themeColorPaler: rgb(24, 212, 24, 0.3);
     --borderRadius: 0.25rem;
     --letterSpacing: 1px;
     --transition: 0.3s ease-in-out all;
@@ -181,6 +184,7 @@ ul {
     transition: var(--transition);
     text-transform: capitalize;
     display: inline-block;
+    margin-left: 5px;
 }
 .btn:hover {
     background: rgb(24, 212, 24, 0.8);
@@ -375,3 +379,13 @@ ul {
 }
 
 /* Icons css end*/
+.back-button-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.fa-star,
+.fa-star-half {
+    color: var(--themeColor);
+}

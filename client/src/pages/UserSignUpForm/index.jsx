@@ -21,6 +21,7 @@ const UserSignUpForm = () => {
     const [mealComplexity, setMealComplexity] = useState('');
     const [budget, setBudget] = useState('');
     const [subscriptionType, setSubscriptionType] = useState('');
+    const [loading, setLoading] = useState(false)
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -42,19 +43,19 @@ const UserSignUpForm = () => {
         };
     
         try {
+            setLoading(true)
             const token = localStorage.getItem('token')
             const response = await axios.put(`http://127.0.0.1:5000/users/`, userData, {
                 headers: {
                     Authorization: `${token}`
                 },
             });
-    
-            console.log(response.data);
-            alert("Profile updated successfully!")
+
             Navigate("/dashboard")
         } catch (error) {
             console.log(error.response.data);
         }
+        setLoading(false)
     };
     
 
@@ -152,6 +153,7 @@ const UserSignUpForm = () => {
                         setSubscriptionType={setSubscriptionType}
                         prevPage={prevPage}
                         handleSubmit={handleSubmit}
+                        submitting={loading}
                     />
                 </CSSTransition>
             </form>

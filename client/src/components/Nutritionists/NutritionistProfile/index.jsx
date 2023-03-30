@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import NutritionistStars from '../NutritionistStars'
+import Loader from '../../Loader'
 
 import './styles.css'
 
@@ -37,8 +38,12 @@ function NutritionistProfile({selectedNutritionist, handleClosePopup, handleSend
                     <div className="popup-right">
                         {reviewsLength > 0 &&
                             <div className="popup-review">
-                                { <NutritionistStars rating={selectedNutritionist.reviews[selectedReviewIndex].rating}/> }
-                                <p className="popup-review-content">{selectedNutritionist.reviews[selectedReviewIndex].review_message}</p>
+                                <p className="popup-review-content">
+                                    <div className='stars-container'>
+                                        { <NutritionistStars rating={selectedNutritionist.reviews[selectedReviewIndex].rating}/> }
+                                    </div>
+                                    {selectedNutritionist.reviews[selectedReviewIndex].review_message}
+                                </p>
                                 <div className="popup-review-arrows">
                                     {hasPrevReview ? <button className="popup-arrow-button btn" onClick={handlePrevReview}>{"<"}</button> : <div/>}
                                     {hasNextReview ? <button className="popup-arrow-button btn" onClick={handleNextReview}>{">"}</button> : <div/>}
@@ -49,10 +54,10 @@ function NutritionistProfile({selectedNutritionist, handleClosePopup, handleSend
                             <h5>Request Nutritionist</h5>
                             { requestSent 
                                 ? <div>Request Sent!</div> 
-                                : sendingRequest ? <div>Sending request...</div> 
-                                : <div>
-                                    <textarea name="" id="" cols="50" rows="10" placeholder="Enter your message" value={message} onChange={(e) => setMessage(e.target.value)}></textarea>
-                                    <button className='btn' disabled={sendingRequest} onClick={() => handleSendRequest(selectedNutritionist, message)}>
+                                : sendingRequest ? <Loader />
+                                : <div className='request-message-container'>
+                                    <textarea name="" id="" cols="60" rows="5" placeholder="Enter your message" value={message} onChange={(e) => setMessage(e.target.value)}></textarea>
+                                    <button className='btn' style={{marginTop: '10px'}} disabled={sendingRequest} onClick={() => handleSendRequest(selectedNutritionist, message)}>
                                         { sendingRequest ? "Sending Request" : "Request" }
                                     </button>
                                 </div>
