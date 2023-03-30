@@ -3,7 +3,6 @@ import axios from 'axios';
 import "./gptstyles.css";
 
 function GPTPage() {
-  const [prompt, setPrompt] = useState('');
   const [response, setResponse] = useState({});
   const [loading, setLoading] = useState(false);
 
@@ -44,12 +43,13 @@ function GPTPage() {
     <div id="gpt-container">
       <h1 id="gpt-heading">AI Nutritionist</h1>
       <form onSubmit={handleSubmit} id="gpt-form">
-        <button type="submit" id="gpt-button">Request meal plan for today</button>
+        <button type="submit" id="gpt-button">Request</button>
       </form>
       {loading ?
-        <p>Loading...</p>
+        <div id="gpt-spinner"></div>
         :
-        <ul id="gpt-response">
+        response && Object.keys(response).length ? (
+          <ul id="gpt-response">
           <section class="gpt-meal">
             <h2>Breakfast</h2>
             <ul>
@@ -83,6 +83,12 @@ function GPTPage() {
             </ul>
           </section>
         </ul>
+        )
+        :
+        <div id="gpt-cta">
+          <p>Click the button to request a meal plan for a day.</p>
+          <p>Warning: This feature is experimental</p>
+        </div>
       }
     </div>
   );
