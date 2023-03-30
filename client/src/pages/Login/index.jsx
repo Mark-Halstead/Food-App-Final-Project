@@ -2,23 +2,25 @@ import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Wrapper from '../../assets/wrappers/LoginPage';
-// import { AuthContext } from '../../contexts/AuthContext';
+import { UserContext } from '../../contexts/UserContext';
 
 function Login() {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const { setIsLoggedIn, setUserData, setNutritionistData } = useContext(UserContext);
     // const { setIsLoggedIn } = useContext(AuthContext);
 
     async function handleLogin(event) {
         event.preventDefault();
         try {
             const response = await axios.post('http://127.0.0.1:5000/users/login', { email, password });
-            localStorage.setItem('token', response.data.token);
+            localStorage.setItem('token', response.data.token_data.token);
+            setUserData(response.data.user_data)
             // setIsLoggedIn(true);
             alert('You have successfully logged in!');
             navigate('/dashboard');
-            console.log(localStorage.getItem('token'));
+            setIsLoggedIn(true)
         } catch (error) {
             console.error(error);
         }

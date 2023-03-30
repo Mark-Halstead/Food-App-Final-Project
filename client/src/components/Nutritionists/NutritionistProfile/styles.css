@@ -6,3 +6,8 @@
 .request-nutritionist textarea {
     padding: 15px;
 }
+
+.popup-review-arrows {
+    display: flex;
+    justify-content: space-between;
+}

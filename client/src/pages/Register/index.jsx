@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Wrapper from '../../assets/wrappers/RegisterPage';
+import { UserContext } from '../../contexts/UserContext';
 
 function Register() {
 
@@ -20,8 +21,7 @@ function Register() {
             });
 
             console.log(response.data);
-            const { token } = response.data;
-            localStorage.setItem('token', token);
+            localStorage.setItem('token', response.data.token_data.token);
             console.log(localStorage.getItem('token'));
             alert("Thanks for registering!")
             Navigate("/user-signup-form")

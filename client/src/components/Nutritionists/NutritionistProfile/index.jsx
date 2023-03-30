@@ -38,13 +38,14 @@ function NutritionistProfile({selectedNutritionist, handleClosePopup, handleSend
                                 { <NutritionistStars rating={selectedNutritionist.reviews[selectedReviewIndex].rating}/> }
                                 <p className="popup-review-content">{selectedNutritionist.reviews[selectedReviewIndex].review_message}</p>
                                 <div className="popup-review-arrows">
-                                    {hasPrevReview && <button className="popup-arrow-button" onClick={handlePrevReview}>{"<"}</button>}
-                                    {hasNextReview && <button className="popup-arrow-button" onClick={handleNextReview}>{">"}</button>}
+                                    {hasPrevReview ? <button className="popup-arrow-button" onClick={handlePrevReview}>{"<"}</button> : <div/>}
+                                    {hasNextReview ? <button className="popup-arrow-button" onClick={handleNextReview}>{">"}</button> : <div/>}
                                 </div>
                             </div>
                         }
                         <div className="request-nutritionist">
                             <h5>Request Nutritionist</h5>
+                            
                             <textarea name="" id="" cols="50" rows="10" placeholder="Enter your message" value={message} onChange={(e) => setMessage(e.target.value)}></textarea>
                             <button onClick={() => handleSendRequest(selectedNutritionist, message)}>Request</button>
                         </div>

@@ -7,13 +7,12 @@ import { UserContext } from '../../contexts/UserContext';
 
 const StatsContainer = () => {
   const { userData, nutritionistData } = useContext(UserContext);
-  console.log('nutritionistData', nutritionistData)
 
   const defaultStats = [
     {
       // title: `${nutritionistData.first_name} ${nutritionistData.first_name}`,
-      title:"hello",
-      count: "Nutritionist",
+      title:"Name",
+      count: "Wallace Smith",
       color: '#e9b949',
       bcg: '#fcefc7',
       icon: <FaUser />,
@@ -38,10 +37,13 @@ const StatsContainer = () => {
 
   return (
     <Wrapper>
-
-      {defaultStats.map((item, index) => {
-        return <StatCard key={index} {...item} />;
-      })}
+      {
+        userData ? 
+        defaultStats.map((item, index) => {
+          return <StatCard key={index} {...item} />;
+        })
+        : <h3>Loading...</h3>
+      }
     </Wrapper>
   );
 };
