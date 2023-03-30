@@ -9,9 +9,12 @@ function RegisterNutritionist() {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [isRegistering, setIsRegistering] = useState(false);
+
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        setIsRegistering(true);
 
         try {
             const response = await axios.post('http://127.0.0.1:5000/nutritionists/signup', {
@@ -22,10 +25,12 @@ function RegisterNutritionist() {
             const { token } = response.data;
             localStorage.setItem('token', token);
             console.log(localStorage.getItem('token'));
+            setIsRegistering(false);
             alert("Thanks for registering!")
             Navigate("/nutritionist-signup-form")
         } catch (error) {
             console.log(error.response.data);
+            setIsRegistering(false);
         }
     };
 

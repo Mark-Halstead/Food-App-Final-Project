@@ -8,19 +8,23 @@ function LoginNutritionist() {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
 // const { setIsLoggedIn } = useContext(AuthContext);
 
     async function handleLogin(event) {
         event.preventDefault();
+        setLoading(true);
         try {
             const response = await axios.post('http://127.0.0.1:5000/nutritionists/login', { email, password });
             const { token } = response.data;
             localStorage.setItem('token', token);
             console.log(localStorage.getItem('token'));
+            setLoading(false);
             alert('You have successfully logged in!');
             navigate('/nutritionist-dashboard');
         } catch (error) {
             console.error(error.response.data);
+            setLoading(false);
         }
     }
 
@@ -37,7 +41,7 @@ function LoginNutritionist() {
                             Password:
                             <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} />
                         </label>
-                        <button type="submit">Login</button>
+                        <button type="submit">{loading ? 'Logging in...' : 'Login'}</button>
                     </form>
                 </div>
             </div>

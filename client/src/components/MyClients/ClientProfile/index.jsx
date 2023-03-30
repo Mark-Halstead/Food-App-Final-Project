@@ -86,7 +86,7 @@ function ClientProfile({ selectedClient, handleClosePopup, handleCreateMealPlan,
                     <div className="popup-content">
                     <div className={`popup-left`}>
                         {selectedClient.age && <ClientProfileItem label="Age" value={selectedClient.age} />}
-                        {selectedClient.height && <ClientProfileItem label="Height" value={`${parseFloat(selectedClient).height.toFixed(1)} cm`} icon="fa-solid fa-ruler-vertical" />}
+                        {selectedClient.height && <ClientProfileItem label="Height" value={`${parseFloat(selectedClient.height).toFixed(1)} cm`} icon="fa-solid fa-ruler-vertical" />}
                         {selectedClient.weight && <ClientProfileItem label="Weight" value={`${parseFloat(selectedClient.weight).toFixed(1)} kg`} icon="fa-solid fa-weight" />}
                         {selectedClient.meal_complexity && <ClientProfileItem label="Meal Complexity" value={selectedClient.meal_complexity} icon="fa-solid fa-utensils" />}
                         {selectedClient.food_preferences && <ClientProfileItem label="Food Preferences" value={selectedClient.food_preferences} icon="fa-solid fa-tree" />}
@@ -114,15 +114,15 @@ function ClientProfile({ selectedClient, handleClosePopup, handleCreateMealPlan,
                                             <p>
                                                 {selectedClient.nutritionist_message}
                                             </p>
-                                            <button onClick={() => acceptClient(selectedClient)}>Accept Client</button>
-                                            <button onClick={() => declineClient(selectedClient)}>Decline Client</button>
+                                            <button className='btn' onClick={() => acceptClient(selectedClient)}>Accept Client</button>
+                                            <button className='btn' onClick={() => declineClient(selectedClient)}>Decline Client</button>
                                         </>
 
                                     )
                             ) :
                                 <>
-                                    <button onClick={() => handleCreateMealPlan(selectedClient)}>View/Edit Meal Plan</button>
-                                    <button onClick={() => sendMealPlan(selectedClient)}>Send Meal Plan</button>
+                                    <button className='btn' onClick={() => handleCreateMealPlan(selectedClient)}>View/Edit Meal Plan</button>
+                                    <button className='btn' onClick={() => sendMealPlan(selectedClient)}>Send Meal Plan</button>
                                 </>
                         }
                     </div>

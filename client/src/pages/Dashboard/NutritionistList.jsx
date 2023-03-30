@@ -13,6 +13,8 @@ function NutritionistList() {
     const [selectedNutritionist, setSelectedNutritionist] = useState({});
     const [showProfilePopup, setShowProfilePopup] = useState(false);
     const [loading, setLoading] = useState(false)
+    const [sendingRequest, setSendingRequest] = useState(false);
+    const [requestSent, setRequestSent] = useState(false);
 
 
     useEffect(() => {
@@ -45,6 +47,7 @@ function NutritionistList() {
     }, [credentialsFilter, areaFilter])
 
     const handleSendRequest = async (nutritionist, message) => {
+        setSendingRequest(true)
         const token = localStorage.token
         const options = {
             method:"PUT",
@@ -58,6 +61,8 @@ function NutritionistList() {
             })
         }
         const response = await fetch("http://127.0.0.1:5000/users/select_nutritionist", options)
+        setRequestSent(true)
+        setSendingRequest(false)
     }
 
     const handleClick = (nutritionist) => {
@@ -74,7 +79,7 @@ function NutritionistList() {
         <div>
             {
                 showProfilePopup && 
-                    (<NutritionistProfile selectedNutritionist={selectedNutritionist} handleClosePopup={handleClosePopup} handleSendRequest={handleSendRequest}/>)
+                    (<NutritionistProfile sendingRequest={sendingRequest} requestSent={requestSent} selectedNutritionist={selectedNutritionist} handleClosePopup={handleClosePopup} handleSendRequest={handleSendRequest}/>)
             }
             {
                 loading ? (

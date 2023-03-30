@@ -3,7 +3,7 @@ import NutritionistStars from '../NutritionistStars'
 
 import './styles.css'
 
-function NutritionistProfile({selectedNutritionist, handleClosePopup, handleSendRequest}) {
+function NutritionistProfile({selectedNutritionist, handleClosePopup, handleSendRequest, sendingRequest, requestSent}) {
     const [ selectedReviewIndex, setSelectedReviewIndex ] = useState(0)
     const [ message, setMessage ] = useState("")
 
@@ -22,9 +22,11 @@ function NutritionistProfile({selectedNutritionist, handleClosePopup, handleSend
     return (
         <div className="popup-background">
             <div className="popup">
+                <div>
+                    <button className='popup-close-button' onClick={handleClosePopup}>&#215;</button>
+                </div>
                 <div className="popup-header">
                     <h4>{selectedNutritionist.first_name} {selectedNutritionist.last_name}</h4>
-                    <button className="close-button" onClick={handleClosePopup}>X</button>
                 </div>
                 <div className="popup-content">
                     <div className="popup-left">
@@ -38,16 +40,23 @@ function NutritionistProfile({selectedNutritionist, handleClosePopup, handleSend
                                 { <NutritionistStars rating={selectedNutritionist.reviews[selectedReviewIndex].rating}/> }
                                 <p className="popup-review-content">{selectedNutritionist.reviews[selectedReviewIndex].review_message}</p>
                                 <div className="popup-review-arrows">
-                                    {hasPrevReview ? <button className="popup-arrow-button" onClick={handlePrevReview}>{"<"}</button> : <div/>}
-                                    {hasNextReview ? <button className="popup-arrow-button" onClick={handleNextReview}>{">"}</button> : <div/>}
+                                    {hasPrevReview ? <button className="popup-arrow-button btn" onClick={handlePrevReview}>{"<"}</button> : <div/>}
+                                    {hasNextReview ? <button className="popup-arrow-button btn" onClick={handleNextReview}>{">"}</button> : <div/>}
                                 </div>
                             </div>
                         }
                         <div className="request-nutritionist">
                             <h5>Request Nutritionist</h5>
-                            
-                            <textarea name="" id="" cols="50" rows="10" placeholder="Enter your message" value={message} onChange={(e) => setMessage(e.target.value)}></textarea>
-                            <button onClick={() => handleSendRequest(selectedNutritionist, message)}>Request</button>
+                            { requestSent 
+                                ? <div>Request Sent!</div> 
+                                : sendingRequest ? <div>Sending request...</div> 
+                                : <div>
+                                    <textarea name="" id="" cols="50" rows="10" placeholder="Enter your message" value={message} onChange={(e) => setMessage(e.target.value)}></textarea>
+                                    <button className='btn' disabled={sendingRequest} onClick={() => handleSendRequest(selectedNutritionist, message)}>
+                                        { sendingRequest ? "Sending Request" : "Request" }
+                                    </button>
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>
