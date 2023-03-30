@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">20% </span>
+                <span class="strong">54.28% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>7/35</span>
+                <span class='fraction'>19/35</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">33.33% </span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>1/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
-                <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
-            </div>
-        
-            
-            <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>1/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">20% </span>
+                <span class="strong">54.28% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>7/35</span>
+                <span class='fraction'>19/35</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -102,6 +102,9 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -118,27 +121,24 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react'
 &nbsp;
 import './styles.css'
 import { StatContainer } from '../../FoodDiary'
 &nbsp;
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >function ProductItem({result}) {</span></span>
-<span class="cstat-no" title="statement not covered" >    let value;</span>
-<span class="cstat-no" title="statement not covered" >    if (result.nutriments["energy-kcal_serving"]) {</span>
+function ProductItem({result}) {
+    let value;
+    if (result.nutriments["energy-kcal_serving"]) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
 <span class="cstat-no" title="statement not covered" >      value = `${result.nutriments["energy-kcal_serving"]} kcal`;</span>
 <span class="cstat-no" title="statement not covered" >    } else if (result.nutriments["energy-kcal_100g"]) {</span>
 <span class="cstat-no" title="statement not covered" >      value = `${result.nutriments["energy-kcal_100g"]} kcal`;</span>
@@ -155,15 +155,15 @@ import { StatContainer } from '../../FoodDiary'
 <span class="cstat-no" title="statement not covered" >                            &lt;StatContainer title={"Calories"} value={value} /&gt;</span>
 <span class="cstat-no" title="statement not covered" >                            &lt;StatContainer</span>
 <span class="cstat-no" title="statement not covered" >                                title={"Serving Size"}</span>
-<span class="cstat-no" title="statement not covered" >                                value={value === `${result.nutriments["energy-kcal_serving"]} kcal` ? `${result.serving_quantity} g` : `100 g`}</span>
-<span class="cstat-no" title="statement not covered" >                            /&gt;</span>
-<span class="cstat-no" title="statement not covered" >                        &lt;/&gt;</span>
-<span class="cstat-no" title="statement not covered" >                    )}</span>
-<span class="cstat-no" title="statement not covered" >                </span>
-<span class="cstat-no" title="statement not covered" >            &lt;/div&gt;</span>
-<span class="cstat-no" title="statement not covered" >        &lt;/li&gt;</span>
-<span class="cstat-no" title="statement not covered" >    )</span>
-<span class="cstat-no" title="statement not covered" >}</span>
+                                value={value === `${result.nutriments["energy-kcal_serving"]} kcal` ? `${result.<span class="branch-0 cbranch-no" title="branch not covered" >serving_quantity} g` : `100 g`}</span>
+                            /&gt;
+                        &lt;/&gt;
+                    )}
+                
+            &lt;/div&gt;
+        &lt;/li&gt;
+    )
+}
 &nbsp;
 export default ProductItem</pre></td></tr></table></pre>
 
@@ -172,7 +172,7 @@ export default ProductItem</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-03-28T10:39:44.517Z
+                at 2023-03-30T10:50:43.309Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

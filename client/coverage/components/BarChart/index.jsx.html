@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">53.84% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>14/26</span>
+                <span class='fraction'>26/26</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>1/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>1/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">53.84% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>14/26</span>
+                <span class='fraction'>26/26</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -101,18 +101,18 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import {
@@ -126,19 +126,19 @@
 } from 'recharts';
 import data from './barData';
 &nbsp;
-const BarChartComponent = <span class="fstat-no" title="function not covered" >() =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    return (</span>
-<span class="cstat-no" title="statement not covered" >        &lt;ResponsiveContainer width='100%' height={300}&gt;</span>
-<span class="cstat-no" title="statement not covered" >            &lt;BarChart data={data} margin={{ top: 50 }}&gt;</span>
-<span class="cstat-no" title="statement not covered" >                &lt;CartesianGrid strokeDasharray='10 10 ' /&gt;</span>
-<span class="cstat-no" title="statement not covered" >                &lt;XAxis dataKey='date' /&gt;</span>
-<span class="cstat-no" title="statement not covered" >                &lt;YAxis allowDecimals={false} /&gt;</span>
-<span class="cstat-no" title="statement not covered" >                &lt;Tooltip /&gt;</span>
-<span class="cstat-no" title="statement not covered" >                &lt;Bar dataKey='Meals' fill='#42b942' barSize={75} /&gt;</span>
-<span class="cstat-no" title="statement not covered" >            &lt;/BarChart&gt;</span>
-<span class="cstat-no" title="statement not covered" >        &lt;/ResponsiveContainer&gt;</span>
-<span class="cstat-no" title="statement not covered" >    );</span>
-<span class="cstat-no" title="statement not covered" >};</span>
+const BarChartComponent = () =&gt; {
+    return (
+        &lt;ResponsiveContainer width='100%' height={300}&gt;
+            &lt;BarChart data={data} margin={{ top: 50 }}&gt;
+                &lt;CartesianGrid strokeDasharray='10 10 ' /&gt;
+                &lt;XAxis dataKey='date' /&gt;
+                &lt;YAxis allowDecimals={false} /&gt;
+                &lt;Tooltip /&gt;
+                &lt;Bar dataKey='Calories' fill='rgb(24, 212, 24, 0.8)' barSize={75} /&gt;
+            &lt;/BarChart&gt;
+        &lt;/ResponsiveContainer&gt;
+    );
+};
 &nbsp;
 export default BarChartComponent;
 &nbsp;</pre></td></tr></table></pre>
@@ -148,7 +148,7 @@ export default BarChartComponent;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-03-28T10:39:44.517Z
+                at 2023-03-30T10:50:43.309Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

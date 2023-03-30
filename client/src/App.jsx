@@ -2,7 +2,7 @@ import React from 'react'
 import { MyClients, DietForm, HomePage, GPTPage } from './pages'
 import { Routes, Route } from 'react-router-dom'
 import { Navbar } from './components'
-import { Profile, Overview, Plan, SharedLayout, Chat, NutritionistSharedLayout, Register, Login, FoodDiary, UserSignUpForm, GoalsForm, SubscriptionForm, MealPlan , BarcodePage, NutritionistList, RegisterNutritionist, NutritionistSignUpForm, LoginNutritionist } from './pages/index'
+import { Profile, Overview, Plan, SharedLayout, Chat, NutritionistSharedLayout, Register, Login, FoodDiary, UserSignUpForm, GoalsForm, SubscriptionForm, MealPlan , BarcodePage, NutritionistList, RegisterNutritionist, NutritionistSignUpForm, LoginNutritionist, TestChat } from './pages/index'
 import { useLocation } from 'react-router-dom';
 import NutritionistProfile from './pages/NutritionistDashboard/NutritionistProfile'
 import { AuthProvider } from './contexts/AuthContext';
@@ -38,6 +38,7 @@ function App() {
           <Route path='goals-form' element={<GoalsForm />} />
           <Route path='diet-form' element={<DietForm />} />
           <Route path='subscription-form' element={<SubscriptionForm />} />
+          <Route path='test-chat' element={<TestChat />} />
           {/* <Route path='form' element={<FormPage />} /> */}
           <Route path="/nutritionist-dashboard" element={<ClientProvider><NutritionistSharedLayout /></ClientProvider>}>
             <Route index element={<MyClients />} />
