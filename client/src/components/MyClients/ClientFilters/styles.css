@@ -1,0 +1,37 @@
+.client-filters {
+    display: flex;
+    align-items: center;
+  }
+  
+  select {
+    padding: 8px 10px;
+    margin: 0 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #F2F2F2;
+    font-size: 14px;
+    color: #666;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+  }
+  
+  select:hover {
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  select:focus {
+    outline: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  }
+  
+  option {
+    color: #333;
+    background-color: #F2F2F2;
+  }
+  
+  select:not(:last-child) {
+    margin-right: 20px;
+  }
+  
+  
