@@ -8,11 +8,11 @@ function PeopleReviews() {
       <div className="stories-wrapper">
         <div className="story-bg">
           <div className="story">
-            <img
+            {/* <img
               src="images/story-img-1.jpg"
               alt="Customer image"
               className="story-image"
-            />
+            /> */}
             <div className="story-text">
               <h1 className="story-heading">
                 Sadik Islam
@@ -30,11 +30,11 @@ function PeopleReviews() {
         </div>
         <div className="story-bg">
           <div className="story">
-            <img
+            {/* <img
               src="images/story-img-2.jpg"
               alt="Customer image"
               className="story-image"
-            />
+            /> */}
             <div className="story-text">
               <h1 className="story-heading">
                 Sadik Islam
