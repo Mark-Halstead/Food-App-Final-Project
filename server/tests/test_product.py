@@ -1,5 +1,6 @@
 import pytest
 from app.models.Product import ProductSchema, Product
+import bson
 
 @pytest.fixture
 def product():
@@ -35,6 +36,6 @@ def test_get_product(product):
         "barcode": "123456789"
     }
     inserted_id = product.create(data)
-    product_data = product.get(inserted_id)
+    product_data = product.get(bson.ObjectId(inserted_id["_id"]))
     assert product_data is not None
     assert product_data["name"] == "Product 1"
