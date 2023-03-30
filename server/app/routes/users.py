@@ -23,7 +23,7 @@ user_routes = Blueprint("user_routes", __name__)
 @token_required("user")
 def get_user(user_data):
     if user_data["nutritionist_id"]:
-        nutritionist_data = g.nutritionist_data_model.get(user_data["nutritionist_id"])
+        nutritionist_data = g.nutritionist_model.get(user_data["nutritionist_id"])
         nutritionist_data.pop("password")
     if user_data:
         user_data.pop("password")

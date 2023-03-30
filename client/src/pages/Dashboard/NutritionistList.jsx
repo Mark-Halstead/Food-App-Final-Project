@@ -53,7 +53,7 @@ function NutritionistList() {
             },
             body:JSON.stringify({
                 nutritionist_id:nutritionist["_id"],
-                nutritionist_pending:false,
+                nutritionist_pending:true,
                 nutritionist_message:message
             })
         }

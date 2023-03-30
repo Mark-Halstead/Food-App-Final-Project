@@ -19,8 +19,10 @@ class MealPlanEntry(Base):
     def save_meal_plan(self, user_id, data):
         today = datetime.today().strftime("%Y-%m-%d")
         self.table.delete_many({"user_id": user_id, "date": {"$gt": today}})
-        data = [d for d in data if d["date"] > today]
-        self.table.insert_many(data)
+        data = [{**d, "user_id":user_id} for d in data if d["date"] > today]
+        
+        if data:
+            self.table.insert_many(data)
         return data
     
     def get_user_by_date(self, date, user_id):

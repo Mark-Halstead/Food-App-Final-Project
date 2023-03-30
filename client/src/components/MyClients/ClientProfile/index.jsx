@@ -85,15 +85,15 @@ function ClientProfile({ selectedClient, handleClosePopup, handleCreateMealPlan,
                     </div>
                     <div className="popup-content">
                     <div className={`popup-left`}>
-                        <ClientProfileItem label="Age" value={selectedClient.age} />
-                        <ClientProfileItem label="Height" value={`${selectedClient.height.toFixed(1)} cm`} icon="fa-solid fa-ruler-vertical" />
-                        <ClientProfileItem label="Weight" value={`${selectedClient.weight.toFixed(1)} kg`} icon="fa-solid fa-weight" />
-                        <ClientProfileItem label="Meal Complexity" value={selectedClient.meal_complexity} icon="fa-solid fa-utensils" />
-                        <ClientProfileItem label="Food Preferences" value={selectedClient.food_preferences.join(", ")} icon="fa-solid fa-tree" />
-                        <ClientProfileItem label="Budget" value={getBudgetIcons(selectedClient.budget)} icon="fa-solid fa-dollar-sign" />
-                        <ClientProfileItem label="Goal" value={selectedClient.goal} icon="fa-solid fa-tree" />
-                        <ClientProfileItem label="Activity Level" value={selectedClient.activity_level} icon="fa-solid fa-shoe-prints" />
-                        <ClientProfileItem label="Daily Calorie Target" value={selectedClient.daily_calorie_target.toFixed()} />
+                        {selectedClient.age && <ClientProfileItem label="Age" value={selectedClient.age} />}
+                        {selectedClient.height && <ClientProfileItem label="Height" value={`${parseFloat(selectedClient).height.toFixed(1)} cm`} icon="fa-solid fa-ruler-vertical" />}
+                        {selectedClient.weight && <ClientProfileItem label="Weight" value={`${parseFloat(selectedClient.weight).toFixed(1)} kg`} icon="fa-solid fa-weight" />}
+                        {selectedClient.meal_complexity && <ClientProfileItem label="Meal Complexity" value={selectedClient.meal_complexity} icon="fa-solid fa-utensils" />}
+                        {selectedClient.food_preferences && <ClientProfileItem label="Food Preferences" value={selectedClient.food_preferences} icon="fa-solid fa-tree" />}
+                        {selectedClient.budget && <ClientProfileItem label="Budget" value={getBudgetIcons(selectedClient.budget)} icon="fa-solid fa-dollar-sign" />}
+                        {selectedClient.goal && <ClientProfileItem label="Goal" value={selectedClient.goal} icon="fa-solid fa-tree" />}
+                        {selectedClient.activity_level && <ClientProfileItem label="Activity Level" value={selectedClient.activity_level} icon="fa-solid fa-shoe-prints" />}
+                        {selectedClient.daily_calorie_target && <ClientProfileItem label="Daily Calorie Target" value={selectedClient.daily_calorie_target.toFixed()} />}
                     </div>
                     <div className="popup-right">
                         {

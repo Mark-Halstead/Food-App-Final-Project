@@ -36,7 +36,7 @@ function RegisterNutritionist() {
                     <form onSubmit={handleSubmit}>
                         <label>
                             Email:
-                            <input type="text" value={email} onChange={(event) => setEmail(event.target.value)} />
+                            <input type="email" value={email} onChange={(event) => setEmail(event.target.value)} />
                         </label>
                         <label>
                             Password:
