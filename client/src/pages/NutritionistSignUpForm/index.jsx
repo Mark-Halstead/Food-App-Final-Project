@@ -34,7 +34,6 @@ const NutritionistSignUpForm = () => {
       });
 
       console.log(response.data);
-      alert("Profile updated successfully!")
       navigate("/nutritionist-dashboard")
       // redirect to dashboard or display success message
     } catch (error) {

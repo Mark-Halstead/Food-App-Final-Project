@@ -7,7 +7,6 @@ const ButtonLogout = () => {
 
     function handleLogout() {
         try {
-            alert("You have successfully logged out!")
             Navigate("/")
             console.log(localStorage.getItem('token'));
             localStorage.removeItem('token');
