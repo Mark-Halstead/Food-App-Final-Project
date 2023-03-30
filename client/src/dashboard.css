@@ -1,7 +1,7 @@
 /* fonts */
 @import url("https://fonts.googleapis.com/css2?family=Cabin&family=Roboto+Condensed:wght@400;700&display=swap");
 
-/* *::-webkit-scrollbar {
+*::-webkit-scrollbar {
     width: 10px;
     background-color: rgba(235, 235, 235, 0);
     border-radius: 10px;
@@ -15,7 +15,7 @@
 *::-webkit-scrollbar-thumb:hover {
     background-color: #161616;
     cursor: pointer;
-} */
+}
 
 html {
     overflow-x: hidden;
@@ -75,6 +75,9 @@ html {
     /* rest of the vars */
     --backgroundColor: var(--grey-50);
     --textColor: var(--grey-900);
+    --themeColor: rgb(24, 212, 24, 1);
+    --themeColorPale: rgb(24, 212, 24, 0.5);
+    --themeColorPaler: rgb(24, 212, 24, 0.3);
     --borderRadius: 0.25rem;
     --letterSpacing: 1px;
     --transition: 0.3s ease-in-out all;
@@ -181,10 +184,20 @@ ul {
     transition: var(--transition);
     text-transform: capitalize;
     display: inline-block;
+    margin-left: 5px;
 }
+.btn-reverse {
+    color: var(--themeColor);
+    background: white;
+    border: var(--themeColor) solid;
+}
+
 .btn:hover {
     background: rgb(24, 212, 24, 0.8);
     box-shadow: var(--shadow-3);
+}
+.btn-reverse:hover {
+    background: var(--themeColorPaler);
 }
 .btn-hipster {
     color: var(--primary-500);
@@ -375,3 +388,13 @@ ul {
 }
 
 /* Icons css end*/
+.back-button-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.fa-star,
+.fa-star-half {
+    color: var(--themeColor);
+}

@@ -3,7 +3,7 @@ import Calendar from 'react-calendar'
 
 import { StatContainer, DateChanger } from '../../components/FoodDiary'
 import { MealContainer } from '../../components/MealPlan'
-import { SearchPopup } from '../../components';
+import { SearchPopup, Loader } from '../../components';
 
 import { calculateTotals } from '../../helpers/calculateStats';
 import { createEmptyMealPlanObject } from '../../helpers/createEmptyObjects';
@@ -212,11 +212,13 @@ function MealPlan() {
             <div>
                 {showSearchPopup && <SearchPopup onClose={onClose} handleAddFood={handleAddFood} meal={meal} servingMultiplier={servingMultiplier} setServingMultiplier={setServingMultiplier}/>}
             </div>
-            <button
-                className='btn'
-                onClick={() => navigate(-1)}
-            
-            >Back</button>
+            <div className='back-button-container'>
+                <button
+                    className='btn'
+                    onClick={() => navigate(-1)}
+                
+                >Back</button>
+            </div>
             <h2>Client: {selectedClient.first_name} {selectedClient.last_name}</h2>
             <div className='diary-header'>
                 <div className='diary-header-left'>
@@ -250,7 +252,7 @@ function MealPlan() {
             </div>
             {
                 loading ? 
-                    <h4>Loading meal plan...</h4>
+                    <Loader />
                 :
                 <>
                     <MealContainer mealName={"breakfast"} mealItems={mealPlanEntry} setMealItems={setMealPlanEntry} totals={mealTotals} openSearchPopup={openSearchPopup} handleDeleteFood={handleDeleteFood}/>

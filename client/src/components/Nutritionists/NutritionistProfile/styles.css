@@ -7,7 +7,48 @@
     padding: 15px;
 }
 
+.popup-header h4 {
+    text-align: center;
+}
+
+.popup-review-content {
+    height: 180px;
+    background-color: rgb(255, 255, 255);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.popup-right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.popup-review {
+    background-color: lightgray;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    max-width: 600px;
+}
+
 .popup-review-arrows {
     display: flex;
     justify-content: space-between;
+}
+
+.request-message-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.request-message-container textarea {
+    resize: none;
+}
+
+.stars-container {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
 }

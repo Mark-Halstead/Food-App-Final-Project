@@ -20,7 +20,6 @@ function LoginNutritionist() {
             localStorage.setItem('token', token);
             console.log(localStorage.getItem('token'));
             setLoading(false);
-            alert('You have successfully logged in!');
             navigate('/nutritionist-dashboard');
         } catch (error) {
             console.error(error.response.data);

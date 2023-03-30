@@ -4,6 +4,7 @@ import axios from "axios";
 import '../../components/Nutritionists/styles.css'
 
 import { NutritionistCard, NutritionistFilter, NutritionistProfile } from "../../components/Nutritionists";
+import { Loader } from "../../components";
 
 function NutritionistList() {
     const [nutritionists, setNutritionists] = useState([]);
@@ -83,7 +84,7 @@ function NutritionistList() {
             }
             {
                 loading ? (
-                    <h3>Loading nutritionists...</h3>
+                    <Loader />
                 ) : (
                     <>
                         <h2>Nutritionists</h2>

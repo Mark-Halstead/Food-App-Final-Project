@@ -1,8 +1,18 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import { NavLink } from 'react-router-dom';
 import links from "../SmallSideBar/links"
+import { SidebarContext } from '../../contexts/SidebarContext';
+
 
 const DashNavLinks = () => {
+    const { sidebar, toggleSidebar } = useContext(SidebarContext);
+    const handleToggleSidebar = () => {
+      if (sidebar === false) {
+        toggleSidebar(true);
+      } else {
+        toggleSidebar(!sidebar);
+      }
+    }
     return (
         <div className='nav-links'>
             {links.map((link) => {
@@ -13,6 +23,7 @@ const DashNavLinks = () => {
                         className="nav-link"
                         activeClassName="active"
                         key={id}
+                        onClick={handleToggleSidebar}
                         end
                     >
                         <div className="icon-container">

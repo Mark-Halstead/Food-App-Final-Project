@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import axios from 'axios';
 import { MealContainer, MoodMenu, StatContainer, DateChanger } from '../../components/FoodDiary'
-import { SearchPopup } from '../../components';
+import { SearchPopup, Loader } from '../../components';
 import { calculateCombinedTotals } from '../../helpers/calculateStats';
 import { createEmptyDiaryEntryObject } from '../../helpers/createEmptyObjects';
 
@@ -20,7 +20,7 @@ function FoodDiary() {
     const [allDiaryEntries, setAllDiaryEntries] = useState(null);
     const [currentDiaryEntry, setCurrentDiaryEntry] = useState(null);
     const [currentMealPlanEntry, setCurrentMealPlanEntry] = useState(null);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [showMoodMenu, setShowMoodMenu] = useState(false)
 
@@ -150,11 +150,11 @@ function FoodDiary() {
             setCurrentDiaryEntry(updatedDiaryEntry)
             setAllDiaryEntries(updatedAllDiaryEntries)
             onClose()
-            setLoadingAddingFood(false)
             
-          } catch (error) {
+        } catch (error) {
             console.error(error);
-          }
+        }
+        setLoadingAddingFood(false)
     }
 
     async function handleDeleteFood(meal, productId) {
@@ -197,13 +197,7 @@ function FoodDiary() {
             {
                 loading ? 
                     <>
-                        <div className='loader-2'>
-                            <div className="line"></div>
-                            <div className="line"></div>
-                            <div className="line"></div>
-                            <div className="line"></div>
-                            <div className="line"></div>
-                        </div>
+                        <Loader />
                     </>
                     // <h3 className='food-diary-loading'>Loading Food Diary...</h3>
                     :

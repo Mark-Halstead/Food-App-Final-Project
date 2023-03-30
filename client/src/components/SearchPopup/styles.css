@@ -61,3 +61,27 @@
     top: 0;
     left: 0;
 }
+
+.search-popup-header h2 {
+    text-align: center;
+}
+
+.search-popup-body {
+    display: flex;
+    justify-content: center;
+}
+
+.search-popup-body input {
+    padding: 0.375rem 0.75rem;
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.barcode-scanner {
+    display: flex;
+    justify-content: center;
+}

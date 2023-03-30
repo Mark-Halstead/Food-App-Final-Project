@@ -100,7 +100,7 @@ function ClientProfile({ selectedClient, handleClosePopup, handleCreateMealPlan,
                         {selectedClient.activity_level && <ClientProfileItem label="Activity Level" value={selectedClient.activity_level} icon="fa-solid fa-shoe-prints" />}
                         {selectedClient.daily_calorie_target && <ClientProfileItem label="Daily Calorie Target" value={selectedClient.daily_calorie_target.toFixed()} />}
                     </div>
-                    <div className="popup-right">
+                    <div className="">
                         {
                             selectedClient.nutritionist_pending ? (
                                 clientAccepted ? (
@@ -126,7 +126,7 @@ function ClientProfile({ selectedClient, handleClosePopup, handleCreateMealPlan,
                                     )
                             ) :
                                 <>
-                                    <button className='btn' onClick={() => handleCreateMealPlan(selectedClient)}>View/Edit Meal Plan</button>
+                                    <button className='btn btn-reverse' onClick={() => handleCreateMealPlan(selectedClient)}>View/Edit Meal Plan</button>
                                     {
                                         sent ? <button className='btn'>Meal Plan Sent!</button>
                                             : sending ? <button className='btn'>Sending Meal Plan...</button>

@@ -6,6 +6,7 @@ import '../../components/MyClients/styles.css'
 
 import { ClientCard, ClientProfile, ClientFilters } from "../../components/MyClients";
 import { ClientContext } from '../../contexts/ClientContext';
+import { Loader } from "../../components";
 
 function MyClients() {
     const { clients, setClients, pendingClients, setPendingClients, selectedClient, setSelectedClient, clientsLoaded, setClientsLoaded } = useContext(ClientContext);
@@ -88,7 +89,7 @@ function MyClients() {
     });
 
     if (loading) {
-        return <h4>Loading clients...</h4>
+        return <Loader/>
     }
 
     return (

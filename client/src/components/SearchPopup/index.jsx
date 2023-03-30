@@ -3,12 +3,15 @@ import axios from 'axios';
 
 import './styles.css'
 import ProductItem from './ProductItem';
+import Loader from '../Loader';
+import BarcodeScanner from '../BarcodeScanner';
 
 function SearchPopup({handleAddFood, meal, onClose, servingMultiplier, setServingMultiplier, loadingAddingFood}) {
     const [searchQuery, setSearchQuery] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const [selectedItem, setSelectedItem] = useState(null);
     const [searchLoading, setSearchLoading] = useState(false)
+    const [barcodeScanner, setBarcodeScanner] = useState(false)
 
     const handleSearchQueryChange = (event) => {
         setSearchQuery(event.target.value);
@@ -41,17 +44,24 @@ function SearchPopup({handleAddFood, meal, onClose, servingMultiplier, setServin
             console.log('products', products)
             setSearchResults(products);
         }
+        setSearchLoading(false)
+
+    }
+
+    const renderBarcodeScanner = () => {
 
     }
 
     const handleItemClick = (result) => {
         setServingMultiplier(1)
         setSelectedItem(result);
+        setSearchLoading(false)
         console.log('setSelectedItem', result)
     }
 
     const handleBackClick = () => {
         setSelectedItem(null);
+        setSearchLoading(false)
     }
 
     return (
@@ -68,7 +78,9 @@ function SearchPopup({handleAddFood, meal, onClose, servingMultiplier, setServin
                     { selectedItem ? (
                         <div>
                             <h3>{selectedItem.product_name}</h3>
-                            <button onClick={handleBackClick}>Back to results</button>
+                            <div className='back-button-container'>
+                                <button className='btn' onClick={handleBackClick}>Back to results</button>
+                            </div>
                             { loadingAddingFood ? (
                                 <h4>Adding food...</h4>
                             ) : (
@@ -91,10 +103,13 @@ function SearchPopup({handleAddFood, meal, onClose, servingMultiplier, setServin
                                     
                                 </li>
                                 <li>
-                                    <button
-                                        className='btn'
-                                        onClick={() => handleAddFood(meal, selectedItem)}
-                                    >Add Food</button>
+                                    <div className='back-button-container'>
+                                        <button
+                                            className='btn'
+                                            style={{marginTop: '20px'}}
+                                            onClick={() => handleAddFood(meal, selectedItem)}
+                                        >Add Food</button>
+                                    </div>
                                 </li>
                             </ul>
                             )
@@ -104,17 +119,32 @@ function SearchPopup({handleAddFood, meal, onClose, servingMultiplier, setServin
                         </div>
                     ) : (
                         <div>
-                            <input type="text" value={searchQuery} onChange={handleSearchQueryChange} />
-                            <button
-                                onClick={handleSearch}
-                                className='btn'
-                            >Search</button>
+                            <div className='search-container'>
+                                <input type="text" value={searchQuery} onChange={handleSearchQueryChange} />
+                                <button
+                                    onClick={handleSearch}
+                                    className='btn'
+                                >Search</button>
+                                {
+                                    barcodeScanner ?
+                                    <button
+                                        onClick={() => setBarcodeScanner(false)}
+                                        className='btn'
+                                    >Close Scanner</button>
+                                    :
+                                    <button
+                                        onClick={() => setBarcodeScanner(true)}
+                                        className='btn'
+                                    >Scan Barcode</button>
+                                }
+
+                            </div>
                             {
-                                searchLoading ?
+                                barcodeScanner ?
+                                    <BarcodeScanner />
+                                : searchLoading ?
                                 (
-                                    <h4>
-                                        Loading food...
-                                    </h4>
+                                    <Loader />
                                 )
                                 :
                                 (

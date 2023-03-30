@@ -25,7 +25,6 @@ function Register() {
             localStorage.setItem('token', response.data.token_data.token);
             console.log(localStorage.getItem('token'));
             setIsRegistering(false);
-            alert("Thanks for registering!")
             Navigate("/user-signup-form")
         } catch (error) {
             console.log(error.response.data);

@@ -26,7 +26,6 @@ function RegisterNutritionist() {
             localStorage.setItem('token', token);
             console.log(localStorage.getItem('token'));
             setIsRegistering(false);
-            alert("Thanks for registering!")
             Navigate("/nutritionist-signup-form")
         } catch (error) {
             console.log(error.response.data);
