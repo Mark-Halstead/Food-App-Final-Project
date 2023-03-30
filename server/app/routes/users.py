@@ -48,13 +48,15 @@ def signup():
     # Encrypt the password
     user['password'] = pbkdf2_sha256.encrypt(user['password'])
     new_user = g.user_model.create(user)
+    user = g.user_model.get(new_user["_id"])
     token_data = {
         "token": user["token_id"],
         "role": "user",
         "user_id": str(new_user["_id"])
     }
-    token = g.token_model.create(token_data)
-    return Response(JSONEncoder().encode(token), content_type='application/json')
+    g.token_model.create(token_data)
+    response_data = {"token_data":token_data, "user_data":user}
+    return Response(JSONEncoder().encode(response_data), content_type='application/json')
 
 
 @user_routes.route('/', methods=['PUT'])
@@ -74,7 +76,9 @@ def update_user(user_data):
         "food_preferences": data.get("food_preferences"),
         "daily_calorie_target": data.get("daily_calorie_target"),
         "meal_complexity": data.get("meal_complexity"),
-        "budget": data.get("budget")
+        "budget": data.get("budget"),
+        "meal_plan_confirmed":False
+
     }
 
     updated_user = g.user_model.update(user_data["_id"], updated_data)
@@ -130,4 +134,5 @@ def login():
         "user_id": str(user_data["_id"])
     }
     token = g.token_model.create(token_data)
-    return Response(JSONEncoder().encode(token), content_type='application/json')
+    response_data = {"token_data":token, "user_data":user_data}
+    return Response(JSONEncoder().encode(response_data), content_type='application/json')

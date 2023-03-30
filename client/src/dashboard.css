@@ -17,6 +17,14 @@
     cursor: pointer;
 } */
 
+html {
+    overflow-x: hidden;
+}
+
+.section-title h2 {
+    width: 280px;
+}
+
 *,
 ::after,
 ::before {
