@@ -6,6 +6,8 @@ import ClientProfileItem from '../ClientProfileItem';
 function ClientProfile({ selectedClient, handleClosePopup, handleCreateMealPlan, clients, setClients, pendingClients, setPendingClients }) {
     const [clientAccepted, setClientAccepted] = useState(false) 
     const [clientDeclined, setClientDeclined] = useState(false) 
+    const [sending, setSending] = useState(false)
+    const [sent, setSent] = useState(false)
     const getBudgetIcons = (budget) => {
         return [...Array(parseInt(budget))].map((x, i) => (
             <i key={i} className="fa-solid fa-dollar-sign"></i>
@@ -56,6 +58,7 @@ function ClientProfile({ selectedClient, handleClosePopup, handleCreateMealPlan,
     };
 
     const sendMealPlan = async (client) => {
+        setSending(true)
         const token = localStorage.token;
         const options = {
             method: "PUT",
@@ -70,6 +73,8 @@ function ClientProfile({ selectedClient, handleClosePopup, handleCreateMealPlan,
         if (response.status === 200) {
             
         }
+        setSent(true)
+        setSending(false)
     }
       
     
@@ -122,7 +127,12 @@ function ClientProfile({ selectedClient, handleClosePopup, handleCreateMealPlan,
                             ) :
                                 <>
                                     <button className='btn' onClick={() => handleCreateMealPlan(selectedClient)}>View/Edit Meal Plan</button>
-                                    <button className='btn' onClick={() => sendMealPlan(selectedClient)}>Send Meal Plan</button>
+                                    {
+                                        sent ? <button className='btn'>Meal Plan Sent!</button>
+                                            : sending ? <button className='btn'>Sending Meal Plan...</button>
+                                                : <button className='btn' onClick={() => sendMealPlan(selectedClient)}>Send Meal Plan</button>
+                                    }
+                                    
                                 </>
                         }
                     </div>
