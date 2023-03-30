@@ -9,7 +9,8 @@ import { UserContext } from '../../contexts/UserContext'
 const SharedLayout = () => {
   const [userData, setUserData] = useState({})
   const [nutritionistData, setNutritionistData] = useState({})
-
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  
   useEffect(() => {
     async function fetchUser() {
       const options = {
@@ -22,17 +23,16 @@ const SharedLayout = () => {
       setUserData(data.user_data)
       setNutritionistData(data.nutritionist_data)
     }
-    fetchUser()
+    if (isLoggedIn) {
+      fetchUser()
+    } 
   }, [])
 
-  if (!userData) {
-    // Render a loading spinner or some other loading indicator until user data is loaded
-    return <div>Loading...</div>
-  }
-
   return (
-    <UserContext.Provider value={{userData, nutritionistData}}>
+  
+
       <Wrapper>
+        <UserContext.Provider value={{userData, nutritionistData, setUserData, isLoggedIn, setIsLoggedIn}}>
         <main className='dashboard'>
           <SmallSideBar />
           <BigSidebar />
@@ -43,8 +43,9 @@ const SharedLayout = () => {
             </div>
           </div>
         </main>
+        </UserContext.Provider>
       </Wrapper>
-    </UserContext.Provider>
+
   )
 }
 
