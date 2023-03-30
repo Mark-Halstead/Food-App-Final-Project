@@ -344,7 +344,7 @@ p {
 
 .banner-heading {
   height: 20vh;
-  margin-left: -137vh;
+  margin-left: -71vw;
   margin-top: -40vh;
   perspective: 60vh;
   overflow: hidden;

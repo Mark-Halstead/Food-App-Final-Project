@@ -3,14 +3,27 @@ import styled from 'styled-components'
 const Wrapper = styled.section`
 /*////////////////// REGISTER CSS START /////////////////////*/
 .register-background {
-  height: 110vh;
+  height: 100vh;
   width: 100%;
-  background-color: rgb(24, 212, 24, 0.8);
+  background-color: rgba(24, 212, 24, 0.8);
   background-image: url('https://thumbs.dreamstime.com/b/greek-food-background-traditional-different-greek-dishes-set-greek-food-background-traditional-different-greek-dishes-set-top-view-178761927.jpg');
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 100%;
   background-position: center;
+  /* animation: backgroundZoomOut 15s linear infinite; */
 }
+
+
+/* @keyframes backgroundZoomOut {
+  0% {
+    background-size: 120%;
+  }
+  100% {
+    background-size: 140%;
+  }
+} */
+
+
 
 .register-background::before {
     content: "";

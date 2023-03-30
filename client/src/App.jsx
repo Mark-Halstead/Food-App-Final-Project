@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { MyClients, DietForm, HomePage, GPTPage } from './pages'
 import { Routes, Route } from 'react-router-dom'
 import { Navbar } from './components'
-import { Profile, Overview, Plan, SharedLayout, Chat, NutritionistSharedLayout, Register, Login, FoodDiary, UserSignUpForm, GoalsForm, SubscriptionForm, MealPlan , BarcodePage, NutritionistList, RegisterNutritionist, NutritionistSignUpForm, LoginNutritionist } from './pages/index'
+import { Profile, Overview, Plan, SharedLayout, Chat, NutritionistSharedLayout, Register, Login, FoodDiary, UserSignUpForm, GoalsForm, SubscriptionForm, MealPlan , BarcodePage, NutritionistList, RegisterNutritionist, NutritionistSignUpForm, LoginNutritionist, TestChat } from './pages/index'
 import { useLocation } from 'react-router-dom';
 import NutritionistProfile from './pages/NutritionistDashboard/NutritionistProfile'
 import { AuthProvider } from './contexts/AuthContext';

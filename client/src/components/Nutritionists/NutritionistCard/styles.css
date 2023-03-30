@@ -1,14 +1,18 @@
 .nutritionist-card {
-    background-color: rgb(86, 212, 69);
+    background-color: #F2F2F2;
     padding: 10px;
     height: 100%;
     cursor: pointer;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease-in-out;
 }
 
 .nutritionist-card:hover {
-    background-color: rgb(86, 212, 69, 0.7);
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
+    transform: scale(1.05);
 }
 
 .nutritionist-card p {
     margin-bottom: 10px;
 }
+

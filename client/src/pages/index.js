@@ -21,3 +21,4 @@ export { default as RegisterNutritionist } from "./RegisterNutritionist";
 export { default as NutritionistSignUpForm } from "./NutritionistSignUpForm";
 export { default as LoginNutritionist } from "./LoginNutritionist";
 export { default as GPTPage } from './GPTPage';
+export { default as TestChat } from './Dashboard/TestChat';

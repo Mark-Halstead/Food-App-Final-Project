@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">6.01% </span>
+                <span class="strong">5.75% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>8/133</span>
+                <span class='fraction'>8/139</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">6.01% </span>
+                <span class="strong">5.75% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>8/133</span>
+                <span class='fraction'>8/139</span>
             </div>
         
             
@@ -195,12 +195,24 @@
 <a name='L130'></a><a href='#L130'>130</a>
 <a name='L131'></a><a href='#L131'>131</a>
 <a name='L132'></a><a href='#L132'>132</a>
-<a name='L133'></a><a href='#L133'>133</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L133'></a><a href='#L133'>133</a>
+<a name='L134'></a><a href='#L134'>134</a>
+<a name='L135'></a><a href='#L135'>135</a>
+<a name='L136'></a><a href='#L136'>136</a>
+<a name='L137'></a><a href='#L137'>137</a>
+<a name='L138'></a><a href='#L138'>138</a>
+<a name='L139'></a><a href='#L139'>139</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -386,10 +398,12 @@ import ProductItem from './ProductItem';
 <span class="cstat-no" title="statement not covered" >    return (</span>
 <span class="cstat-no" title="statement not covered" >        &lt;div className='popup-background'&gt;</span>
 <span class="cstat-no" title="statement not covered" >            &lt;div className="popup"&gt;</span>
+<span class="cstat-no" title="statement not covered" >                &lt;div className='popup-close-button-container'&gt;</span>
+<span class="cstat-no" title="statement not covered" >                    &lt;button className='popup-close-button' onClick={onClose}&gt;&amp;#215;&lt;/button&gt;</span>
+<span class="cstat-no" title="statement not covered" >                &lt;/div&gt;</span>
 <span class="cstat-no" title="statement not covered" >                &lt;div className="search-popup-header"&gt;</span>
 <span class="cstat-no" title="statement not covered" >                    &lt;h2&gt;{meal}&lt;/h2&gt;</span>
 <span class="cstat-no" title="statement not covered" >                    &lt;h2&gt;Search for food&lt;/h2&gt;</span>
-<span class="cstat-no" title="statement not covered" >                    &lt;button onClick={onClose}&gt;Close&lt;/button&gt;</span>
 <span class="cstat-no" title="statement not covered" >                &lt;/div&gt;</span>
 <span class="cstat-no" title="statement not covered" >                &lt;div className="search-popup-body"&gt;</span>
 <span class="cstat-no" title="statement not covered" >                    { selectedItem ? (</span>
@@ -419,6 +433,7 @@ import ProductItem from './ProductItem';
 <span class="cstat-no" title="statement not covered" >                                &lt;/li&gt;</span>
 <span class="cstat-no" title="statement not covered" >                                &lt;li&gt;</span>
 <span class="cstat-no" title="statement not covered" >                                    &lt;button</span>
+<span class="cstat-no" title="statement not covered" >                                        className='btn'</span>
 <span class="cstat-no" title="statement not covered" >                                        onClick={() =&gt; handleAddFood(meal, selectedItem)}</span>
 <span class="cstat-no" title="statement not covered" >                                    &gt;Add Food&lt;/button&gt;</span>
 <span class="cstat-no" title="statement not covered" >                                &lt;/li&gt;</span>
@@ -431,7 +446,10 @@ import ProductItem from './ProductItem';
 <span class="cstat-no" title="statement not covered" >                    ) : (</span>
 <span class="cstat-no" title="statement not covered" >                        &lt;div&gt;</span>
 <span class="cstat-no" title="statement not covered" >                            &lt;input type="text" value={searchQuery} onChange={handleSearchQueryChange} /&gt;</span>
-<span class="cstat-no" title="statement not covered" >                            &lt;button onClick={handleSearch}&gt;Search&lt;/button&gt;</span>
+<span class="cstat-no" title="statement not covered" >                            &lt;button</span>
+<span class="cstat-no" title="statement not covered" >                                onClick={handleSearch}</span>
+<span class="cstat-no" title="statement not covered" >                                className='btn'</span>
+<span class="cstat-no" title="statement not covered" >                            &gt;Search&lt;/button&gt;</span>
 <span class="cstat-no" title="statement not covered" >                            {</span>
 <span class="cstat-no" title="statement not covered" >                                searchLoading ?</span>
 <span class="cstat-no" title="statement not covered" >                                (</span>
@@ -466,7 +484,7 @@ export default SearchPopup;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-03-28T10:39:44.517Z
+                at 2023-03-30T10:57:17.394Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
