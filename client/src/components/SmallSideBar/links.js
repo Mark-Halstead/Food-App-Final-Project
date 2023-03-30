@@ -5,6 +5,7 @@ import {
     MdBook,
     MdChat,
     MdCropFree,
+    MdSmartToy
 } from "react-icons/md";
 
 const links = [
