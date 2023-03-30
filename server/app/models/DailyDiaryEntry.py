@@ -29,8 +29,20 @@ class DailyDiaryEntry(Base):
     def __init__(self, table_name, db_connection=None):
         super().__init__(table_name, db_connection)
 
-    def get_by_date(self, date):
+    '''def get_user_by_date(self, date, user_id):
         diary_entries = self.table.find_one({
-            "date": date
+            "date": date,
+            "user_id":user_id
         })
         return diary_entries
+        '''
+    def create(self, diary_entry: DailyDiaryEntrySchema) -> str:
+        diary_entry_dict = diary_entry.dict()
+        inserted_id = self.table.insert_one(diary_entry_dict).inserted_id
+        return str(inserted_id)
+    
+    def create_diary_entry(self, diary_entry: DailyDiaryEntrySchema) -> DailyDiaryEntrySchema:
+        diary_entry_dict = diary_entry.dict()
+        result = self.table.insert_one(diary_entry_dict)
+        diary_entry_dict['_id'] = result.inserted_id
+        return DailyDiaryEntrySchema(**diary_entry_dict)

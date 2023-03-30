@@ -3,10 +3,11 @@ import React, { useState } from "react";
 function NutritionistFilter({ setCredentialsFilter, setAreaFilter, areaFilter, credentialsFilter }) {
 
   return (
-    <div>
+    <div style={{ display: "flex", gap: "10px" }}>
       <select
         value={credentialsFilter}
         onChange={(e) => setCredentialsFilter(e.target.value)}
+        style={{ padding: "10px", border: "1px solid #ccc", borderRadius: "5px", minWidth: "150px" }}
       >
         <option value="">Credentials</option>
         <option value="RD">RD</option>
@@ -17,6 +18,7 @@ function NutritionistFilter({ setCredentialsFilter, setAreaFilter, areaFilter, c
       <select
         value={areaFilter}
         onChange={(e) => setAreaFilter(e.target.value)}
+        style={{ padding: "10px", border: "1px solid #ccc", borderRadius: "5px", minWidth: "150px" }}
       >
         <option value="">Area of Expertise</option>
         <option value="Weight management">Weight management</option>
@@ -33,3 +35,4 @@ function NutritionistFilter({ setCredentialsFilter, setAreaFilter, areaFilter, c
 }
 
 export default NutritionistFilter;
+

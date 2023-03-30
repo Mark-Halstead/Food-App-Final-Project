@@ -100,7 +100,7 @@ const BarcodeScanner = () => {
           #scanner-container {
             width: 50%;
             height: 50%;
-            position: fixed;
+            // position: fixed;
             top: 30%;
             left: 36%;
             z-index: 999;

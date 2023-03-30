@@ -50,10 +50,9 @@ def add_nutritionist():
 @token_required("nutritionist")
 def get_nutritionist(user_data):
     clients = g.user_model.get_all_client_profiles(user_data["_id"])
-    if clients:
-        return Response(JSONEncoder().encode(clients), content_type='application/json')
-    else:
-        return make_response(jsonify({"error": "Clients not found"}), 404)
+
+    return Response(JSONEncoder().encode(clients), content_type='application/json')
+
 
 @nutritionist_routes.route("/accept_client/<client_id>", methods=["PUT"])
 @token_required("nutritionist")
@@ -81,6 +80,18 @@ def decline_client(user_data, client_id):
     if not client or client["nutritionist_id"] != str(user_data["_id"]):
         return make_response(jsonify({"error": "Client not found"}), 404)
     
+    updated_client = g.user_model.update(client_id, update_data)
+    return Response(JSONEncoder().encode(updated_client), content_type='application/json')
+
+@nutritionist_routes.route("/send_meal_plan/<client_id>", methods=["PUT"])
+@token_required("nutritionist")
+def send_meal_plan(user_data, client_id):
+    client = g.user_model.get(client_id)
+
+    if not client or client["nutritionist_id"] != str(user_data["_id"]):
+        return make_response(jsonify({"error": "Client not found"}), 404)
+    
+    update_data = {"meal_plan_confirmed": True}
     updated_client = g.user_model.update(client_id, update_data)
     return Response(JSONEncoder().encode(updated_client), content_type='application/json')
 
@@ -168,7 +179,7 @@ def login():
     token_data = {
         "token": nutritionist["token_id"],
         "role": "nutritionist",
-        "nutritionist_id": nutritionist_data["_id"]
+        "user_id": nutritionist_data["_id"]
     }
     token = g.token_model.create(token_data)
     return Response(JSONEncoder().encode(token), content_type='application/json')

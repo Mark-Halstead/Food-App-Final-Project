@@ -19,48 +19,15 @@ class JSONEncoder(json.JSONEncoder):
 
 user_routes = Blueprint("user_routes", __name__)
 
-
-@user_routes.route("/", methods=["POST"])
-def add_user():
-    try:
-        user_data = request.json
-        validated_data = UserSchema(**user_data).dict()
-        inserted_id = g.user_model.create(validated_data)
-        return {"inserted_id": str(inserted_id)}
-    except ValidationError as e:
-        return make_response(jsonify({"error": "Invalid data", "details": e.errors()}), 400)
-
-
-@user_routes.route("/", methods=["GET"])
-@token_required('user')
+@user_routes.route("/load_profile", methods=["GET"])
+@token_required("user")
 def get_user(user_data):
-    print(user_data)
-    # user = g.user_model.get(user_id)
+    if user_data["nutritionist_id"]:
+        nutritionist_data = g.nutritionist_model.get(user_data["nutritionist_id"])
+        nutritionist_data.pop("password")
     if user_data:
-        return Response(JSONEncoder().encode(user_data), content_type='application/json')
-    else:
-        return make_response(jsonify({"error": "User not found"}), 404)
-
-
-# @user_routes.route("/<user_id>", methods=["PUT"])
-# def update_user(user_id):
-#     try:
-#         user_data = request.json
-#         validated_data = UserUpdateSchema(**user_data).dict()
-#         modified_count = g.user_model.update(user_id, validated_data)
-#         if modified_count:
-#             return {"modified_count": modified_count}
-#         else:
-#             return make_response(jsonify({"error": "User not found"}), 404)
-#     except ValidationError as e:
-#         return make_response(jsonify({"error": "Invalid data", "details": e.errors()}), 400)
-
-
-@user_routes.route("/<user_id>", methods=["DELETE"])
-def delete_user(user_id):
-    deleted_count = g.user_model.delete(user_id)
-    if deleted_count:
-        return {"deleted_count": deleted_count}
+        user_data.pop("password")
+        return Response(JSONEncoder().encode({"user_data":user_data, "nutritionist_data":nutritionist_data}), content_type='application/json')
     else:
         return make_response(jsonify({"error": "User not found"}), 404)
 

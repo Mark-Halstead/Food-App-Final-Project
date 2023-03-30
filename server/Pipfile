@@ -18,6 +18,7 @@ faker = "*"
 pytest-cov = "*"
 openai = "*"
 flask-jwt-extended = "*"
+faker-food = "*"
 
 [dev-packages]
 

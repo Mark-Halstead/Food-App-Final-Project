@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">96.87% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>69/69</span>
+                <span class='fraction'>62/64</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>1/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">96.87% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>69/69</span>
+                <span class='fraction'>62/64</span>
             </div>
         
             
@@ -127,27 +127,17 @@
 <a name='L62'></a><a href='#L62'>62</a>
 <a name='L63'></a><a href='#L63'>63</a>
 <a name='L64'></a><a href='#L64'>64</a>
-<a name='L65'></a><a href='#L65'>65</a>
-<a name='L66'></a><a href='#L66'>66</a>
-<a name='L67'></a><a href='#L67'>67</a>
-<a name='L68'></a><a href='#L68'>68</a>
-<a name='L69'></a><a href='#L69'>69</a>
-<a name='L70'></a><a href='#L70'>70</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L65'></a><a href='#L65'>65</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -201,75 +191,70 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react'
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from "react";
+import forest from "../../assets/images/forest.jpg"
+import river from "../../assets/images/river.jpg"
+import sea from "../../assets/images/sea.jpg"
 &nbsp;
-const PricingCards = () =&gt; {
+function PricingCards() {
+    const colors = ["#6495ed", "#7fffd4", "#ffa07a", "#f08080", "#afeeee"];
+&nbsp;
+    const handleNavButtonClick = <span class="fstat-no" title="function not covered" >(event) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        event.currentTarget.parentElement.parentElement.classList.toggle("change");</span>
+<span class="cstat-no" title="statement not covered" >    };</span>
+&nbsp;
     return (
-        &lt;div className="card-container"&gt;
+        &lt;section className="popular-tours" id="pricing"&gt;
             &lt;div className="cards-wrapper"&gt;
                 &lt;div className="card"&gt;
-                    &lt;div className="card-header"&gt;
-                        &lt;h3&gt;Free&lt;/h3&gt;
-                        &lt;h1&gt;&lt;sup&gt;$&lt;/sup&gt; 0&lt;/h1&gt;
-                    &lt;/div&gt;
-                    &lt;div className="card-body"&gt;
-                        &lt;ul&gt;
-                            &lt;li&gt;&lt;i className="fas fa-check"&gt;&lt;/i&gt;Some Feature Text&lt;/li&gt;
-                            &lt;li&gt;&lt;i className="fas fa-check"&gt;&lt;/i&gt;Some Feature Text&lt;/li&gt;
-                            &lt;li&gt;&lt;i className="fas fa-times"&gt;&lt;/i&gt;Some Feature Text&lt;/li&gt;
-                            &lt;li&gt;&lt;i className="fas fa-times"&gt;&lt;/i&gt;Some Feature Text&lt;/li&gt;
-                            &lt;li&gt;&lt;i className="fas fa-times"&gt;&lt;/i&gt;Some Feature Text&lt;/li&gt;
-                            &lt;li&gt;&lt;i className="fas fa-times"&gt;&lt;/i&gt;Some Feature Text&lt;/li&gt;
+                    &lt;div className="front-side"&gt;
+                        &lt;img src="https://cdn.pixabay.com/photo/2016/12/26/17/28/spaghetti-1932466__340.jpg" alt="Forest" className="card-image" /&gt;
+                        &lt;h1 className="tour-name" id="free-plan"&gt;Free Plan&lt;/h1&gt;
+                        &lt;ul className="card-list"&gt;
+                            &lt;li className="card-list-item"&gt;&lt;/li&gt;
+                            &lt;li className="card-list-item"&gt;Personalized Meal Plans&lt;/li&gt;
+                            &lt;li className="card-list-item"&gt;AI driven Meal Plans&lt;/li&gt;
+                            &lt;li className="card-list-item"&gt;Basic nutritional information&lt;/li&gt;
                         &lt;/ul&gt;
+                        &lt;button className="navigation-button" onClick={handleNavButtonClick}&gt;
+                            price
+                        &lt;/button&gt;
                     &lt;/div&gt;
-                    &lt;div className="card-footer"&gt;
-                        &lt;button type="button"&gt;Subscribe&lt;/button&gt;
+                    &lt;div className="back-side center"&gt;
+                        &lt;button className="navigation-button" onClick={handleNavButtonClick}&gt;
+                            back
+                        &lt;/button&gt;
+                        &lt;button className="card-button"&gt;Try for free now!&lt;/button&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
                 &lt;div className="card"&gt;
-                    &lt;div className="card-header"&gt;
-                        &lt;h3&gt;Standard&lt;/h3&gt;
-                        &lt;h1&gt;&lt;sup&gt;$&lt;/sup&gt; 49 /&lt;span&gt;Month&lt;/span&gt;&lt;/h1&gt;
-                    &lt;/div&gt;
-                    &lt;div className="card-body"&gt;
-                        &lt;ul&gt;
-                            &lt;li&gt;&lt;i className="fas fa-check"&gt;&lt;/i&gt;Some Feature Text&lt;/li&gt;
-                            &lt;li&gt;&lt;i className="fas fa-check"&gt;&lt;/i&gt;Some Feature Text&lt;/li&gt;
-                            &lt;li&gt;&lt;i className="fas fa-check"&gt;&lt;/i&gt;Some Feature Text&lt;/li&gt;
-                            &lt;li&gt;&lt;i className="fas fa-check"&gt;&lt;/i&gt;Some Feature Text&lt;/li&gt;
-                            &lt;li&gt;&lt;i className="fas fa-times"&gt;&lt;/i&gt;Some Feature Text&lt;/li&gt;
-                            &lt;li&gt;&lt;i className="fas fa-times"&gt;&lt;/i&gt;Some Feature Text&lt;/li&gt;
+                    &lt;div className="front-side"&gt;
+                        &lt;img src="https://media.istockphoto.com/id/1316145932/photo/table-top-view-of-spicy-food.jpg?b=1&amp;s=170667a&amp;w=0&amp;k=20&amp;c=P3jIQq8gVqlXjd4kP2OrXYyzqEXSWCwwYtwrd81psDY=" alt="River" className="card-image" /&gt;
+                        &lt;h1 className="tour-name"&gt;Premium Plan&lt;/h1&gt;
+                        &lt;ul className="card-list"&gt;
+                            &lt;li className="card-list-item"&gt;&lt;/li&gt;
+                            &lt;li className="card-list-item"&gt;All the features that come with the free plan&lt;/li&gt;
+                            &lt;li className="card-list-item"&gt;Professional advice from real Nutritionists&lt;/li&gt;
+                            &lt;li className="card-list-item"&gt;Barcode Scanning accessibility&lt;/li&gt;
                         &lt;/ul&gt;
+                        &lt;button className="navigation-button" onClick={handleNavButtonClick}&gt;
+                            price
+                        &lt;/button&gt;
                     &lt;/div&gt;
-                    &lt;div className="card-footer"&gt;
-                        &lt;button type="button"&gt;Subscribe&lt;/button&gt;
-                    &lt;/div&gt;
-                &lt;/div&gt;
-                &lt;div className="card"&gt;
-                    &lt;div className="card-header"&gt;
-                        &lt;h3&gt;Premium&lt;/h3&gt;
-                        &lt;h1&gt;&lt;sup&gt;$&lt;/sup&gt; 99 /&lt;span&gt;Month&lt;/span&gt;&lt;/h1&gt;
-                    &lt;/div&gt;
-                    &lt;div className="card-body"&gt;
-                        &lt;ul&gt;
-                            &lt;li&gt;&lt;i className="fas fa-check"&gt;&lt;/i&gt;Some Feature Text&lt;/li&gt;
-                            &lt;li&gt;&lt;i className="fas fa-check"&gt;&lt;/i&gt;Some Feature Text&lt;/li&gt;
-                            &lt;li&gt;&lt;i className="fas fa-check"&gt;&lt;/i&gt;Some Feature Text&lt;/li&gt;
-                            &lt;li&gt;&lt;i className="fas fa-check"&gt;&lt;/i&gt;Some Feature Text&lt;/li&gt;
-                            &lt;li&gt;&lt;i className="fas fa-check"&gt;&lt;/i&gt;Some Feature Text&lt;/li&gt;
-                            &lt;li&gt;&lt;i className="fas fa-check"&gt;&lt;/i&gt;Some Feature Text&lt;/li&gt;
-                        &lt;/ul&gt;
-                    &lt;/div&gt;
-                    &lt;div className="card-footer"&gt;
-                        &lt;button type="button"&gt;Subscribe&lt;/button&gt;
+                    &lt;div className="back-side center"&gt;
+                        &lt;button className="navigation-button" onClick={handleNavButtonClick}&gt;
+                            back
+                        &lt;/button&gt;
+                        &lt;h3 className="tour-price"&gt;£499&lt;/h3&gt;
+                        &lt;button className="card-button"&gt;Booking&lt;/button&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
             &lt;/div&gt;
-        &lt;/div&gt;
-    )
+        &lt;/section&gt;
+    );
 }
 &nbsp;
-export default PricingCards
+export default PricingCards;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -277,7 +262,7 @@ export default PricingCards
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-03-28T10:39:44.517Z
+                at 2023-03-30T10:57:17.394Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

@@ -2,6 +2,7 @@ from . import get_connection
 from datetime import datetime, timedelta
 import random
 from faker import Faker
+from passlib.hash import pbkdf2_sha256
 from faker_food import FoodProvider
 from app.models.DailyDiaryEntry import DailyDiaryEntrySchema
 from app.models.User  import UserSchema
@@ -11,6 +12,9 @@ from app.models.MealPlanEntry import MealPlanEntrySchema
 
 
 db = get_connection("DB_URL")
+
+db.users.update_many({}, {"$set": {"meal_plan_confirmed": False}})
+
 db.products.delete_many({})
 db.diary_entries.delete_many({})
 db.meal_plan_entries.delete_many({})
@@ -22,12 +26,44 @@ db.tokens.delete_many({})
 fake = Faker()
 fake.add_provider(FoodProvider)
 
+reviews_messages = [
+    "I had a great experience working with my nutritionist! They were very knowledgeable and gave me helpful advice on how to improve my diet.",    
+    "My nutritionist really helped me with my weight loss goals. They created a personalized plan for me and I've already seen great results.",    
+    "I was skeptical about seeing a nutritionist at first, but I'm so glad I did. They were able to address my concerns and help me make positive changes in my eating habits.",    
+    "I would definitely recommend this nutritionist to anyone looking to improve their health. They were very professional and made me feel comfortable throughout the entire process.",   
+    "The nutritionist I worked with was incredibly thorough and really took the time to understand my needs. I appreciate all of their help and guidance.",
+    "I've seen a few different nutritionists in the past, but this one was by far the best. They were easy to talk to and gave me practical advice that I could actually use in my day-to-day life.",    
+    "I'm so glad I decided to see a nutritionist. They helped me identify some areas where I was falling short and gave me simple solutions to improve my diet.",    
+    "The nutritionist I worked with was very knowledgeable and passionate about their work. It was clear that they really cared about helping me achieve my goals.",    
+    "I would highly recommend this nutritionist to anyone looking to make positive changes in their diet. They were very patient and understanding, and really helped me stay motivated.",    
+    "Working with a nutritionist has been a game-changer for me. I feel better than ever and have more energy throughout the day. I couldn't be happier with the results.",
+    "I was really impressed with the level of detail my nutritionist provided. They gave me a lot of information about the specific nutrients my body needed and helped me create a meal plan that worked for my lifestyle.",
+    "I had been struggling with digestive issues for years and my nutritionist was able to pinpoint the problem and help me make dietary changes that have made a huge difference. I'm so grateful for their expertise!",
+    "My nutritionist was incredibly kind and supportive. They never made me feel judged or guilty about my eating habits and instead focused on helping me make positive changes.",
+    "I was hesitant to see a nutritionist because I didn't think I needed one, but I'm so glad I did. They helped me realize that my diet was lacking in certain areas and gave me simple ways to improve it.",
+    "I've been working with my nutritionist for a few months now and I've already seen a big improvement in my overall health. They really know their stuff!",
+    "My nutritionist was able to provide me with a wealth of information about nutrition and wellness. They were also able to recommend some great recipes and resources to help me stay on track.",
+    "I was struggling to lose weight on my own and my nutritionist was able to help me figure out why. They gave me practical tips on portion control and healthy snacking that have made all the difference.",
+    "I was hesitant to spend money on a nutritionist, but it was one of the best investments I've ever made in my health. They were able to help me make lasting changes that will benefit me for years to come.",
+    "I've worked with a few different nutritionists in the past, but none of them were as knowledgeable or as compassionate as the one I worked with recently. I would highly recommend them to anyone looking for guidance on nutrition.",
+    "My nutritionist was able to help me create a customized plan that worked with my busy schedule and dietary restrictions. They were also great at answering my questions and helping me stay motivated.",
+    "If you're looking for a nutritionist who really knows their stuff, look no further. The one I worked with was a true expert and I learned so much from them.",
+    "I was skeptical about seeing a nutritionist at first, but after just one session I knew I had made the right choice. They were able to identify some key areas where I needed to make changes and gave me practical ways to do so.",
+    "I've been working with my nutritionist for several months now and I can honestly say that I feel like a different person. I have more energy, fewer cravings, and just an overall better sense of well-being. Thank you!",
+    "My nutritionist was incredibly patient and understanding. They never made me feel like I was asking dumb questions and always took the time to explain things in a way that made sense to me.",
+    "I would highly recommend this nutritionist to anyone looking for guidance on how to eat for optimal health. They were incredibly knowledgeable and always had my best interests at heart.",
+    "I was surprised at how much I learned from my nutritionist in just a few sessions. They really know their stuff and were able to provide me with practical solutions to some of my biggest dietary challenges.",
+    "My nutritionist was able to help me identify some food sensitivities that I never would have figured out on my own. They were also great at providing alternatives and recipes that worked for my new diet.",
+    "I was nervous about meeting with a nutritionist, but my fears were quickly put to rest. They were friendly, knowledgeable, and genuinely interested in helping me achieve my goals."  
+]
+
+
 def add_dummy_nutritionists():
     nutritionists = []
     for _ in range(10):
         nutritionist_data = {
             "email": fake.email(),
-            "password": "password123",
+            "password": pbkdf2_sha256.encrypt("password"),
             "first_name": fake.first_name(),
             "last_name": fake.last_name(),
             "credentials": random.choice(["RD", "MS", "PhD", "MD"]),
@@ -51,7 +87,7 @@ def add_dummy_users():
             "nutritionist_pending":random.choice([False, True]),
             "nutritionist_message":fake.text(),
             "email": fake.email(),
-            "password": "password123",
+            "password": pbkdf2_sha256.encrypt("password"),
             "first_name": fake.first_name(),
             "last_name": fake.last_name(),
             "paid_subscription": fake.boolean(),
@@ -64,7 +100,8 @@ def add_dummy_users():
             "food_preferences": [random.choice(food_preferences) for _ in range(random.randint(0, 3))],
             "daily_calorie_target": random.uniform(1000, 3000),
             "meal_complexity": random.randint(0, 5),
-            "budget": random.randint(0, 5)
+            "budget": random.randint(0, 5),
+            "meal_plan_confirmed": False
         }
         user = UserSchema(**user_data)
         users.append(user)
@@ -78,8 +115,8 @@ def add_dummy_users():
             review_data = {
                 "user_id": str(random.choice(user_ids)),
                 "nutritionist_id": nutritionist_id,
-                "rating": random.randint(1, 5),
-                "review_message": fake.text()
+                "rating": random.randint(3, 5),
+                "review_message": random.choice(reviews_messages)
             }
             review = ReviewSchema(**review_data)
             reviews.append(review)

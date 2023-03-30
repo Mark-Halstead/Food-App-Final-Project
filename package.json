@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon -L server/server.js"
+    "start": "nodemon -L server/server.js",
+    "coverage": "coverage run -m pytest"
   },
   "repository": {
     "type": "git",
@@ -18,6 +19,7 @@
   },
   "homepage": "https://github.com/Mark-Halstead/Food-App-Final-Project#readme",
   "dependencies": {
+    "coverage": "^0.4.1",
     "express": "^4.18.2",
     "nodemon": "^2.0.22"
   }

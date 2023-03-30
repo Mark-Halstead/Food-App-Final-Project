@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import axios from 'axios';
 import { MealContainer, MoodMenu, StatContainer, DateChanger } from '../../components/FoodDiary'
 import { SearchPopup } from '../../components';
-import { calculateTotals } from '../../helpers/calculateStats';
+import { calculateCombinedTotals } from '../../helpers/calculateStats';
 import { createEmptyDiaryEntryObject } from '../../helpers/createEmptyObjects';
+
 
 function FoodDiary() {
     const currentDate = new Date();
@@ -18,6 +19,7 @@ function FoodDiary() {
 
     const [allDiaryEntries, setAllDiaryEntries] = useState(null);
     const [currentDiaryEntry, setCurrentDiaryEntry] = useState(null);
+    const [currentMealPlanEntry, setCurrentMealPlanEntry] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [showMoodMenu, setShowMoodMenu] = useState(false)
@@ -35,10 +37,14 @@ function FoodDiary() {
                 const response = await fetch(`http://127.0.0.1:5000/diary_entries/`, options)
                 if (response.status === 200) {
                     const { diary_entries, meal_plan } = await response.json()
+                    console.log('diary_entries', diary_entries)
+                    console.log('meal_plan', meal_plan)
                     setAllDiaryEntries(diary_entries)
                     setMealPlan(meal_plan)
-                    const todaysDiaryEntry = data.find(entry => entry.date === selectedDate);
-                    setCurrentDiaryEntry(todaysDiaryEntry)
+                    const currentDiaryEntry = diary_entries.find(entry => entry.date === selectedDate);
+                    const currentMealPlanEntry = meal_plan.find(entry => entry.date === selectedDate);
+                    setCurrentDiaryEntry(currentDiaryEntry)
+                    setCurrentMealPlanEntry(currentMealPlanEntry)
                 } else if (response.status === 404) {
                     const emptyDiaryEntry = createEmptyDiaryEntryObject(selectedDate, "")
                     setCurrentDiaryEntry(emptyDiaryEntry)
@@ -58,16 +64,17 @@ function FoodDiary() {
     useEffect(() => {
         if (allDiaryEntries) {
             const currentEntry = allDiaryEntries.find(entry => entry.date === selectedDate);
+            const currentMealPlan = mealPlan.find(entry => entry.date === selectedDate);
 
             const entry = currentEntry ? currentEntry : createEmptyDiaryEntryObject(selectedDate, "")
             setCurrentDiaryEntry(entry)
+            setCurrentMealPlanEntry(currentMealPlan)
             setShowMoodMenu(false)
 
         } 
     }, [selectedDate])
 
     async function updateDiary(updateData) {
-        console.log('currentDiaryEntry', currentDiaryEntry)
         try {
             const token = localStorage.getItem('token')
             const options = {
@@ -118,20 +125,20 @@ function FoodDiary() {
     }
 
     useEffect(() => {
-        if (currentDiaryEntry) {
-            const totals = calculateTotals(currentDiaryEntry);
-            setMealTotals(totals);
+        if (currentDiaryEntry && currentMealPlanEntry) {
+            const combinedTotals = calculateCombinedTotals(currentDiaryEntry, currentMealPlanEntry)
+            
+            setMealTotals(combinedTotals);
         }
-    }, [currentDiaryEntry]);
+    }, [currentDiaryEntry, currentMealPlanEntry]);
 
     const handleAddFood = async (meal, selectedItem) => {
         const data = {serving_multiplier:servingMultiplier, ...selectedItem }
         try {
             setLoadingAddingFood(true)
-            const token = localStorage.getItem("token")
             const response = await axios.post(`http://127.0.0.1:5000/diary_entries/${selectedDate}/foods/${meal}`, data, {
                 headers:{
-                    Authorization:token
+                    Authorization:localStorage.token
                 }
             });
             const updatedDiaryEntry = response.data;
@@ -189,13 +196,22 @@ function FoodDiary() {
             </div>
             {
                 loading ? 
-                    <h3 className='food-diary-loading'>Loading Food Diary...</h3>
+                    <>
+                        <div className='loader-2'>
+                            <div className="line"></div>
+                            <div className="line"></div>
+                            <div className="line"></div>
+                            <div className="line"></div>
+                            <div className="line"></div>
+                        </div>
+                    </>
+                    // <h3 className='food-diary-loading'>Loading Food Diary...</h3>
                     :
                     <>
-                        <MealContainer mealName={"breakfast"} mealItems={currentDiaryEntry} setCurrentDiaryEntry={setCurrentDiaryEntry} totals={mealTotals} openSearchPopup={openSearchPopup} handleDeleteFood={handleDeleteFood}/>
-                        <MealContainer mealName={"lunch"} mealItems={currentDiaryEntry} setCurrentDiaryEntry={setCurrentDiaryEntry} totals={mealTotals} openSearchPopup={openSearchPopup} handleDeleteFood={handleDeleteFood}/>
-                        <MealContainer mealName={"dinner"} mealItems={currentDiaryEntry} setCurrentDiaryEntry={setCurrentDiaryEntry} totals={mealTotals} openSearchPopup={openSearchPopup} handleDeleteFood={handleDeleteFood}/>
-                        <MealContainer mealName={"snacks"} mealItems={currentDiaryEntry} setCurrentDiaryEntry={setCurrentDiaryEntry} totals={mealTotals} openSearchPopup={openSearchPopup} handleDeleteFood={handleDeleteFood}/>
+                        <MealContainer mealName={"breakfast"} mealItems={currentDiaryEntry} setMealItems={setCurrentDiaryEntry} mealPlanItems={currentMealPlanEntry} setMealPlanItems={setCurrentMealPlanEntry} totals={mealTotals} openSearchPopup={openSearchPopup} handleDeleteFood={handleDeleteFood}/>
+                        <MealContainer mealName={"lunch"} mealItems={currentDiaryEntry} setMealItems={setCurrentDiaryEntry} mealPlanItems={currentMealPlanEntry} setMealPlanItems={setCurrentMealPlanEntry} totals={mealTotals} openSearchPopup={openSearchPopup} handleDeleteFood={handleDeleteFood}/>
+                        <MealContainer mealName={"dinner"} mealItems={currentDiaryEntry} setMealItems={setCurrentDiaryEntry} mealPlanItems={currentMealPlanEntry} setMealPlanItems={setCurrentMealPlanEntry} totals={mealTotals} openSearchPopup={openSearchPopup} handleDeleteFood={handleDeleteFood}/>
+                        <MealContainer mealName={"snacks"} mealItems={currentDiaryEntry} setMealItems={setCurrentDiaryEntry} mealPlanItems={currentMealPlanEntry} setMealPlanItems={setCurrentMealPlanEntry} totals={mealTotals} openSearchPopup={openSearchPopup} handleDeleteFood={handleDeleteFood}/>
                     </>
 
             }

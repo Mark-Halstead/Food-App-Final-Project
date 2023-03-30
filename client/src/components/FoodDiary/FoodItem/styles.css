@@ -22,5 +22,15 @@
 }
 
 .confirmed {
-    background-color: green;
+    color: rgb(24, 212, 24);
+}
+.fa-trash {
+    color: var(--textColor);
+}
+
+.icon-btn:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+.fa-solid {
 }

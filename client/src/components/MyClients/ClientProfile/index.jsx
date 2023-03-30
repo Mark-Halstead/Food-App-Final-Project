@@ -54,27 +54,46 @@ function ClientProfile({ selectedClient, handleClosePopup, handleCreateMealPlan,
             setClientDeclined(true);
         }
     };
+
+    const sendMealPlan = async (client) => {
+        const token = localStorage.token;
+        const options = {
+            method: "PUT",
+            headers: {
+                Authorization: token,
+            },
+        };
+        const response = await fetch(
+            `http://127.0.0.1:5000/nutritionists/send_meal_plan/${client._id}`,
+            options
+        );
+        if (response.status === 200) {
+            
+        }
+    }
       
     
 
     return (
         <div className="popup-background">
             <div className="popup">
+                <div>
+                    <button className='popup-close-button' onClick={handleClosePopup}>&#215;</button>
+                </div>
                 <div className="popup-header">
                     <h4><i className="fa-solid fa-user"></i> {selectedClient.first_name} {selectedClient.last_name}</h4>
-                        <button className="close-button" onClick={handleClosePopup}>X</button>
                     </div>
                     <div className="popup-content">
                     <div className={`popup-left`}>
-                        <ClientProfileItem label="Age" value={selectedClient.age} />
-                        <ClientProfileItem label="Height" value={`${selectedClient.height.toFixed(1)} cm`} icon="fa-solid fa-ruler-vertical" />
-                        <ClientProfileItem label="Weight" value={`${selectedClient.weight.toFixed(1)} kg`} icon="fa-solid fa-weight" />
-                        <ClientProfileItem label="Meal Complexity" value={selectedClient.meal_complexity} icon="fa-solid fa-utensils" />
-                        <ClientProfileItem label="Food Preferences" value={selectedClient.food_preferences.join(", ")} icon="fa-solid fa-tree" />
-                        <ClientProfileItem label="Budget" value={getBudgetIcons(selectedClient.budget)} icon="fa-solid fa-dollar-sign" />
-                        <ClientProfileItem label="Goal" value={selectedClient.goal} icon="fa-solid fa-tree" />
-                        <ClientProfileItem label="Activity Level" value={selectedClient.activity_level} icon="fa-solid fa-shoe-prints" />
-                        <ClientProfileItem label="Daily Calorie Target" value={selectedClient.daily_calorie_target.toFixed()} />
+                        {selectedClient.age && <ClientProfileItem label="Age" value={selectedClient.age} />}
+                        {selectedClient.height && <ClientProfileItem label="Height" value={`${parseFloat(selectedClient).height.toFixed(1)} cm`} icon="fa-solid fa-ruler-vertical" />}
+                        {selectedClient.weight && <ClientProfileItem label="Weight" value={`${parseFloat(selectedClient.weight).toFixed(1)} kg`} icon="fa-solid fa-weight" />}
+                        {selectedClient.meal_complexity && <ClientProfileItem label="Meal Complexity" value={selectedClient.meal_complexity} icon="fa-solid fa-utensils" />}
+                        {selectedClient.food_preferences && <ClientProfileItem label="Food Preferences" value={selectedClient.food_preferences} icon="fa-solid fa-tree" />}
+                        {selectedClient.budget && <ClientProfileItem label="Budget" value={getBudgetIcons(selectedClient.budget)} icon="fa-solid fa-dollar-sign" />}
+                        {selectedClient.goal && <ClientProfileItem label="Goal" value={selectedClient.goal} icon="fa-solid fa-tree" />}
+                        {selectedClient.activity_level && <ClientProfileItem label="Activity Level" value={selectedClient.activity_level} icon="fa-solid fa-shoe-prints" />}
+                        {selectedClient.daily_calorie_target && <ClientProfileItem label="Daily Calorie Target" value={selectedClient.daily_calorie_target.toFixed()} />}
                     </div>
                     <div className="popup-right">
                         {
@@ -101,7 +120,10 @@ function ClientProfile({ selectedClient, handleClosePopup, handleCreateMealPlan,
 
                                     )
                             ) :
-                                <button onClick={() => handleCreateMealPlan(selectedClient)}>View Meal Plan</button>
+                                <>
+                                    <button onClick={() => handleCreateMealPlan(selectedClient)}>View/Edit Meal Plan</button>
+                                    <button onClick={() => sendMealPlan(selectedClient)}>Send Meal Plan</button>
+                                </>
                         }
                     </div>
                 </div>
