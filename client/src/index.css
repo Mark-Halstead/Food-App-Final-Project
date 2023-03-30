@@ -246,7 +246,8 @@ p {
 }
 
 .section-title {
-    text-align: center;
+    display: flex;
+    justify-content: center;
 }
 .section-title h2 {
     text-transform: uppercase;
