@@ -1,7 +1,4 @@
 import React from "react";
-import forest from "../../assets/images/forest.jpg"
-import river from "../../assets/images/river.jpg"
-import sea from "../../assets/images/sea.jpg"
 
 function PricingCards() {
     const colors = ["#6495ed", "#7fffd4", "#ffa07a", "#f08080", "#afeeee"];
@@ -19,7 +16,7 @@ function PricingCards() {
                         <h1 className="tour-name" id="free-plan">Free Plan</h1>
                         <ul className="card-list">
                             <li className="card-list-item"></li>
-                            <li className="card-list-item">Personalized Meal Plans</li>
+                            <li className="card-list-item">Personalised Meal Plans</li>
                             <li className="card-list-item">AI driven Meal Plans</li>
                             <li className="card-list-item">Basic nutritional information</li>
                         </ul>

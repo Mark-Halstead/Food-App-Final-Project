@@ -14,7 +14,7 @@ const Wrapper = styled.article`
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        font-family: "Open Sans";
+        font-family: "Oswald";
     }
     html {
         scroll-behavior: smooth;
@@ -235,7 +235,7 @@ const Wrapper = styled.article`
     }
 
     .landing-btn {
-        padding: 0.9vh 1.6vw;
+        padding: 3vh 3vw;
         font-size: 1.25vw;
         margin-top: 3vh;
         background: #fff;
@@ -264,7 +264,8 @@ const Wrapper = styled.article`
         text-transform: uppercase;
         background: #fff;
         color: #18de18;
-        padding: 0.4vh 0.45vw 0.4vh 0.8vw;
+        padding: 1vh 0.65vw 1vh 1.0vw;
+        margin-top: 3vh;
         letter-spacing: 0.15vw;
         display: inline-block;
         font-weight: 600;
@@ -481,6 +482,7 @@ const Wrapper = styled.article`
     .about-img,
     .about-info {
         margin-bottom: 2rem;
+        font-family: 'Open Sans';
     }
     img:not(.nav-logo) {
         width: 90%;
@@ -493,6 +495,8 @@ const Wrapper = styled.article`
     .section-title {
         text-align: center;
         margin-bottom: 4rem;
+        display: flex;
+        justify-content: center;
     }
     .section-title h2 {
         text-transform: uppercase;
@@ -559,7 +563,7 @@ const Wrapper = styled.article`
 
     .popular-tours-heading {
         font-size: 2rem;
-        font-family: "Open Sans";
+        font-family: "Oswald";
         list-style-type: none;
         text-decoration: none;
         box-sizing: border-box;
@@ -781,116 +785,107 @@ const Wrapper = styled.article`
     /*//////////////// FOOTER CSS START ///////////////*/
 
     .wrapper {
-        width: 100%;
-        height: 30vh;
-        background-color: #262626;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+    width: 100%;
+    height: 30vh;
+    background-color: #262626;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-    .follow,
-    .menu-link {
-        font-size: 1.1rem;
-        font-weight: 300;
-        color: #fff;
-        text-transform: uppercase;
-        letter-spacing: 0.1rem;
-        margin-right: 4rem;
-    }
+.follow,
+.menu-link {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    margin-right: 4rem;
+}
 
-    .follow {
-        pointer-events: auto;
-    }
 
-    .menu {
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-        pointer-events: none;
-    }
+.menu {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
 
-    .menu:hover {
-        pointer-events: auto;
-    }
+.line {
+    width: 10rem;
+    height: 0.1rem;
+    margin-right: 5rem;
+    position: relative;
+}
 
-    .line {
-        width: 10rem;
-        height: 0.1rem;
-        margin-right: 5rem;
-        position: relative;
-    }
+.line {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 100%;
+    background-color: #fff;
+    transition: width 0.5s;
+}
 
-    .line::after {
-        content: "";
-        position: absolute;
-        width: 0;
-        height: 100%;
-        background-color: #fff;
-        transition: width 0.5s;
-    }
+.nav-menu {
+    display: flex;
+}
 
-    .menu:hover .line::after {
-        width: 100%;
-    }
+.menu-link {
+    text-decoration: none;
+    position: relative;
+    top: 5rem;
+    opacity: 0;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    display: block;
+    pointer-events: all;
+}
 
-    .nav-menu {
-        display: flex;
-    }
+.menu .menu-link {
+    top: 0;
+    opacity: 1;
+}
 
-    .menu-link {
-        text-decoration: none;
-        position: relative;
-        top: 5rem;
-        opacity: 0;
-        padding: 0.5rem;
-        border-radius: 0.5rem;
-    }
+.menu-link:nth-child(1) {
+    transition: top 0.5s 0.1s, opacity 0.5s 0.1s, background-color 0.3s;
+}
 
-    .menu:hover .menu-link {
-        top: 0;
-        opacity: 1;
-    }
+.menu-link:nth-child(2) {
+    transition: top 0.5s 0.2s, opacity 0.5s 0.2s, background-color 0.3s;
+}
 
-    .menu-link:nth-child(1) {
-        transition: top 0.5s 0.1s, opacity 0.5s 0.1s, background-color 0.3s;
-    }
+.menu-link:nth-child(3) {
+    transition: top 0.5s 0.3s, opacity 0.5s 0.3s, background-color 0.3s;
+}
 
-    .menu-link:nth-child(2) {
-        transition: top 0.5s 0.2s, opacity 0.5s 0.2s, background-color 0.3s;
-    }
+.menu-link:nth-child(4) {
+    transition: top 0.5s 0.4s, opacity 0.5s 0.4s, background-color 0.3s;
+}
 
-    .menu-link:nth-child(3) {
-        transition: top 0.5s 0.3s, opacity 0.5s 0.3s, background-color 0.3s;
-    }
+.menu-link:nth-child(5) {
+    transition: top 0.5s 0.5s, opacity 0.5s 0.5s, background-color 0.3s;
+}
 
-    .menu-link:nth-child(4) {
-        transition: top 0.5s 0.4s, opacity 0.5s 0.4s, background-color 0.3s;
-    }
+.menu-link:nth-child(1) {
+    background-color: #3b5998;
+}
 
-    .menu-link:nth-child(5) {
-        transition: top 0.5s 0.5s, opacity 0.5s 0.5s, background-color 0.3s;
-    }
+.menu-link:nth-child(2) {
+    background-color: #3f729b;
+}
 
-    .menu-link:nth-child(1):hover {
-        background-color: #3b5998;
-    }
+.menu-link:nth-child(3) {
+    background-color: #55acee;
+}
 
-    .menu-link:nth-child(2):hover {
-        background-color: #3f729b;
-    }
+.menu-link:nth-child(4) {
+    background-color: #0077b5;
+}
 
-    .menu-link:nth-child(3):hover {
-        background-color: #55acee;
-    }
+.menu-link:nth-child(5) {
+    background-color: #cd201f;
+}
 
-    .menu-link:nth-child(4):hover {
-        background-color: #0077b5;
-    }
-
-    .menu-link:nth-child(5):hover {
-        background-color: #cd201f;
-    }
     /*//////////////// FOOTER CSS END /////////////////*/
 `;
 

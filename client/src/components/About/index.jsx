@@ -21,12 +21,9 @@ const About = () => {
                     <img src="https://media.istockphoto.com/id/1402004971/photo/healthy-heart-food-high-in-flavonoids-and-polyphenols.jpg?b=1&s=170667a&w=0&k=20&c=QevKY1TYe-TigCs5ypIp0fp9LYTBMk3W6tGHE6De-A8=" className='about-photo' alt='awesome beach' />
                 </div>
                 <article className='about-info'>
-                    <h3>Lorem ipsum</h3>
+                    <h3>What we do</h3>
                     <p>
-                        An e-learning app with a quiz and revision planner is an excellent tool for learners of all ages and abilities. The quiz feature allows users to test their knowledge and comprehension of the subject matter, providing immediate feedback and helping to reinforce learning.
-                    </p>
-                    <p>
-                        The revision planner feature enables users to schedule and plan their study time effectively.
+                    PlatePal is a nutritionist app that provides personalized meal recommendations based on the user's dietary preferences and health goals. The app offers a wide range of meal plans, recipes, and grocery lists, making it easy for users to plan and prepare healthy meals. PlatePal also has employed nutritionists to track the user's nutrient intake and offer tips on how to make healthier food choices. With PlatePal, users can achieve their health and wellness goals while enjoying delicious and nutritious meals.
                     </p>
                     <a href='#activities' className='btn btn-activities' onClick={() => scrollToComponent('pricing')}>
                         Pricing

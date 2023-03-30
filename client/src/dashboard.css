@@ -1,7 +1,7 @@
 /* fonts */
 @import url("https://fonts.googleapis.com/css2?family=Cabin&family=Roboto+Condensed:wght@400;700&display=swap");
 
-*::-webkit-scrollbar {
+/* *::-webkit-scrollbar {
     width: 10px;
     background-color: rgba(235, 235, 235, 0);
     border-radius: 10px;
@@ -15,14 +15,14 @@
 *::-webkit-scrollbar-thumb:hover {
     background-color: #161616;
     cursor: pointer;
-}
+} */
 
 html {
     overflow-x: hidden;
 }
 
 .section-title h2 {
-    width: 280px;
+    width: 400px;
 }
 
 *,
