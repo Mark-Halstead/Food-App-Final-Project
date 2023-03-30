@@ -32,6 +32,7 @@
     "sketchfab": "^0.1.2",
     "socket.io-client": "^4.6.1",
     "styled-components": "^5.3.9",
+    "talkjs": "^0.15.6",
     "testing-library": "^0.0.2",
     "vitest": "^0.29.7"
   },

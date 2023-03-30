@@ -13,9 +13,13 @@ class Base:
         list_of_results = [r for r in results]
         return list_of_results
 
-    def create(self, data):
+    '''def create(self, data):
         id = self.table.insert_one(data).inserted_id
         return self.get(id)
+    '''
+    def create(self, data: dict) -> str:
+        inserted_id = self.table.insert_one(data).inserted_id
+        return str(inserted_id)
 
     def get(self, id):
         document = self.table.find_one({"_id": ObjectId(id)})
