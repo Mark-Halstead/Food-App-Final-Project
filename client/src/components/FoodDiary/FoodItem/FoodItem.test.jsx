@@ -15,7 +15,6 @@ const { window } = new JSDOM('<!doctype html><html><body></body></html>');
 global.window = window;
 global.document = window.document;
 
-it('DietaryInfo renders without crashing', () => {
     const item = { 
       product: { 
         product_name_en: 'Test Product',
@@ -25,11 +24,25 @@ it('DietaryInfo renders without crashing', () => {
       user_serving_size: 50,
       serving_multiplier: 1
     };
+    const meal = 'breakfast';
+    const mealItems = { date: '2022-04-01' };
+    const setMealItems = '';
+    const handleFoodItemClick = '';
+    const handleDeleteFood = '';
+    const mealPlanItem = false;
     
-    render(
-      <MemoryRouter>
-        <FoodItem item={item} />
-      </MemoryRouter>
-    );
-  });
+    it('renders without crashing', () => {
+      render(
+        <FoodItem
+          item={item}
+          meal={meal}
+          mealItems={mealItems}
+          setMealItems={setMealItems}
+          handleFoodItemClick={handleFoodItemClick}
+          handleDeleteFood={handleDeleteFood}
+          mealPlanItem={mealPlanItem}
+        />
+      );
+    })
+  
   

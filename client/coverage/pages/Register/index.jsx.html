@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">11.47% </span>
+                <span class="strong">12.72% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>7/61</span>
+                <span class='fraction'>7/55</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">11.47% </span>
+                <span class="strong">12.72% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>7/61</span>
+                <span class='fraction'>7/55</span>
             </div>
         
             
@@ -118,23 +118,11 @@
 <a name='L53'></a><a href='#L53'>53</a>
 <a name='L54'></a><a href='#L54'>54</a>
 <a name='L55'></a><a href='#L55'>55</a>
-<a name='L56'></a><a href='#L56'>56</a>
-<a name='L57'></a><a href='#L57'>57</a>
-<a name='L58'></a><a href='#L58'>58</a>
-<a name='L59'></a><a href='#L59'>59</a>
-<a name='L60'></a><a href='#L60'>60</a>
-<a name='L61'></a><a href='#L61'>61</a>
-<a name='L62'></a><a href='#L62'>62</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L56'></a><a href='#L56'>56</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -196,7 +184,6 @@ import Wrapper from '../../assets/wrappers/RegisterPage';
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >    const [email, setEmail] = useState('');</span>
 <span class="cstat-no" title="statement not covered" >    const [password, setPassword] = useState('');</span>
-<span class="cstat-no" title="statement not covered" >    const [role, setRole] = useState('');</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >    const handleSubmit = async (event) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >        event.preventDefault();</span>
@@ -204,8 +191,7 @@ import Wrapper from '../../assets/wrappers/RegisterPage';
 <span class="cstat-no" title="statement not covered" >        try {</span>
 <span class="cstat-no" title="statement not covered" >            const response = await axios.post('http://127.0.0.1:5000/users/signup', {</span>
 <span class="cstat-no" title="statement not covered" >                email: email,</span>
-<span class="cstat-no" title="statement not covered" >                password: password,</span>
-<span class="cstat-no" title="statement not covered" >                role: role,</span>
+<span class="cstat-no" title="statement not covered" >                password: password</span>
 <span class="cstat-no" title="statement not covered" >            });</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >            console.log(response.data);</span>
@@ -232,10 +218,6 @@ import Wrapper from '../../assets/wrappers/RegisterPage';
 <span class="cstat-no" title="statement not covered" >                            Password:</span>
 <span class="cstat-no" title="statement not covered" >                            &lt;input type="password" value={password} onChange={(event) =&gt; setPassword(event.target.value)} /&gt;</span>
 <span class="cstat-no" title="statement not covered" >                        &lt;/label&gt;</span>
-<span class="cstat-no" title="statement not covered" >                        &lt;label&gt;</span>
-<span class="cstat-no" title="statement not covered" >                            Role:</span>
-<span class="cstat-no" title="statement not covered" >                            &lt;input type="text" value={role} onChange={(event) =&gt; setRole(event.target.value)} /&gt;</span>
-<span class="cstat-no" title="statement not covered" >                        &lt;/label&gt;</span>
 <span class="cstat-no" title="statement not covered" >                        &lt;button type="submit"&gt;Register&lt;/button&gt;</span>
 <span class="cstat-no" title="statement not covered" >                        &lt;button onClick={() =&gt; Navigate("/register-nutritionist")}&gt;Register as a Nutritionist&lt;/button&gt;</span>
 <span class="cstat-no" title="statement not covered" >                    &lt;/form&gt;</span>
@@ -253,7 +235,7 @@ export default Register;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-03-30T10:50:43.309Z
+                at 2023-03-30T10:57:17.394Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

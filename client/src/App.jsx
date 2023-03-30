@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { MyClients, DietForm, HomePage, GPTPage } from './pages'
 import { Routes, Route } from 'react-router-dom'
 import { Navbar } from './components'
