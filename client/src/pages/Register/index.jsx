@@ -9,7 +9,6 @@ function Register() {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [role, setRole] = useState('');
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -17,8 +16,7 @@ function Register() {
         try {
             const response = await axios.post('http://127.0.0.1:5000/users/signup', {
                 email: email,
-                password: password,
-                role: role,
+                password: password
             });
 
             console.log(response.data);
@@ -44,10 +42,6 @@ function Register() {
                         <label>
                             Password:
                             <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} />
-                        </label>
-                        <label>
-                            Role:
-                            <input type="text" value={role} onChange={(event) => setRole(event.target.value)} />
                         </label>
                         <button type="submit">Register</button>
                         <button onClick={() => Navigate("/register-nutritionist")}>Register as a Nutritionist</button>
