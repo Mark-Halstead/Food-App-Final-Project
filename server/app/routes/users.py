@@ -31,6 +31,15 @@ def get_user(user_data):
     else:
         return make_response(jsonify({"error": "User not found"}), 404)
 
+@user_routes.route("/", methods=["GET"])
+@token_required("user")
+def get_user_data(user_data):
+    # print(user_data)
+    # user = g.user_model.get(user_data)
+    if user_data:
+        return Response(JSONEncoder().encode(user_data), content_type='application/json')
+    else:
+        return make_response(jsonify({"error": "User not found"}), 404)
 
 @user_routes.route('/signup', methods=["POST"])
 def signup():
