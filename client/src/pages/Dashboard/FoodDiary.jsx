@@ -34,7 +34,7 @@ function FoodDiary() {
                         Authorization:token
                     }
                 }
-                const response = await fetch(`http://127.0.0.1:5000/diary_entries/`, options)
+                const response = await fetch(`https://plate-perfect.onrender.com/diary_entries/`, options)
                 if (response.status === 200) {
                     const { diary_entries, meal_plan } = await response.json()
                     console.log('diary_entries', diary_entries)
@@ -85,7 +85,7 @@ function FoodDiary() {
                 }
 
             }
-            const response = await fetch(`http://127.0.0.1:5000/diary_entries/${selectedDate}`, 
+            const response = await fetch(`https://plate-perfect.onrender.com/diary_entries/${selectedDate}`, 
                 options
             )
             const updatedDiaryEntry = await response.json()
@@ -136,7 +136,7 @@ function FoodDiary() {
         const data = {serving_multiplier:servingMultiplier, ...selectedItem }
         try {
             setLoadingAddingFood(true)
-            const response = await axios.post(`http://127.0.0.1:5000/diary_entries/${selectedDate}/foods/${meal}`, data, {
+            const response = await axios.post(`https://plate-perfect.onrender.com/diary_entries/${selectedDate}/foods/${meal}`, data, {
                 headers:{
                     Authorization:localStorage.token
                 }
@@ -159,7 +159,7 @@ function FoodDiary() {
 
     async function handleDeleteFood(meal, productId) {
         try {
-            const response = await fetch(`http://127.0.0.1:5000/diary_entries/${currentDiaryEntry._id}/foods/${meal}/${productId}`,
+            const response = await fetch(`https://plate-perfect.onrender.com/diary_entries/${currentDiaryEntry._id}/foods/${meal}/${productId}`,
                 {method:"DELETE"}
             )
             const data = await response.json()

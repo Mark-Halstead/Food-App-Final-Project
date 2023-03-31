@@ -50,7 +50,7 @@ function MealPlan() {
                         Authorization:localStorage.token
                     }
                 }
-                const response = await fetch(`http://127.0.0.1:5000/meal_plan_entries/${selectedClient._id}`, options);
+                const response = await fetch(`https://plate-perfect.onrender.com/meal_plan_entries/${selectedClient._id}`, options);
                 if (response.status === 200) {
                     const data = await response.json();
             
@@ -117,7 +117,7 @@ function MealPlan() {
                     Authorization:localStorage.token
                 }
             }
-            const response = await fetch(`http://127.0.0.1:5000/meal_plan_entries/${selectedClient._id}`, 
+            const response = await fetch(`https://plate-perfect.onrender.com/meal_plan_entries/${selectedClient._id}`, 
                 options
             )
             if (response.status === 200) {
