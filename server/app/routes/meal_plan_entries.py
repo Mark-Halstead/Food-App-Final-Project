@@ -78,10 +78,9 @@ def update_meal_plan_entry(user_data, client_id):
         data = json.loads(request.data)
 
         updated_meal_plan = g.meal_plan_entry_model.save_meal_plan(client_id, data)
-        if updated_meal_plan:
-            return Response(JSONEncoder().encode(data), status=200, content_type='application/json')
-        else:
-            return make_response(jsonify({"error": "Entry not found"}), 404)
+
+        return Response(JSONEncoder().encode(data), status=200, content_type='application/json')
+
     except ValidationError as e:
         return make_response(jsonify({"error": "Invalid data", "details": e.errors()}), 400)
 

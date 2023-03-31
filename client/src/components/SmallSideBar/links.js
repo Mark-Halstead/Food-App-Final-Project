@@ -5,7 +5,7 @@ import {
     MdBook,
     MdChat,
     MdCropFree,
-    MdSmartToy
+    MdSmartToy,
 } from "react-icons/md";
 
 const links = [
@@ -40,17 +40,11 @@ const links = [
         icon: MdChat,
     },
     {
-        id: 6,
-        text: "BarcodeScanner",
-        path: "/dashboard/barcode",
-        icon: MdCropFree,
-    },
-    {
         id: 7,
         text: "AI Nutrition",
         path: "/dashboard/gpt",
-        icon: MdSmartToy
-    }
+        icon: MdSmartToy,
+    },
 ];
 
 export default links;
