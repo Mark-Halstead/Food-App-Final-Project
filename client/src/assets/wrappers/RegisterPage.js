@@ -11,7 +11,7 @@ const Wrapper = styled.section`
         background-color: rgba(24, 212, 24, 0.8);
         background-image: url("https://thumbs.dreamstime.com/b/greek-food-background-traditional-different-greek-dishes-set-greek-food-background-traditional-different-greek-dishes-set-top-view-178761927.jpg");
         background-repeat: no-repeat;
-        background-size: 100%;
+        background-size: 110%;
         background-position: center;
         /* animation: backgroundZoomOut 15s linear infinite; */
     }

@@ -74,13 +74,19 @@ const BarcodeScanner = () => {
                 <div id="popup">
                     <p>Scanned barcode: {scannedCode}</p>
                     {productName && <p>Product name: {productName}</p>}
-                    <button onClick={addToFoodDiary}>Add to food diary</button>
-                    <button onClick={viewDetails}>View details</button>
+                    <div className='btn-container'>
+                        <button onClick={addToFoodDiary} className="btn">Add to food diary</button>
+                    </div>
+                    <div className='btn-container'>
+                        <button onClick={viewDetails} className="btn">View details</button>
+                    </div>
                 </div>
             )}
             {product && showDetails && (
                 <div id="popup-details">
-                    <button onClick={closeDetails}>Close details</button>
+                    <div className='btn-container'>
+                        <button onClick={closeDetails} className="btn">Close details</button>
+                    </div>
                     <h2>{product.product_name}</h2>
                     <img src={product.image_front_url} alt={product.product_name} />
                     <p>{product.ingredients_text}</p>
