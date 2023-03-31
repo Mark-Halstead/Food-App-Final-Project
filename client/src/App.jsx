@@ -34,7 +34,7 @@ function App() {
             <Route path='register' element={<Register />} />
             <Route path='register-nutritionist' element={<RegisterNutritionist />} />
             <Route path='login-nutritionist' element={<LoginNutritionist />} />
-            <Route path='login' element={<Login />} />
+            <Route exact path='login' element={<Login />} />
             <Route path='user-signup-form' element={<UserSignUpForm />} />
             <Route path='nutritionist-signup-form' element={<NutritionistSignUpForm />} />
             <Route path='goals-form' element={<GoalsForm />} />
