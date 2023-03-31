@@ -27,7 +27,7 @@ const NutritionistSignUpForm = () => {
 
     try {
       const token = localStorage.getItem('token')
-      const response = await axios.put(`https://plate-perfect.onrender.com/nutritionists/`, userData, {
+      const response = await axios.put(`https://plate-perfect-server.onrender.com/nutritionists/`, userData, {
         headers: {
           Authorization: `${token}`
         },

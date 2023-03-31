@@ -18,7 +18,7 @@ const SharedLayout = () => {
           Authorization:localStorage.token
         }
       } 
-      const response = await fetch('https://plate-perfect.onrender.com/users/load_profile', options)
+      const response = await fetch('https://plate-perfect-server.onrender.com/users/load_profile', options)
       const data = await response.json()
       setUserData(data.user_data)
       setNutritionistData(data.nutritionist_data)

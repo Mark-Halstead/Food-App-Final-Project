@@ -28,7 +28,7 @@ describe('Register component', () => {
     fireEvent.change(screen.getByLabelText('Role:'), { target: { value: 'testrole' } });
     fireEvent.click(screen.getByRole('button', { name: /register/i }));
     await waitFor(() => expect(axios.post).toHaveBeenCalledTimes(1));
-    expect(axios.post).toHaveBeenCalledWith('https://plate-perfect.onrender.com/users/signup', {
+    expect(axios.post).toHaveBeenCalledWith('https://plate-perfect-server.onrender.com/users/signup', {
       username: 'testuser',
       password: 'testpassword',
       role: 'testrole',

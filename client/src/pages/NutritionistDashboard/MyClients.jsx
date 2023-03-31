@@ -25,7 +25,7 @@ function MyClients() {
     useEffect(() => {
         async function loadClients() {
             setLoading(true)
-            const response = await axios.get("https://plate-perfect.onrender.com/nutritionists/clients", {
+            const response = await axios.get("https://plate-perfect-server.onrender.com/nutritionists/clients", {
                 headers:{
                 Authorization:localStorage.token
                 }

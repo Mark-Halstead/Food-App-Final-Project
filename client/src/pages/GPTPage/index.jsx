@@ -11,7 +11,7 @@ function GPTPage() {
     setLoading(true);
 
     console.log(localStorage.getItem("token"))
-    const user = await axios.get('https://plate-perfect.onrender.com/users/', {
+    const user = await axios.get('https://plate-perfect-server.onrender.com/users/', {
       headers: {
         Authorization: localStorage.getItem("token")
       }
@@ -32,7 +32,7 @@ function GPTPage() {
     }
     p += "Return the meal plan as a valid JSON object with 'breakfast', 'lunch', 'dinner', and 'snacks' keys, which contain a list for each meal with the individual items in that meal. "
     console.log("prompt", p)
-    const res = await axios.post('https://plate-perfect.onrender.com/meal_plan_entries/gpt', { "prompt": p });
+    const res = await axios.post('https://plate-perfect-server.onrender.com/meal_plan_entries/gpt', { "prompt": p });
     console.log("res", res.data.response.choices[0].text)
     setResponse(JSON.parse(res.data.response.choices[0].text));
 

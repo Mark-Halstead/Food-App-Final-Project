@@ -15,8 +15,8 @@ function FoodItem({ item, meal, mealItems, setMealItems, handleFoodItemClick,  h
 					Authorization:localStorage.token
 				}
             }
-			const url = mealPlanItem ? `https://plate-perfect.onrender.com/meal_plan_entries/${mealItems.date}/foods/${meal}/${productId}`
-								: `https://plate-perfect.onrender.com/diary_entries/${mealItems.date}/foods/${meal}/${productId}`
+			const url = mealPlanItem ? `https://plate-perfect-server.onrender.com/meal_plan_entries/${mealItems.date}/foods/${meal}/${productId}`
+								: `https://plate-perfect-server.onrender.com/diary_entries/${mealItems.date}/foods/${meal}/${productId}`
             const response = await fetch(url , 
                 options
             )

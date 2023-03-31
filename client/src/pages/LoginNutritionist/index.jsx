@@ -15,7 +15,7 @@ function LoginNutritionist() {
         event.preventDefault();
         setLoading(true);
         try {
-            const response = await axios.post('https://plate-perfect.onrender.com/nutritionists/login', { email, password });
+            const response = await axios.post('https://plate-perfect-server.onrender.com/nutritionists/login', { email, password });
             const { token } = response.data;
             localStorage.setItem('token', token);
             console.log(localStorage.getItem('token'));

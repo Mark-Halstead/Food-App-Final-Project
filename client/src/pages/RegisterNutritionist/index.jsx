@@ -17,7 +17,7 @@ function RegisterNutritionist() {
         setIsRegistering(true);
 
         try {
-            const response = await axios.post('https://plate-perfect.onrender.com/nutritionists/signup', {
+            const response = await axios.post('https://plate-perfect-server.onrender.com/nutritionists/signup', {
                 email: email,
                 password: password
             });

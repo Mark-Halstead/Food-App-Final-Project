@@ -14,7 +14,7 @@ function Login() {
         event.preventDefault();
         setLoading(true);
         try {
-            const response = await axios.post('https://plate-perfect.onrender.com/users/login', { email, password });
+            const response = await axios.post('https://plate-perfect-server.onrender.com/users/login', { email, password });
             localStorage.setItem('token', response.data.token_data.token);
             setUserData(response.data.user_data)
             setLoading(false);

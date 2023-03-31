@@ -16,7 +16,7 @@ function Register() {
         setIsRegistering(true);
 
         try {
-            const response = await axios.post('https://plate-perfect.onrender.com/users/signup', {
+            const response = await axios.post('https://plate-perfect-server.onrender.com/users/signup', {
                 email: email,
                 password: password
             });

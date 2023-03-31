@@ -8,7 +8,7 @@ function FoodItem({ item, meal, mealItems, setMealItems, handleFoodItemClick,  h
                 method:"PUT",
                 body:JSON.stringify({confirmed})
             }
-			const url = `https://plate-perfect.onrender.com/diary_entries/${mealItems._id}/foods/${meal}/${productId}`
+			const url = `https://plate-perfect-server.onrender.com/diary_entries/${mealItems._id}/foods/${meal}/${productId}`
 			console.log('url', url)
             const response = await fetch(url , 
                 options

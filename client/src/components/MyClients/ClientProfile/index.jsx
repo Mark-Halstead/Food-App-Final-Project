@@ -22,7 +22,7 @@ function ClientProfile({ selectedClient, handleClosePopup, handleCreateMealPlan,
                 Authorization:token
             }
         };
-        const response = await fetch(`https://plate-perfect.onrender.com/nutritionists/accept_client/${client._id}`, options);
+        const response = await fetch(`https://plate-perfect-server.onrender.com/nutritionists/accept_client/${client._id}`, options);
         if (response.status === 200) {
             const updatedClient = await response.json()
             // Remove the client from pendingClients
@@ -44,7 +44,7 @@ function ClientProfile({ selectedClient, handleClosePopup, handleCreateMealPlan,
             },
         };
         const response = await fetch(
-            `https://plate-perfect.onrender.com/nutritionists/decline_client/${client._id}`,
+            `https://plate-perfect-server.onrender.com/nutritionists/decline_client/${client._id}`,
             options
         );
         if (response.status === 200) {
@@ -67,7 +67,7 @@ function ClientProfile({ selectedClient, handleClosePopup, handleCreateMealPlan,
             },
         };
         const response = await fetch(
-            `https://plate-perfect.onrender.com/nutritionists/send_meal_plan/${client._id}`,
+            `https://plate-perfect-server.onrender.com/nutritionists/send_meal_plan/${client._id}`,
             options
         );
         if (response.status === 200) {

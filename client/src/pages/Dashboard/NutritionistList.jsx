@@ -21,7 +21,7 @@ function NutritionistList() {
     useEffect(() => {
         async function loadNutritionists() {
             setLoading(true)
-            const response = await axios.get("https://plate-perfect.onrender.com/nutritionists/")
+            const response = await axios.get("https://plate-perfect-server.onrender.com/nutritionists/")
             setNutritionists(response.data);
             setFilteredNutritionists(response.data.filter((nutritionist) => !nutritionist.top_pick));
             setLoading(false)
@@ -61,7 +61,7 @@ function NutritionistList() {
                 nutritionist_message:message
             })
         }
-        const response = await fetch("https://plate-perfect.onrender.com/users/select_nutritionist", options)
+        const response = await fetch("https://plate-perfect-server.onrender.com/users/select_nutritionist", options)
         setRequestSent(true)
         setSendingRequest(false)
     }
