@@ -10,11 +10,9 @@ import './dashboard.css'
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
       <Router>
         <SidebarProvider>
           <App />
         </SidebarProvider>
       </Router>
-  </React.StrictMode>,
 )
