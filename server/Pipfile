@@ -19,6 +19,8 @@ pytest-cov = "*"
 openai = "*"
 flask-jwt-extended = "*"
 faker-food = "*"
+selenium = "*"
+chromedriver-binary-auto = "*"
 
 [dev-packages]
 
