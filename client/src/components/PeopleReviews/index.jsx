@@ -35,7 +35,7 @@ function PeopleReviews() {
                 Mark Halstead
               </h1>
               <p className="story-paragraph">
-              What really sets PlatePal apart is the personalized recommendations it provides. The app will provide you with personalized meal plans and recipe suggestions that will help you achieve your goals. And if you're someone who struggles with staying motivated, PlatePal has you covered. It provides daily reminders to log your food intake and track your progress, and you can earn badges and rewards for meeting your goals.
+              What really sets PlatePal apart is the personalised recommendations it provides. The app will provide you with personalised meal plans and recipe suggestions that will help you achieve your goals. And if you're someone who struggles with staying motivated, PlatePal has you covered. It provides daily reminders to log your food intake and track your progress, and you can earn badges and rewards for meeting your goals.
               </p>
             </div>
           </div>

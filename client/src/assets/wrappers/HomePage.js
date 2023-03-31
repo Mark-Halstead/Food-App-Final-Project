@@ -496,6 +496,8 @@ const Wrapper = styled.article`
         margin-bottom: 4rem;
         display: flex;
         justify-content: center;
+        width: 300px;
+        text-align: center;
     }
     .section-title h2 {
         text-transform: uppercase;
@@ -698,8 +700,8 @@ const Wrapper = styled.article`
     #food {
         position: absolute;
         top: 15vh;
-        left: 50vw;
-        width: 36vw;
+        right: 10vw;
+        width: auto;
         height: 70vh;
         transform: translate(-50%, -50%);
         z-index: 100;

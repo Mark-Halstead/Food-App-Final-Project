@@ -8,11 +8,8 @@ import NutritionistProfile from './pages/NutritionistDashboard/NutritionistProfi
 import { AuthProvider } from './contexts/AuthContext';
 import { ClientProvider } from './contexts/ClientContext';
 
-
-
 function App() {
   const location = useLocation();
-
 
   return (
     <>

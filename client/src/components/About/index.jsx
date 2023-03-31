@@ -23,7 +23,7 @@ const About = () => {
                 <article className='about-info'>
                     <h3>What we do</h3>
                     <p>
-                    PlatePal is a nutritionist app that provides personalized meal recommendations based on the user's dietary preferences and health goals. The app offers a wide range of meal plans, recipes, and grocery lists, making it easy for users to plan and prepare healthy meals. PlatePal also has employed nutritionists to track the user's nutrient intake and offer tips on how to make healthier food choices. With PlatePal, users can achieve their health and wellness goals while enjoying delicious and nutritious meals.
+                    PlatePal is a nutritionist app that provides personalised meal recommendations based on the user's dietary preferences and health goals. The app offers a wide range of meal plans, recipes, and grocery lists, making it easy for users to plan and prepare healthy meals. PlatePal also has employed nutritionists to track the user's nutrient intake and offer tips on how to make healthier food choices. With PlatePal, users can achieve their health and wellness goals while enjoying delicious and nutritious meals.
                     </p>
                     <a href='#activities' className='btn btn-activities' onClick={() => scrollToComponent('pricing')}>
                         Pricing
